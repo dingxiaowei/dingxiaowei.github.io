@@ -5,27 +5,27 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
+  <link rel="dns-prefetch" href="http://dingxiaowei.cn">
   <title>[Unity]iOS内购 | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前言：最近项目需要切换到iOS平台做一些提交审核和支付对接相关的工作，上一篇刚分享了最新的iOS10提交审核的一些坑，这篇分享一些内购相关的流程。 Unity iOS内购思路：Unity调用iOS内购代码实现 效果图：">
 <meta name="keywords" content="Unity,iOS,内购">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Unity]iOS内购">
-<meta property="og:url" content="http://yoursite.com/2016/10/18/Unity-iOS内购/index.html">
+<meta property="og:url" content="http://dingxiaowei.cn/2016/10/18/Unity-iOS内购/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="前言：最近项目需要切换到iOS平台做一些提交审核和支付对接相关的工作，上一篇刚分享了最新的iOS10提交审核的一些坑，这篇分享一些内购相关的流程。 Unity iOS内购思路：Unity调用iOS内购代码实现 效果图：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2016/10/18/Unity-iOS内购/Unity-iOS内购/1.png">
-<meta property="og:image" content="http://yoursite.com/2016/10/18/Unity-iOS内购/Unity-iOS内购/2.png">
-<meta property="og:image" content="http://yoursite.com/2016/10/18/Unity-iOS内购/Unity-iOS内购/3.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/10/18/Unity-iOS内购/Unity-iOS内购/1.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/10/18/Unity-iOS内购/Unity-iOS内购/2.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/10/18/Unity-iOS内购/Unity-iOS内购/3.png">
 <meta property="og:image" content="http://img.blog.csdn.net/20161128123546291">
 <meta property="og:image" content="http://pub.idqqimg.com/wpa/images/group.png">
 <meta property="og:updated_time" content="2018-09-12T22:27:49.890Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Unity]iOS内购">
 <meta name="twitter:description" content="前言：最近项目需要切换到iOS平台做一些提交审核和支付对接相关的工作，上一篇刚分享了最新的iOS10提交审核的一些坑，这篇分享一些内购相关的流程。 Unity iOS内购思路：Unity调用iOS内购代码实现 效果图：">
-<meta name="twitter:image" content="http://yoursite.com/2016/10/18/Unity-iOS内购/Unity-iOS内购/1.png">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2016/10/18/Unity-iOS内购/Unity-iOS内购/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -236,7 +236,7 @@
 <h4 id="Unity中调用的C-代码"><a href="#Unity中调用的C-代码" class="headerlink" title="Unity中调用的C#代码"></a>Unity中调用的C#代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using System.Collections;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using System.Runtime.InteropServices;</span><br><span class="line"></span><br><span class="line">public class IAPExample : MonoBehaviour &#123;</span><br><span class="line">	</span><br><span class="line">	public List&lt;string&gt; productInfo = new List&lt;string&gt;();</span><br><span class="line">	</span><br><span class="line">	[DllImport(&quot;__Internal&quot;)]</span><br><span class="line">	private static extern void TestMsg();//测试信息发送</span><br><span class="line">	</span><br><span class="line">	[DllImport(&quot;__Internal&quot;)]</span><br><span class="line">	private static extern void TestSendString(string s);//测试发送字符串</span><br><span class="line">	</span><br><span class="line">	[DllImport(&quot;__Internal&quot;)]</span><br><span class="line">	private static extern void TestGetString();//测试接收字符串</span><br><span class="line">	</span><br><span class="line">	[DllImport(&quot;__Internal&quot;)]</span><br><span class="line">	private static extern void InitIAPManager();//初始化</span><br><span class="line">	</span><br><span class="line">	[DllImport(&quot;__Internal&quot;)]</span><br><span class="line">	private static extern bool IsProductAvailable();//判断是否可以购买</span><br><span class="line">	</span><br><span class="line">	[DllImport(&quot;__Internal&quot;)]</span><br><span class="line">	private static extern void RequstProductInfo(string s);//获取商品信息</span><br><span class="line">	</span><br><span class="line">	[DllImport(&quot;__Internal&quot;)]</span><br><span class="line">	private static extern void BuyProduct(string s);//购买商品</span><br><span class="line">	</span><br><span class="line">	//测试从xcode接收到的字符串</span><br><span class="line">	void IOSToU(string s)&#123;</span><br><span class="line">		Debug.Log (&quot;[MsgFrom ios]&quot;+s);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//获取product列表</span><br><span class="line">	void ShowProductList(string s)&#123;</span><br><span class="line">		productInfo.Add (s);</span><br><span class="line">	&#125;</span><br><span class="line">	bool back = false;</span><br><span class="line">	//获取商品回执</span><br><span class="line">	void ProvideContent(string s)&#123;</span><br><span class="line">		Debug.Log (&quot;[MsgFrom ios]proivideContent : &quot;+s);</span><br><span class="line">		back = true;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	// Use this for initialization</span><br><span class="line">	void Start () &#123;</span><br><span class="line">		InitIAPManager();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	void OnGUI()&#123;</span><br><span class="line">		</span><br><span class="line">		if(Btn (&quot;GetProducts&quot;))&#123;</span><br><span class="line">			if(!IsProductAvailable())</span><br><span class="line">				throw new System.Exception(&quot;IAP not enabled&quot;);</span><br><span class="line">			productInfo = new List&lt;string&gt;();</span><br><span class="line">			RequstProductInfo(&quot;com.aladdin.fishpocker1\tcom.aladdin.fishpocker2&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		GUILayout.Space(40);</span><br><span class="line"></span><br><span class="line">		if (back)</span><br><span class="line">			GUI.Label (new Rect (10, 150, 100, 100), &quot;Message back&quot;);</span><br><span class="line"></span><br><span class="line">		for(int i=0; i&lt;productInfo.Count; i++)&#123;</span><br><span class="line">			if(GUILayout.Button (productInfo[i],GUILayout.Height (100), GUILayout.MinWidth (200)))&#123;</span><br><span class="line">				string[] cell = productInfo[i].Split(&apos;\t&apos;);</span><br><span class="line">				Debug.Log (&quot;[Buy]&quot;+cell[cell.Length-1]);</span><br><span class="line">				BuyProduct(cell[cell.Length-1]);</span><br><span class="line">				GUI.Label(new Rect (10, 10, 100, 200), string.Format(&quot;[Buy]&#123;0&#125;&quot; ,cell[cell.Length-1]));</span><br><span class="line">			&#125;  </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	bool Btn(string msg)&#123;</span><br><span class="line">		GUILayout.Space (100);</span><br><span class="line">		return 	GUILayout.Button (msg,GUILayout.Width (200),GUILayout.Height(100));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Git地址点击下载"><a href="#Git地址点击下载" class="headerlink" title="Git地址点击下载"></a>Git地址<a href="https://git.oschina.net/dingxiaowei/iOSPurchase.git" target="_blank" rel="noopener">点击下载</a></h3><hr>
 <p>欢迎关注我的<a href="http://weibo.com/dingxiaowei2013" target="_blank" rel="noopener">围脖</a><br>==================== 迂者 丁小未 CSDN博客专栏=================</p>
-<p>MyBlog：<a href="http://dingxiaowei.cn" target="_blank" rel="noopener">http://dingxiaowei.cn</a> MyQQ:1213250243</p>
+<p>MyBlog：<a href="http://dingxiaowei.cn">http://dingxiaowei.cn</a> MyQQ:1213250243</p>
 <p>Unity QQ群：375151422</p>
 <p>====================== 相互学习，共同进步 ===================</p>
 <hr>
@@ -401,7 +401,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2016/10/18/Unity-iOS内购/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://dingxiaowei.cn/2016/10/18/Unity-iOS内购/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -568,11 +568,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,23 +588,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,15 +620,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,15 +640,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
+                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -669,10 +669,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -688,6 +684,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
@@ -700,15 +700,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">美文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">

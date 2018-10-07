@@ -5,24 +5,24 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
+  <link rel="dns-prefetch" href="http://dingxiaowei.cn">
   <title> [Unity 设计模式]桥接模式(BridgePattern) | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1.前言继上一讲IOC模式的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们在工作过程中想要熟练运用其中的每一种设计模式就好比跟高手过招想要能运用好武侠秘籍中的每一招每一式，并且能随着对手出招的不同我们能随机应变对应的招数，这就要求我们对每一种设计模式都理解的非常深刻才能运用自如，打出组合拳的效果。">
 <meta name="keywords" content="设计模式,Unity 设计模式,桥接模式,BridgePattern">
 <meta property="og:type" content="article">
 <meta property="og:title" content=" [Unity 设计模式]桥接模式(BridgePattern)">
-<meta property="og:url" content="http://yoursite.com/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/index.html">
+<meta property="og:url" content="http://dingxiaowei.cn/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="1.前言继上一讲IOC模式的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们在工作过程中想要熟练运用其中的每一种设计模式就好比跟高手过招想要能运用好武侠秘籍中的每一招每一式，并且能随着对手出招的不同我们能随机应变对应的招数，这就要求我们对每一种设计模式都理解的非常深刻才能运用自如，打出组合拳的效果。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/Unity-设计模式-桥接模式-BridgePattern/1.png">
-<meta property="og:image" content="http://yoursite.com/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/Unity-设计模式-桥接模式-BridgePattern/2.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/Unity-设计模式-桥接模式-BridgePattern/1.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/Unity-设计模式-桥接模式-BridgePattern/2.png">
 <meta property="og:updated_time" content="2018-09-12T22:27:49.890Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=" [Unity 设计模式]桥接模式(BridgePattern)">
 <meta name="twitter:description" content="1.前言继上一讲IOC模式的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们在工作过程中想要熟练运用其中的每一种设计模式就好比跟高手过招想要能运用好武侠秘籍中的每一招每一式，并且能随着对手出招的不同我们能随机应变对应的招数，这就要求我们对每一种设计模式都理解的非常深刻才能运用自如，打出组合拳的效果。">
-<meta name="twitter:image" content="http://yoursite.com/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/Unity-设计模式-桥接模式-BridgePattern/1.png">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/Unity-设计模式-桥接模式-BridgePattern/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -387,7 +387,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://dingxiaowei.cn/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -554,11 +554,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,23 +574,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,15 +606,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -638,15 +626,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
+                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -655,10 +655,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -674,6 +670,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
@@ -686,15 +686,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">美文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
