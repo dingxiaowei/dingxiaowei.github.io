@@ -197,69 +197,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-ceshi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/07/ceshi/">ceshi</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/07/ceshi/" class="archive-article-date">
-  	<time datetime="2018-10-07T09:01:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="1.jpg" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/07/ceshi/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-Lua相关的知识小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -267,12 +204,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/18/Lua相关的知识小结/">Lua相关的知识小结</a>
+      <a class="article-title" href="/2018/08/18/">Lua相关的知识小结</a>
     </h1>
   
 
         
-        <a href="/2018/08/18/Lua相关的知识小结/" class="archive-article-date">
+        <a href="/2018/08/18/" class="archive-article-date">
   	<time datetime="2018-08-18T06:34:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-18</time>
 </a>
         
@@ -290,7 +227,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">local parent=&#123;&#125;</span><br><span class="line">parent.__index=parent</span><br><span class="line">--类实例--</span><br><span class="line">function parent:New() </span><br><span class="line">    local self = &#123;&#125;;    --初始化self，如果没有这句，那么类所建立的对象改变，其他对象都会改变</span><br><span class="line">  setmetatable(self, parent);  --将self的元表设定为Class</span><br><span class="line">    return self;    --返回自身</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function parent.Hello( ... )</span><br><span class="line">  print(&quot;Parent&quot;)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">local Child=parent:New()</span><br><span class="line">Child.__index=Child;</span><br><span class="line">function Child:New( )</span><br><span class="line">  local self=&#123;super=getmetatable(Child)&#125;</span><br><span class="line">  setmetatable(self, Child);  --将self的元表设定为Class</span><br><span class="line">  return self;    --返回自身</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function Child:Hello( ... )</span><br><span class="line">  print(&quot;Child&quot;);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 <p>运行结果:<br><img src="Lua相关的知识小结/1.png" alt=""><br>由此可见打印了子类和父类的Hello方法</p>
         
-          <a class="article-more-a" href="/2018/08/18/Lua相关的知识小结/#more">more >></a>
+          <a class="article-more-a" href="/2018/08/18/#more">more >></a>
         
       
 
@@ -314,7 +251,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/18/Lua相关的知识小结/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/08/18/">展开全文 >></a>
         </p>
       
 
@@ -351,12 +288,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/19/【Aladdin-Unity3D-Shader编程】之五-模型常见特效/">【Aladdin-Unity3D-Shader编程】之五-模型常见特效</a>
+      <a class="article-title" href="/2017/11/19/">【Aladdin-Unity3D-Shader编程】之五-模型常见特效</a>
     </h1>
   
 
         
-        <a href="/2017/11/19/【Aladdin-Unity3D-Shader编程】之五-模型常见特效/" class="archive-article-date">
+        <a href="/2017/11/19/" class="archive-article-date">
   	<time datetime="2017-11-19T13:42:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-19</time>
 </a>
         
@@ -367,7 +304,7 @@
         <p>首先来看一个表情,<img src="【Aladdin-Unity3D-Shader编程】之五-模型常见特效/11.gif" alt="搞笑">是不是感觉很酷炫，这就是流光效果。我们也可以在模型上面来添加上这个效果，下面会介绍。</p>
 <h2 id="一、缩放效果"><a href="#一、缩放效果" class="headerlink" title="一、缩放效果"></a>一、缩放效果</h2><h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="【Aladdin-Unity3D-Shader编程】之五-模型常见特效/1.gif" alt=""><br><img src="【Aladdin-Unity3D-Shader编程】之五-模型常见特效/1.png" alt=""><br>会看到模型有一个伸缩的效果</p>
         
-          <a class="article-more-a" href="/2017/11/19/【Aladdin-Unity3D-Shader编程】之五-模型常见特效/#more">more >></a>
+          <a class="article-more-a" href="/2017/11/19/#more">more >></a>
         
       
 
@@ -402,7 +339,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/19/【Aladdin-Unity3D-Shader编程】之五-模型常见特效/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/11/19/">展开全文 >></a>
         </p>
       
 
@@ -439,12 +376,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之四-贴图纹理/">【Aladdin Unity3D Shader编程】之四 贴图纹理</a>
+      <a class="article-title" href="/2017/11/18/">【Aladdin Unity3D Shader编程】之四 贴图纹理</a>
     </h1>
   
 
         
-        <a href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之四-贴图纹理/" class="archive-article-date">
+        <a href="/2017/11/18/" class="archive-article-date">
   	<time datetime="2017-11-18T01:43:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
 </a>
         
@@ -457,7 +394,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;AladdinShader/11 Single Texture Shader&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        // _Diffuse(&quot;Diffuse Color&quot;, Color)=(1,1,1,1) //漫反射的颜色</span><br><span class="line">        _MainTex(&quot;Main Tex&quot;, 2D) = &quot;white&quot;&#123;&#125; //纹理贴图 默认白色</span><br><span class="line">        _Color(&quot;Color&quot;, Color) = (1,1,1,1) //整体一个色调</span><br><span class="line">        _Specular(&quot;Specular Color&quot;, Color)=(1,1,1,1)</span><br><span class="line">        _Gloss(&quot;Gloss&quot;,Range(10,200))=20</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader &#123;</span><br><span class="line">        Pass&#123;</span><br><span class="line">            //只有正确定义Tags 才能获取跟光相关的属性</span><br><span class="line">            Tags &#123; &quot;LightMode&quot;=&quot;ForwardBase&quot; &#125;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">#include &quot;Lighting.cginc&quot; </span><br><span class="line">#pragma vertex vert </span><br><span class="line">#pragma fragment frag </span><br><span class="line"></span><br><span class="line">            // fixed4 _Diffuse;</span><br><span class="line">            sampler2D _MainTex;</span><br><span class="line">            fixed4 _Color;</span><br><span class="line">            fixed4 _Specular;</span><br><span class="line">            half _Gloss;</span><br><span class="line">            //顶点函数参数</span><br><span class="line">            struct a2v&#123;</span><br><span class="line">                float4 vertex:POSITION; //顶点位置</span><br><span class="line">                float3 normal:NORMAL; //模型空间下的法线</span><br><span class="line"></span><br><span class="line">                //纹理坐标只能在定点函数取到</span><br><span class="line">                float4 texcoord:TEXCOORD0; </span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            struct v2f&#123;</span><br><span class="line">                float4 svPos:SV_POSITION;</span><br><span class="line">                fixed3 worldNormal:TEXCOORD0;//世界空间下的法线</span><br><span class="line">                float4 worldVertex:TEXCOORD1;</span><br><span class="line"></span><br><span class="line">                //将取到的纹理坐标传递到片元函数</span><br><span class="line">                float4 uv:TEXCOORD2;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            v2f vert(a2v v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f f;</span><br><span class="line">                f.svPos = mul(UNITY_MATRIX_MVP,v.vertex); //模型空间位置到剪裁空间的顶点位置的转换</span><br><span class="line">                f.worldNormal = UnityObjectToWorldNormal(v.normal); //模型空间的法线转成时间空间下的法线</span><br><span class="line">                f.worldVertex = mul(v.vertex,unity_WorldToObject);</span><br><span class="line">                f.uv = v.texcoord;</span><br><span class="line">                return f;</span><br><span class="line">            &#125; </span><br><span class="line"></span><br><span class="line">            //片元函数返回颜色</span><br><span class="line">            fixed4 frag(v2f f):SV_Target&#123;</span><br><span class="line">                //漫反射</span><br><span class="line">                //漫反射颜色 先不管透明度</span><br><span class="line">                //_LightColor0 平行光的颜色 cos夹角 光的方向和视野的夹角</span><br><span class="line">                fixed3 normalDir = normalize(f.worldNormal);</span><br><span class="line">                //光的方向</span><br><span class="line">                fixed3 lightDir = normalize(WorldSpaceLightDir(f.worldVertex));</span><br><span class="line"></span><br><span class="line">                //返回贴图上某像素颜色的值</span><br><span class="line">                fixed3 texColor = tex2D(_MainTex, f.uv.xy) * _Color.rgb;</span><br><span class="line"></span><br><span class="line">                //漫反射的颜色</span><br><span class="line">                // fixed3 diffuse = _LightColor0.rgb *_Diffuse.rgb * max(dot(normalDir, lightDir),0);</span><br><span class="line">                fixed3 diffuse = _LightColor0.rgb * texColor * max(dot(normalDir, lightDir), 0);</span><br><span class="line"></span><br><span class="line">                //相机方向</span><br><span class="line">                fixed3 viewDir = normalize(UnityWorldSpaceViewDir(f.worldVertex));</span><br><span class="line"></span><br><span class="line">                //光和相机方向的平分线</span><br><span class="line">                fixed3 halfDir = normalize(lightDir + viewDir);</span><br><span class="line">                //高光反射</span><br><span class="line">                fixed3  specular = _LightColor0.rgb * _Specular.rgb * pow(max(dot(normalDir,halfDir),0),_Gloss);</span><br><span class="line">                //环境光</span><br><span class="line">                // fixed3 tempColor = diffuse + specular + UNITY_LIGHTMODEL_AMBIENT.rgb; </span><br><span class="line"></span><br><span class="line">                //使用了纹理之后 一般环境光也跟纹理做一个融合</span><br><span class="line">                fixed3 tempColor = diffuse + specular + UNITY_LIGHTMODEL_AMBIENT.rbg * texColor;</span><br><span class="line">                return fixed4(tempColor,1);</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    FallBack  &quot;Specular&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们找一个纹理贴图<br><img src="【Aladdin-Unity3D-Shader编程】之四-贴图纹理/1.png" alt=""><br>然后将贴图赋值给_MainTex属性，调整一下高光颜色和整体贴图颜色属性并且查看效果<br>第一组效果:<br><img src="【Aladdin-Unity3D-Shader编程】之四-贴图纹理/2.png" alt=""><br><img src="【Aladdin-Unity3D-Shader编程】之四-贴图纹理/3.png" alt=""><br>第二组效果:<br><img src="【Aladdin-Unity3D-Shader编程】之四-贴图纹理/4.png" alt=""><br><img src="【Aladdin-Unity3D-Shader编程】之四-贴图纹理/5.png" alt=""></p>
         
-          <a class="article-more-a" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之四-贴图纹理/#more">more >></a>
+          <a class="article-more-a" href="/2017/11/18/#more">more >></a>
         
       
 
@@ -496,7 +433,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之四-贴图纹理/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/11/18/">展开全文 >></a>
         </p>
       
 
@@ -533,12 +470,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之三-光照模型-二/">【Aladdin Unity3D Shader编程】之三 光照模型(二)</a>
+      <a class="article-title" href="/2017/11/18/">【Aladdin Unity3D Shader编程】之三 光照模型(二)</a>
     </h1>
   
 
         
-        <a href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之三-光照模型-二/" class="archive-article-date">
+        <a href="/2017/11/18/" class="archive-article-date">
   	<time datetime="2017-11-18T01:42:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
 </a>
         
@@ -550,7 +487,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;AladdinShader/09 Specular Fragment Blinn Phong Shader&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _Diffuse(&quot;Diffuse&quot;,Color)=(1,1,1,1) //添加自身的颜色</span><br><span class="line">        _Specular(&quot;Specular&quot;,Color)=(1,1,1,1)</span><br><span class="line">        _Gloss(&quot;Gloss&quot;,Range(8,200)) = 10</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader &#123;</span><br><span class="line">        Pass </span><br><span class="line">        &#123;</span><br><span class="line">            Tags&#123;&quot;LightMode&quot;=&quot;ForwardBase&quot;&#125;</span><br><span class="line"></span><br><span class="line">        CGPROGRAM</span><br><span class="line">#include &quot;Lighting.cginc&quot; //引用一些写好的程序块 会包含一些获取光照的信息  </span><br><span class="line">//_LightColor0 取得第一个直射光的颜色</span><br><span class="line">//_WorldSpaceLightPos0 </span><br><span class="line"></span><br><span class="line">#pragma vertex vert</span><br><span class="line">#pragma fragment frag </span><br><span class="line">    </span><br><span class="line">        fixed4 _Diffuse;</span><br><span class="line">        fixed4 _Specular;</span><br><span class="line">        half _Gloss;</span><br><span class="line"></span><br><span class="line">        struct a2v </span><br><span class="line">        &#123;</span><br><span class="line">            float4 vertex:POSITION;</span><br><span class="line">            float3 normal:NORMAL; //模型空间下法线</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        struct v2f</span><br><span class="line">        &#123;</span><br><span class="line">            float4 position:SV_POSITION;</span><br><span class="line">            float3 worldNormal:TEXCOORD0;//世界空间下的法线方向 </span><br><span class="line">            float3 worldVertext:TEXCOORD1;//时间空间下的顶点坐标</span><br><span class="line">        &#125;;</span><br><span class="line">        v2f vert(a2v v)</span><br><span class="line">        &#123;</span><br><span class="line">            v2f f;</span><br><span class="line">            f.position = mul(UNITY_MATRIX_MVP, v.vertex);</span><br><span class="line">            f.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);</span><br><span class="line">            f.worldVertext = mul(v.vertex , unity_WorldToObject).xyz;</span><br><span class="line">            return f;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        fixed4 frag(v2f f):SV_Target</span><br><span class="line">        &#123;</span><br><span class="line">            fixed3 adbient = UNITY_LIGHTMODEL_AMBIENT.rgb;</span><br><span class="line">            fixed3 normalDir = normalize(f.worldNormal);</span><br><span class="line">            fixed3 lightDir = normalize(_WorldSpaceLightPos0.xyz);//对于每个顶点来说 光的位置就是光的方向 因为是平行光</span><br><span class="line">            fixed3 diffuse = _LightColor0.rgb * max(dot(normalDir,lightDir), 0) * _Diffuse.rgb;//取得漫反射的颜色</span><br><span class="line">            </span><br><span class="line">            //反射光方向</span><br><span class="line">            //fixed3 reflectDir = normalize(reflect(-lightDir,normalDir));</span><br><span class="line">            //视野方向</span><br><span class="line">            //相机是在世界空间下              </span><br><span class="line">            fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - f.worldVertext);</span><br><span class="line"></span><br><span class="line">            //平分线</span><br><span class="line">            fixed3 halfDir = normalize(viewDir + lightDir);  //视野方向和光照方向的平分线</span><br><span class="line"></span><br><span class="line">            //高光反射</span><br><span class="line">            fixed3 specular = _LightColor0.rgb * pow(max(dot(normalDir,halfDir),0),_Gloss) * _Specular.rgb;</span><br><span class="line">            fixed3 tempColor = diffuse + adbient + specular;</span><br><span class="line">            return fixed4(tempColor, 1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    FallBack  &quot;VertexLit&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="【Aladdin-Unity3D-Shader编程】之三-光照模型-二/8.png" alt=""><br>会发现高光部分会显得更大了，这也是平时用的比较多的高光反射模型。</p>
         
-          <a class="article-more-a" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之三-光照模型-二/#more">more >></a>
+          <a class="article-more-a" href="/2017/11/18/#more">more >></a>
         
       
 
@@ -589,7 +526,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之三-光照模型-二/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/11/18/">展开全文 >></a>
         </p>
       
 
@@ -626,12 +563,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之二-光照模型-一/">【Aladdin Unity3D Shader编程】之二 光照模型(一)</a>
+      <a class="article-title" href="/2017/11/18/">【Aladdin Unity3D Shader编程】之二 光照模型(一)</a>
     </h1>
   
 
         
-        <a href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之二-光照模型-一/" class="archive-article-date">
+        <a href="/2017/11/18/" class="archive-article-date">
   	<time datetime="2017-11-18T01:42:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
 </a>
         
@@ -659,7 +596,7 @@
 </li>
 </ul>
         
-          <a class="article-more-a" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之二-光照模型-一/#more">more >></a>
+          <a class="article-more-a" href="/2017/11/18/#more">more >></a>
         
       
 
@@ -694,7 +631,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之二-光照模型-一/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/11/18/">展开全文 >></a>
         </p>
       
 
@@ -731,12 +668,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之一-基本入门/">【Aladdin Unity3D Shader编程】之一 基本入门</a>
+      <a class="article-title" href="/2017/11/18/">【Aladdin Unity3D Shader编程】之一 基本入门</a>
     </h1>
   
 
         
-        <a href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之一-基本入门/" class="archive-article-date">
+        <a href="/2017/11/18/" class="archive-article-date">
   	<time datetime="2017-11-18T01:41:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
 </a>
         
@@ -753,7 +690,7 @@
 <h2 id="GPU渲染管线概述"><a href="#GPU渲染管线概述" class="headerlink" title="GPU渲染管线概述"></a>GPU渲染管线概述</h2><h3 id="1-顶点着色器"><a href="#1-顶点着色器" class="headerlink" title="1.顶点着色器"></a>1.顶点着色器</h3><p>顶点着色器是流水线的第一个阶段，它的输入来自于CPU。顶点着色器的处理单位是顶点，也就是说输入进来的每个顶点都会调用一次顶点着色器。</p>
 <p>顶点着色器需要完成的工作主要有:坐标变换和逐顶点光照。当然，除了这两个主要任务外，顶点着色器还可以输出后续阶段所需的数据。<br>坐标变换，顾名思义，就是对顶点的坐标进行某种变换。例如我们可以通过改变顶点位置来模拟水面，布料等。</p>
         
-          <a class="article-more-a" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之一-基本入门/#more">more >></a>
+          <a class="article-more-a" href="/2017/11/18/#more">more >></a>
         
       
 
@@ -788,7 +725,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/【Aladdin-Unity3D-Shader编程】之一-基本入门/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/11/18/">展开全文 >></a>
         </p>
       
 
@@ -825,12 +762,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/NPOI读写Excel-财务报表/">NPOI读写Excel-财务报表</a>
+      <a class="article-title" href="/2017/10/10/">NPOI读写Excel-财务报表</a>
     </h1>
   
 
         
-        <a href="/2017/10/10/NPOI读写Excel-财务报表/" class="archive-article-date">
+        <a href="/2017/10/10/" class="archive-article-date">
   	<time datetime="2017-10-10T05:25:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
 </a>
         
@@ -842,7 +779,7 @@
 <h2 id="最终效果图"><a href="#最终效果图" class="headerlink" title="最终效果图"></a>最终效果图</h2><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p><img src="NPOI读写Excel-财务报表/use.png" alt=""></p>
 <h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="NPOI读写Excel-财务报表/res.gif" alt=""><br><img src="NPOI读写Excel-财务报表/fapiao.png" alt=""></p>
         
-          <a class="article-more-a" href="/2017/10/10/NPOI读写Excel-财务报表/#more">more >></a>
+          <a class="article-more-a" href="/2017/10/10/#more">more >></a>
         
       
 
@@ -877,7 +814,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/10/NPOI读写Excel-财务报表/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/10/10/">展开全文 >></a>
         </p>
       
 
@@ -914,12 +851,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/20/记录参加微软打造开发者社会生态圈线下会议/"> 记录参加微软打造开发者社会生态圈线下会议</a>
+      <a class="article-title" href="/2017/08/20/"> 记录参加微软打造开发者社会生态圈线下会议</a>
     </h1>
   
 
         
-        <a href="/2017/08/20/记录参加微软打造开发者社会生态圈线下会议/" class="archive-article-date">
+        <a href="/2017/08/20/" class="archive-article-date">
   	<time datetime="2017-08-20T06:19:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-20</time>
 </a>
         
@@ -930,7 +867,7 @@
         <p>昨天很荣幸受邀参加微软第一届为打造微软技术开发者社区生态圈现在会议，我是一名从.net转到unity的游戏开发者，也算半个微软技术圈的人，一直对微软技术比较钟爱，因为这个，我也”唆使”我的老婆成为一名.net开发者。参会的有来自各个技术社区和产业界的朋友。不但有.NET社区的，还有google、java、nodejs、linux等等开源社会的专家或者社区组织者共20余人。这届会议不同于以往只是主办人读PPT的流程，下面的参会者聆听而已，这次更多的是参会人员的发言和交流。</p>
 <p>这次会议是微软走向开源，在以云战略为基础的新姿态。更多的是和技术社区的交流，更多的关注技术社区的发展，虚心改变服务的交流会，这让更多微软技术开发爱好者看到了未来的希望，现在开源是大势所趋，微软在14年更换CEO之后大力倡导走开源路线，才不会让微软的生态越走越窄，我之前从朋友身边了解到，他们公司的.NET产品不得不转型用java开发，我也问过为什么，朋友的回答是公司招人难。同样的问题，对于开发者而言，找工作也难，这样的话大环境只会一步一步的恶化，可能微软也有这种意识，所以现在重新重视技术生态圈的发展，这种线下交流会会越来越多，这也让微软技术开发者看到了未来的希望。</p>
         
-          <a class="article-more-a" href="/2017/08/20/记录参加微软打造开发者社会生态圈线下会议/#more">more >></a>
+          <a class="article-more-a" href="/2017/08/20/#more">more >></a>
         
       
 
@@ -954,7 +891,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/20/记录参加微软打造开发者社会生态圈线下会议/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/08/20/">展开全文 >></a>
         </p>
       
 
@@ -991,12 +928,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/22/Unity-AssetBundle资源更新以及多线程下载/">AssetBundle资源更新以及多线程下载</a>
+      <a class="article-title" href="/2017/06/22/">AssetBundle资源更新以及多线程下载</a>
     </h1>
   
 
         
-        <a href="/2017/06/22/Unity-AssetBundle资源更新以及多线程下载/" class="archive-article-date">
+        <a href="/2017/06/22/" class="archive-article-date">
   	<time datetime="2017-06-22T06:48:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
@@ -1007,7 +944,7 @@
         <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1494902993&amp;di=76ef0051c42c8c9cdfcebf3cad9604e0&amp;imgtype=jpg&amp;er=1&amp;src=http://u.candou.com/2014/1010/1412905945671.jpg" alt="这里写图片描述"></p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>此文章适合不太了解资源加载的萌新，有了入门基础之后再去github上搜大牛写的专业的资源加载方案才能得心应手，不然的话会看的很吃力或者说一脸懵逼。Unity里面关于资源加载我们都知道是下载更新AssetBundle，关于<a href="http://blog.csdn.net/dingxiaowei2013/article/details/71479045" target="_blank" rel="noopener">AssetBundle</a>我之前的文章已经详细介绍过，没看过的朋友可以在看一下。下面介绍的资源加载的Demo有以下几点：<br>1.WWW下载图片资源<br>2.HTTP下载apk文件，并且支持断点续传，并且显示加载进度条<br>3.HTTP多线程下载文件</p>
         
-          <a class="article-more-a" href="/2017/06/22/Unity-AssetBundle资源更新以及多线程下载/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/22/#more">more >></a>
         
       
 
@@ -1035,7 +972,89 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/22/Unity-AssetBundle资源更新以及多线程下载/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/22/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="w-Lua-元表" class="article article-type-w  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/18/">Lua-元表</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/18/" class="archive-article-date">
+  	<time datetime="2017-06-18T06:53:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="元表作用"><a href="#元表作用" class="headerlink" title="元表作用"></a>元表作用</h2><p>元表扩展普通表</p>
+<p>举例：如果A+B两个表相加，如果不设置元表的话就会报错，这种情况就可以设置元表来实现，就类似C++的友元函数这种概念</p>
+<h2 id="元表设置"><a href="#元表设置" class="headerlink" title="元表设置"></a>元表设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mymetable = &#123;&#125;</span><br><span class="line">mytable = setmetatable(&#123;&#125;, mymetable)</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/06/18/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Lua</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">元表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/18/">展开全文 >></a>
         </p>
       
 
@@ -1184,14 +1203,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
@@ -1200,19 +1211,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1228,23 +1263,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1256,11 +1287,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1276,15 +1307,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1296,19 +1319,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">美文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">

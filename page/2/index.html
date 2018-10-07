@@ -197,88 +197,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="w-Lua-元表" class="article article-type-w  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/18/Lua-元表/">Lua-元表</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/18/Lua-元表/" class="archive-article-date">
-  	<time datetime="2017-06-18T06:53:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="元表作用"><a href="#元表作用" class="headerlink" title="元表作用"></a>元表作用</h2><p>元表扩展普通表</p>
-<p>举例：如果A+B两个表相加，如果不设置元表的话就会报错，这种情况就可以设置元表来实现，就类似C++的友元函数这种概念</p>
-<h2 id="元表设置"><a href="#元表设置" class="headerlink" title="元表设置"></a>元表设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mymetable = &#123;&#125;</span><br><span class="line">mytable = setmetatable(&#123;&#125;, mymetable)</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/06/18/Lua-元表/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Lua</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">元表</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/18/Lua-元表/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-Unity-设计模式-桥接模式-BridgePattern" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -286,12 +204,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/"> [Unity 设计模式]桥接模式(BridgePattern)</a>
+      <a class="article-title" href="/2017/06/08/"> [Unity 设计模式]桥接模式(BridgePattern)</a>
     </h1>
   
 
         
-        <a href="/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/" class="archive-article-date">
+        <a href="/2017/06/08/" class="archive-article-date">
   	<time datetime="2017-06-08T06:26:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-08</time>
 </a>
         
@@ -302,7 +220,7 @@
         <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h2><p>继上一讲<a href="http://blog.csdn.net/dingxiaowei2013/article/details/72933223" target="_blank" rel="noopener">IOC模式</a>的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们在工作过程中想要熟练运用其中的每一种设计模式就好比跟高手过招想要能运用好武侠秘籍中的每一招每一式，并且能随着对手出招的不同我们能随机应变对应的招数，这就要求我们对每一种设计模式都理解的非常深刻才能运用自如，打出组合拳的效果。</p>
 <h2 id="2-需求"><a href="#2-需求" class="headerlink" title="2.需求"></a>2.需求</h2><p>我们在FPS类游戏中会碰到这样的需求——实现武器和角色，无论是敌人还是我方角色都能通过不同的武器击杀对方，武器有手枪、散弹枪、以及火箭炮，并以”攻击力”和”攻击距离”来区分他们的威力。我们可能会这样实现：</p>
         
-          <a class="article-more-a" href="/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/08/#more">more >></a>
         
       
 
@@ -316,11 +234,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity 设计模式</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity 设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -338,7 +256,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/08/">展开全文 >></a>
         </p>
       
 
@@ -375,12 +293,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/07/Unity-设计模式-IOC依赖倒置/">[Unity 设计模式]IOC依赖倒置</a>
+      <a class="article-title" href="/2017/06/07/">[Unity 设计模式]IOC依赖倒置</a>
     </h1>
   
 
         
-        <a href="/2017/06/07/Unity-设计模式-IOC依赖倒置/" class="archive-article-date">
+        <a href="/2017/06/07/" class="archive-article-date">
   	<time datetime="2017-06-07T06:24:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-07</time>
 </a>
         
@@ -390,7 +308,7 @@
       
         <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h2><p>最近在看《游戏开发与设计模式》一书，看到控制反转设计模式，作者说：上层模块不应该依赖于下层模块，上层模块和下层模块都应该依赖于接口，这样能减少耦合。然后附带举了个例子，我觉得特别好，就是一台计算机是属于上层模块，里面硬盘属于下层模块，计算机依赖于硬盘，硬盘是计算机的基本组成部件之一。这里提到依赖一词，下面就详细谈谈依赖。</p>
         
-          <a class="article-more-a" href="/2017/06/07/Unity-设计模式-IOC依赖倒置/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/07/#more">more >></a>
         
       
 
@@ -404,11 +322,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Unity设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Unity设计模式</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -430,7 +348,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/07/Unity-设计模式-IOC依赖倒置/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/07/">展开全文 >></a>
         </p>
       
 
@@ -467,12 +385,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/09/译-使用AssetBundle-Manader/">[译]使用AssetBundle Manader</a>
+      <a class="article-title" href="/2017/05/09/">[译]使用AssetBundle Manader</a>
     </h1>
   
 
         
-        <a href="/2017/05/09/译-使用AssetBundle-Manader/" class="archive-article-date">
+        <a href="/2017/05/09/" class="archive-article-date">
   	<time datetime="2017-05-09T06:29:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-09</time>
 </a>
         
@@ -484,7 +402,7 @@
 <h1 id="AssetBundle-and-the-AssetBundle-Manager"><a href="#AssetBundle-and-the-AssetBundle-Manager" class="headerlink" title="AssetBundle and the AssetBundle Manager"></a>AssetBundle and the AssetBundle Manager</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>AssetBundle允许从本地或者远程服务器加载Assets资源，利用AssetBundles技术，Assets资源可以放在远程服务器上，这种技术增加了项目灵活性并且减少项目初始包的大小。</p>
 <p>本文介绍AssetBundles并且讨论一步一步的介绍怎么样使用它，怎样将资源打包到AssetBundle中，如何使用以及如何处理资源的引用计数，所有这些我们都可以使用AssetBundle Manader来简化AssetBundle构建、测试和发布环节。最后会介绍一个使用AB和Variants实际项目的例子。</p>
         
-          <a class="article-more-a" href="/2017/05/09/译-使用AssetBundle-Manader/#more">more >></a>
+          <a class="article-more-a" href="/2017/05/09/#more">more >></a>
         
       
 
@@ -516,7 +434,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/09/译-使用AssetBundle-Manader/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/05/09/">展开全文 >></a>
         </p>
       
 
@@ -553,12 +471,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/25/Unity-UGUI-ScrollRect效果大全/">[Unity UGUI]ScrollRect效果大全</a>
+      <a class="article-title" href="/2017/04/25/">[Unity UGUI]ScrollRect效果大全</a>
     </h1>
   
 
         
-        <a href="/2017/04/25/Unity-UGUI-ScrollRect效果大全/" class="archive-article-date">
+        <a href="/2017/04/25/" class="archive-article-date">
   	<time datetime="2017-04-25T06:31:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-25</time>
 </a>
         
@@ -586,7 +504,7 @@
 <li><strong>缩放滑动效果</strong><br><img src="Unity-UGUI-ScrollRect效果大全/1.gif" alt="这里写图片描述"></li>
 </ul>
         
-          <a class="article-more-a" href="/2017/04/25/Unity-UGUI-ScrollRect效果大全/#more">more >></a>
+          <a class="article-more-a" href="/2017/04/25/#more">more >></a>
         
       
 
@@ -618,7 +536,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/25/Unity-UGUI-ScrollRect效果大全/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/04/25/">展开全文 >></a>
         </p>
       
 
@@ -655,12 +573,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/24/老婆是恩人/">老婆是恩人</a>
+      <a class="article-title" href="/2017/03/24/">老婆是恩人</a>
     </h1>
   
 
         
-        <a href="/2017/03/24/老婆是恩人/" class="archive-article-date">
+        <a href="/2017/03/24/" class="archive-article-date">
   	<time datetime="2017-03-24T04:58:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-24</time>
 </a>
         
@@ -726,7 +644,7 @@ type=0&id=572758458&auto=1&height=430"></iframe>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/24/老婆是恩人/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/03/24/">展开全文 >></a>
         </p>
       
 
@@ -763,12 +681,12 @@ type=0&id=572758458&auto=1&height=430"></iframe>
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/18/React-Native-常用组件/">[React-Native]常用组件</a>
+      <a class="article-title" href="/2017/01/18/">[React-Native]常用组件</a>
     </h1>
   
 
         
-        <a href="/2017/01/18/React-Native-常用组件/" class="archive-article-date">
+        <a href="/2017/01/18/" class="archive-article-date">
   	<time datetime="2017-01-18T11:59:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-18</time>
 </a>
         
@@ -779,7 +697,7 @@ type=0&id=572758458&auto=1&height=430"></iframe>
         <h2 id="一、Image组件"><a href="#一、Image组件" class="headerlink" title="一、Image组件"></a>一、Image组件</h2><p>（1）引用本地图片<br>React Native提供了一种统一的方式来管理iOS和Android应用中的图片。 要向应用程序添加静态图片，请将其放在源代码树中的某个位置，并引用它，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Image source=&#123;require(&apos;./my-icon.png&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
 <p>以与解析JS模块相同的方式解析映像名称。 在上面的示例中，打包程序将在与需要它的组件相同的文件夹中查找my-icon.png。 此外，如果您有my-icon.ios.png和my-icon.android.png，打包程序将为平台选择正确的文件。<br>
         
-          <a class="article-more-a" href="/2017/01/18/React-Native-常用组件/#more">more >></a>
+          <a class="article-more-a" href="/2017/01/18/#more">more >></a>
         
       
 
@@ -803,7 +721,7 @@ type=0&id=572758458&auto=1&height=430"></iframe>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/18/React-Native-常用组件/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/01/18/">展开全文 >></a>
         </p>
       
 
@@ -840,12 +758,12 @@ type=0&id=572758458&auto=1&height=430"></iframe>
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/18/React-Native-Props和State/">[React-Native]Props和State</a>
+      <a class="article-title" href="/2017/01/18/">[React-Native]Props和State</a>
     </h1>
   
 
         
-        <a href="/2017/01/18/React-Native-Props和State/" class="archive-article-date">
+        <a href="/2017/01/18/" class="archive-article-date">
   	<time datetime="2017-01-18T09:59:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-18</time>
 </a>
         
@@ -857,7 +775,7 @@ type=0&id=572758458&auto=1&height=430"></iframe>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">import &#123; AppRegistry, Image &#125; from &apos;react-native&apos;;</span><br><span class="line"></span><br><span class="line">class Bananas extends Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    let pic = &#123;</span><br><span class="line">      uri: &apos;https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg&apos;</span><br><span class="line">    &#125;;</span><br><span class="line">    return (</span><br><span class="line">      &lt;Image source=&#123;pic&#125; style=&#123;&#123;width: 193, height: 110&#125;&#125;/&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">AppRegistry.registerComponent(&apos;Bananas&apos;, () =&gt; Bananas);</span><br></pre></td></tr></table></figure>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg" alt="这里写图片描述"></p>
         
-          <a class="article-more-a" href="/2017/01/18/React-Native-Props和State/#more">more >></a>
+          <a class="article-more-a" href="/2017/01/18/#more">more >></a>
         
       
 
@@ -881,7 +799,7 @@ type=0&id=572758458&auto=1&height=430"></iframe>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/18/React-Native-Props和State/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/01/18/">展开全文 >></a>
         </p>
       
 
@@ -918,12 +836,12 @@ type=0&id=572758458&auto=1&height=430"></iframe>
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/18/React-Native-样式和布局/">[React-Native]样式和布局</a>
+      <a class="article-title" href="/2017/01/18/">[React-Native]样式和布局</a>
     </h1>
   
 
         
-        <a href="/2017/01/18/React-Native-样式和布局/" class="archive-article-date">
+        <a href="/2017/01/18/" class="archive-article-date">
   	<time datetime="2017-01-18T08:58:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-18</time>
 </a>
         
@@ -936,7 +854,7 @@ type=0&id=572758458&auto=1&height=430"></iframe>
 <p>（2）外联样式<br>在组件里指向外面的样式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Text style=&#123;[styles.orange, styles.bigFontSize]&#125;&gt; 大字号外联样式&lt;/Text&gt;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2017/01/18/React-Native-样式和布局/#more">more >></a>
+          <a class="article-more-a" href="/2017/01/18/#more">more >></a>
         
       
 
@@ -960,7 +878,7 @@ type=0&id=572758458&auto=1&height=430"></iframe>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/18/React-Native-样式和布局/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/01/18/">展开全文 >></a>
         </p>
       
 
@@ -997,12 +915,12 @@ type=0&id=572758458&auto=1&height=430"></iframe>
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/18/React-Native-初识代码结构/">[React-Native]初识代码结构</a>
+      <a class="article-title" href="/2017/01/18/">[React-Native]初识代码结构</a>
     </h1>
   
 
         
-        <a href="/2017/01/18/React-Native-初识代码结构/" class="archive-article-date">
+        <a href="/2017/01/18/" class="archive-article-date">
   	<time datetime="2017-01-18T07:56:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-18</time>
 </a>
         
@@ -1012,7 +930,7 @@ type=0&id=572758458&auto=1&height=430"></iframe>
       
         <h2 id="一、了解index-ios-js"><a href="#一、了解index-ios-js" class="headerlink" title="一、了解index.ios.js"></a>一、了解index.ios.js</h2><p>React-Native就是在开发效率和用户体验间做的一种权衡。React-native是使用JS开发，开发效率高、发布能力强，不仅拥有hybrid的开发效率，同时拥有native app相媲美的用户体验。目前天猫也在这块开始试水，一些其他大厂都在尝试Reac Native开发。<br>分析命令创建的HelloWorld的index.ios.js代码：<br>1.第一句：var React = require(‘react-native’);有Node.js开发经验的同学都清楚，require可以引入其他模块。如果没有node.js开发经验的同学，可以脑补下java的import和c++的#include或者C#的using</p>
         
-          <a class="article-more-a" href="/2017/01/18/React-Native-初识代码结构/#more">more >></a>
+          <a class="article-more-a" href="/2017/01/18/#more">more >></a>
         
       
 
@@ -1036,7 +954,90 @@ type=0&id=572758458&auto=1&height=430"></iframe>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/18/React-Native-初识代码结构/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/01/18/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-React-Native-环境配置-HelloWorld" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/18/"> [React-Native]环境配置&amp;HelloWorld</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/18/" class="archive-article-date">
+  	<time datetime="2017-01-18T07:55:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>手头有mac、有开发者证书，不想浪费资源，之前做过iOS开发，还会对移动开发表示关注，现在移动开发目前用Rect Native也是一个热潮，加上之前有web开发经验，然后就有了学习的冲动。Keep learning, make me happy!</p>
+<h2 id="二、环境配置"><a href="#二、环境配置" class="headerlink" title="二、环境配置"></a>二、环境配置</h2><ol>
+<li>需要mac设备</li>
+<li>需要Xcode6.3版本以上</li>
+<li>安装Node.js:<a href="https://nodejs.org/download/" target="_blank" rel="noopener">https://nodejs.org/download/</a></li>
+<li>建议安装watchman,终端命令:brew install watchman</li>
+<li>安装flow:brew install flow</li>
+</ol>
+        
+          <a class="article-more-a" href="/2017/01/18/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">REACT NATIVE</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/18/">展开全文 >></a>
         </p>
       
 
@@ -1185,14 +1186,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
@@ -1201,19 +1194,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1229,23 +1246,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1257,11 +1270,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1277,15 +1290,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1297,19 +1302,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">美文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
