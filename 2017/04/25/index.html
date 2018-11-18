@@ -16,17 +16,17 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="UGUI各种优化效果本文所实现的UGUI效果需求如下：  支持缩放滑动效果 支持动态缩放循环加载 支持大数据固定Item复用加载 支持不用Mask遮罩无限循环加载 支持ObjectPool动态加载 支持无限不规则子物体动态加载 支持拖动并点击和拖拽 支持拖动并拖拽 支持ScrollRect拖动自动吸附功能(拖动是否超过一半自动进退)   前言 要实现以上效果，我从网上搜索得到部分解决方案链接，但不">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/Unity-UGUI-ScrollRect效果大全/1.gif">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/Unity-UGUI-ScrollRect效果大全/2.gif">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/Unity-UGUI-ScrollRect效果大全/3.gif">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/Unity-UGUI-ScrollRect效果大全/4.gif">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/Unity-UGUI-ScrollRect效果大全/5.gif">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/Unity-UGUI-ScrollRect效果大全/6.gif">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/1.gif">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/2.gif">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/3.gif">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/4.gif">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/5.gif">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/04/25/6.gif">
 <meta property="og:updated_time" content="2018-09-12T22:27:49.828Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Unity UGUI]ScrollRect效果大全">
 <meta name="twitter:description" content="UGUI各种优化效果本文所实现的UGUI效果需求如下：  支持缩放滑动效果 支持动态缩放循环加载 支持大数据固定Item复用加载 支持不用Mask遮罩无限循环加载 支持ObjectPool动态加载 支持无限不规则子物体动态加载 支持拖动并点击和拖拽 支持拖动并拖拽 支持ScrollRect拖动自动吸附功能(拖动是否超过一半自动进退)   前言 要实现以上效果，我从网上搜索得到部分解决方案链接，但不">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2017/04/25/Unity-UGUI-ScrollRect效果大全/1.gif">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2017/04/25/1.gif">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -241,28 +241,28 @@
 <p>要实现以上效果，我从网上搜索得到部分解决方案<a href="https://github.com/qiankanglai/LoopScrollRect" target="_blank" rel="noopener">链接</a>，但不是完全满足想要的效果，就自己继续改造优化和添加想要的效果，本文最后会附带上完整Demo下载链接。</p>
 </blockquote>
 <h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><ul>
-<li><strong>缩放滑动效果</strong><br><img src="Unity-UGUI-ScrollRect效果大全/1.gif" alt="这里写图片描述"></li>
+<li><strong>缩放滑动效果</strong><br><img src="/2017/04/25/1.gif" alt="这里写图片描述"></li>
 </ul>
 <a id="more"></a>
 <ul>
 <li><strong>缩放循环展示卡牌效果</strong></li>
 </ul>
-<p><img src="Unity-UGUI-ScrollRect效果大全/2.gif" alt="这里写图片描述"></p>
+<p><img src="/2017/04/25/2.gif" alt="这里写图片描述"></p>
 <ul>
 <li><strong>大量数据无卡顿动态加载，并且支持拖拽、点击和吸附功能</strong></li>
 </ul>
-<p><img src="Unity-UGUI-ScrollRect效果大全/3.gif" alt="这里写图片描述"></p>
+<p><img src="/2017/04/25/3.gif" alt="这里写图片描述"></p>
 <ul>
-<li><p><strong>大量数据循固定Item复用</strong><br><img src="Unity-UGUI-ScrollRect效果大全/4.gif" alt="这里写图片描述"></p>
+<li><p><strong>大量数据循固定Item复用</strong><br><img src="/2017/04/25/4.gif" alt="这里写图片描述"></p>
 </li>
 <li><p><strong>无限无遮罩动态加载</strong></p>
 </li>
 </ul>
-<p><img src="Unity-UGUI-ScrollRect效果大全/5.gif" alt="这里写图片描述"></p>
+<p><img src="/2017/04/25/5.gif" alt="这里写图片描述"></p>
 <ul>
 <li><strong>不规则子物体动态循环加载</strong></li>
 </ul>
-<p><img src="Unity-UGUI-ScrollRect效果大全/6.gif" alt="这里写图片描述"></p>
+<p><img src="/2017/04/25/6.gif" alt="这里写图片描述"></p>
 <h3 id="部分核心代码"><a href="#部分核心代码" class="headerlink" title="部分核心代码"></a>部分核心代码</h3><ul>
 <li><strong>有遮罩无卡顿加载</strong><br>思路：并没有使用UGUI的ScrollRect组件，摆放几张卡片，通过移动和缩放来实现</li>
 </ul>
@@ -557,7 +557,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -565,7 +565,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,15 +581,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,11 +601,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,6 +633,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -629,23 +645,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -677,15 +677,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,6 +698,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">

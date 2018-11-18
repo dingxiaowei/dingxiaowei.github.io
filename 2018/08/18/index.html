@@ -16,38 +16,38 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！ 在线编辑器 最佳推荐(有api提示) 菜鸟工具 在线工具  元表Lua我们访问对应的key来得到value的值，但无法对两个table进行操作。因此">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/1.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/2.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/3.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/4.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/5.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/6.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/7.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/8.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/9.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/10.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/11.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/12.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/13.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/14.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/15.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/16.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/17.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/18.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/19.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/22.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/23.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/24.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/25.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/27.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/21.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/20.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/26.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/1.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/2.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/3.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/4.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/5.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/6.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/7.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/8.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/9.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/10.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/11.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/12.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/13.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/14.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/15.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/16.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/17.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/18.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/19.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/22.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/23.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/24.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/25.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/27.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/21.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/20.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/26.png">
 <meta property="og:updated_time" content="2018-11-18T03:45:24.586Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lua相关的知识小结">
 <meta name="twitter:description" content="前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！ 在线编辑器 最佳推荐(有api提示) 菜鸟工具 在线工具  元表Lua我们访问对应的key来得到value的值，但无法对两个table进行操作。因此">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/1.png">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2018/08/18/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -253,23 +253,23 @@
 </ul>
 <h3 id="元表"><a href="#元表" class="headerlink" title="元表"></a>元表</h3><p>Lua我们访问对应的key来得到value的值，但无法对两个table进行操作。因此Lua提供了元表(Metatable),允许我们改变的行为，每个行为对应一个元方法，元方法下面介绍。<br>Lua本身不是面向对象语言，但可以利用Lua的table来扩展面向对象，也就是我们常用的继承。我们如何实现一个子类继承父类并且能打印出子类的方法和父类的方法。主要思想是setmetatable和getmetable，子类定义个super变量指向父类对象，然后子类就通过这个super变量来访问父类的成员，下面是代码实现：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">local parent=&#123;&#125;</span><br><span class="line">parent.__index=parent</span><br><span class="line">--类实例--</span><br><span class="line">function parent:New()</span><br><span class="line">    local self = &#123;&#125;;    --初始化self，如果没有这句，那么类所建立的对象改变，其他对象都会改变</span><br><span class="line">  setmetatable(self, parent);  --将self的元表设定为Class</span><br><span class="line">    return self;    --返回自身</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function parent.Hello( ... )</span><br><span class="line">  print(&quot;Parent&quot;)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">local Child=parent:New()</span><br><span class="line">Child.__index=Child;</span><br><span class="line">function Child:New( )</span><br><span class="line">  local self=&#123;super=getmetatable(Child)&#125;</span><br><span class="line">  setmetatable(self, Child);  --将self的元表设定为Class</span><br><span class="line">  return self;    --返回自身</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function Child:Hello( ... )</span><br><span class="line">  print(&quot;Child&quot;);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<p>运行结果:<br><img src="Lua相关的知识小结/1.png" alt=""><br>由此可见打印了子类和父类的Hello方法</p>
+<p>运行结果:<br><img src="/2018/08/18/1.png" alt=""><br>由此可见打印了子类和父类的Hello方法</p>
 <a id="more"></a>
 <h3 id="元方法"><a href="#元方法" class="headerlink" title="元方法"></a>元方法</h3><p>元方法之前有过<a href="http://dingxiaowei.cn/2017/06/18/Lua-%E5%85%83%E8%A1%A8/">介绍</a>,可以点击查看一下。</p>
 <h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>遍历最常用的也是我们容易搞混的pairs和ipairs。</p>
 <ul>
-<li>pairs<br>pairs我们可以理解将Lua存储中的内容全部遍历出来，但Lua的存储有时候并不是像我们想象中的那样table中写了几个遍历就会存储几个变量，大致分为一下几种情况：<br>1.纯array，例如{1,2,3,4,5}，或者{1,2,3,nil,5}这样的<br><img src="Lua相关的知识小结/2.png" alt=""><br><img src="Lua相关的知识小结/3.png" alt=""><br>2.纯KeyValuePair(KV)，例如{[1] = 1,[2] = 2}这样的，但如果中间索引间断或者索引从1开始，例如{[3] = 2,[1]= 1}或者{[2]=2,[3]=3}<br><img src="Lua相关的知识小结/4.png" alt=""><br><img src="Lua相关的知识小结/5.png" alt=""><br>3.array和kv混合的类型，例如{[1] = 1,[2] = 2,[3] = 3,4,5,6}或者{1,2,3,[3] = 4,5}或者{1,2,3,[4]=4,5}或者{1,2,3,nil,[4]=4}<br><img src="Lua相关的知识小结/6.png" alt=""><br><img src="Lua相关的知识小结/7.png" alt=""><br><img src="Lua相关的知识小结/8.png" alt=""><br><img src="Lua相关的知识小结/9.png" alt=""></li>
+<li>pairs<br>pairs我们可以理解将Lua存储中的内容全部遍历出来，但Lua的存储有时候并不是像我们想象中的那样table中写了几个遍历就会存储几个变量，大致分为一下几种情况：<br>1.纯array，例如{1,2,3,4,5}，或者{1,2,3,nil,5}这样的<br><img src="/2018/08/18/2.png" alt=""><br><img src="/2018/08/18/3.png" alt=""><br>2.纯KeyValuePair(KV)，例如{[1] = 1,[2] = 2}这样的，但如果中间索引间断或者索引从1开始，例如{[3] = 2,[1]= 1}或者{[2]=2,[3]=3}<br><img src="/2018/08/18/4.png" alt=""><br><img src="/2018/08/18/5.png" alt=""><br>3.array和kv混合的类型，例如{[1] = 1,[2] = 2,[3] = 3,4,5,6}或者{1,2,3,[3] = 4,5}或者{1,2,3,[4]=4,5}或者{1,2,3,nil,[4]=4}<br><img src="/2018/08/18/6.png" alt=""><br><img src="/2018/08/18/7.png" alt=""><br><img src="/2018/08/18/8.png" alt=""><br><img src="/2018/08/18/9.png" alt=""></li>
 </ul>
 <p>由此可见小结一下，pairs会遍历出所有的table内存里面的值，这里并不是我们所看到的所有值，table存储规律是优先存储array，并且索引从1开始，碰到nil会跳过并且索引+1，如果kv类型的值，key没有冲突，那则继续存储，如果key有冲突则忽略不会存储。pairs会将所有存储的值都打印出来。</p>
 <ul>
-<li>ipairs<br>ipairs也是将table存储的值打印出来，只不过有个特殊的规律是从1开始打印，并且不能间断，如果碰到nil的值就不会继续遍历，下面我们也来用几组情况的数据说话<br>1.纯array，例如{1,2,3,4,5}，或者{1,2,3,nil,5}这样的<br><img src="Lua相关的知识小结/10.png" alt=""><br><img src="Lua相关的知识小结/11.png" alt=""><br><img src="Lua相关的知识小结/12.png" alt=""></li>
+<li>ipairs<br>ipairs也是将table存储的值打印出来，只不过有个特殊的规律是从1开始打印，并且不能间断，如果碰到nil的值就不会继续遍历，下面我们也来用几组情况的数据说话<br>1.纯array，例如{1,2,3,4,5}，或者{1,2,3,nil,5}这样的<br><img src="/2018/08/18/10.png" alt=""><br><img src="/2018/08/18/11.png" alt=""><br><img src="/2018/08/18/12.png" alt=""></li>
 </ul>
-<p>2.纯KeyValuePair(KV)，例如{[1] = 1,[2] = 2}这样的，但如果中间索引间断或者索引从1开始，例如{[3] = 2,[1]= 1}或者{[2]=2,[3]=3}<br><img src="Lua相关的知识小结/13.png" alt=""><br><img src="Lua相关的知识小结/14.png" alt=""><br><img src="Lua相关的知识小结/15.png" alt=""></p>
-<p>3.array和kv混合的类型，例如{[1] = 1,[2] = 2,[3] = 3,4,5,6}或者{1,2,3,[3] = 4,5}或者{1,2,3,[4]=4,5}或者{1,2,3,nil,[4]=4}<br><img src="Lua相关的知识小结/16.png" alt=""><br><img src="Lua相关的知识小结/17.png" alt=""><br><img src="Lua相关的知识小结/18.png" alt=""><br><img src="Lua相关的知识小结/19.png" alt=""></p>
-<h3 id="计数"><a href="#计数" class="headerlink" title="#计数"></a>#计数</h3><p>计算table的长度，可以用#来统计，其实#就是统计table的存储长度，到底存了几个键值对，但我们就要搞懂Lua是如何存储的了。我经过几组数据来介绍一下：<br>经过上面的规律，我们应该知道lua的存储规律，就是优先将array变成kv，依次从1开始，如果碰到nil则不存储并且索引号+1，array存储结束之后然后继续在当前的索引号的基础上+1继续找kv的值去存储，最后统计存储的kv的键值对数量<br>1.纯array并且包含nil，例如{1,2,3,nil}或者{1,2,3,nil,5}<br><img src="Lua相关的知识小结/22.png" alt=""><br><img src="Lua相关的知识小结/23.png" alt=""></p>
-<p>2.纯kv，例如{[1] = 1,[3] = 3}或者{[2] = 2, [3] = 3}或者{[1] = 1,[2] = nil,[3] = 3}<br><img src="Lua相关的知识小结/24.png" alt=""><br><img src="Lua相关的知识小结/25.png" alt=""><br><img src="Lua相关的知识小结/27.png" alt=""></p>
+<p>2.纯KeyValuePair(KV)，例如{[1] = 1,[2] = 2}这样的，但如果中间索引间断或者索引从1开始，例如{[3] = 2,[1]= 1}或者{[2]=2,[3]=3}<br><img src="/2018/08/18/13.png" alt=""><br><img src="/2018/08/18/14.png" alt=""><br><img src="/2018/08/18/15.png" alt=""></p>
+<p>3.array和kv混合的类型，例如{[1] = 1,[2] = 2,[3] = 3,4,5,6}或者{1,2,3,[3] = 4,5}或者{1,2,3,[4]=4,5}或者{1,2,3,nil,[4]=4}<br><img src="/2018/08/18/16.png" alt=""><br><img src="/2018/08/18/17.png" alt=""><br><img src="/2018/08/18/18.png" alt=""><br><img src="/2018/08/18/19.png" alt=""></p>
+<h3 id="计数"><a href="#计数" class="headerlink" title="#计数"></a>#计数</h3><p>计算table的长度，可以用#来统计，其实#就是统计table的存储长度，到底存了几个键值对，但我们就要搞懂Lua是如何存储的了。我经过几组数据来介绍一下：<br>经过上面的规律，我们应该知道lua的存储规律，就是优先将array变成kv，依次从1开始，如果碰到nil则不存储并且索引号+1，array存储结束之后然后继续在当前的索引号的基础上+1继续找kv的值去存储，最后统计存储的kv的键值对数量<br>1.纯array并且包含nil，例如{1,2,3,nil}或者{1,2,3,nil,5}<br><img src="/2018/08/18/22.png" alt=""><br><img src="/2018/08/18/23.png" alt=""></p>
+<p>2.纯kv，例如{[1] = 1,[3] = 3}或者{[2] = 2, [3] = 3}或者{[1] = 1,[2] = nil,[3] = 3}<br><img src="/2018/08/18/24.png" alt=""><br><img src="/2018/08/18/25.png" alt=""><br><img src="/2018/08/18/27.png" alt=""></p>
 <p>3.array和kv混合，例如{1,2,3,nil,[4]=5}或者{1,2,3,nil,[5]=5}</p>
-<p><img src="Lua相关的知识小结/21.png" alt=""><br><img src="Lua相关的知识小结/20.png" alt=""><br><img src="Lua相关的知识小结/26.png" alt=""></p>
+<p><img src="/2018/08/18/21.png" alt=""><br><img src="/2018/08/18/20.png" alt=""><br><img src="/2018/08/18/26.png" alt=""></p>
 <p>总结一下，#的规律就是从1开始统计，优先统计array，如果碰到nil就不统计，如果纯数字，nil后面还有值的话(针对纯array而言)会索引++,也会计入统计,如果是kv,碰到nil就不统计了</p>
 <h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>闭包是由函数以及它所访问的非局部变量组成，这个非局部变量也不是全局变量，这个变量称作upvalue，如果没有闭包的话，这个函数只能访问函数里面的变量或者全局变量。<br>闭包实现原理：<br>当Lua编译一个函数时，它会生成一个原型（prototype），原型中包括函数的虚拟机指令、函数中的常量（数值和字符串等）和一些调试信息。在任何时候只要Lua执行一个function .. end表达时，它都会创建一个新的闭包（closure）。每个闭包都有一个相应函数原型的引用以及一个数组，数组中每个元素都是一个对upvalue的引用，可以通过该数组来访问外部的局部变量（outer local variables）。值得注意的是，在Lua 5.2之前，闭包中还包括一个对环境（environment）的引用，环境实质就是一个table，函数可以在该表中索引全局变量，从Lua 5.2开始，取消了闭包中的环境，而引入一个变量_ENV来设置闭包环境。由此可见，函数是编译期概念，是静态的，而闭包是运行期概念，是动态的。<br>更多内容可以访问下面相关连接！</p>
 <h3 id="其他链接"><a href="#其他链接" class="headerlink" title="其他链接"></a>其他链接</h3><ul>
@@ -538,7 +538,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,7 +546,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,15 +562,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,11 +582,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,6 +614,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -610,23 +626,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -658,15 +658,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,6 +679,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -16,15 +16,15 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="#Aladdin_XLua 前言前段时间腾讯开源了一个内部热更框架XLua在Unity开发群里引起一阵热议，也受到广大开发者的热捧，然后我当然也抱着好奇的心去学习学习。后面也会将扩展之后的工程放在git上，大家一起学习交流！在此感谢XLua作者创造出这么好用的框架！">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/01/14/Unity-XLua-热更新XLua入门-一-基础篇/1.gif">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/01/14/Unity-XLua-热更新XLua入门-一-基础篇/2.jpg">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/01/14/Unity-XLua-热更新XLua入门-一-基础篇/3.jpg">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/01/14/Unity-XLua-热更新XLua入门-一-基础篇/4.jpg">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/01/14/1.gif">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/01/14/2.jpg">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/01/14/3.jpg">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/01/14/4.jpg">
 <meta property="og:updated_time" content="2018-09-12T22:27:49.875Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=" [Unity XLua]热更新XLua入门(一)-基础篇">
 <meta name="twitter:description" content="#Aladdin_XLua 前言前段时间腾讯开源了一个内部热更框架XLua在Unity开发群里引起一阵热议，也受到广大开发者的热捧，然后我当然也抱着好奇的心去学习学习。后面也会将扩展之后的工程放在git上，大家一起学习交流！在此感谢XLua作者创造出这么好用的框架！">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2017/01/14/Unity-XLua-热更新XLua入门-一-基础篇/1.gif">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2017/01/14/1.gif">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -242,7 +242,7 @@
 <li>特色：HotFix<br>关于这个HotFix是其他热更lua框架所不具备的，也是他最大的优势和特色之一，原理就是通过特性标记然后在IL逻辑层判断修改逻辑，使程序支持热更的lua逻辑代码而不是走之前的C#逻辑</li>
 </ol>
 <h3 id="自己扩展XLua支持NGUI开发"><a href="#自己扩展XLua支持NGUI开发" class="headerlink" title="自己扩展XLua支持NGUI开发"></a>自己扩展XLua支持NGUI开发</h3><p>现在开源热更Lua框架都很少支持NGUI了，可能现在趋势都是用原生的UGUI，但估计还有一些NGUI粉喜欢用NGUI开发，毕竟NGUI用了很长时间，XLua例子里面已经支持了lua使用UGUI，这里我就自己补充让它支持NGUI开发。后续我也会多添加一些UGUI的例子。先看看扩展的NGUI做的界面效果图，然后下面再讲解怎么让XLua支持第三方插件。</p>
-<h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="Unity-XLua-热更新XLua入门-一-基础篇/1.gif" alt="这里写图片描述"></p>
+<h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="/2017/01/14/1.gif" alt="这里写图片描述"></p>
 <h3 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h3><p>在学习一个东西之前最好先学习一下XLua作者辛辛苦苦写的那些多教程文档，包括案例以及wiki和issu，如果还有什么不明白的地方可以在加入文章最后的群我们一起交流学习。</p>
 <h4 id="1-自定义C-类供Lua访问"><a href="#1-自定义C-类供Lua访问" class="headerlink" title="1.自定义C#类供Lua访问"></a>1.自定义C#类供Lua访问</h4><p>这里可以学习一下作者写的Test中的例子，还是比较详细，但我还是想记录一下我自己尝试的过程。</p>
 <h5 id="（1）特性方式"><a href="#（1）特性方式" class="headerlink" title="（1）特性方式"></a>（1）特性方式</h5><p>XLua支持使用特性标签让自定义的类可供Lua访问<br>C#：</p>
@@ -273,7 +273,7 @@
 <p>Lua:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">--测试ref</span><br><span class="line">local inputValue = &apos;你好，我是lua&apos;</span><br><span class="line">local outputValue = luaO2:SayHelloWithRefParam(inputValue)</span><br><span class="line">print(outputValue)                          --lua是通过字符串返回</span><br><span class="line"></span><br><span class="line">local outValue1,outValue2 = luaO2:SayHelloWithRefParamAndReturnString(inputValue)</span><br><span class="line">print(outValue1)</span><br><span class="line">print(outValue2)</span><br><span class="line">			</span><br><span class="line">--测试out</span><br><span class="line">inputValue = &apos;我是测试lua&apos;</span><br><span class="line">outputValue = luaO2:SayHelloWithOutParam(inputValue)</span><br><span class="line">print(outputValue)</span><br></pre></td></tr></table></figure>
 <p>一开始我测试的时候是本以为lua调用ref传入的参数，也会返回出修改的结果，但出乎我的意料，并没能修改，经过作者提示，lua是通过返回值返回的ref参数，如果函数本身就有返回值，那么最后一个参数是返回的ref或者out参数，这个读者可以尝试一下。</p>
-<h6 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h6><p><img src="Unity-XLua-热更新XLua入门-一-基础篇/2.jpg" alt="这里写图片描述"></p>
+<h6 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h6><p><img src="/2017/01/14/2.jpg" alt="这里写图片描述"></p>
 <h6 id="关于Wrap"><a href="#关于Wrap" class="headerlink" title="关于Wrap"></a>关于Wrap</h6><p>Wrap是C#跟Lua之间的一个桥梁，Lua想要访问C#必须要用过Wrap访问，相信看过其他Lua框架的这一点应该不陌生，XLua对生成Wrap也是非常方便。</p>
 <p>我们只要新建一个类然后继承一个GenConfig的接口，下面是接口内容，关于这几个类型XLua文档中也有介绍，我们只需要把自定义的类添加到LuaCallCSharp集合中即可，然后点击Generate就会自动帮我们生成对应的Wrap文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//注意：用户自己代码不建议在这里配置，建议通过标签来声明!!</span><br><span class="line">    public interface GenConfig </span><br><span class="line">    &#123;</span><br><span class="line">        //lua中要使用到C#库的配置，比如C#标准库，或者Unity API，第三方库等。</span><br><span class="line">        List&lt;Type&gt; LuaCallCSharp &#123; get; &#125;</span><br><span class="line"></span><br><span class="line">        //C#静态调用Lua的配置（包括事件的原型），仅可以配delegate，interface</span><br><span class="line">        List&lt;Type&gt; CSharpCallLua &#123; get; &#125;</span><br><span class="line"></span><br><span class="line">        //黑名单</span><br><span class="line">        List&lt;List&lt;string&gt;&gt; BlackList &#123; get; &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
@@ -281,7 +281,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public static class AladdinGenConfig</span><br><span class="line">&#123;</span><br><span class="line">	//lua扩展第三方或者自定义类库</span><br><span class="line">	public class LuaCallCSharpExtern : GenConfig</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">		public List&lt;Type&gt; LuaCallCSharp</span><br><span class="line">		&#123;</span><br><span class="line">			get</span><br><span class="line">			&#123;</span><br><span class="line">				return new List&lt;Type&gt;()</span><br><span class="line">				&#123;</span><br><span class="line">					typeof(CSModelWidhoutNameSpace),</span><br><span class="line">					typeof(CSModel),</span><br><span class="line">					typeof(CSModelTest),</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="2-NGUI扩展"><a href="#2-NGUI扩展" class="headerlink" title="2.NGUI扩展"></a>2.NGUI扩展</h4><p>正如上图所示的效果，下面讲述一下我是如何支持NGUI扩展的，也参考了作者UGUI的一个例子修改的。</p>
 <h5 id="a）生成Wrap接口"><a href="#a）生成Wrap接口" class="headerlink" title="a）生成Wrap接口"></a>a）生成Wrap接口</h5><p>这一步上上面说的一样，只要把NGUI的组件类全部都添加到LuaCallCSharp列表中然后Generate一下即可，这里要注意的是组件中委托类型也需要添加进去。</p>
-<h5 id="b）搭建两个UI界面，UI逻辑接口用C-，Lua是调用逻辑调用界面中C-的方法。"><a href="#b）搭建两个UI界面，UI逻辑接口用C-，Lua是调用逻辑调用界面中C-的方法。" class="headerlink" title="b）搭建两个UI界面，UI逻辑接口用C#，Lua是调用逻辑调用界面中C#的方法。"></a>b）搭建两个UI界面，UI逻辑接口用C#，Lua是调用逻辑调用界面中C#的方法。</h5><p><img src="Unity-XLua-热更新XLua入门-一-基础篇/3.jpg" alt="这里写图片描述"><br><img src="Unity-XLua-热更新XLua入门-一-基础篇/4.jpg" alt="这里写图片描述"></p>
+<h5 id="b）搭建两个UI界面，UI逻辑接口用C-，Lua是调用逻辑调用界面中C-的方法。"><a href="#b）搭建两个UI界面，UI逻辑接口用C-，Lua是调用逻辑调用界面中C-的方法。" class="headerlink" title="b）搭建两个UI界面，UI逻辑接口用C#，Lua是调用逻辑调用界面中C#的方法。"></a>b）搭建两个UI界面，UI逻辑接口用C#，Lua是调用逻辑调用界面中C#的方法。</h5><p><img src="/2017/01/14/3.jpg" alt="这里写图片描述"><br><img src="/2017/01/14/4.jpg" alt="这里写图片描述"></p>
 <p>C#:<br>购买</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using System.Collections;</span><br><span class="line">using XLua;</span><br><span class="line">public class AsyncBuy : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">	LuaEnv luaenv = null;</span><br><span class="line"></span><br><span class="line">	void Start()</span><br><span class="line">	&#123;</span><br><span class="line">		luaenv = new LuaEnv();</span><br><span class="line">		luaenv.DoString(&quot;require &apos;async_buy&apos;&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// Update is called once per frame</span><br><span class="line">	void Update()</span><br><span class="line">	&#123;</span><br><span class="line">		if (luaenv != null)</span><br><span class="line">		&#123;</span><br><span class="line">			luaenv.Tick();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Panel逻辑：</p>
@@ -559,7 +559,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,7 +567,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,15 +583,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -603,11 +603,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -623,6 +635,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -631,23 +647,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -679,15 +679,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -704,6 +700,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">

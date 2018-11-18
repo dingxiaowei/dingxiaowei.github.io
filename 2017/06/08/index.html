@@ -9,20 +9,20 @@
   <title> [Unity 设计模式]桥接模式(BridgePattern) | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1.前言继上一讲IOC模式的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们在工作过程中想要熟练运用其中的每一种设计模式就好比跟高手过招想要能运用好武侠秘籍中的每一招每一式，并且能随着对手出招的不同我们能随机应变对应的招数，这就要求我们对每一种设计模式都理解的非常深刻才能运用自如，打出组合拳的效果。">
-<meta name="keywords" content="设计模式,Unity 设计模式,桥接模式,BridgePattern">
+<meta name="keywords" content="Unity 设计模式,设计模式,桥接模式,BridgePattern">
 <meta property="og:type" content="article">
 <meta property="og:title" content=" [Unity 设计模式]桥接模式(BridgePattern)">
 <meta property="og:url" content="http://dingxiaowei.cn/2017/06/08/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="1.前言继上一讲IOC模式的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们在工作过程中想要熟练运用其中的每一种设计模式就好比跟高手过招想要能运用好武侠秘籍中的每一招每一式，并且能随着对手出招的不同我们能随机应变对应的招数，这就要求我们对每一种设计模式都理解的非常深刻才能运用自如，打出组合拳的效果。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/1.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/2.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/06/08/1.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/06/08/2.png">
 <meta property="og:updated_time" content="2018-09-12T22:27:49.890Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=" [Unity 设计模式]桥接模式(BridgePattern)">
 <meta name="twitter:description" content="1.前言继上一讲IOC模式的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们在工作过程中想要熟练运用其中的每一种设计模式就好比跟高手过招想要能运用好武侠秘籍中的每一招每一式，并且能随着对手出招的不同我们能随机应变对应的招数，这就要求我们对每一种设计模式都理解的非常深刻才能运用自如，打出组合拳的效果。">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2017/06/08/Unity-设计模式-桥接模式-BridgePattern/1.png">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2017/06/08/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -223,7 +223,7 @@
         <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h2><p>继上一讲<a href="http://blog.csdn.net/dingxiaowei2013/article/details/72933223" target="_blank" rel="noopener">IOC模式</a>的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们在工作过程中想要熟练运用其中的每一种设计模式就好比跟高手过招想要能运用好武侠秘籍中的每一招每一式，并且能随着对手出招的不同我们能随机应变对应的招数，这就要求我们对每一种设计模式都理解的非常深刻才能运用自如，打出组合拳的效果。</p>
 <h2 id="2-需求"><a href="#2-需求" class="headerlink" title="2.需求"></a>2.需求</h2><p>我们在FPS类游戏中会碰到这样的需求——实现武器和角色，无论是敌人还是我方角色都能通过不同的武器击杀对方，武器有手枪、散弹枪、以及火箭炮，并以”攻击力”和”攻击距离”来区分他们的威力。我们可能会这样实现：</p>
 <a id="more"></a>
-<p><img src="Unity-设计模式-桥接模式-BridgePattern/1.png" alt="这里写图片描述"><br>上面是我们的一个UML示例图，这里笔者很惭愧没用过UML专业的绘图工具，就临时用绘图软件简单的画了一下。下面就是我们的初步设计代码。</p>
+<p><img src="/2017/06/08/1.png" alt="这里写图片描述"><br>上面是我们的一个UML示例图，这里笔者很惭愧没用过UML专业的绘图工具，就临时用绘图软件简单的画了一下。下面就是我们的初步设计代码。</p>
 <ul>
 <li>角色基类</li>
 </ul>
@@ -245,7 +245,7 @@
 <li>每当添加一个角色时，继承自ICharacter接口的角色重新定义Attack都必须针对不同的武器进行判断，并且要写重复的相同的代码。</li>
 <li>每当新增武器时，所有角色的Attack都需要重新改造，这样增加维护成本。<br>为了解决以上问题，下面我们桥接模式隆重登场了！</li>
 </ul>
-<h2 id="4-桥接模式"><a href="#4-桥接模式" class="headerlink" title="4.桥接模式"></a>4.桥接模式</h2><p>桥接模式（Bridge Pattern）：桥接模式的用意是将抽象化(Abstraction)与实现化(Implementation)脱耦，使得二者可以独立地变化。<br>以上是桥接模式的官方定义，我们还是通过以上例子来理解分析，”桥接”顾名思义就是这一组跟那一组两组对象通过某种中间关系链接在一起。”当两个群组因为功能上的需求，想要进行链接合作，但又希望两组类可以自行发展互相不受对方变化而影响”，上面角色跟武器的实现案例，武器和角色分别是两组群组，其实上面的实现只是考虑了角色通过子类通过基类继承来实现，然后传入武器对象，这中实现思路有点上一讲介绍的控制反转的味道，那既然角色可以这样设计，为何不把武器也这样设计呢，然后两个群组之间就通过两个群组的接口来实现，就好比两家结婚，双方都有一个媒人来传递信息，这是我对桥接模式的理解，哈哈。基于这种想法，我们来改造一下角色和武器的实现。<br><img src="Unity-设计模式-桥接模式-BridgePattern/2.png" alt="这里写图片描述"><br>说明：</p>
+<h2 id="4-桥接模式"><a href="#4-桥接模式" class="headerlink" title="4.桥接模式"></a>4.桥接模式</h2><p>桥接模式（Bridge Pattern）：桥接模式的用意是将抽象化(Abstraction)与实现化(Implementation)脱耦，使得二者可以独立地变化。<br>以上是桥接模式的官方定义，我们还是通过以上例子来理解分析，”桥接”顾名思义就是这一组跟那一组两组对象通过某种中间关系链接在一起。”当两个群组因为功能上的需求，想要进行链接合作，但又希望两组类可以自行发展互相不受对方变化而影响”，上面角色跟武器的实现案例，武器和角色分别是两组群组，其实上面的实现只是考虑了角色通过子类通过基类继承来实现，然后传入武器对象，这中实现思路有点上一讲介绍的控制反转的味道，那既然角色可以这样设计，为何不把武器也这样设计呢，然后两个群组之间就通过两个群组的接口来实现，就好比两家结婚，双方都有一个媒人来传递信息，这是我对桥接模式的理解，哈哈。基于这种想法，我们来改造一下角色和武器的实现。<br><img src="/2017/06/08/2.png" alt="这里写图片描述"><br>说明：</p>
 <ul>
 <li>ICharacter:角色的抽象接口拥有一个IWeapon的对象引用，并在接口中申明了一个武器攻击目标WeaponAttackTarget()方法让子类可以调用,同时要求继承子类必须在Attack()中重新实现攻击目标的功能。</li>
 <li>ISoldier、IEnemy:双方阵容单位实现攻击目标Attack()时，只需要调用父类的WeaponAttackTarget方法就可以使用当前武器攻击对手。</li>
@@ -319,11 +319,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity 设计模式</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity 设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -549,7 +549,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,7 +557,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -573,15 +573,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -593,11 +593,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,6 +625,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -621,23 +637,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -669,15 +669,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,6 +690,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">

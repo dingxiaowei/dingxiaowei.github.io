@@ -16,23 +16,23 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="前序：又是好久没动手写写博客了，意味着好久没有自己研究一些新东西了，每天回来都比较晚，可能也比较累，都懒的打开电脑了，最近公司给所有的程序都配置了一台surface，欣喜若狂，轻便小巧，利用三天假期的时间终于可以好好利用一番，偶然的机会看到scut开原游戏服务器(一款基于.net framework4.5.1)，便有一种意见钟情的感觉，于是便决定好好研究一番！一、Scut特点 一款免费开源的游戏服">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/11.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/22.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/33.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/44.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/55.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/66.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/77.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/88.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/99.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/00.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/111.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/112.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/11.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/22.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/33.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/44.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/55.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/66.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/77.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/88.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/99.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/00.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/111.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2015/06/18/112.png">
 <meta property="og:updated_time" content="2018-09-12T22:27:49.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=" Scut初识之HelloWorld">
 <meta name="twitter:description" content="前序：又是好久没动手写写博客了，意味着好久没有自己研究一些新东西了，每天回来都比较晚，可能也比较累，都懒的打开电脑了，最近公司给所有的程序都配置了一台surface，欣喜若狂，轻便小巧，利用三天假期的时间终于可以好好利用一番，偶然的机会看到scut开原游戏服务器(一款基于.net framework4.5.1)，便有一种意见钟情的感觉，于是便决定好好研究一番！一、Scut特点 一款免费开源的游戏服">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2015/06/18/Scut初识HelloWorld/11.png">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2015/06/18/11.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -233,8 +233,8 @@
         <p>前序：又是好久没动手写写博客了，意味着好久没有自己研究一些新东西了，每天回来都比较晚，可能也比较累，都懒的打开电脑了，最近公司给所有的程序都配置了一台surface，欣喜若狂，轻便小巧，利用三天假期的时间终于可以好好利用一番，偶然的机会看到scut开原游戏服务器(一款基于.net framework4.5.1)，便有一种意见钟情的感觉，于是便决定好好研究一番！<br>一、Scut特点</p>
 <pre><code>一款免费开源的游戏服务器引擎，适用于开发AVG、SLGRPG、MMOG等类型的网络游戏，同时支持Http、WebSocket和Socket协议通讯，支持Window、Mac和Linux多种平台部署，支持Redis内存数据库和Microsoft SQL、MySql数据库；服务器引擎框架基于C#编写，游戏逻辑层可以选择使用C#、Python和Lua多种脚本进行开发，支持热更新的方式部署；客户端可以使用Coscos2d、Unity3d、FlashAir与服务器引擎对接；提供了丰富的中间件，可以简单快捷的搭建您的游戏。
 </code></pre><a id="more"></a>
-<p>多协议：支持Http / WebSocket / Socket<br>脚本化：支持C# / Python / Lua脚本开发<br>多平台：Windows / Linux / Mac平台<br>多数据库：MSSQL、Mysql及NoSql<br>兼容多平台、也支持cocos2dx，unity3d，falsh等主流的游戏开发引擎，支持逻辑层脚本语言开发，而且还支持热更新方式部署，是一款非常值得好好研究的.NET开原服务器引擎，作为.NET开发爱好者，有啥理由不喜爱上她呢？！<br>二、操作步骤<br>1.安装IIS，Win8上安装跟Win7上稍有区别，Win7上是中文Internet信息服务，Win8上直接叫英文了，要注意一下，具体安装步骤可以参考Win8 IIS安装 ,安装之后再浏览器里面输入localhost能出现默认的IIS页面则说明安装成功！<br>2.对上面一条的补充，设置应用程序池-&gt;DefaultAppPool-&gt;v4.0经典,确保IIS可以正常启动。<br>3.将Scut源码中Scut-&gt;Source-&gt;Tools-&gt;release拷贝到IIS C盘IIS目录C:\inetpub\wwwroot下<br><img src="Scut初识HelloWorld/11.png" alt=""><br>4.修改本地默认域名解析，C:\Windows\System32\drivers\etc\hosts修改ip对应的默认域名，127.0.0.1 <a href="http://www.dingxiaowei.com" target="_blank" rel="noopener">www.dingxiaowei.com</a> ，这样在浏览器里面输入这个域名就能解析到本地的127.0.0.1<br><img src="Scut初识HelloWorld/22.png" alt=""><br>效果如下<br><img src="Scut初识HelloWorld/33.png" alt=""><br>5.安装mysql和navicat for mysql，scut支持mssql和mysql，这里我演示的是musql，具体安装自行搜索<br>6.导入scut数据到本地mysql，导入数据表文件C:\Users\ding\Desktop\study\Work\ASP.NET\Scut\Source\Tools\ContractTools\db\mysql<br><img src="Scut初识HelloWorld/44.png" alt=""><br>7.再次刷新网页<a href="http://www.dingxiaowei.com" target="_blank" rel="noopener">www.dingxiaowei.com</a> ，会发现出现如图4的协议管理工具<br>8.在管理工具上点击新建项目，添加协议，添加版本号等等<br><img src="Scut初识HelloWorld/55.png" alt=""><br>9.打开vs，新建一个类库，然后将C:\Users\ding\Desktop\study\Work\ASP.NET\Scut\Release\6.7.9.8\Console这里面的工程都拷贝到你新建的工程中，前提要运行一下install.<br>bat生成一些必要的dll类库文件。<br>10.将Script文件夹和NLog.config、GameServer.exe.config文件包含在项目中，并且添加引用<br><img src="Scut初识HelloWorld/66.png" alt=""><br>11.查看一下Script/CsScript/Action/Action1000.cs文件的命名空间和引用空间，并修改对应的协议网站上的命名空间和引用<br>12.查看网站上自己添加的协议号并且在工程Script/CsScript/Action目录添加上对应协议号的类，然后将网站上的脚本拷贝过来,我这边是Action100.cs<br><img src="Scut初识HelloWorld/77.png" alt=""><br>13.在原来的Action1000.cs添加如下代码<br> public override bool GetUrlElement()<br>        {<br>            if (httpGet.GetString(“UserName”, ref UserName)<br>                 &amp;&amp; httpGet.GetInt(“Score”, ref Score))<br>            {<br>                return true;<br>            }<br>            return false;<br>        }<br>        public override bool TakeAction()<br>        {<br>            var cache = new ShareCacheStruct<userranking>();<br>            var ranking = cache.Find(m =&gt; m.UserName == UserName);<br>            if (ranking == null)<br>            {<br>                var user = new GameUser() { UserId = (int)cache.GetNextNo(), NickName = UserName};<br>                new PersonalCacheStruct<gameuser>().Add(user);<br>                ranking = new UserRanking();<br>                ranking.UserID = user.UserId;<br>                ranking.UserName = UserName;<br>                ranking.Score = Score;<br>                cache.Add(ranking);<br>            }<br>            else<br>            {<br>                ranking.UserName = UserName;<br>                ranking.Score = Score;<br>            }<br>            return true;<br>        }</gameuser></userranking></p>
-<p>14.服务器设置为.NET Framework4.5.1,调试选择当前目录下的GameServer,并且工作目录页选择当前目录C:\Users\ding\Desktop\DotaServer\HelloWorldTest\HelloWorldTest\<br>15.启动RedisServer,然后启动服务器端,直到显示Server has started successfully！Server is listening…表明连接成功<br>启动redis<br><img src="Scut初识HelloWorld/88.png" alt=""><br>启动游戏服务器<br><img src="Scut初识HelloWorld/99.png" alt=""><br>16.服务器端就算OK,接下来是客户端，新建一个unity客户端，然后将scut的服务器端sdk拷贝过来，路径是：C:\Users\ding\Desktop\study\Work\ASP.NET\Scut\SDK\Unity3d\Assets，将里面所有的脚本都放在unity的客户端中C:\Users\ding\Desktop\study\Work\ASP.NET\Scut\SDK\Unity3d\Assets<br><img src="Scut初识HelloWorld/00.png" alt=""><br>17.测试连接和断开连接<br><img src="Scut初识HelloWorld/111.png" alt=""><br>断开连接<br><img src="Scut初识HelloWorld/112.png" alt=""></p>
+<p>多协议：支持Http / WebSocket / Socket<br>脚本化：支持C# / Python / Lua脚本开发<br>多平台：Windows / Linux / Mac平台<br>多数据库：MSSQL、Mysql及NoSql<br>兼容多平台、也支持cocos2dx，unity3d，falsh等主流的游戏开发引擎，支持逻辑层脚本语言开发，而且还支持热更新方式部署，是一款非常值得好好研究的.NET开原服务器引擎，作为.NET开发爱好者，有啥理由不喜爱上她呢？！<br>二、操作步骤<br>1.安装IIS，Win8上安装跟Win7上稍有区别，Win7上是中文Internet信息服务，Win8上直接叫英文了，要注意一下，具体安装步骤可以参考Win8 IIS安装 ,安装之后再浏览器里面输入localhost能出现默认的IIS页面则说明安装成功！<br>2.对上面一条的补充，设置应用程序池-&gt;DefaultAppPool-&gt;v4.0经典,确保IIS可以正常启动。<br>3.将Scut源码中Scut-&gt;Source-&gt;Tools-&gt;release拷贝到IIS C盘IIS目录C:\inetpub\wwwroot下<br><img src="/2015/06/18/11.png" alt=""><br>4.修改本地默认域名解析，C:\Windows\System32\drivers\etc\hosts修改ip对应的默认域名，127.0.0.1 <a href="http://www.dingxiaowei.com" target="_blank" rel="noopener">www.dingxiaowei.com</a> ，这样在浏览器里面输入这个域名就能解析到本地的127.0.0.1<br><img src="/2015/06/18/22.png" alt=""><br>效果如下<br><img src="/2015/06/18/33.png" alt=""><br>5.安装mysql和navicat for mysql，scut支持mssql和mysql，这里我演示的是musql，具体安装自行搜索<br>6.导入scut数据到本地mysql，导入数据表文件C:\Users\ding\Desktop\study\Work\ASP.NET\Scut\Source\Tools\ContractTools\db\mysql<br><img src="/2015/06/18/44.png" alt=""><br>7.再次刷新网页<a href="http://www.dingxiaowei.com" target="_blank" rel="noopener">www.dingxiaowei.com</a> ，会发现出现如图4的协议管理工具<br>8.在管理工具上点击新建项目，添加协议，添加版本号等等<br><img src="/2015/06/18/55.png" alt=""><br>9.打开vs，新建一个类库，然后将C:\Users\ding\Desktop\study\Work\ASP.NET\Scut\Release\6.7.9.8\Console这里面的工程都拷贝到你新建的工程中，前提要运行一下install.<br>bat生成一些必要的dll类库文件。<br>10.将Script文件夹和NLog.config、GameServer.exe.config文件包含在项目中，并且添加引用<br><img src="/2015/06/18/66.png" alt=""><br>11.查看一下Script/CsScript/Action/Action1000.cs文件的命名空间和引用空间，并修改对应的协议网站上的命名空间和引用<br>12.查看网站上自己添加的协议号并且在工程Script/CsScript/Action目录添加上对应协议号的类，然后将网站上的脚本拷贝过来,我这边是Action100.cs<br><img src="/2015/06/18/77.png" alt=""><br>13.在原来的Action1000.cs添加如下代码<br> public override bool GetUrlElement()<br>        {<br>            if (httpGet.GetString(“UserName”, ref UserName)<br>                 &amp;&amp; httpGet.GetInt(“Score”, ref Score))<br>            {<br>                return true;<br>            }<br>            return false;<br>        }<br>        public override bool TakeAction()<br>        {<br>            var cache = new ShareCacheStruct<userranking>();<br>            var ranking = cache.Find(m =&gt; m.UserName == UserName);<br>            if (ranking == null)<br>            {<br>                var user = new GameUser() { UserId = (int)cache.GetNextNo(), NickName = UserName};<br>                new PersonalCacheStruct<gameuser>().Add(user);<br>                ranking = new UserRanking();<br>                ranking.UserID = user.UserId;<br>                ranking.UserName = UserName;<br>                ranking.Score = Score;<br>                cache.Add(ranking);<br>            }<br>            else<br>            {<br>                ranking.UserName = UserName;<br>                ranking.Score = Score;<br>            }<br>            return true;<br>        }</gameuser></userranking></p>
+<p>14.服务器设置为.NET Framework4.5.1,调试选择当前目录下的GameServer,并且工作目录页选择当前目录C:\Users\ding\Desktop\DotaServer\HelloWorldTest\HelloWorldTest\<br>15.启动RedisServer,然后启动服务器端,直到显示Server has started successfully！Server is listening…表明连接成功<br>启动redis<br><img src="/2015/06/18/88.png" alt=""><br>启动游戏服务器<br><img src="/2015/06/18/99.png" alt=""><br>16.服务器端就算OK,接下来是客户端，新建一个unity客户端，然后将scut的服务器端sdk拷贝过来，路径是：C:\Users\ding\Desktop\study\Work\ASP.NET\Scut\SDK\Unity3d\Assets，将里面所有的脚本都放在unity的客户端中C:\Users\ding\Desktop\study\Work\ASP.NET\Scut\SDK\Unity3d\Assets<br><img src="/2015/06/18/00.png" alt=""><br>17.测试连接和断开连接<br><img src="/2015/06/18/111.png" alt=""><br>断开连接<br><img src="/2015/06/18/112.png" alt=""></p>
 <p>三、工程路径<br>git：<a href="https://code.csdn.net/s10141303/scut_helloworld.git" target="_blank" rel="noopener">https://code.csdn.net/s10141303/scut_helloworld.git</a><br>四、参考文档<br><a href="https://github.com/ScutGame/Scut/wiki" target="_blank" rel="noopener">https://github.com/ScutGame/Scut/wiki</a><br><a href="http://www.cnblogs.com/lancidie/p/3412417.html" target="_blank" rel="noopener">http://www.cnblogs.com/lancidie/p/3412417.html</a><br><a href="https://git.oschina.net/scutgame/Scut#git-readme" target="_blank" rel="noopener">https://git.oschina.net/scutgame/Scut#git-readme</a></p>
 
       
@@ -498,7 +498,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -506,7 +506,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -522,15 +522,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,11 +542,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,6 +574,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -570,23 +586,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,15 +618,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -643,6 +639,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">

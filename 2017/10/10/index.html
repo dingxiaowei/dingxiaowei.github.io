@@ -16,16 +16,16 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="前言表弟做财务工作，每周都要处理一堆Excel，面对大量的数据，不仅人很疲劳，眼睛也很疲劳，我了解了他的工作之后，就决定帮他做一个小工具来节省劳力。 最终效果图使用 结果">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/10/10/NPOI读写Excel-财务报表/use.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/10/10/NPOI读写Excel-财务报表/res.gif">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/10/10/NPOI读写Excel-财务报表/fapiao.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/10/10/NPOI读写Excel-财务报表/shujuyuan.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/10/10/NPOI读写Excel-财务报表/moban.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/10/10/use.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/10/10/res.gif">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/10/10/fapiao.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/10/10/shujuyuan.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/10/10/moban.png">
 <meta property="og:updated_time" content="2018-10-07T03:27:08.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NPOI读写Excel-财务报表">
 <meta name="twitter:description" content="前言表弟做财务工作，每周都要处理一堆Excel，面对大量的数据，不仅人很疲劳，眼睛也很疲劳，我了解了他的工作之后，就决定帮他做一个小工具来节省劳力。 最终效果图使用 结果">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2017/10/10/NPOI读写Excel-财务报表/use.png">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2017/10/10/use.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -224,10 +224,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>表弟做财务工作，每周都要处理一堆Excel，面对大量的数据，不仅人很疲劳，眼睛也很疲劳，我了解了他的工作之后，就决定帮他做一个小工具来节省劳力。</p>
-<h2 id="最终效果图"><a href="#最终效果图" class="headerlink" title="最终效果图"></a>最终效果图</h2><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p><img src="NPOI读写Excel-财务报表/use.png" alt=""></p>
-<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="NPOI读写Excel-财务报表/res.gif" alt=""><br><img src="NPOI读写Excel-财务报表/fapiao.png" alt=""></p>
+<h2 id="最终效果图"><a href="#最终效果图" class="headerlink" title="最终效果图"></a>最终效果图</h2><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p><img src="/2017/10/10/use.png" alt=""></p>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="/2017/10/10/res.gif" alt=""><br><img src="/2017/10/10/fapiao.png" alt=""></p>
 <a id="more"></a>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>从一个Excel数据源表格中，根据Type字段筛选出EMS的数据，并且一个公司做出一个发票收执。<br><img src="NPOI读写Excel-财务报表/shujuyuan.png" alt="数据源"><br>发票收执模板<br><img src="NPOI读写Excel-财务报表/moban.png" alt="发票收执"><br>手动操作的话工作量非常大，工具操作的话就非常非常方便了。</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>从一个Excel数据源表格中，根据Type字段筛选出EMS的数据，并且一个公司做出一个发票收执。<br><img src="/2017/10/10/shujuyuan.png" alt="数据源"><br>发票收执模板<br><img src="/2017/10/10/moban.png" alt="发票收执"><br>手动操作的话工作量非常大，工具操作的话就非常非常方便了。</p>
 <h2 id="NPOI"><a href="#NPOI" class="headerlink" title="NPOI"></a>NPOI</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>NPOI是指构建在POI 3.x版本之上的一个程序，NPOI可以在没有安装Office的情况下对Word或Excel文档进行读写操作。<br>POI是一个开源的Java读写Excel、WORD等微软OLE2组件文档的项目，NPOI是对应的.net库。</p>
 <h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><h4 id="（一）传统操作Excel遇到的问题："><a href="#（一）传统操作Excel遇到的问题：" class="headerlink" title="（一）传统操作Excel遇到的问题："></a>（一）传统操作Excel遇到的问题：</h4><ol>
 <li>如果是.NET，需要在服务器端装Office，且及时更新它，以防漏洞，还需要设定权限允许.NET访问COM+，如果在导出过程中出问题可能导致服务器宕机。</li>
@@ -533,7 +533,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -541,7 +541,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,15 +557,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -577,11 +577,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,6 +609,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -605,23 +621,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,15 +653,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,6 +674,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">

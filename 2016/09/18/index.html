@@ -16,21 +16,21 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="需求： 做一款社交类的APP，主体工程是原生开发，也就是是IOS的Xcode工程，产品经理为了丰富应用的玩法，就想往里面加上现在比较流行的AR功能，组成一款AR社交APP，我们之前见识多的都是工程是主体，然后IOS原生功能或者代码作为插件添加进Unity的Plugin里面，这样的方式参见文章(举例)：Unity和Android交互让手机动起来，相关IOS方面的文章也可以参见Mono的文章。但是作为">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/Unity跟IOS原生开发项目融合/1.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/Unity跟IOS原生开发项目融合/2.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/Unity跟IOS原生开发项目融合/3.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/Unity跟IOS原生开发项目融合/4.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/Unity跟IOS原生开发项目融合/5.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/Unity跟IOS原生开发项目融合/6.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/Unity跟IOS原生开发项目融合/7.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/Unity跟IOS原生开发项目融合/8.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/Unity跟IOS原生开发项目融合/9.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/Unity跟IOS原生开发项目融合/10.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/1.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/2.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/3.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/4.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/5.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/6.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/7.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/8.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/9.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2016/09/18/10.png">
 <meta property="og:updated_time" content="2018-09-12T22:27:49.906Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unity跟IOS原生开发项目融合">
 <meta name="twitter:description" content="需求： 做一款社交类的APP，主体工程是原生开发，也就是是IOS的Xcode工程，产品经理为了丰富应用的玩法，就想往里面加上现在比较流行的AR功能，组成一款AR社交APP，我们之前见识多的都是工程是主体，然后IOS原生功能或者代码作为插件添加进Unity的Plugin里面，这样的方式参见文章(举例)：Unity和Android交互让手机动起来，相关IOS方面的文章也可以参见Mono的文章。但是作为">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2016/09/18/Unity跟IOS原生开发项目融合/1.png">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2016/09/18/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -230,18 +230,18 @@
       
         <h2 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h2><hr>
 <p>做一款社交类的APP，主体工程是原生开发，也就是是IOS的Xcode工程，产品经理为了丰富应用的玩法，就想往里面加上现在比较流行的AR功能，组成一款AR社交APP，我们之前见识多的都是工程是主体，然后IOS原生功能或者代码作为插件添加进Unity的Plugin里面，这样的方式参见文章(举例)：Unity和Android交互让手机动起来，相关IOS方面的文章也可以参见Mono的文章。但是作为AR社交我们肯定是以IOS的Xcode功能为主体，Unity的AR功能为宿主，因为毕竟还是属于社交APP。下面就进入正题，如何将Unity的功能模块添加整合进Xcode工程里面，直接上步骤。</p>
-<p>介绍：Unity导出一个空的IOS项目，命名为UnityProject，原生应用命名为Native。<br><img src="Unity跟IOS原生开发项目融合/1.png" alt="这里写图片描述"></p>
+<p>介绍：Unity导出一个空的IOS项目，命名为UnityProject，原生应用命名为Native。<br><img src="/2016/09/18/1.png" alt="这里写图片描述"></p>
 <a id="more"></a>
 <h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><hr>
-<h3 id="一、拷贝文件"><a href="#一、拷贝文件" class="headerlink" title="一、拷贝文件"></a>一、拷贝文件</h3><p>将UnityProject项目下  Classes Data Libraries MapFileParser MapFileParser.sh 等文件拷贝到Native主项根目录下<br><img src="Unity跟IOS原生开发项目融合/2.png" alt="这里写图片描述"><br><img src="Unity跟IOS原生开发项目融合/3.png" alt="这里写图片描述"><br><img src="Unity跟IOS原生开发项目融合/4.png" alt="这里写图片描述"></p>
+<h3 id="一、拷贝文件"><a href="#一、拷贝文件" class="headerlink" title="一、拷贝文件"></a>一、拷贝文件</h3><p>将UnityProject项目下  Classes Data Libraries MapFileParser MapFileParser.sh 等文件拷贝到Native主项根目录下<br><img src="/2016/09/18/2.png" alt="这里写图片描述"><br><img src="/2016/09/18/3.png" alt="这里写图片描述"><br><img src="/2016/09/18/4.png" alt="这里写图片描述"></p>
 <hr>
-<h3 id="二、添加Framework"><a href="#二、添加Framework" class="headerlink" title="二、添加Framework"></a>二、添加Framework</h3><p><img src="Unity跟IOS原生开发项目融合/5.png" alt="这里写图片描述"></p>
+<h3 id="二、添加Framework"><a href="#二、添加Framework" class="headerlink" title="二、添加Framework"></a>二、添加Framework</h3><p><img src="/2016/09/18/5.png" alt="这里写图片描述"></p>
 <hr>
 <p>###三、添加配置</p>
-<h4 id="1-添加runscript"><a href="#1-添加runscript" class="headerlink" title="1.添加runscript"></a>1.添加runscript</h4><p> <img src="Unity跟IOS原生开发项目融合/6.png" alt="这里写图片描述"></p>
+<h4 id="1-添加runscript"><a href="#1-添加runscript" class="headerlink" title="1.添加runscript"></a>1.添加runscript</h4><p> <img src="/2016/09/18/6.png" alt="这里写图片描述"></p>
 <h4 id="2-添加Search-Paths"><a href="#2-添加Search-Paths" class="headerlink" title="2.添加Search Paths"></a>2.添加Search Paths</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Header Search Paths 添加</span><br><span class="line">“$(SRCROOT)/Classes”</span><br><span class="line">“$(SRCROOT)”</span><br><span class="line">$(SRCROOT)/Classes/Native</span><br><span class="line">$(SRCROOT)/Libraries/bdwgc/include</span><br><span class="line">$(SRCROOT)/Libraries/libil2cpp/include</span><br><span class="line"> </span><br><span class="line">Library Search Paths 添加</span><br><span class="line">$(inherited)</span><br><span class="line">“$(SRCROOT)”</span><br><span class="line">“$(SRCROOT)/Libraries”</span><br></pre></td></tr></table></figure>
-<p>####3.添加预处理文件<br>Classes/Prefix.pch<br><img src="Unity跟IOS原生开发项目融合/7.png" alt="这里写图片描述"></p>
-<p>####4.添加 -DINIT_SCRIPTING_BACKEND=1<br><img src="Unity跟IOS原生开发项目融合/8.png" alt="这里写图片描述"></p>
+<p>####3.添加预处理文件<br>Classes/Prefix.pch<br><img src="/2016/09/18/7.png" alt="这里写图片描述"></p>
+<p>####4.添加 -DINIT_SCRIPTING_BACKEND=1<br><img src="/2016/09/18/8.png" alt="这里写图片描述"></p>
 <hr>
 <p>###四、修改main.m<br>复制Classes/main.mm内容到main.m  修改main.m的扩展名为.mm<br>删除Unity生成main.mm<br>return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));</p>
 <hr>
@@ -250,10 +250,10 @@
 <p>###六、修改 appdelegate</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</span><br><span class="line">    // Override point for customization after application launch.</span><br><span class="line">    BOOL returnBool;</span><br><span class="line">    if (_unityAppController == nil) &#123;</span><br><span class="line">         </span><br><span class="line">        _unityAppController = [[UnityAppController alloc] init];</span><br><span class="line">    &#125;</span><br><span class="line">    returnBool = [_unityAppController application:application didFinishLaunchingWithOptions:launchOptions];</span><br><span class="line">//    self.window = _unityAppController.window;</span><br><span class="line">     </span><br><span class="line">    HelloViewController *vc = [[HelloViewController alloc] init];</span><br><span class="line">    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];</span><br><span class="line">    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];</span><br><span class="line">    self.window.rootViewController = nav;</span><br><span class="line">    [self.window makeKeyAndVisible];</span><br><span class="line">     </span><br><span class="line">    return YES;</span><br><span class="line">     </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">- (void)applicationWillResignActive:(UIApplication *)application &#123;</span><br><span class="line">    [_unityAppController applicationWillResignActive:application];</span><br><span class="line">    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.</span><br><span class="line">    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">- (void)applicationDidEnterBackground:(UIApplication *)application &#123;</span><br><span class="line">    [_unityAppController applicationDidEnterBackground:application];</span><br><span class="line"> </span><br><span class="line">    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.</span><br><span class="line">    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">- (void)applicationWillEnterForeground:(UIApplication *)application &#123;</span><br><span class="line">    [_unityAppController applicationWillEnterForeground:application];</span><br><span class="line"> </span><br><span class="line">    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">- (void)applicationDidBecomeActive:(UIApplication *)application &#123;</span><br><span class="line">    [_unityAppController applicationDidBecomeActive:application];</span><br><span class="line"> </span><br><span class="line">    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">- (void)applicationWillTerminate:(UIApplication *)application &#123;</span><br><span class="line">    [_unityAppController applicationWillTerminate:application];</span><br><span class="line">    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>###七、Error</p>
-<p>####1、Expected identifier or ‘(‘<br>修改UnityViewControllerBaseiOS.h<br><img src="Unity跟IOS原生开发项目融合/9.png" alt="这里写图片描述"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#ifdef __cplusplus</span><br><span class="line">extern &quot;C&quot; &#123;</span><br><span class="line">#endif</span><br><span class="line">    void AddViewControllerRotationHandling(Class class_, IMP willRotateToInterfaceOrientation, IMP didRotateFromInterfaceOrientation, IMP viewWillTransitionToSize);</span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">&#125;</span><br><span class="line">#endif</span><br><span class="line"> </span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">extern &quot;C&quot; &#123;</span><br><span class="line">#endif</span><br><span class="line">    void AddViewControllerDefaultRotationHandling(Class class_);</span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">&#125;</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure></p>
+<p>####1、Expected identifier or ‘(‘<br>修改UnityViewControllerBaseiOS.h<br><img src="/2016/09/18/9.png" alt="这里写图片描述"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#ifdef __cplusplus</span><br><span class="line">extern &quot;C&quot; &#123;</span><br><span class="line">#endif</span><br><span class="line">    void AddViewControllerRotationHandling(Class class_, IMP willRotateToInterfaceOrientation, IMP didRotateFromInterfaceOrientation, IMP viewWillTransitionToSize);</span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">&#125;</span><br><span class="line">#endif</span><br><span class="line"> </span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">extern &quot;C&quot; &#123;</span><br><span class="line">#endif</span><br><span class="line">    void AddViewControllerDefaultRotationHandling(Class class_);</span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">&#125;</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure></p>
 <p>####2、如果存在多个pch配置文件，需要整合为一个</p>
 <p>####3、Unity和Xcode版本会存在兼容问题，最好都升级到最新，否则会碰到莫名其妙的报错</p>
-<p>###八、关于EasyAR的提示<br>如果使用EasyAR的话，会出现融合后黑屏的问题，解决如下<br><img src="Unity跟IOS原生开发项目融合/10.png" alt="这里写图片描述"></p>
+<p>###八、关于EasyAR的提示<br>如果使用EasyAR的话，会出现融合后黑屏的问题，解决如下<br><img src="/2016/09/18/10.png" alt="这里写图片描述"></p>
 <hr>
 
       
@@ -521,7 +521,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,7 +529,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -545,15 +545,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -565,11 +565,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,6 +597,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -593,23 +609,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,15 +641,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -666,6 +662,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">

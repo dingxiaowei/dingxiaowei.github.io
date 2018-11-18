@@ -16,13 +16,13 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="Shader入门系列第一篇，Shader和渲染基本介绍。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/11/18/【Aladdin-Unity3D-Shader编程】之一-基本入门/1.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/11/18/【Aladdin-Unity3D-Shader编程】之一-基本入门/2.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/11/18/1.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/11/18/2.png">
 <meta property="og:updated_time" content="2018-09-12T22:27:49.922Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Aladdin Unity3D Shader编程】之一 基本入门">
 <meta name="twitter:description" content="Shader入门系列第一篇，Shader和渲染基本介绍。">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2017/11/18/【Aladdin-Unity3D-Shader编程】之一-基本入门/1.png">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2017/11/18/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -259,7 +259,7 @@
 <h2 id="Unity-Shader的基本结构"><a href="#Unity-Shader的基本结构" class="headerlink" title="Unity Shader的基本结构"></a>Unity Shader的基本结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Aladdin/01 First Shader&quot; //指定Shader路径和名字</span><br><span class="line">&#123;</span><br><span class="line">	Properties //属性</span><br><span class="line">	&#123;</span><br><span class="line">		_Color(&quot;Color&quot;,Color)=(1,1,1,1)</span><br><span class="line">	&#125;</span><br><span class="line">	SubShader //SubShader可以写很多个 显卡运行效果的时候 从第一个开始，如果第一个SubShader里面的效果都可以实现就使用第一个SubShader，如果显卡这个SubShader有的实现不了会往下找支持的SubShader</span><br><span class="line">	&#123;</span><br><span class="line">		//至少含有一个Pass</span><br><span class="line">		Pass &#123;</span><br><span class="line">			//在这里编写Shader代码 HLSLPROGRAM</span><br><span class="line">			CGPROGRAM</span><br><span class="line">			//使用CG语言编写Shader代码</span><br><span class="line">			ENDCG</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	FallBack  &quot;VertexLit&quot; //如果上面SubShader都不支持 则执行默认的Shader效果</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Unity-Shader属性和使用"><a href="#Unity-Shader属性和使用" class="headerlink" title="Unity Shader属性和使用"></a>Unity Shader属性和使用</h2><h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p>常用属性</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">_Color(&quot;Color&quot;,Color)=(1,1,1,1)</span><br><span class="line">_Vector(&quot;Vector&quot;,Vector)=(1,2,3,4)</span><br><span class="line">_Int(&quot;Int&quot;,Int)=2</span><br><span class="line">_Float(&quot;Float&quot;,Float)=12.3 //不用加f</span><br><span class="line">_Range(&quot;Range&quot;,Range(1.0,10.0))=1.0 //范围类型</span><br><span class="line">_2D(&quot;Texture&quot;,2D)=&quot;white&quot;&#123;&#125; //white是默认值，如果不选图的话 就是默认白色的图</span><br><span class="line">_Cute(&quot;Cute&quot;,Cube)=&quot;red&quot;&#123;&#125; //如果用天空盒就用Cube 立方体纹理</span><br><span class="line">_3D(&quot;Texture&quot;,3D)=&quot;black&quot;&#123;&#125; //3D纹理</span><br></pre></td></tr></table></figure>
-<p><img src="【Aladdin-Unity3D-Shader编程】之一-基本入门/1.png" alt="这里写图片描述"></p>
+<p><img src="/2017/11/18/1.png" alt="这里写图片描述"></p>
 <h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">float4 _Color;//float4就是四个值 _Color要跟上面属性名字保持一致</span><br><span class="line">float4 _Vector;</span><br><span class="line">float _Int;</span><br><span class="line">float _Range;</span><br><span class="line">sampler2D _2D;</span><br><span class="line">samplerCube _Cube;</span><br><span class="line">sampler3D _3D;</span><br></pre></td></tr></table></figure>
 <h4 id="float、half和fixed类型区别"><a href="#float、half和fixed类型区别" class="headerlink" title="float、half和fixed类型区别"></a>float、half和fixed类型区别</h4><p>float也可以用half和fixed代替<br>float 32位来存储<br>half 16位来存储 -6万~+6万<br>fixed 11位来存储 一般都是用fixed</p>
 <h2 id="顶点、片元函数编写"><a href="#顶点、片元函数编写" class="headerlink" title="顶点、片元函数编写"></a>顶点、片元函数编写</h2><h4 id="vert函数"><a href="#vert函数" class="headerlink" title="vert函数"></a>vert函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//顶点函数定义 这里只是声明了顶点函数的函数名</span><br><span class="line">//基本作用是完成顶点坐标从模型空间到剪裁空间的转换(从游戏环境到视野相机屏幕上)</span><br><span class="line">#pragma vertex vert</span><br><span class="line"></span><br><span class="line">//通过语义告诉系统我这个参数是干嘛的比如POSITION是模型坐标语义，告诉系统我需要顶点参数坐标  SV_POSITION是剪裁坐标语义</span><br><span class="line">float4 vert(float4 v:POSITION) :SV_POSITION</span><br><span class="line">&#123;</span><br><span class="line">    return mul(UNITY_MATRIX_MVP, v); //计算模型坐标转换成剪裁坐标</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -268,7 +268,7 @@
 <h2 id="NORMAL、TEXCOORD0语义"><a href="#NORMAL、TEXCOORD0语义" class="headerlink" title="NORMAL、TEXCOORD0语义"></a>NORMAL、TEXCOORD0语义</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//a2v  application to vertex</span><br><span class="line">struct a2v </span><br><span class="line">&#123;</span><br><span class="line">    //顶点坐标</span><br><span class="line">    float4 vertex:POSITION; //添加上POSITION语义，这样操作系统才知道给这个变量赋值模型坐标变量</span><br><span class="line">    //法线</span><br><span class="line">    float3 normal:NORMAL; //告诉unity把模型空间下的法线方向向量填充给normal变量</span><br><span class="line">    //纹理坐标(模型坐标对应贴图的坐标)</span><br><span class="line">    //纹理坐标一般都是0-1 不按照实际的像素来的</span><br><span class="line">    float4 texcoord:TEXCOORD0; //告诉unity把模型空间下的纹理坐标填充给texcoord变量</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//通过语义告诉系统我这个参数是干嘛的比如POSITION是模型坐标语义，告诉系统我需要顶点参数坐标  SV_POSITION是剪裁坐标语义</span><br><span class="line">float4 vert(a2v v) :SV_POSITION</span><br><span class="line">&#123;</span><br><span class="line">    return mul(UNITY_MATRIX_MVP, v.vertex); //计算模型坐标转换成剪裁坐标</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="片元函数和顶点函数之间传数据"><a href="#片元函数和顶点函数之间传数据" class="headerlink" title="片元函数和顶点函数之间传数据"></a>片元函数和顶点函数之间传数据</h2><p>使用结构体作为参数和返回值,这样可以添加任意多个返回值或者传入值,会更方便一些。<br><strong>为什么要传参？</strong><br>因为有些参数只能比如顶点、法线等只能在顶点函数中访问到，片元函数是访问不到的，如果片元函数要访问顶点法线等参数只能从顶点函数中返回并且作为参数传入给片元函数才行。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;AladdinShader/03 Struct Shader&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    SubShader &#123;</span><br><span class="line">        Pass </span><br><span class="line">        &#123;</span><br><span class="line">        CGPROGRAM</span><br><span class="line">// Upgrade NOTE: excluded shader from DX11; has structs without semantics (struct v2f members tempNormal)</span><br><span class="line">#pragma exclude_renderers d3d11</span><br><span class="line">#pragma vertex vert</span><br><span class="line">#pragma fragment frag </span><br><span class="line"></span><br><span class="line">        //a2v  application to vertex</span><br><span class="line">        struct a2v </span><br><span class="line">        &#123;</span><br><span class="line">            //顶点坐标</span><br><span class="line">            float4 vertex:POSITION; //添加上POSITION语义，这样操作系统才知道给这个变量赋值模型坐标变量</span><br><span class="line">            //法线</span><br><span class="line">            float3 normal:NORMAL; //告诉unity把模型空间下的法线方向向量填充给normal变量</span><br><span class="line">            //纹理坐标(模型坐标对应贴图的坐标)</span><br><span class="line">            //纹理坐标一般都是0-1 不按照实际的像素来的</span><br><span class="line">            float4 texcoord:TEXCOORD0; //告诉unity把模型空间下的纹理坐标填充给texcoord变量</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        //v2f vertex to fragment</span><br><span class="line">        struct v2f</span><br><span class="line">        &#123;</span><br><span class="line">            float4 position:SV_POSITION;</span><br><span class="line">            float3 tempNormal:COLOR0;</span><br><span class="line">        &#125;;</span><br><span class="line">        //通过语义告诉系统我这个参数是干嘛的比如POSITION是模型坐标语义，告诉系统我需要顶点参数坐标  SV_POSITION是剪裁坐标语义</span><br><span class="line">        v2f vert(a2v v)</span><br><span class="line">        &#123;</span><br><span class="line">            v2f f;</span><br><span class="line">            f.position = mul(UNITY_MATRIX_MVP, v.vertex);//计算模型坐标转换成剪裁坐标</span><br><span class="line">            f.tempNormal = v.normal;//将法线数据放到返回结构体里面供片元函数调用</span><br><span class="line">            return f;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //SV_target是返回颜色语义</span><br><span class="line">        fixed4 frag(v2f f):SV_Target</span><br><span class="line">        &#123;</span><br><span class="line">            return fixed4(f.tempNormal,1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    FallBack  &quot;VertexLit&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>效果的计算放在片元函数里面效果更好但计算量也大，片元函数的调用比顶点函数调用也多的多。<br>顶点之间的点的数值是经过插值运算得到的。<br>效果图：<br><img src="【Aladdin-Unity3D-Shader编程】之一-基本入门/2.png" alt="这里写图片描述"><br>解释：三个方向上的法线向量依次是(1,0,0)(0,1,0)(0,0,1),对应的颜色就是红绿蓝,也就是如图所示的效果图。</p>
+<p>效果的计算放在片元函数里面效果更好但计算量也大，片元函数的调用比顶点函数调用也多的多。<br>顶点之间的点的数值是经过插值运算得到的。<br>效果图：<br><img src="/2017/11/18/2.png" alt="这里写图片描述"><br>解释：三个方向上的法线向量依次是(1,0,0)(0,1,0)(0,0,1),对应的颜色就是红绿蓝,也就是如图所示的效果图。</p>
 <h2 id="Unity中常用语义"><a href="#Unity中常用语义" class="headerlink" title="Unity中常用语义"></a>Unity中常用语义</h2><p>从应用程序传递到顶点函数的语义有哪些a2v<br>POSITION顶点坐标(模型空间下的)<br>NORMAL法线(模型空间下)<br>TARGET切线(模型空间)<br>TEXCOORD0~n纹理坐标<br>COLOR顶点颜色</p>
 <p>从顶点函数传递给片元函数的时候可以使用的语义<br>SV_POSITION剪裁空间中的顶点坐标(一般是系统直接使用)<br>COLOR0可以传递一组值 四个值<br>COLOR1可以传递一组值 四个值<br>TEXCOORD0~7传递纹理坐标</p>
 <p>片元函数传递给系统<br>SV_TARGET颜色值，显示到屏幕上的颜色</p>
@@ -545,7 +545,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -553,7 +553,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,15 +569,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,11 +589,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -609,6 +621,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -617,23 +633,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,15 +665,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -690,6 +686,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
