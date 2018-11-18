@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/21.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/20.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/08/18/Lua相关的知识小结/26.png">
-<meta property="og:updated_time" content="2018-09-12T22:27:49.719Z">
+<meta property="og:updated_time" content="2018-11-18T02:39:38.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lua相关的知识小结">
 <meta name="twitter:description" content="前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！ 在线编辑器 最佳推荐(有api提示) 菜鸟工具 在线工具  元表Lua我们访问对应的key来得到value的值，但无法对两个table进行操作。因此">
@@ -252,7 +252,7 @@
 <li><a href="https://tool.lu/coderunner/" target="_blank" rel="noopener">在线工具</a></li>
 </ul>
 <h3 id="元表"><a href="#元表" class="headerlink" title="元表"></a>元表</h3><p>Lua我们访问对应的key来得到value的值，但无法对两个table进行操作。因此Lua提供了元表(Metatable),允许我们改变的行为，每个行为对应一个元方法，元方法下面介绍。<br>Lua本身不是面向对象语言，但可以利用Lua的table来扩展面向对象，也就是我们常用的继承。我们如何实现一个子类继承父类并且能打印出子类的方法和父类的方法。主要思想是setmetatable和getmetable，子类定义个super变量指向父类对象，然后子类就通过这个super变量来访问父类的成员，下面是代码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">local parent=&#123;&#125;</span><br><span class="line">parent.__index=parent</span><br><span class="line">--类实例--</span><br><span class="line">function parent:New() </span><br><span class="line">    local self = &#123;&#125;;    --初始化self，如果没有这句，那么类所建立的对象改变，其他对象都会改变</span><br><span class="line">  setmetatable(self, parent);  --将self的元表设定为Class</span><br><span class="line">    return self;    --返回自身</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function parent.Hello( ... )</span><br><span class="line">  print(&quot;Parent&quot;)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">local Child=parent:New()</span><br><span class="line">Child.__index=Child;</span><br><span class="line">function Child:New( )</span><br><span class="line">  local self=&#123;super=getmetatable(Child)&#125;</span><br><span class="line">  setmetatable(self, Child);  --将self的元表设定为Class</span><br><span class="line">  return self;    --返回自身</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function Child:Hello( ... )</span><br><span class="line">  print(&quot;Child&quot;);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">local parent=&#123;&#125;</span><br><span class="line">parent.__index=parent</span><br><span class="line">--类实例--</span><br><span class="line">function parent:New()</span><br><span class="line">    local self = &#123;&#125;;    --初始化self，如果没有这句，那么类所建立的对象改变，其他对象都会改变</span><br><span class="line">  setmetatable(self, parent);  --将self的元表设定为Class</span><br><span class="line">    return self;    --返回自身</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function parent.Hello( ... )</span><br><span class="line">  print(&quot;Parent&quot;)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">local Child=parent:New()</span><br><span class="line">Child.__index=Child;</span><br><span class="line">function Child:New( )</span><br><span class="line">  local self=&#123;super=getmetatable(Child)&#125;</span><br><span class="line">  setmetatable(self, Child);  --将self的元表设定为Class</span><br><span class="line">  return self;    --返回自身</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function Child:Hello( ... )</span><br><span class="line">  print(&quot;Child&quot;);</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 <p>运行结果:<br><img src="Lua相关的知识小结/1.png" alt=""><br>由此可见打印了子类和父类的Hello方法</p>
 <a id="more"></a>
 <h3 id="元方法"><a href="#元方法" class="headerlink" title="元方法"></a>元方法</h3><p>元方法之前有过<a href="http://dingxiaowei.cn/2017/06/18/Lua-%E5%85%83%E8%A1%A8/">介绍</a>,可以点击查看一下。</p>
@@ -394,7 +394,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          搭建Jenkins导出Unity安卓环境
+          (no title)
         
       </div>
     </a>
@@ -551,10 +551,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity</a>
               </li>
              
@@ -563,7 +559,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,6 +568,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -615,10 +615,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -627,11 +623,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,7 +635,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -647,7 +659,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -663,11 +675,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">工具 Jenkins</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -676,18 +684,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
