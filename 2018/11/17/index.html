@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/5.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/6.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/7.png">
-<meta property="og:updated_time" content="2018-11-18T12:28:24.176Z">
+<meta property="og:updated_time" content="2018-11-18T12:48:51.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建Jenkins导出Unity安卓环境">
 <meta name="twitter:description" content="前言早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Unity开发环境，就只要浏览器打开Jenkins然后点击打包即可。 准备工具 准备Jenkins环境，可以选择去Jenkins官网下载,我这里准备了一个Jenkins的war包。">
@@ -231,25 +231,45 @@
 </ul>
 <a id="more"></a>
 <h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><ul>
-<li>首要前提本地Unity已经安装好Unity Android的打包环境，确保能够正确的用Unity导出Android apk包，这里就不过多介绍Unity如何导出Android环境了，自行解决。</li>
-<li>命令行启动Jenkins，java -jar jenkins.war,会看到如下运行即代表启动成功，可以在浏览器输入<a href="http://localhost:8080/来测试，会看到进入Jenkins网站。" target="_blank" rel="noopener">http://localhost:8080/来测试，会看到进入Jenkins网站。</a><br><img src="/2018/11/17/8.png" alt=""><br><img src="/2018/11/17/1.png" alt=""></li>
-<li><p>构建项目<br><img src="/2018/11/17/2.png" alt=""><br><img src="/2018/11/17/3.png" alt=""><br>注意windows路径和命令行的路径的转变，上图是Unity打包apk的批处理的路径，这个批处理如下图，并且要放到Unity的工程下。<br><img src="/2018/11/17/5.png" alt=""><br>注意：如果批处理路径中不能带有空格，如果有空格的话可以加上双引号，确保这个批处理能够正确的导出apk，批处理代码如下，并且注意用utf8保存：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">echo &quot;Start build apk...&quot;</span><br><span class="line">C:\&quot;Program Files&quot;\Unity1748f1\Unity\Editor\Unity.exe -projectPath D:\study\gitoschina\jenkinsTest\HelloUnity -quit -batchmode -executeMethod PerformBuild.CommandLineBuildAndroid -logFile build.log</span><br><span class="line">REM %1 -projectPath %2 -quit -batchmode -executeMethod APKBuild.Build -logFile build.log</span><br><span class="line">if not %errorlevel%==0 ( goto fail ) else ( goto success )</span><br><span class="line">:success</span><br><span class="line">echo Build APK OK</span><br><span class="line">goto end</span><br><span class="line">:fail</span><br><span class="line">echo Build APK Fail</span><br><span class="line">goto end</span><br><span class="line">:end</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<li><p>首要前提本地Unity已经安装好Unity Android的打包环境，确保能够正确的用Unity导出Android apk包，这里就不过多介绍Unity如何导出Android环境了，自行解决。</p>
 </li>
-<li><p>工程Editor目录下添加自动构建的代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">using UnityEditor;</span><br><span class="line">using System.IO;</span><br><span class="line">using System.Collections;</span><br><span class="line">using UnityEngine;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">class PerformBuild</span><br><span class="line">&#123;</span><br><span class="line">    static string[] GetBuildScenes()</span><br><span class="line">    &#123;</span><br><span class="line">        List&lt;string&gt; names = new List&lt;string&gt;();</span><br><span class="line">        foreach (EditorBuildSettingsScene e in EditorBuildSettings.scenes)</span><br><span class="line">        &#123;</span><br><span class="line">            if (e == null)</span><br><span class="line">                continue;</span><br><span class="line">            if (e.enabled)</span><br><span class="line">                names.Add(e.path);</span><br><span class="line">        &#125;</span><br><span class="line">        return names.ToArray();</span><br><span class="line">    &#125;</span><br><span class="line">    static string GetBuildPath()</span><br><span class="line">    &#123;</span><br><span class="line">        string dirPath = Application.dataPath + &quot;/../build/iPhone&quot;;</span><br><span class="line">        if (!System.IO.Directory.Exists(dirPath))</span><br><span class="line">        &#123;</span><br><span class="line">            System.IO.Directory.CreateDirectory(dirPath);</span><br><span class="line">        &#125;</span><br><span class="line">        return dirPath;</span><br><span class="line">    &#125;</span><br><span class="line">    [UnityEditor.MenuItem(&quot;Tools/PerformBuild/Test Command Line Build iPhone Step&quot;)]</span><br><span class="line">    static void CommandLineBuild()</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(&quot;Command line build\n------------------\n------------------&quot;);</span><br><span class="line">        string[] scenes = GetBuildScenes();</span><br><span class="line">        string path = GetBuildPath();</span><br><span class="line">        if (scenes == null || scenes.Length == 0 || path == null)</span><br><span class="line">            return;</span><br><span class="line">        Debug.Log(string.Format(&quot;Path: \&quot;&#123;0&#125;\&quot;&quot;, path));</span><br><span class="line">        for (int i = 0; i &lt; scenes.Length; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            Debug.Log(string.Format(&quot;Scene[&#123;0&#125;]: \&quot;&#123;1&#125;\&quot;&quot;, i, scenes[i]));</span><br><span class="line">        &#125;</span><br><span class="line">        Debug.Log(&quot;Starting Build!&quot;);</span><br><span class="line">        BuildPipeline.BuildPlayer(scenes, path, BuildTarget.iOS, BuildOptions.None);</span><br><span class="line">    &#125;</span><br><span class="line">    static string GetBuildPathAndroid()</span><br><span class="line">    &#123;</span><br><span class="line">        string dirPath = Application.dataPath.Replace(&quot;/Assets&quot;, &quot;&quot;) + &quot;/../build/android/&quot;+Application.productName+&quot;.apk&quot;;</span><br><span class="line">        if (!System.IO.Directory.Exists(dirPath))</span><br><span class="line">        &#123;</span><br><span class="line">            System.IO.Directory.CreateDirectory(dirPath);</span><br><span class="line">        &#125;</span><br><span class="line">        return dirPath;</span><br><span class="line">    &#125;</span><br><span class="line">    [UnityEditor.MenuItem(&quot;Tools/PerformBuild/Test Command Line Build Step Android&quot;)]</span><br><span class="line">    static void CommandLineBuildAndroid()</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(&quot;Command line build android version\n------------------\n------------------&quot;);</span><br><span class="line">        string[] scenes = GetBuildScenes();</span><br><span class="line">        string path = GetBuildPathAndroid();</span><br><span class="line">        if (scenes == null || scenes.Length == 0 || path == null)</span><br><span class="line">        &#123;</span><br><span class="line">            Debug.LogError(&quot;Please add scene to buildsetting...&quot;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        Debug.Log(string.Format(&quot;Path: \&quot;&#123;0&#125;\&quot;&quot;, path));</span><br><span class="line">        for (int i = 0; i &lt; scenes.Length; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            Debug.Log(string.Format(&quot;Scene[&#123;0&#125;]: \&quot;&#123;1&#125;\&quot;&quot;, i, scenes[i]));</span><br><span class="line">        &#125;</span><br><span class="line">        Debug.Log(&quot;Starting Android Build!&quot;);</span><br><span class="line">        BuildPipeline.BuildPlayer(scenes, path, BuildTarget.Android, BuildOptions.None);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>命令行启动Jenkins，java -jar jenkins.war,会看到如下运行即代表启动成功，可以在浏览器输入<a href="http://localhost:8080/来测试，会看到进入Jenkins网站。" target="_blank" rel="noopener">http://localhost:8080/来测试，会看到进入Jenkins网站。</a></p>
 </li>
-<li><p>点击Jenkins构建<br><img src="/2018/11/17/6.png" alt=""></p>
-</li>
-<li>本地生成apk<br><img src="/2018/11/17/7.png" alt=""><br>更深入的配置可以参考以下链接，更多Jenkins插件和功能可以摸索研究。Mac中导出iOS配置后续添加或者想尝试的朋友参考文末雨凇的文章。</li>
 </ul>
+<p><img src="/2018/11/17/8.png" alt=""></p>
+<p><img src="/2018/11/17/1.png" alt=""></p>
+<ul>
+<li>构建项目</li>
+</ul>
+<p><img src="/2018/11/17/2.png" alt=""></p>
+<p><img src="/2018/11/17/3.png" alt=""></p>
+<p>注意windows路径和命令行的路径的转变，上图是Unity打包apk的批处理的路径，这个批处理如下图，并且要放到Unity的工程下。</p>
+<p><img src="/2018/11/17/5.png" alt=""></p>
+<p>注意：如果批处理路径中不能带有空格，如果有空格的话可以加上双引号，确保这个批处理能够正确的导出apk，批处理代码如下，并且注意用utf8保存：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">echo &quot;Start build apk...&quot;</span><br><span class="line"></span><br><span class="line">C:\&quot;Program Files&quot;\Unity1748f1\Unity\Editor\Unity.exe -projectPath D:\study\gitoschina\jenkinsTest\HelloUnity -quit -batchmode -executeMethod PerformBuild.CommandLineBuildAndroid -logFile build.log</span><br><span class="line"></span><br><span class="line">REM %1 -projectPath %2 -quit -batchmode -executeMethod APKBuild.Build -logFile build.log</span><br><span class="line"></span><br><span class="line">if not %errorlevel%==0 ( goto fail ) else ( goto success )</span><br><span class="line"></span><br><span class="line">:success</span><br><span class="line"></span><br><span class="line">echo Build APK OK</span><br><span class="line"></span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:fail</span><br><span class="line"></span><br><span class="line">echo Build APK Fail</span><br><span class="line"></span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:end</span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<ul>
+<li>工程Editor目录下添加自动构建的代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">using UnityEditor;</span><br><span class="line"></span><br><span class="line">using System.IO;</span><br><span class="line"></span><br><span class="line">using System.Collections;</span><br><span class="line"></span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">using System.Collections.Generic;</span><br><span class="line"></span><br><span class="line">class PerformBuild</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    static string[] GetBuildScenes()</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;string&gt; names = new List&lt;string&gt;();</span><br><span class="line"></span><br><span class="line">        foreach (EditorBuildSettingsScene e in EditorBuildSettings.scenes)</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            if (e == null)</span><br><span class="line"></span><br><span class="line">                continue;</span><br><span class="line"></span><br><span class="line">            if (e.enabled)</span><br><span class="line"></span><br><span class="line">                names.Add(e.path);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return names.ToArray();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static string GetBuildPath()</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        string dirPath = Application.dataPath + &quot;/../build/iPhone&quot;;</span><br><span class="line"></span><br><span class="line">        if (!System.IO.Directory.Exists(dirPath))</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            System.IO.Directory.CreateDirectory(dirPath);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dirPath;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [UnityEditor.MenuItem(&quot;Tools/PerformBuild/Test Command Line Build iPhone Step&quot;)]</span><br><span class="line"></span><br><span class="line">    static void CommandLineBuild()</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        Debug.Log(&quot;Command line build\n------------------\n------------------&quot;);</span><br><span class="line"></span><br><span class="line">        string[] scenes = GetBuildScenes();</span><br><span class="line"></span><br><span class="line">        string path = GetBuildPath();</span><br><span class="line"></span><br><span class="line">        if (scenes == null || scenes.Length == 0 || path == null)</span><br><span class="line"></span><br><span class="line">            return;</span><br><span class="line"></span><br><span class="line">        Debug.Log(string.Format(&quot;Path: \&quot;&#123;0&#125;\&quot;&quot;, path));</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; scenes.Length; ++i)</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            Debug.Log(string.Format(&quot;Scene[&#123;0&#125;]: \&quot;&#123;1&#125;\&quot;&quot;, i, scenes[i]));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Debug.Log(&quot;Starting Build!&quot;);</span><br><span class="line"></span><br><span class="line">        BuildPipeline.BuildPlayer(scenes, path, BuildTarget.iOS, BuildOptions.None);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static string GetBuildPathAndroid()</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        string dirPath = Application.dataPath.Replace(&quot;/Assets&quot;, &quot;&quot;) + &quot;/../build/android/&quot;+Application.productName+&quot;.apk&quot;;</span><br><span class="line"></span><br><span class="line">        if (!System.IO.Directory.Exists(dirPath))</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            System.IO.Directory.CreateDirectory(dirPath);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return dirPath;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [UnityEditor.MenuItem(&quot;Tools/PerformBuild/Test Command Line Build Step Android&quot;)]</span><br><span class="line"></span><br><span class="line">    static void CommandLineBuildAndroid()</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        Debug.Log(&quot;Command line build android version\n------------------\n------------------&quot;);</span><br><span class="line"></span><br><span class="line">        string[] scenes = GetBuildScenes();</span><br><span class="line"></span><br><span class="line">        string path = GetBuildPathAndroid();</span><br><span class="line"></span><br><span class="line">        if (scenes == null || scenes.Length == 0 || path == null)</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            Debug.LogError(&quot;Please add scene to buildsetting...&quot;);</span><br><span class="line"></span><br><span class="line">            return;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Debug.Log(string.Format(&quot;Path: \&quot;&#123;0&#125;\&quot;&quot;, path));</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; scenes.Length; ++i)</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            Debug.Log(string.Format(&quot;Scene[&#123;0&#125;]: \&quot;&#123;1&#125;\&quot;&quot;, i, scenes[i]));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Debug.Log(&quot;Starting Android Build!&quot;);</span><br><span class="line"></span><br><span class="line">        BuildPipeline.BuildPlayer(scenes, path, BuildTarget.Android, BuildOptions.None);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>点击Jenkins构建</li>
+</ul>
+<p><img src="/2018/11/17/6.png" alt=""></p>
+<ul>
+<li>本地生成apk</li>
+</ul>
+<p><img src="/2018/11/17/7.png" alt=""></p>
+<p>更深入的配置可以参考以下链接，更多Jenkins插件和功能可以摸索研究。Mac中导出iOS配置后续添加或者想尝试的朋友参考文末雨凇的文章。</p>
 <h2 id="下载链接"><a href="#下载链接" class="headerlink" title="下载链接"></a>下载链接</h2><ul>
 <li><a href="https://gitee.com/dingxiaowei/JenkinsTest" target="_blank" rel="noopener">https://gitee.com/dingxiaowei/JenkinsTest</a></li>
 </ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://zh.wikipedia.org/wiki/Jenkins_(%E8%BD%AF%E4%BB%B6)" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/Jenkins_(%E8%BD%AF%E4%BB%B6)</a> Jenkins维基百科</li>
-<li><a href="https://jenkins.io/doc/" target="_blank" rel="noopener">https://jenkins.io/doc/</a> Jenkins官方使用文档</li>
-<li><a href="https://www.xuanyusong.com/archives/3349" target="_blank" rel="noopener">https://www.xuanyusong.com/archives/3349</a> 宣雨凇的配置</li>
+<li><p><a href="https://zh.wikipedia.org/wiki/Jenkins_(%E8%BD%AF%E4%BB%B6)" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/Jenkins_(%E8%BD%AF%E4%BB%B6)</a> Jenkins维基百科</p>
+</li>
+<li><p><a href="https://jenkins.io/doc/" target="_blank" rel="noopener">https://jenkins.io/doc/</a> Jenkins官方使用文档</p>
+</li>
+<li><p><a href="https://www.xuanyusong.com/archives/3349" target="_blank" rel="noopener">https://www.xuanyusong.com/archives/3349</a> 宣雨凇的配置</p>
+</li>
 </ul>
 <h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>如果碰到问题欢迎留言讨论！</p>
 
@@ -367,8 +387,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2018/10/07/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
+    <a href="/2018/10/10/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Lua相关的知识小结</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -522,11 +542,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -535,10 +555,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,11 +570,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,6 +594,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
@@ -594,10 +614,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -606,15 +622,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
+                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
               </li>
              
               <li class="article-tag-list-item">
