@@ -87,18 +87,18 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="前言早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Unity开发环境，就只要浏览器打开Jenkins然后点击打包即可。 准备工具 准备Jenkins环境，可以选择去Jenkins官网下载,我这里准备了一个Jenkins的war包。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/如何搭建Jenkins导出Unity安卓环境/8.png">
+<meta property="og:image" content="http://dingxiaowei.cn/如何搭建Jenkins导出Unity安卓环境/8.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/如何搭建Jenkins导出Unity安卓环境/1.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/如何搭建Jenkins导出Unity安卓环境/2.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/如何搭建Jenkins导出Unity安卓环境/3.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/如何搭建Jenkins导出Unity安卓环境/5.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/如何搭建Jenkins导出Unity安卓环境/6.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/如何搭建Jenkins导出Unity安卓环境/7.png">
-<meta property="og:updated_time" content="2018-11-18T04:32:53.771Z">
+<meta property="og:updated_time" content="2018-11-18T05:00:06.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建Jenkins导出Unity安卓环境">
 <meta name="twitter:description" content="前言早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Unity开发环境，就只要浏览器打开Jenkins然后点击打包即可。 准备工具 准备Jenkins环境，可以选择去Jenkins官网下载,我这里准备了一个Jenkins的war包。">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2018/11/17/如何搭建Jenkins导出Unity安卓环境/8.png">
+<meta name="twitter:image" content="http://dingxiaowei.cn/如何搭建Jenkins导出Unity安卓环境/8.png">
 
 
 
@@ -326,7 +326,7 @@
 <a id="more"></a>
 <h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><ul>
 <li>首要前提本地Unity已经安装好Unity Android的打包环境，确保能够正确的用Unity导出Android apk包，这里就不过多介绍Unity如何导出Android环境了，自行解决。</li>
-<li>命令行启动Jenkins，java -jar jenkins.war,会看到如下运行即代表启动成功，可以在浏览器输入<a href="http://localhost:8080/来测试，会看到进入Jenkins网站。" target="_blank" rel="noopener">http://localhost:8080/来测试，会看到进入Jenkins网站。</a><br><img src="如何搭建Jenkins导出Unity安卓环境/8.png" alt=""><br><img src="如何搭建Jenkins导出Unity安卓环境/1.png" alt=""></li>
+<li>命令行启动Jenkins，java -jar jenkins.war,会看到如下运行即代表启动成功，可以在浏览器输入<a href="http://localhost:8080/来测试，会看到进入Jenkins网站。" target="_blank" rel="noopener">http://localhost:8080/来测试，会看到进入Jenkins网站。</a><br><img src="/如何搭建Jenkins导出Unity安卓环境/8.png" alt=""><br><img src="如何搭建Jenkins导出Unity安卓环境/1.png" alt=""></li>
 <li><p>构建项目<br><img src="如何搭建Jenkins导出Unity安卓环境/2.png" alt=""><br><img src="如何搭建Jenkins导出Unity安卓环境/3.png" alt=""><br>注意windows路径和命令行的路径的转变，上图是Unity打包apk的批处理的路径，这个批处理如下图，并且要放到Unity的工程下。<br><img src="如何搭建Jenkins导出Unity安卓环境/5.png" alt=""><br>注意：如果批处理路径中不能带有空格，如果有空格的话可以加上双引号，确保这个批处理能够正确的导出apk，批处理代码如下，并且注意用utf8保存：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">echo &quot;Start build apk...&quot;</span><br><span class="line">C:\&quot;Program Files&quot;\Unity1748f1\Unity\Editor\Unity.exe -projectPath D:\study\gitoschina\jenkinsTest\HelloUnity -quit -batchmode -executeMethod PerformBuild.CommandLineBuildAndroid -logFile build.log</span><br><span class="line">REM %1 -projectPath %2 -quit -batchmode -executeMethod APKBuild.Build -logFile build.log</span><br><span class="line">if not %errorlevel%==0 ( goto fail ) else ( goto success )</span><br><span class="line">:success</span><br><span class="line">echo Build APK OK</span><br><span class="line">goto end</span><br><span class="line">:fail</span><br><span class="line">echo Build APK Fail</span><br><span class="line">goto end</span><br><span class="line">:end</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
 </li>
