@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://dingxiaowei.cn">
   <title>Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: Lua相关的知识小结date: 2018-08-18 14:34:18tags: [Lua]  前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！ 在线编辑器 最佳推荐(有api提示)">
+  <meta name="description" content="title: Lua相关的知识小结date: 2018-08-18 14:34:18tags: [Lua]comments: truetoc: true  前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Aladdin的博客">
 <meta property="og:url" content="http://dingxiaowei.cn/2018/10/07/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
-<meta property="og:description" content="title: Lua相关的知识小结date: 2018-08-18 14:34:18tags: [Lua]  前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！ 在线编辑器 最佳推荐(有api提示)">
+<meta property="og:description" content="title: Lua相关的知识小结date: 2018-08-18 14:34:18tags: [Lua]comments: truetoc: true  前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/10/07/1.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/10/07/2.png">
@@ -42,10 +42,10 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2018/10/07/21.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/10/07/20.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/10/07/26.png">
-<meta property="og:updated_time" content="2018-11-18T12:28:37.386Z">
+<meta property="og:updated_time" content="2018-11-18T12:40:33.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Aladdin的博客">
-<meta name="twitter:description" content="title: Lua相关的知识小结date: 2018-08-18 14:34:18tags: [Lua]  前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！ 在线编辑器 最佳推荐(有api提示)">
+<meta name="twitter:description" content="title: Lua相关的知识小结date: 2018-08-18 14:34:18tags: [Lua]comments: truetoc: true  前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可">
 <meta name="twitter:image" content="http://dingxiaowei.cn/2018/10/07/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
@@ -230,17 +230,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>title: Lua相关的知识小结<br>date: 2018-08-18 14:34:18<br>tags: [Lua]</p>
+<p>title: Lua相关的知识小结<br>date: 2018-08-18 14:34:18<br>tags: [Lua]<br>comments: true<br>toc: true</p>
 <hr>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！</p>
 <h3 id="在线编辑器"><a href="#在线编辑器" class="headerlink" title="在线编辑器"></a>在线编辑器</h3><ul>
-<li><a href="https://www.dooccn.com/lua/" target="_blank" rel="noopener">最佳推荐(有api提示)</a></li>
-<li><a href="hhttps://c.runoob.com/compile/66" target="_blank" rel="noopener">菜鸟工具</a></li>
-<li><a href="https://tool.lu/coderunner/" target="_blank" rel="noopener">在线工具</a></li>
+<li><p><a href="https://www.dooccn.com/lua/" target="_blank" rel="noopener">最佳推荐(有api提示)</a></p>
+</li>
+<li><p><a href="hhttps://c.runoob.com/compile/66" target="_blank" rel="noopener">菜鸟工具</a></p>
+</li>
+<li><p><a href="https://tool.lu/coderunner/" target="_blank" rel="noopener">在线工具</a></p>
+</li>
 </ul>
-<h3 id="元表"><a href="#元表" class="headerlink" title="元表"></a>元表</h3><p>Lua我们访问对应的key来得到value的值，但无法对两个table进行操作。因此Lua提供了元表(Metatable),允许我们改变的行为，每个行为对应一个元方法，元方法下面介绍。<br>Lua本身不是面向对象语言，但可以利用Lua的table来扩展面向对象，也就是我们常用的继承。我们如何实现一个子类继承父类并且能打印出子类的方法和父类的方法。主要思想是setmetatable和getmetable，子类定义个super变量指向父类对象，然后子类就通过这个super变量来访问父类的成员，下面是代码实现：</p>
-<pre><code>
-local parent={}
+<h3 id="元表"><a href="#元表" class="headerlink" title="元表"></a>元表</h3><p>Lua我们访问对应的key来得到value的值，但无法对两个table进行操作。因此Lua提供了元表(Metatable),允许我们改变的行为，每个行为对应一个元方法，元方法下面介绍。</p>
+<p>Lua本身不是面向对象语言，但可以利用Lua的table来扩展面向对象，也就是我们常用的继承。我们如何实现一个子类继承父类并且能打印出子类的方法和父类的方法。主要思想是setmetatable和getmetable，子类定义个super变量指向父类对象，然后子类就通过这个super变量来访问父类的成员，下面是代码实现：</p>
+<pre><code>local parent={}
 parent.__index=parent
 --类实例--
 function parent:New()
@@ -264,7 +267,6 @@ end
 function Child:Hello( ... )
   print(&quot;Child&quot;);
 end
-
 </code></pre><p>运行结果:<br><img src="/2018/10/07/1.png" alt=""><br>由此可见打印了子类和父类的Hello方法</p>
 <a id="more"></a>
 <h3 id="元方法"><a href="#元方法" class="headerlink" title="元方法"></a>元方法</h3><p>元方法之前有过<a href="http://dingxiaowei.cn/2017/06/18/Lua-%E5%85%83%E8%A1%A8/">介绍</a>,可以点击查看一下。</p>
@@ -543,11 +545,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -559,11 +561,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,7 +569,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -603,18 +605,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
@@ -624,6 +614,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -643,6 +645,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
@@ -659,15 +665,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
