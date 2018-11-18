@@ -6,27 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://dingxiaowei.cn">
-  <title>Aladdin的博客</title>
+  <title>如何搭建Jenkins导出Unity安卓环境 | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: 搭建Jenkins导出Unity安卓环境date: 2018-11-17 20:12:09tags: [Jenkins]comments: truecategories: 工具  前言早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Un">
+  <meta name="description" content="前言早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Unity开发环境，就只要浏览器打开Jenkins然后点击打包即可。 准备工具 准备Jenkins环境，可以选择去Jenkins官网下载,我这里准备了一个Jenkins的war包。">
+<meta name="keywords" content="Jenkins">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Aladdin的博客">
+<meta property="og:title" content="如何搭建Jenkins导出Unity安卓环境">
 <meta property="og:url" content="http://dingxiaowei.cn/2018/11/17/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
-<meta property="og:description" content="title: 搭建Jenkins导出Unity安卓环境date: 2018-11-17 20:12:09tags: [Jenkins]comments: truecategories: 工具  前言早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Un">
+<meta property="og:description" content="前言早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Unity开发环境，就只要浏览器打开Jenkins然后点击打包即可。 准备工具 准备Jenkins环境，可以选择去Jenkins官网下载,我这里准备了一个Jenkins的war包。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/搭建Jenkins导出Unity安卓环境/8.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/搭建Jenkins导出Unity安卓环境/1.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/搭建Jenkins导出Unity安卓环境/2.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/搭建Jenkins导出Unity安卓环境/3.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/搭建Jenkins导出Unity安卓环境/5.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/搭建Jenkins导出Unity安卓环境/6.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/搭建Jenkins导出Unity安卓环境/7.png">
-<meta property="og:updated_time" content="2018-11-18T02:46:55.795Z">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/如何搭建Jenkins导出Unity安卓环境/8.png">
+<meta property="og:updated_time" content="2018-11-18T02:55:37.402Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aladdin的博客">
-<meta name="twitter:description" content="title: 搭建Jenkins导出Unity安卓环境date: 2018-11-17 20:12:09tags: [Jenkins]comments: truecategories: 工具  前言早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Un">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2018/11/17/搭建Jenkins导出Unity安卓环境/8.png">
+<meta name="twitter:title" content="如何搭建Jenkins导出Unity安卓环境">
+<meta name="twitter:description" content="前言早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Unity开发环境，就只要浏览器打开Jenkins然后点击打包即可。 准备工具 准备Jenkins环境，可以选择去Jenkins官网下载,我这里准备了一个Jenkins的war包。">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2018/11/17/如何搭建Jenkins导出Unity安卓环境/8.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -204,131 +199,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-搭建Jenkins导出Unity安卓环境" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-如何搭建Jenkins导出Unity安卓环境" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何搭建Jenkins导出Unity安卓环境
+    </h1>
+  
+
+        
+        <a href="/2018/11/17/" class="archive-article-date">
+  	<time datetime="2018-11-17T12:12:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-17</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: 搭建Jenkins导出Unity安卓环境<br>date: 2018-11-17 20:12:09<br>tags: [Jenkins]<br>comments: true<br>categories: 工具</p>
-<hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Unity开发环境，就只要浏览器打开Jenkins然后点击打包即可。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Unity开发环境，就只要浏览器打开Jenkins然后点击打包即可。</p>
 <h2 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h2><ul>
 <li>准备Jenkins环境，可以选择去Jenkins<a href="https://jenkins.io/" target="_blank" rel="noopener">官网</a>下载,我这里准备了一个Jenkins的war包。</li>
 </ul>
 <a id="more"></a>
 <h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><ul>
 <li>首要前提本地Unity已经安装好Unity Android的打包环境，确保能够正确的用Unity导出Android apk包，这里就不过多介绍Unity如何导出Android环境了，自行解决。</li>
-<li>命令行启动Jenkins，java -jar jenkins.war,会看到如下运行即代表启动成功，可以在浏览器输入<a href="http://localhost:8080/来测试，会看到进入Jenkins网站。" target="_blank" rel="noopener">http://localhost:8080/来测试，会看到进入Jenkins网站。</a><br><img src="搭建Jenkins导出Unity安卓环境/8.png" alt=""><br><img src="搭建Jenkins导出Unity安卓环境/1.png" alt=""></li>
-<li>构建项目<br><img src="搭建Jenkins导出Unity安卓环境/2.png" alt=""><br><img src="搭建Jenkins导出Unity安卓环境/3.png" alt=""><br>注意windows路径和命令行的路径的转变，上图是Unity打包apk的批处理的路径，这个批处理如下图，并且要放到Unity的工程下。<br><img src="搭建Jenkins导出Unity安卓环境/5.png" alt=""><br>注意：如果批处理路径中不能带有空格，如果有空格的话可以加上双引号，确保这个批处理能够正确的导出apk，批处理代码如下，并且注意用utf8保存：</li>
+<li>命令行启动Jenkins，java -jar jenkins.war,会看到如下运行即代表启动成功，可以在浏览器输入<a href="http://localhost:8080/来测试，会看到进入Jenkins网站。" target="_blank" rel="noopener">http://localhost:8080/来测试，会看到进入Jenkins网站。</a><br><img src="如何搭建Jenkins导出Unity安卓环境/8.png" alt=""></li>
 </ul>
-<pre><code>@echo off
-
-echo &quot;Start build apk...&quot;
-C:\&quot;Program Files&quot;\Unity1748f1\Unity\Editor\Unity.exe -projectPath D:\study\gitoschina\jenkinsTest\HelloUnity -quit -batchmode -executeMethod PerformBuild.CommandLineBuildAndroid -logFile build.log
-REM %1 -projectPath %2 -quit -batchmode -executeMethod APKBuild.Build -logFile build.log
-
-if not %errorlevel%==0 ( goto fail ) else ( goto success )
-
-:success
-echo Build APK OK
-goto end
-
-:fail
-echo Build APK Fail
-goto end
-
-:end
-pause
-</code></pre><ul>
-<li><p>工程Editor目录下添加自动构建的代码</p>
-<pre><code>using UnityEditor;
-using System.IO;
-using System.Collections;
-using UnityEngine;
-using System.Collections.Generic;
-class PerformBuild
-{
-  static string[] GetBuildScenes()
-  {
-      List&lt;string&gt; names = new List&lt;string&gt;();
-      foreach (EditorBuildSettingsScene e in EditorBuildSettings.scenes)
-      {
-          if (e == null)
-              continue;
-          if (e.enabled)
-              names.Add(e.path);
-      }
-      return names.ToArray();
-  }
-  static string GetBuildPath()
-  {
-      string dirPath = Application.dataPath + &quot;/../build/iPhone&quot;;
-      if (!System.IO.Directory.Exists(dirPath))
-      {
-          System.IO.Directory.CreateDirectory(dirPath);
-      }
-      return dirPath;
-  }
-  [UnityEditor.MenuItem(&quot;Tools/PerformBuild/Test Command Line Build iPhone Step&quot;)]
-  static void CommandLineBuild()
-  {
-      Debug.Log(&quot;Command line build\n------------------\n------------------&quot;);
-      string[] scenes = GetBuildScenes();
-      string path = GetBuildPath();
-      if (scenes == null || scenes.Length == 0 || path == null)
-          return;
-      Debug.Log(string.Format(&quot;Path: \&quot;{0}\&quot;&quot;, path));
-      for (int i = 0; i &lt; scenes.Length; ++i)
-      {
-          Debug.Log(string.Format(&quot;Scene[{0}]: \&quot;{1}\&quot;&quot;, i, scenes[i]));
-      }
-      Debug.Log(&quot;Starting Build!&quot;);
-      BuildPipeline.BuildPlayer(scenes, path, BuildTarget.iOS, BuildOptions.None);
-  }
-  static string GetBuildPathAndroid()
-  {
-      string dirPath = Application.dataPath.Replace(&quot;/Assets&quot;, &quot;&quot;) + &quot;/../build/android/&quot;+Application.productName+&quot;.apk&quot;;
-      if (!System.IO.Directory.Exists(dirPath))
-      {
-          System.IO.Directory.CreateDirectory(dirPath);
-      }
-      return dirPath;
-  }
-  [UnityEditor.MenuItem(&quot;Tools/PerformBuild/Test Command Line Build Step Android&quot;)]
-  static void CommandLineBuildAndroid()
-  {
-      Debug.Log(&quot;Command line build android version\n------------------\n------------------&quot;);
-      string[] scenes = GetBuildScenes();
-      string path = GetBuildPathAndroid();
-      if (scenes == null || scenes.Length == 0 || path == null)
-      {
-          Debug.LogError(&quot;Please add scene to buildsetting...&quot;);
-          return;
-      }
-      Debug.Log(string.Format(&quot;Path: \&quot;{0}\&quot;&quot;, path));
-      for (int i = 0; i &lt; scenes.Length; ++i)
-      {
-          Debug.Log(string.Format(&quot;Scene[{0}]: \&quot;{1}\&quot;&quot;, i, scenes[i]));
-      }
-      Debug.Log(&quot;Starting Android Build!&quot;);
-      BuildPipeline.BuildPlayer(scenes, path, BuildTarget.Android, BuildOptions.None);
-  }
-}
-</code></pre></li>
-<li><p>点击Jenkins构建<br><img src="搭建Jenkins导出Unity安卓环境/6.png" alt=""></p>
-</li>
-<li>本地生成apk<br><img src="搭建Jenkins导出Unity安卓环境/7.png" alt=""><br>更深入的配置可以参考以下链接，更多Jenkins插件和功能可以摸索研究。Mac中导出iOS配置后续添加或者想尝试的朋友参考文末雨凇的文章。</li>
-</ul>
-<h2 id="下载链接"><a href="#下载链接" class="headerlink" title="下载链接"></a>下载链接</h2><ul>
-<li><a href="https://gitee.com/dingxiaowei/JenkinsTest" target="_blank" rel="noopener">https://gitee.com/dingxiaowei/JenkinsTest</a></li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://zh.wikipedia.org/wiki/Jenkins_(%E8%BD%AF%E4%BB%B6)" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/Jenkins_(%E8%BD%AF%E4%BB%B6)</a> Jenkins维基百科</li>
-<li><a href="https://jenkins.io/doc/" target="_blank" rel="noopener">https://jenkins.io/doc/</a> Jenkins官方使用文档</li>
-<li><a href="https://www.xuanyusong.com/archives/3349" target="_blank" rel="noopener">https://www.xuanyusong.com/archives/3349</a> 宣雨凇的配置</li>
-</ul>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>如果碰到问题欢迎留言讨论！</p>
 
       
 
@@ -368,6 +267,17 @@ class PerformBuild
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jenkins</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -464,7 +374,7 @@ class PerformBuild
   
 
   
-  <div id="SOHUCS" sid="搭建Jenkins导出Unity安卓环境" ></div> 
+  <div id="SOHUCS" sid="如何搭建Jenkins导出Unity安卓环境" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -584,15 +494,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,27 +526,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,6 +547,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -680,19 +590,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -705,6 +603,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
               </li>
              
               <li class="article-tag-list-item">
