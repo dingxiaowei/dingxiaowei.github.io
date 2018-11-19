@@ -16,12 +16,13 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="Shader入门系列第六篇，创建实时阴影。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/11/20/1.gif">
-<meta property="og:updated_time" content="2018-11-18T14:15:56.367Z">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/11/20/shadow.gif">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/11/20/1.png">
+<meta property="og:updated_time" content="2018-11-19T03:27:08.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Aladdin-Unity3D-Shader编程】之六-模型实时阴影">
 <meta name="twitter:description" content="Shader入门系列第六篇，创建实时阴影。">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2017/11/20/1.gif">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2017/11/20/shadow.gif">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -231,8 +232,13 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在游戏开发中实时阴影是比较常见的需求，我们最常见的方法是实时光照，但是这个会带来性能的问题，如果场景中模型比较多，例如我最近在做的3D足球游戏，场景中22个球员，如果采用实时光照DC会增加好几百，会造成渲染的压力，就有必要采用关照贴图的方案，比关闭掉实时光，但这种方案就降低了DC，减轻了渲染压力，这就要求阴影必须采用其他方案，我这里介绍Shader来现在的方案，貌似是王者荣耀采用的一种方案，专门用一个pass来渲染球员的阴影。</p>
-<h2 id="一、缩放效果"><a href="#一、缩放效果" class="headerlink" title="一、缩放效果"></a>一、缩放效果</h2><h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="/2017/11/20/1.gif" alt=""><br>会看到模型有实时阴影效果。</p>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/2017/11/20/shadow.gif" alt=""><br>会看到模型有实时阴影效果。</p>
 <a id="more"></a>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>下面用2D视角来分析，阴影产生正如下图：<br><img src="/2017/11/20/1.png" alt=""><br>由上图可知，阴影的a点与遮挡物的b点在光照方向的垂直面上其实映射的是同一个点d。这很容易让我们联想到MVP当中的投影变换。其实是一样的。我们将于光照方向当做照相机的视线，而与光照方向垂直的面，就是投影变换最后的盒子的正面。这意味着我们可以制作一个正交照相机，使得它与光照方向一致，再将地面模型的各个顶点投影到该照相机上，这时候照相机的纹理UV坐标范围是0~1，地面投影到了照相机，也将其坐标映射到0~1之间，由此与照相机的纹理一一对应，于是将照相机照出来的纹理叠加在地面上，就形成了阴影。</p>
+<h2 id="程序实现"><a href="#程序实现" class="headerlink" title="程序实现"></a>程序实现</h2><h3 id="shader"><a href="#shader" class="headerlink" title="shader"></a>shader</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Custom/PlayerShadow&quot;</span><br><span class="line">&#123;</span><br><span class="line">	Properties</span><br><span class="line">	&#123;</span><br><span class="line">		_MainTex (&quot;Texture&quot;, 2D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">		_ShadowInvLen (&quot;ShadowInvLen&quot;, float) = 1.0 //0.4449261</span><br><span class="line">		_Power(&quot;Power&quot;, Range(0,2)) = 1.7</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SubShader</span><br><span class="line">	&#123;</span><br><span class="line">		Tags&#123; &quot;RenderType&quot; = &quot;Opaque&quot; &quot;Queue&quot; = &quot;Geometry+10&quot; &#125;</span><br><span class="line">		LOD 100</span><br><span class="line"></span><br><span class="line">		Pass</span><br><span class="line">		&#123;</span><br><span class="line">			CGPROGRAM</span><br><span class="line"></span><br><span class="line">			#pragma vertex vert</span><br><span class="line">			#pragma fragment frag</span><br><span class="line">			// make fog work</span><br><span class="line">			#pragma multi_compile_fog</span><br><span class="line"></span><br><span class="line">			#include &quot;UnityCG.cginc&quot;</span><br><span class="line"></span><br><span class="line">			struct appdata</span><br><span class="line">			&#123;</span><br><span class="line">				float4 vertex : POSITION;</span><br><span class="line">				float2 uv : TEXCOORD0;</span><br><span class="line">			&#125;;</span><br><span class="line"></span><br><span class="line">			struct v2f</span><br><span class="line">			&#123;</span><br><span class="line">				float2 uv : TEXCOORD0;</span><br><span class="line">				UNITY_FOG_COORDS(1)</span><br><span class="line">				float4 vertex : SV_POSITION;</span><br><span class="line">			&#125;;</span><br><span class="line"></span><br><span class="line">			sampler2D _MainTex;</span><br><span class="line">			float4 _MainTex_ST;</span><br><span class="line">			fixed _Power;</span><br><span class="line">			v2f vert (appdata v)</span><br><span class="line">			&#123;</span><br><span class="line">				v2f o;</span><br><span class="line">				o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">				o.uv = TRANSFORM_TEX(v.uv, _MainTex);</span><br><span class="line">				UNITY_TRANSFER_FOG(o,o.vertex);</span><br><span class="line">				return o;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			fixed4 frag (v2f i) : SV_Target</span><br><span class="line">			&#123;</span><br><span class="line">				// sample the texture</span><br><span class="line">				fixed4 col = tex2D(_MainTex, i.uv) * _Power;</span><br><span class="line"></span><br><span class="line">				// apply fog</span><br><span class="line">				UNITY_APPLY_FOG(i.fogCoord, col);</span><br><span class="line">				return col;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			ENDCG</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		Pass</span><br><span class="line">		&#123;</span><br><span class="line">			Blend SrcAlpha  OneMinusSrcAlpha</span><br><span class="line">			ZWrite Off</span><br><span class="line">			Cull Back</span><br><span class="line">			ColorMask RGB</span><br><span class="line"></span><br><span class="line">			Stencil</span><br><span class="line">			&#123;</span><br><span class="line">				Ref 0</span><br><span class="line">				Comp Equal</span><br><span class="line">				WriteMask 255</span><br><span class="line">				ReadMask 255</span><br><span class="line">				//Pass IncrSat</span><br><span class="line">				Pass Invert</span><br><span class="line">				Fail Keep</span><br><span class="line">				ZFail Keep</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			CGPROGRAM</span><br><span class="line"></span><br><span class="line">			#pragma vertex vert</span><br><span class="line">			#pragma fragment frag</span><br><span class="line"></span><br><span class="line">			float4 _ShadowPlane; //渲染的地面</span><br><span class="line">			float4 _ShadowProjDir; //渲染的光源点，这里只是记录点的位置，用于计算阴影的投影</span><br><span class="line">			float4 _WorldPos;</span><br><span class="line">			float _ShadowInvLen; //阴影的长度</span><br><span class="line">			float4 _ShadowFadeParams; //阴影渐变的参数</span><br><span class="line"></span><br><span class="line">			struct appdata</span><br><span class="line">			&#123;</span><br><span class="line">				float4 vertex : POSITION;</span><br><span class="line">			&#125;;</span><br><span class="line"></span><br><span class="line">			struct v2f</span><br><span class="line">			&#123;</span><br><span class="line">				float4 vertex : SV_POSITION;</span><br><span class="line">				float3 xlv_TEXCOORD0 : TEXCOORD0;</span><br><span class="line">				float3 xlv_TEXCOORD1 : TEXCOORD1;</span><br><span class="line">			&#125;;</span><br><span class="line"></span><br><span class="line">			v2f vert(appdata v)</span><br><span class="line">			&#123;</span><br><span class="line">				v2f o;</span><br><span class="line"></span><br><span class="line">				float3 lightdir = normalize(_ShadowProjDir); //单位化光照方向向量</span><br><span class="line">				float3 worldpos = mul(unity_ObjectToWorld, v.vertex).xyz; //模型坐标转成世界坐标</span><br><span class="line">				// _ShadowPlane.w = p0 * n  // 平面的w分量就是p0 * n</span><br><span class="line">				float distance = (_ShadowPlane.w - dot(_ShadowPlane.xyz, worldpos)) / dot(_ShadowPlane.xyz, lightdir.xyz); //计算阴影的长度</span><br><span class="line">				worldpos = worldpos + distance * lightdir.xyz; //影子的投影点</span><br><span class="line">				o.vertex = mul(unity_MatrixVP, float4(worldpos, 1.0));</span><br><span class="line">				o.xlv_TEXCOORD0 = _WorldPos.xyz;</span><br><span class="line">				o.xlv_TEXCOORD1 = worldpos;  //影子投影的点组成的纹理</span><br><span class="line">				return o;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			float4 frag(v2f i) : SV_Target</span><br><span class="line">			&#123;</span><br><span class="line">				float3 posToPlane_2 = (i.xlv_TEXCOORD0 - i.xlv_TEXCOORD1);</span><br><span class="line">				float4 color;</span><br><span class="line">				color.xyz = float3(0.0, 0.0, 0.0);</span><br><span class="line">				color.w = (pow((1.0 - clamp(((sqrt(dot(posToPlane_2, posToPlane_2)) * _ShadowInvLen) - _ShadowFadeParams.x), 0.0, 1.0)), _ShadowFadeParams.y) * _ShadowFadeParams.z);  //透明度渐变计算</span><br><span class="line">				return color;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			ENDCG</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二个pass专门用来渲染阴影，power参数是颜色加强，因为关闭了实时灯光，模型会显得暗淡，这个参数跟阴影效果没太大关系。</p>
+<h3 id="CSharp"><a href="#CSharp" class="headerlink" title="CSharp"></a>CSharp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">using System.Collections;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">public class PlayerShadow : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    public Camera mCamera;</span><br><span class="line">    public GameObject mLight;</span><br><span class="line">    private List&lt;Material&gt; mMatList = new List&lt;Material&gt;();</span><br><span class="line"></span><br><span class="line">    private void Awake()</span><br><span class="line">    &#123;</span><br><span class="line">        SkinnedMeshRenderer[] renderlist = GetComponentsInChildren&lt;SkinnedMeshRenderer&gt;();</span><br><span class="line">        foreach (var render in renderlist)</span><br><span class="line">        &#123;</span><br><span class="line">            if (render == null)</span><br><span class="line">                continue;</span><br><span class="line">            foreach (var mt in render.materials)</span><br><span class="line">            &#123;</span><br><span class="line">                if (mt.shader.name == &quot;Custom/PlayerShadow&quot;)</span><br><span class="line">                    mMatList.Add(mt);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        mCamera = Camera.main;</span><br><span class="line">        mLight = GameObject.Find(&quot;LightPosition&quot;).gameObject;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void Update()</span><br><span class="line">    &#123;</span><br><span class="line">        UpdateShader();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void UpdateShader()</span><br><span class="line">    &#123;</span><br><span class="line">        if (mLight == null)</span><br><span class="line">            return;</span><br><span class="line"></span><br><span class="line">        foreach (var mat in mMatList)</span><br><span class="line">        &#123;</span><br><span class="line">            if (mat == null)</span><br><span class="line">                continue;</span><br><span class="line">            mat.SetVector(&quot;_WorldPos&quot;, transform.position);</span><br><span class="line">            mat.SetVector(&quot;_ShadowProjDir&quot;, mLight.transform.forward);</span><br><span class="line">            mat.SetVector(&quot;_ShadowPlane&quot;, new Vector4(0f, 0.4f, 0.0f, 0.0f));</span><br><span class="line">            mat.SetVector(&quot;_ShadowFadeParams&quot;, new Vector4(1f, 0.9f, 0.8f, 0.7f));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要是将光照向量和当前模型的坐标传递给Shader，以便Shader实时计算出当前模型的阴影。</p>
 <h2 id="案例Demo"><a href="#案例Demo" class="headerlink" title="案例Demo"></a>案例Demo</h2><p>下方留言获取最新案例</p>
 
       
@@ -397,7 +403,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、缩放效果"><span class="toc-number">2.</span> <span class="toc-text">一、缩放效果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#效果图"><span class="toc-number">2.0.1.</span> <span class="toc-text">效果图</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例Demo"><span class="toc-number">3.</span> <span class="toc-text">案例Demo</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#效果图"><span class="toc-number">2.</span> <span class="toc-text">效果图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理"><span class="toc-number">3.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序实现"><span class="toc-number">4.</span> <span class="toc-text">程序实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#shader"><span class="toc-number">4.1.</span> <span class="toc-text">shader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSharp"><span class="toc-number">4.2.</span> <span class="toc-text">CSharp</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例Demo"><span class="toc-number">5.</span> <span class="toc-text">案例Demo</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -519,10 +525,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
@@ -531,7 +533,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,23 +545,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,6 +573,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
@@ -595,6 +593,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -603,15 +605,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -623,11 +621,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -643,11 +645,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -659,15 +657,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">美文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
