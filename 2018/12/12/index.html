@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://dingxiaowei.cn">
-  <title>Archives | Aladdin的博客</title>
+  <title>Unity游戏Log模块说明 | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术来源于一点一滴的积累">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Aladdin的博客">
-<meta property="og:url" content="http://dingxiaowei.cn/archives/page/4/index.html">
+  <meta name="description" content="Unity游戏框架Log模块">
+<meta name="keywords" content="Log">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity游戏Log模块说明">
+<meta property="og:url" content="http://dingxiaowei.cn/2018/12/12/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
-<meta property="og:description" content="技术来源于一点一滴的积累">
+<meta property="og:description" content="Unity游戏框架Log模块">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/12/12/1.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/12/12/2.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/12/12/3.png">
+<meta property="og:updated_time" content="2018-12-16T13:20:57.688Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aladdin的博客">
-<meta name="twitter:description" content="技术来源于一点一滴的积累">
+<meta name="twitter:title" content="Unity游戏Log模块说明">
+<meta name="twitter:description" content="Unity游戏框架Log模块">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2018/12/12/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -195,418 +201,242 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Unity游戏Log模块说明" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Unity游戏Log模块说明
+    </h1>
+  
+
+        
+        <a href="/2018/12/12/" class="archive-article-date">
+  	<time datetime="2018-12-12T13:14:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-12</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>为了让项目功能模块化，支持可复用性和可扩展性的原则，将跟游戏关联不大的功能模块单独拎出来添加到一个独立库工程。Log是游戏框架中比较重要和基础的一个功能模块。</p>
+<h2 id="功能说明"><a href="#功能说明" class="headerlink" title="功能说明"></a>功能说明</h2><p>目前Log模块支持的功能：</p>
+<ul>
+<li>支持是否显示日志</li>
+<li>支持是否显示日志时间</li>
+<li>支持显示不同级别(一般/警告/错误)的日志</li>
+<li>是否将Log显示到本地持久化存储(持久化目录见 Debugger.LogFileDir)</li>
+<li>支持是否打印堆栈日志</li>
+<li>支持多参数的Log显示</li>
+</ul>
+<a id="more"></a>
+<h2 id="操作说明"><a href="#操作说明" class="headerlink" title="操作说明"></a>操作说明</h2><p><img src="/2018/12/12/1.png" alt=""></p>
+<ul>
+<li>可以在代码中控制Log显示(见前面三行)，也可以在库工程变量控制。</li>
+<li>可以显示三个等级的日志</li>
+</ul>
+<h2 id="如何修改库工程"><a href="#如何修改库工程" class="headerlink" title="如何修改库工程"></a>如何修改库工程</h2><h4 id="工程目录路径"><a href="#工程目录路径" class="headerlink" title="工程目录路径"></a>工程目录路径</h4><p>demo\app\fcg_client\fcg_client\Projects</p>
+<h4 id="工程说明"><a href="#工程说明" class="headerlink" title="工程说明"></a>工程说明</h4><ul>
+<li>UGUI 是UGUI的扩展工程库</li>
+<li>GFEditor 是游戏通用编辑工具扩展库</li>
+<li>GF 是游戏通用模块扩展库</li>
+<li>References 是工程依赖库以及导出库</li>
+</ul>
+<h4 id="修改操作步骤"><a href="#修改操作步骤" class="headerlink" title="修改操作步骤"></a>修改操作步骤</h4><ul>
+<li>打开对应工程编辑代码</li>
+<li>编译工程</li>
+<li>打开Unity菜单栏 Tools/CopyDll/CopyXXX</li>
+</ul>
+<p><img src="/2018/12/12/2.png" alt=""><br>修改对应的工程之后运行对应的拷贝功能<br><img src="/2018/12/12/3.png" alt=""><br>弹出这个弹框说明拷贝成功，然后关闭弹框，等待Unity菊花转完，更新成功！</p>
+<h2 id="可继续扩展功能"><a href="#可继续扩展功能" class="headerlink" title="可继续扩展功能"></a>可继续扩展功能</h2><ul>
+<li>菜单控制功能是否开启</li>
+<li>可以显示Log的文件名和行号</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.IO;</span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">namespace GF.Debug</span><br><span class="line">&#123;</span><br><span class="line">    /// &lt;summary&gt;</span><br><span class="line">    /// 系统日志模块</span><br><span class="line">    /// &lt;/summary&gt;</span><br><span class="line">    public class Debugger</span><br><span class="line">    &#123;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 是否启动日志</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        public static bool EnableLog = true;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 是否显示Log时间</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        public static bool EnableTime = true;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 是否将日志保存到本地</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        public static bool EnableSave = false;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 是否允许堆栈</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        public static bool EnableStack = false;</span><br><span class="line">        public static bool UseUnityEngine = true;</span><br><span class="line">        public static string LogFileDir = Application.persistentDataPath + &quot;/DebuggerLog/&quot;;</span><br><span class="line">        public static string LogFileName = &quot;&quot;;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 开头标记，用于对Unity默认log做区分</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        public static string Prefix = &quot;&lt;color=#FFFF00&gt;&gt;&lt;/color&gt; &quot;;</span><br><span class="line">        public static StreamWriter LogFileWriter = null;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        private static string GetLogText(string tag, string message)</span><br><span class="line">        &#123;</span><br><span class="line">            string str = &quot;&quot;;</span><br><span class="line">            if (EnableTime)</span><br><span class="line">            &#123;</span><br><span class="line">                str = DateTime.Now.ToString(&quot;HH:mm:ss.fff&quot;) + &quot; &quot;;</span><br><span class="line">            &#125;</span><br><span class="line">            return (str + tag + &quot;::&quot; + message);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private static string GetLogTime()</span><br><span class="line">        &#123;</span><br><span class="line">            string str = &quot;&quot;;</span><br><span class="line">            if (EnableTime)</span><br><span class="line">            &#123;</span><br><span class="line">                str = DateTime.Now.ToString(&quot;HH:mm:ss.fff&quot;) + &quot; &quot;;</span><br><span class="line">            &#125;</span><br><span class="line">            return str;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void Log(object message)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            string str = GetLogTime() + message;</span><br><span class="line">            UnityEngine.Debug.Log(Prefix + str, null);</span><br><span class="line">            LogToFile(&quot;[I]&quot; + str, false);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void Log(object message, UnityEngine.Object context)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            string str = GetLogTime() + message;</span><br><span class="line">            UnityEngine.Debug.Log(Prefix + str, context);</span><br><span class="line">            LogToFile(&quot;[I]&quot; + str, false);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void Log(string tag, string message)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            message = GetLogText(tag, message);</span><br><span class="line">            UnityEngine.Debug.Log(Prefix + message, null);</span><br><span class="line">            LogToFile(&quot;[I]&quot; + message, false);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void Log(string tag, string format, params object[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            string logText = GetLogText(tag, string.Format(format, args));</span><br><span class="line">            UnityEngine.Debug.Log(Prefix + logText, null);</span><br><span class="line">            LogToFile(&quot;[I]&quot; + logText, false);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void LogError(object message)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            string str = GetLogTime() + message;</span><br><span class="line">            UnityEngine.Debug.LogError(Prefix + str, null);</span><br><span class="line">            LogToFile(&quot;[E]&quot; + str, true);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void LogError(object message, UnityEngine.Object context)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            string str = GetLogTime() + message;</span><br><span class="line">            UnityEngine.Debug.LogError(Prefix + str, context);</span><br><span class="line">            LogToFile(&quot;[E]&quot; + str, true);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void LogError(string tag, string message)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            message = GetLogText(tag, message);</span><br><span class="line">            UnityEngine.Debug.LogError(Prefix + message, null);</span><br><span class="line">            LogToFile(&quot;[E]&quot; + message, true);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void LogError(string tag, string format, params object[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            string logText = GetLogText(tag, string.Format(format, args));</span><br><span class="line">            UnityEngine.Debug.LogError(Prefix + logText, null);</span><br><span class="line">            LogToFile(&quot;[E]&quot; + logText, true);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 将日志写入到文件中</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;param name=&quot;message&quot;&gt;&lt;/param&gt;</span><br><span class="line">        /// &lt;param name=&quot;EnableStack&quot;&gt;&lt;/param&gt;</span><br><span class="line">        private static void LogToFile(string message, bool EnableStack = false)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableSave)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            if (LogFileWriter == null)</span><br><span class="line">            &#123;</span><br><span class="line">                LogFileName = DateTime.Now.GetDateTimeFormats(&apos;s&apos;)[0].ToString();</span><br><span class="line">                LogFileName = LogFileName.Replace(&quot;-&quot;, &quot;_&quot;);</span><br><span class="line">                LogFileName = LogFileName.Replace(&quot;:&quot;, &quot;_&quot;);</span><br><span class="line">                LogFileName = LogFileName.Replace(&quot; &quot;, &quot;&quot;);</span><br><span class="line">                LogFileName = LogFileName + &quot;.log&quot;;</span><br><span class="line">                if (string.IsNullOrEmpty(LogFileDir))</span><br><span class="line">                &#123;</span><br><span class="line">                    try</span><br><span class="line">                    &#123;</span><br><span class="line">                        if (UseUnityEngine)</span><br><span class="line">                        &#123;</span><br><span class="line">                            LogFileDir = Application.persistentDataPath + &quot;/DebuggerLog/&quot;;</span><br><span class="line">                        &#125;</span><br><span class="line">                        else</span><br><span class="line">                        &#123;</span><br><span class="line">                            LogFileDir = AppDomain.CurrentDomain.BaseDirectory + &quot;/DebuggerLog/&quot;;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    catch (Exception exception)</span><br><span class="line">                    &#123;</span><br><span class="line">                        UnityEngine.Debug.Log(Prefix + &quot;获取 Application.persistentDataPath 报错！&quot; + exception.Message, null);</span><br><span class="line">                        return;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                string path = LogFileDir + LogFileName;</span><br><span class="line">                try</span><br><span class="line">                &#123;</span><br><span class="line">                    if (!Directory.Exists(LogFileDir))</span><br><span class="line">                    &#123;</span><br><span class="line">                        Directory.CreateDirectory(LogFileDir);</span><br><span class="line">                    &#125;</span><br><span class="line">                    LogFileWriter = File.AppendText(path);</span><br><span class="line">                    LogFileWriter.AutoFlush = true;</span><br><span class="line">                &#125;</span><br><span class="line">                catch (Exception exception2)</span><br><span class="line">                &#123;</span><br><span class="line">                    LogFileWriter = null;</span><br><span class="line">                    UnityEngine.Debug.Log(&quot;LogToCache() &quot; + exception2.Message + exception2.StackTrace, null);</span><br><span class="line">                    return;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (LogFileWriter != null)</span><br><span class="line">            &#123;</span><br><span class="line">                try</span><br><span class="line">                &#123;</span><br><span class="line">                    LogFileWriter.WriteLine(message);</span><br><span class="line">                    if ((EnableStack || Debugger.EnableStack) &amp;&amp; UseUnityEngine)</span><br><span class="line">                    &#123;</span><br><span class="line">                        LogFileWriter.WriteLine(StackTraceUtility.ExtractStackTrace());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                catch (Exception)</span><br><span class="line">                &#123;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void LogWarning(object message)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            string str = GetLogTime() + message;</span><br><span class="line">            UnityEngine.Debug.LogWarning(Prefix + str, null);</span><br><span class="line">            LogToFile(&quot;[W]&quot; + str, false);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void LogWarning(object message, UnityEngine.Object context)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            string str = GetLogTime() + message;</span><br><span class="line">            UnityEngine.Debug.LogWarning(Prefix + str, context);</span><br><span class="line">            LogToFile(&quot;[W]&quot; + str, false);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void LogWarning(string tag, string message)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            message = GetLogText(tag, message);</span><br><span class="line">            UnityEngine.Debug.LogWarning(Prefix + message, null);</span><br><span class="line">            LogToFile(&quot;[W]&quot; + message, false);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void LogWarning(string tag, string format, params object[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!Debugger.EnableLog)</span><br><span class="line">                return;</span><br><span class="line"></span><br><span class="line">            string logText = GetLogText(tag, string.Format(format, args));</span><br><span class="line">            UnityEngine.Debug.LogWarning(Prefix + logText, null);</span><br><span class="line">            LogToFile(&quot;[W]&quot; + logText, false);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/09/18/" class="archive-article-date">
-  	<time datetime="2016-09-18T06:45:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/18/">Unity发送邮件功能</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">发送邮件</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Log</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/09/18/" class="archive-article-date">
-  	<time datetime="2016-09-18T06:43:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-09-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/18/">Unity跟IOS原生开发项目融合</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/04/18/" class="archive-article-date">
-  	<time datetime="2016-04-18T06:46:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/18/">本人录制的Unity网络编程视频教程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络编程</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">视频教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/10/" class="archive-article-date">
-  	<time datetime="2016-01-10T06:16:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/10/">记录参加CSDN上海大联欢活动</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">社区交流</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/01/" class="archive-article-date">
-  	<time datetime="2016-01-01T06:11:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/01/">”我的2016“-太多难忘的第一次</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">年终小结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/11/27/" class="archive-article-date">
-  	<time datetime="2015-11-27T09:51:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/27/">GC相关小结</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">GC</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://dingxiaowei.cn/2018/12/12/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/18/" class="archive-article-date">
-  	<time datetime="2015-06-18T09:59:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-06-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/08/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何使用adb logcat查看模拟器异常</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/06/18/"> Scut初识之HelloWorld</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Scut</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#功能说明"><span class="toc-number">2.</span> <span class="toc-text">功能说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作说明"><span class="toc-number">3.</span> <span class="toc-text">操作说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何修改库工程"><span class="toc-number">4.</span> <span class="toc-text">如何修改库工程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#工程目录路径"><span class="toc-number">4.0.1.</span> <span class="toc-text">工程目录路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工程说明"><span class="toc-number">4.0.2.</span> <span class="toc-text">工程说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改操作步骤"><span class="toc-number">4.0.3.</span> <span class="toc-text">修改操作步骤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可继续扩展功能"><span class="toc-number">5.</span> <span class="toc-text">可继续扩展功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">6.</span> <span class="toc-text">代码</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/10/" class="archive-article-date">
-  	<time datetime="2015-06-10T08:55:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-06-10</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/06/10/">简历</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">简历</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2014" class="archive-year">2014</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2014/04/18/" class="archive-article-date">
-  	<time datetime="2014-04-18T06:49:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-04-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2014/04/18/"> [Unity3D]Unity+Android交互教程——让手机动起来</a>
-    </h1>
+  <div id="SOHUCS" sid="Unity游戏Log模块说明" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cytjYHUHN",
+        conf: "ea24434ef1bf1bd9532706cf61872684"
+    });
+</script>
+</script>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Uniyt</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/3/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
   
 
 
@@ -626,8 +456,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
