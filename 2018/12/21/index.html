@@ -15,10 +15,12 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="多功能链式计时器。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-23T08:44:25.838Z">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/12/21/1.png">
+<meta property="og:updated_time" content="2019-01-23T08:47:52.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【GFFrameWork】多功能链式计时器">
 <meta name="twitter:description" content="多功能链式计时器。">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2018/12/21/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -227,7 +229,42 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在游戏开发中实时阴影是比较常见的需求，我们最常见的方法是实时光照，但是这个会带来性能的问题，如果场景中模型比较多，例如我最近在做的3D足球游戏，场景中22个球员，如果采用实时光照DC会增加好几百，会造成渲染的压力，就有必要采用关照贴图的方案，比关闭掉实时光，但这种方案就降低了DC，减轻了渲染压力，这就要求阴影必须采用其他方案，我这里介绍Shader来现在的方案，貌似是王者荣耀采用的一种方案，专门用一个pass来渲染球员的阴影。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Unity游戏开发中，我们常用Unity的协程来实现延时，使用频率还是蛮高的，例如：分帧加载，延时加载等，感觉有必要做成一个通用的库，但正好看到网上有人写好了这块，就不重复造轮子了，就收入囊中了，感谢作者！</p>
+<h2 id="简要说明"><a href="#简要说明" class="headerlink" title="简要说明"></a>简要说明</h2><ul>
+<li>简单上手：在脚本中使用this作为入口，e.g. this.Delayer(1, DoSomething);</li>
+<li>自定义：e.g. this.Sequence().Loop(2).Interval(1).Action(DoSomething1).Interval(0.5f).Action(DoSomething2);</li>
+<li>无GC：使用了内存池存放序列和节点，在数组容量足够的情况下，运行时无GC（数组自动扩容会产生GC）</li>
+<li>自动回收：使用Component或其子类作为ID受控，一旦ID被销毁，计时器会随之自动回收</li>
+<li>精准受控：准确停止指定的计时器（请看使用方法的最后）</li>
+<li>支持时间缩放：支持deltaTime和unscaledDeltaTime</li>
+</ul>
+<h2 id="设计架构"><a href="#设计架构" class="headerlink" title="设计架构"></a>设计架构</h2><h5 id="ActionSequenceSystem序列系统"><a href="#ActionSequenceSystem序列系统" class="headerlink" title="ActionSequenceSystem序列系统"></a>ActionSequenceSystem序列系统</h5><ul>
+<li>使用了内存池</li>
+<li>管理ActionSequence</li>
+</ul>
+<h5 id="ActionSequence序列"><a href="#ActionSequence序列" class="headerlink" title="ActionSequence序列"></a>ActionSequence序列</h5><ul>
+<li>对Component做了扩展，在脚本中使用this作为入口</li>
+<li>对Component实例做了依赖，使其可以随Component实例的销毁自动回收</li>
+<li>可自定义，加入不同的ActionNode实现不同的行为链</li>
+</ul>
+<h5 id="ActionNode节点"><a href="#ActionNode节点" class="headerlink" title="ActionNode节点"></a>ActionNode节点</h5><ul>
+<li>Action：执行函数</li>
+<li>Interval: 延时一段时间</li>
+<li>SetActive：激活物体/反激活物体</li>
+<li>WaitFor：知道条件判断为true才跳下一个节点</li>
+</ul>
+<a id="more"></a>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>说明：下面使用方法中的this的类型为Component或其子类（其实this is MonoBehaviour）</p>
+<h4 id="延迟开关GameObject功能"><a href="#延迟开关GameObject功能" class="headerlink" title="延迟开关GameObject功能"></a>延迟开关GameObject功能</h4><p>既然用了Component来做ID，控制gameObject显示隐藏就是举手之劳，何乐而不为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//Start a toggle gameObject active/deactive sequence</span><br><span class="line">tfShowHideExample.Shower(0.5f);</span><br><span class="line">tfShowHideExample.Hider(1.5f);</span><br><span class="line"></span><br><span class="line">//Start a infinite loop toggle active gameObject</span><br><span class="line">tfShowHideExample.Sequence().Interval(0.5f).ToggleActive().Loop();</span><br></pre></td></tr></table></figure></p>
+<h4 id="开启单次计时器（延迟）"><a href="#开启单次计时器（延迟）" class="headerlink" title="开启单次计时器（延迟）"></a>开启单次计时器（延迟）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//Start a once timer</span><br><span class="line">this.Delayer(1, () =&gt; Debug.Log(1));</span><br><span class="line">this.Sequence().Interval(1).Action(() =&gt; Debug.Log(1));//Same</span><br><span class="line"></span><br><span class="line">//Allso use transform as a ID to start a sequence</span><br><span class="line">transform.Delayer(1, () =&gt; Debug.Log(1));</span><br></pre></td></tr></table></figure>
+<h4 id="开启计次计时器-次数"><a href="#开启计次计时器-次数" class="headerlink" title="开启计次计时器(次数)"></a>开启计次计时器(次数)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//Start a loop timer</span><br><span class="line">this.Looper(0.5f, 3, false, () =&gt; Debug.Log(-1));</span><br><span class="line">this.Sequence().Loop(3).Interval(0.5f).Action(() =&gt; Debug.Log(-1));//Same</span><br></pre></td></tr></table></figure>
+<h4 id="开启无限计时器"><a href="#开启无限计时器" class="headerlink" title="开启无限计时器"></a>开启无限计时器</h4><p>相当于计次计时器的缩写，循环次数设置为-1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//Start a infinite loop timer</span><br><span class="line">this.Looper(1, i =&gt; Debug.Log(&quot;Infiniter&quot; + i));</span><br></pre></td></tr></table></figure></p>
+<h4 id="开启自定义序列"><a href="#开启自定义序列" class="headerlink" title="开启自定义序列"></a>开启自定义序列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//Start a custom sequence</span><br><span class="line">this.Sequence()</span><br><span class="line">    .Interval(2)</span><br><span class="line">    .Action(() =&gt; Debug.Log(&quot;Test1&quot;))</span><br><span class="line">    .Interval(3)</span><br><span class="line">    .Action(() =&gt; Debug.Log(&quot;Test2&quot;))</span><br><span class="line">    .Interval(1)</span><br><span class="line">    .Action(() =&gt; Debug.Log(&quot;Test3 end&quot;));</span><br><span class="line"></span><br><span class="line">//Check Q key per 0.2 seconds</span><br><span class="line">this.Sequence()</span><br><span class="line">    .Loop()</span><br><span class="line">    .Interval(0.2f)</span><br><span class="line">    .WaitFor(() =&gt; Input.GetKeyDown(KeyCode.Q))</span><br><span class="line">    .Action(n =&gt; Debug.Log(&quot;Q键 按下次数&quot; + n));</span><br></pre></td></tr></table></figure>
+<h4 id="停止序列"><a href="#停止序列" class="headerlink" title="停止序列"></a>停止序列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//Stop the sequence with the specified ID</span><br><span class="line">private ActionSequence sequence;</span><br><span class="line">sequence = this.Looper(0.5f, 3, false, () =&gt; Debug.Log(-1));</span><br><span class="line">sequence.Stop(this);</span><br><span class="line"></span><br><span class="line">//Stop all sequences by this ID</span><br><span class="line">this.StopSequence();</span><br><span class="line"></span><br><span class="line">//Allso transform as ID</span><br><span class="line">transform.StopSequence();</span><br></pre></td></tr></table></figure>
+<h4 id="可以不用ID直接开序列"><a href="#可以不用ID直接开序列" class="headerlink" title="可以不用ID直接开序列"></a>可以不用ID直接开序列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//Start a sequence without id.</span><br><span class="line">ActionSequenceSystem.Delayer(5, () =&gt; Debug.Log(&quot;No id delayer&quot;));</span><br><span class="line">ActionSequenceSystem.Looper(0.2f, 10, false, () =&gt; Debug.Log(&quot;No id looper&quot;));</span><br><span class="line"></span><br><span class="line">//Notes：An instance must be preserved to manually stop an infinite loop sequence.</span><br><span class="line">ActionSequenceHandle infiniteSequenceHandle = new ActionSequenceHandle();</span><br><span class="line">ActionSequenceSystem.Looper(0.2f, -1, false, () =&gt; Debug.Log(&quot;No id infinite looper&quot;)).SetHandle(infiniteSequenceHandle);</span><br><span class="line">infiniteSequenceHandle.StopSequence();</span><br></pre></td></tr></table></figure>
+<h4 id="停止序列特殊技巧：ActionSequenceHandle用法"><a href="#停止序列特殊技巧：ActionSequenceHandle用法" class="headerlink" title="停止序列特殊技巧：ActionSequenceHandle用法"></a>停止序列特殊技巧：ActionSequenceHandle用法</h4><p>简单来说就是引用一个计时器，让我们可以随时手动停止它<br>但ActionSequence自身有停止的方法，为什么还要使用ActionSequenceHandle？<br>ActionSequenceHandle是为了处理“开启全局计时器时不传入ID，又要控制这个计时器”的情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class ActionSequenceHandleExample : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    private readonly ActionSequenceHandle infiniteSequenceHandle = new ActionSequenceHandle();</span><br><span class="line">    private ActionSequence sequence;</span><br><span class="line"></span><br><span class="line">    private void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        //Notes：An instance must be preserved to manually stop an infinite loop sequence.</span><br><span class="line">        ActionSequenceSystem.Looper(infiniteSequenceHandle, 0.2f, -1, false, () =&gt; Debug.Log(&quot;No id infinite looper&quot;));</span><br><span class="line">        sequence = this.Looper(0.5f, 3, false, () =&gt; Debug.Log(&quot;this looper&quot;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void Update()</span><br><span class="line">    &#123;</span><br><span class="line">        if (Input.GetKeyDown(KeyCode.B))</span><br><span class="line">        &#123;</span><br><span class="line">            //使用ActionSequenceHandle停止</span><br><span class="line">            infiniteSequenceHandle.StopSequence();</span><br><span class="line">            //使用ActionSequence停止</span><br><span class="line">            sequence.Stop(this);</span><br><span class="line">            this.StopSequence(sequence);//Same as sequence.Stop(this);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (Input.GetKeyDown(KeyCode.X))</span><br><span class="line">        &#123;</span><br><span class="line">            transform.Looper(infiniteSequenceHandle, 1, 5, false, i =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                if (i == 2)</span><br><span class="line">                &#123;</span><br><span class="line">                    infiniteSequenceHandle.StopSequence();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/12/21/1.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">using GF.MonoBehavior.ActionSequenceSystem;</span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">public class ActionSequence : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    private readonly ActionSequenceHandle infiniteSequenceHandle = new ActionSequenceHandle();</span><br><span class="line">    public Transform ShowHideExample;</span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        //延时执行</span><br><span class="line">        this.Delayer(1, () =&gt; Debug.Log(&quot;延时1s执行&quot;));</span><br><span class="line">        transform.Delayer(1, () =&gt; Debug.Log(&quot;延时1s执行&quot;));</span><br><span class="line">        ActionSequenceSystem.Delayer(5, () =&gt; Debug.Log(&quot;不依赖物体的延时执行&quot;));</span><br><span class="line">        ActionSequenceSystem.Looper(0.2f, 10, false, () =&gt; Debug.Log(&quot;不依赖物体的延时执行&quot;));</span><br><span class="line">        //循环执行，设置执行次数</span><br><span class="line">        this.Looper(0.5f, 3, false, () =&gt; Debug.Log(&quot;循环执行三次，并且延时0.5s执行&quot;));</span><br><span class="line">        //支持延时序列，增加一个运行节点</span><br><span class="line">        this.Sequence().Interval(1).Action(() =&gt; Debug.Log(&quot;延时序列 ，增加一个运行节点&quot;));</span><br><span class="line">        //循环1s执行一次</span><br><span class="line">        this.Looper(1, i =&gt; Debug.Log(&quot;循环执行&quot; + i));</span><br><span class="line">        //定时检测按键次数</span><br><span class="line">        this.Sequence()</span><br><span class="line">            .Loop()</span><br><span class="line">            .Interval(1f)  //间隔1秒</span><br><span class="line">            .WaitFor(() =&gt; Input.GetKeyDown(KeyCode.Q))</span><br><span class="line">            .Action(n =&gt; Debug.Log(&quot;Q键 按下次数&quot; + n));</span><br><span class="line"></span><br><span class="line">        //延时0.5s隐藏物体</span><br><span class="line">        ShowHideExample.Hider(0.5f);</span><br><span class="line">        //0.5s显示/隐藏物体</span><br><span class="line">        ShowHideExample.Sequence().Interval(0.5f).ToggleActive().Loop();</span><br><span class="line"></span><br><span class="line">        //停止所有序列</span><br><span class="line">        ActionSequenceSystem.StopSequenceAll();</span><br><span class="line"></span><br><span class="line">        //事件循环</span><br><span class="line">        this.LooperUnscaled(infiniteSequenceHandle, 1f, () =&gt; Debug.Log(&quot;No id infinite looper&quot;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void Update()</span><br><span class="line">    &#123;</span><br><span class="line">        if (Input.GetKeyDown(KeyCode.B))</span><br><span class="line">        &#123;</span><br><span class="line">            infiniteSequenceHandle.StopSequence();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (Input.GetKeyDown(KeyCode.X))</span><br><span class="line">        &#123;</span><br><span class="line">            transform.LooperUnscaled(infiniteSequenceHandle, 1, 5, false, i =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                Debug.Log(&quot;transform looper &quot; + i);</span><br><span class="line">                if (i == 2)</span><br><span class="line">                &#123;</span><br><span class="line">                    infiniteSequenceHandle.StopSequence();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="GFFramework地址"><a href="#GFFramework地址" class="headerlink" title="GFFramework地址"></a>GFFramework地址</h2><p><a href="https://gitee.com/dingxiaowei/GFFrameWork" target="_blank" rel="noopener">https://gitee.com/dingxiaowei/GFFrameWork</a></p>
 
       
 
@@ -360,7 +397,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简要说明"><span class="toc-number">2.</span> <span class="toc-text">简要说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设计架构"><span class="toc-number">3.</span> <span class="toc-text">设计架构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ActionSequenceSystem序列系统"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">ActionSequenceSystem序列系统</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ActionSequence序列"><span class="toc-number">3.0.0.2.</span> <span class="toc-text">ActionSequence序列</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ActionNode节点"><span class="toc-number">3.0.0.3.</span> <span class="toc-text">ActionNode节点</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用方法"><span class="toc-number">4.</span> <span class="toc-text">使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#延迟开关GameObject功能"><span class="toc-number">4.0.1.</span> <span class="toc-text">延迟开关GameObject功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开启单次计时器（延迟）"><span class="toc-number">4.0.2.</span> <span class="toc-text">开启单次计时器（延迟）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开启计次计时器-次数"><span class="toc-number">4.0.3.</span> <span class="toc-text">开启计次计时器(次数)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开启无限计时器"><span class="toc-number">4.0.4.</span> <span class="toc-text">开启无限计时器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开启自定义序列"><span class="toc-number">4.0.5.</span> <span class="toc-text">开启自定义序列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#停止序列"><span class="toc-number">4.0.6.</span> <span class="toc-text">停止序列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可以不用ID直接开序列"><span class="toc-number">4.0.7.</span> <span class="toc-text">可以不用ID直接开序列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#停止序列特殊技巧：ActionSequenceHandle用法"><span class="toc-number">4.0.8.</span> <span class="toc-text">停止序列特殊技巧：ActionSequenceHandle用法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GFFramework地址"><span class="toc-number">5.</span> <span class="toc-text">GFFramework地址</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -478,6 +515,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
@@ -487,10 +528,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -506,6 +543,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
@@ -514,11 +555,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,14 +587,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
@@ -570,14 +607,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
               </li>
              
@@ -587,6 +616,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity数据存储</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,11 +643,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,11 +667,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">美文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -643,14 +688,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">美文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
               <li class="article-tag-list-item">
