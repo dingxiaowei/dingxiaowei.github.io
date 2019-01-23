@@ -197,6 +197,132 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-【Aladdin-Unity3D-Shader编程】之二-光照模型-一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/18/">【Aladdin Unity3D Shader编程】之二 光照模型(一)</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/18/" class="archive-article-date">
+  	<time datetime="2017-11-18T01:42:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="光照模型"><a href="#光照模型" class="headerlink" title="光照模型"></a>光照模型</h2><p>光照模型就是一个公式，使用这个公式来计算在某个点的光照效果。</p>
+<p>在标准光照模型里面，我们把进入摄像机的光分为下面四个部分：</p>
+<ul>
+<li><p>自发光</p>
+<p>  类似生活中的萤火虫等自己能够发光</p>
+</li>
+<li><p>高光反射</p>
+<p>  类似生活中的镜子，近似认为百分百反射出去</p>
+</li>
+<li><p>漫反射</p>
+<p>  类似生活中的光照射到墙壁上、桌子上的反光不会百分百反射出去，各个方向都会反射。</p>
+</li>
+<li><p>环境光</p>
+<p>  类似生活中的光照照射在某个物体上，物体漫反射然后反射到其他物体上这些过程的光是环境光。</p>
+</li>
+</ul>
+<p>以上都是模拟生活中的光照效果，并不等同于实际生活中的光照计算，实际生活中的光照会更加复杂。</p>
+<h2 id="光照模型中关于漫反射的计算"><a href="#光照模型中关于漫反射的计算" class="headerlink" title="光照模型中关于漫反射的计算"></a>光照模型中关于漫反射的计算</h2><p>漫反射计算放在顶点函数里面就是逐顶点光照</p>
+<p>Disffuse = 直射光颜色*max(0,cosθ)  (θ是法线跟光照的夹角)  如果夹角小于0的话就是背光面就直接取黑色</p>
+<p>理论知识:</p>
+<ul>
+<li>向量点乘(结果值)</li>
+</ul>
+<pre><code>a*b=|a||b|cosθ
+</code></pre><ul>
+<li>向量叉乘(结果是向量)</li>
+</ul>
+<pre><code>a*b=c  c的一个向量，值是|a||b|sinθ
+</code></pre>
+        
+          <a class="article-more-a" href="/2017/11/18/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Shader</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Shader//" class="article-tag-list-link color2">Shader</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/18/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-【Aladdin-Unity3D-Shader编程】之一-基本入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1088,128 +1214,9 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-老婆是恩人" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/24/">老婆是恩人</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/24/" class="archive-article-date">
-  	<time datetime="2017-03-24T04:58:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-24</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="600" height="330" src="http://music.
-163.com/outchain/player?
-type=0&id=572758458&auto=1&height=430"></iframe>
-
-
-<p> 有人曾说：<br> 老婆是恩人，女儿是亲人，<br> 女婿是仆人，儿子是仇人，<br> 媳妇是敌人，孙子是先人。</p>
-<p>我们应当：<br>感谢恩人，依靠亲人，使唤仆人，<br>拉拢仇人，巴结敌人，供养先人。</p>
-<p><img src="/2017/03/24/1.jpg" alt=""></p>
-<p>人的一生：<br>最伟大的亲情，莫过于夫妻之情；<br>最重要的沟通，莫过于夫妻沟通；<br>最重要的理解，是夫妻间的理解；</p>
-<p>最大的成功，莫过于婚姻的成功；<br>最大的幸福，莫过于家庭的幸福。</p>
-<p>最有成效的忍让，是夫妻间的忍让；<br>最有意义的关心，是夫妻间的关心。<br>最有价值的宽容，是夫妻间的宽容；</p>
-<p><img src="/2017/03/24/2.jpg" alt=""></p>
-<p>婚姻是个杯子，提供一个容器，<br>把男人女人放在一起，相互渗透，<br>让本来很苦的生活散发出香味来。</p>
-<p>结婚后，随着生活中的琐碎繁杂，<br>不可避免要产生磨擦，生活久了，<br>感觉自己妻子不如别的女人漂亮。</p>
-<p>也有的男人在有了名气和金钱时，<br>就果断选择放弃，去寻找第三者，<br>转头把目光转向了更年轻的女性！</p>
-<p><img src="/2017/03/24/3.jpg" alt=""></p>
-<p>  就因为她们漂亮、年轻？<br>  你想到过自己的妻子吗？<br>  她也曾经年轻、漂亮，<br>她为生活、为你付出了一切。</p>
-<p>  男人<br>请不要问你的女人窈窕身段哪里去了，<br>   请回头看看你的孩子，<br>  因为她成了你孩子的母亲；</p>
-<p>请不要问她美丽的容颜哪里去了，<br>因为她让你在外打拼时如此放心；</p>
-<p>  请不要怪她不去逛街，<br> 不要怪她不去买漂亮的衣服，<br>  不要怪她总是不修边幅，<br>不要怪她没有别的女人那么靓，<br>因为她倾其所有给了家，给了孩子，<br>    给了你——她的男人。</p>
-<p>妻子为家庭、为你所做的一切，<br>都是心甘情愿、不需要回报的，<br>她是世界上最爱你的、最懂你、<br>最愿意为了你付出一切的女人。</p>
-<p><img src="/2017/03/24/5.jpg" alt=""></p>
-<p>  女人<br> 她是和你没有血缘关系的女人，<br> 却为你深夜不回家而牵肠挂肚；</p>
-<p>在你贫穷的时候，她不会嫌弃你，<br>默默地在你身旁陪着你，鼓励你，<br>    支持你直到你成功；</p>
-<p>当你生病时，她守在你身边，<br>整夜守护着你，直到你痊愈；</p>
-<p>  妻子是一个家，<br>能给你浮躁的心，带来安抚的港湾；<br>  任何一种男女之情，<br>都不能同夫妻之间的真情相比。</p>
-<p>   好好地爱惜自己的妻子吧，<br>多留一点时间和空闲给自己的妻子，<br>  不要忽视她为你做的一切，<br>  爱一旦拥有就一定要珍惜，<br>不要到失去了才感觉到她的美好。</p>
-<p><img src="/2017/03/24/6.jpg" alt=""></p>
-<p>什么样的女人成就什么样的男人，<br>巴菲特都说，<br>一生最好的投资是选对了老婆。<br>所以，如果没遇到一个好女人，<br>你就准备好马鞭，鞭策自己吧。</p>
-<p> 男人的一生，<br>站得高不高、走得远不远，<br>取决于能否遇到个好女人，<br>这女人可能是初恋女朋友，<br>可能是老婆，可能是知己，<br>可能是一生不分离的情人！<br> 无论哪种，<br>最重要的是你们心在一起！</p>
-<p>费尔巴哈说：“爱就是成就一个人”！<br>对男人来说，能否修炼到一定境界，<br>   关键是身边要有一个，<br>贤淑温柔、善解人意的好女人，<br>  一定要避免“遇人不淑”。<br>因为好男人是需要好女人扶助、<br>关注、欣赏、修剪才能造就的。<br>没有好女人，哪来的好男人呢？</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">美文</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">老婆是恩人</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/24/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1300,7 +1307,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+                <a href="javascript:void(0)" class="js-tag color4">Lua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1308,11 +1319,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Lua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1328,10 +1335,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
@@ -1340,15 +1343,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1369,6 +1368,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1412,11 +1419,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1448,6 +1455,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
@@ -1456,11 +1471,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1469,10 +1480,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
