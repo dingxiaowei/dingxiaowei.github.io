@@ -9,21 +9,22 @@
   <title>【GFFrameWork】游戏Log模块 | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Unity游戏框架Log模块">
-<meta name="keywords" content="Log">
+<meta name="keywords" content="GFFrameWork,Log">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【GFFrameWork】游戏Log模块">
 <meta property="og:url" content="http://dingxiaowei.cn/2018/12/12/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="Unity游戏框架Log模块">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/12/12/5.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/12/12/1.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/12/12/2.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/12/12/3.png">
-<meta property="og:updated_time" content="2019-01-23T08:54:19.546Z">
+<meta property="og:updated_time" content="2019-01-24T15:19:41.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【GFFrameWork】游戏Log模块">
 <meta name="twitter:description" content="Unity游戏框架Log模块">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2018/12/12/1.png">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2018/12/12/5.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -232,9 +233,11 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>为了让项目功能模块化，支持可复用性和可扩展性的原则，将跟游戏关联不大的功能模块单独拎出来添加到一个独立库工程。Log是游戏框架中比较重要和基础的一个功能模块。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>为了让项目功能模块化，支持可复用性和可扩展性的原则，将跟游戏关联不大的功能模块单独拎出来添加到一个独立库工程。Log是游戏框架中比较重要和基础的一个功能模块。并且Log是调试的重要手段之一，游戏Debug版本在UI上显示Log也会显得尤为重要。</p>
+<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><p><img src="/2018/12/12/5.png" alt=""></p>
 <h2 id="功能说明"><a href="#功能说明" class="headerlink" title="功能说明"></a>功能说明</h2><p>目前Log模块支持的功能：</p>
 <ul>
+<li>支持UI可视化</li>
 <li>支持是否显示日志</li>
 <li>支持是否显示日志时间</li>
 <li>支持显示不同级别(一般/警告/错误)的日志</li>
@@ -308,6 +311,10 @@ var _hmt = _hmt || [];
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
+        		</li>
+      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Log</a>
         		</li>
@@ -417,7 +424,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#功能说明"><span class="toc-number">2.</span> <span class="toc-text">功能说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作说明"><span class="toc-number">3.</span> <span class="toc-text">操作说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何修改库工程"><span class="toc-number">4.</span> <span class="toc-text">如何修改库工程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#工程目录路径"><span class="toc-number">4.0.1.</span> <span class="toc-text">工程目录路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工程说明"><span class="toc-number">4.0.2.</span> <span class="toc-text">工程说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改操作步骤"><span class="toc-number">4.0.3.</span> <span class="toc-text">修改操作步骤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可继续扩展功能"><span class="toc-number">5.</span> <span class="toc-text">可继续扩展功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">6.</span> <span class="toc-text">代码</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#效果展示"><span class="toc-number">2.</span> <span class="toc-text">效果展示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#功能说明"><span class="toc-number">3.</span> <span class="toc-text">功能说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作说明"><span class="toc-number">4.</span> <span class="toc-text">操作说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何修改库工程"><span class="toc-number">5.</span> <span class="toc-text">如何修改库工程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#工程目录路径"><span class="toc-number">5.0.1.</span> <span class="toc-text">工程目录路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工程说明"><span class="toc-number">5.0.2.</span> <span class="toc-text">工程说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改操作步骤"><span class="toc-number">5.0.3.</span> <span class="toc-text">修改操作步骤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可继续扩展功能"><span class="toc-number">6.</span> <span class="toc-text">可继续扩展功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">7.</span> <span class="toc-text">代码</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -539,10 +546,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
@@ -555,15 +558,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,7 +578,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,14 +614,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
@@ -627,15 +634,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -647,7 +654,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+                <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,6 +682,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
               </li>
              
@@ -683,19 +698,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
