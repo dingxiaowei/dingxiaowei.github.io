@@ -6,48 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://dingxiaowei.cn">
-  <title>Lua相关的知识小结 | Aladdin的博客</title>
+  <title>”我的2018“-蜕变 | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！ 在线编辑器 最佳推荐(有api提示)   菜鸟工具   在线工具  元表Lua我们访问对应的key来得到value的值，但无法对两个table进行操">
-<meta name="keywords" content="Lua">
+  <meta name="description" content="时间如白驹过隙，一转眼就是2016年的最后一天。曾几何时，我还以我是”90”后程序自居，我引以为傲，曾几何时，”90”后还是IT职场的小鲜肉，当我发现”94”,”95”后程序出现时，”90”后已经快要变成IT职场的腊肉了，感慨时间就是这么快！本来昨晚有很强烈的冲动来小结这特别的一年，但现在我已不在是一个人，有人体谅不许熬夜，不然的话估计又是小结到凌晨了。2016对我来说是特别的一年，有太多的难">
+<meta name="keywords" content="随笔">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lua相关的知识小结">
-<meta property="og:url" content="http://dingxiaowei.cn/2018/10/10/index.html">
+<meta property="og:title" content="”我的2018“-蜕变">
+<meta property="og:url" content="http://dingxiaowei.cn/2018/01/01/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
-<meta property="og:description" content="前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！ 在线编辑器 最佳推荐(有api提示)   菜鸟工具   在线工具  元表Lua我们访问对应的key来得到value的值，但无法对两个table进行操">
+<meta property="og:description" content="时间如白驹过隙，一转眼就是2016年的最后一天。曾几何时，我还以我是”90”后程序自居，我引以为傲，曾几何时，”90”后还是IT职场的小鲜肉，当我发现”94”,”95”后程序出现时，”90”后已经快要变成IT职场的腊肉了，感慨时间就是这么快！本来昨晚有很强烈的冲动来小结这特别的一年，但现在我已不在是一个人，有人体谅不许熬夜，不然的话估计又是小结到凌晨了。2016对我来说是特别的一年，有太多的难">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/1.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/2.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/3.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/4.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/5.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/6.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/7.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/8.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/9.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/10.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/11.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/12.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/13.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/14.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/15.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/16.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/17.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/18.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/19.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/22.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/23.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/24.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/25.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/27.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/21.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/20.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/10/26.png">
-<meta property="og:updated_time" content="2018-11-18T12:46:15.542Z">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/01/01/1.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/01/01/2.jpg">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/01/01/3.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/01/01/4.jpg">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/01/01/5.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/01/01/6.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/01/01/7.jpg">
+<meta property="og:updated_time" content="2019-01-24T17:31:10.406Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lua相关的知识小结">
-<meta name="twitter:description" content="前言Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！ 在线编辑器 最佳推荐(有api提示)   菜鸟工具   在线工具  元表Lua我们访问对应的key来得到value的值，但无法对两个table进行操">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2018/10/10/1.png">
+<meta name="twitter:title" content="”我的2018“-蜕变">
+<meta name="twitter:description" content="时间如白驹过隙，一转眼就是2016年的最后一天。曾几何时，我还以我是”90”后程序自居，我引以为傲，曾几何时，”90”后还是IT职场的小鲜肉，当我发现”94”,”95”后程序出现时，”90”后已经快要变成IT职场的腊肉了，感慨时间就是这么快！本来昨晚有很强烈的冲动来小结这特别的一年，但现在我已不在是一个人，有人体谅不许熬夜，不然的话估计又是小结到凌晨了。2016对我来说是特别的一年，有太多的难">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2018/01/01/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -225,20 +205,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Lua相关的知识小结" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-”我的2018“-蜕变" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Lua相关的知识小结
+      ”我的2018“-蜕变
     </h1>
   
 
         
-        <a href="/2018/10/10/" class="archive-article-date">
-  	<time datetime="2018-10-10T12:12:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-10</time>
+        <a href="/2018/01/01/" class="archive-article-date">
+  	<time datetime="2018-01-01T06:11:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-01</time>
 </a>
         
 		
@@ -256,82 +236,52 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！</p>
-<h3 id="在线编辑器"><a href="#在线编辑器" class="headerlink" title="在线编辑器"></a>在线编辑器</h3><ul>
-<li><a href="https://www.dooccn.com/lua/" target="_blank" rel="noopener">最佳推荐(有api提示)</a></li>
-</ul>
-<ul>
-<li><a href="hhttps://c.runoob.com/compile/66" target="_blank" rel="noopener">菜鸟工具</a></li>
-</ul>
-<ul>
-<li><a href="https://tool.lu/coderunner/" target="_blank" rel="noopener">在线工具</a></li>
-</ul>
-<h3 id="元表"><a href="#元表" class="headerlink" title="元表"></a>元表</h3><p>Lua我们访问对应的key来得到value的值，但无法对两个table进行操作。因此Lua提供了元表(Metatable),允许我们改变的行为，每个行为对应一个元方法，元方法下面介绍。</p>
-<p>Lua本身不是面向对象语言，但可以利用Lua的table来扩展面向对象，也就是我们常用的继承。我们如何实现一个子类继承父类并且能打印出子类的方法和父类的方法。主要思想是setmetatable和getmetable，子类定义个super变量指向父类对象，然后子类就通过这个super变量来访问父类的成员，下面是代码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">local parent=&#123;&#125;</span><br><span class="line"></span><br><span class="line">parent.__index=parent</span><br><span class="line"></span><br><span class="line">--类实例--</span><br><span class="line"></span><br><span class="line">function parent:New()</span><br><span class="line"></span><br><span class="line">    local self = &#123;&#125;;    --初始化self，如果没有这句，那么类所建立的对象改变，其他对象都会改变</span><br><span class="line"></span><br><span class="line">  setmetatable(self, parent);  --将self的元表设定为Class</span><br><span class="line"></span><br><span class="line">    return self;    --返回自身</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function parent.Hello( ... )</span><br><span class="line"></span><br><span class="line">  print(&quot;Parent&quot;)</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">local Child=parent:New()</span><br><span class="line"></span><br><span class="line">Child.__index=Child;</span><br><span class="line"></span><br><span class="line">function Child:New( )</span><br><span class="line"></span><br><span class="line">  local self=&#123;super=getmetatable(Child)&#125;</span><br><span class="line"></span><br><span class="line">  setmetatable(self, Child);  --将self的元表设定为Class</span><br><span class="line"></span><br><span class="line">  return self;    --返回自身</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function Child:Hello( ... )</span><br><span class="line"></span><br><span class="line">  print(&quot;Child&quot;);</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<p>运行结果:</p>
-<p><img src="/2018/10/10/1.png" alt=""></p>
-<p>由此可见打印了子类和父类的Hello方法</p>
+        <p><img src="/2018/01/01/1.png" alt="这里写图片描述"></p>
+<hr>
+<p>时间如白驹过隙，一转眼就是2016年的最后一天。曾几何时，我还以我是”90”后程序自居，我引以为傲，曾几何时，”90”后还是IT职场的小鲜肉，当我发现”94”,”95”后程序出现时，”90”后已经快要变成IT职场的腊肉了，感慨时间就是这么快！本来昨晚有很强烈的冲动来小结这特别的一年，但现在我已不在是一个人，有人体谅不许熬夜，不然的话估计又是小结到凌晨了。<br>2016对我来说是特别的一年，有太多的难忘的第一次，人生中有很多的第一次，比如第一次约会，第一次恋爱等等，迈过第一次也就意味着一种成长。对我而言今年的第一次太多，有大有小，各种第一次也给我带来喜怒哀乐各种复杂的心情。</p>
 <a id="more"></a>
-<h3 id="元方法"><a href="#元方法" class="headerlink" title="元方法"></a>元方法</h3><p>元方法之前有过<a href="http://dingxiaowei.cn/2017/06/18/Lua-%E5%85%83%E8%A1%A8/">介绍</a>,可以点击查看一下。</p>
-<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>遍历最常用的也是我们容易搞混的pairs和ipairs。</p>
+<hr>
+<h2 id="一月"><a href="#一月" class="headerlink" title="一月"></a>一月</h2><p>第一次参加CSDN线下交流活动，这次纯属吃喝玩乐，见识到IT界各行各业的技术专家们，重要的是认识了同行业同年龄《Unity Shader入门精要》的作者程序媛乐乐同学，Shader 图形学一直是这行业比较重要的也是比较难的一个模块，而作者能研究的这么深入并且将自己的学习成果分享出来也是很让人尊敬，在跟各位大牛交流和互动的时候感受到他们那种和气、低调、有内涵的品质。他们都是各个大公司的大佬，或许具备这样的性格才能有聚人的品质吧。<br><img src="/2018/01/01/2.jpg" alt="这里写图片描述"></p>
+<h2 id="二月"><a href="#二月" class="headerlink" title="二月"></a>二月</h2><p>收到了第一份兼职<a href="http://blog.csdn.net/dingxiaowei2013/article/details/52330847" target="_blank" rel="noopener">讲师</a>的收入，也就意味着体验讲师生活成功，虽然才疏学浅经验也少不足以为人导师，但当时也是收到麦子学院的老师邀请，加上自己也想有这种体验才去尝试这份工作，最后还是出乎意料的获得了学员的好评。这段经历，长达好几个月时间，原本我以为讲师是一份相对而言还是比较轻松的工作，就是将自己所学展示给学员就行了，就像我当初学习其他老师的视频教程一样，感觉老师们讲的很轻松自如，自己在看的过程中不断的快进一会一节课的内容就看完了。但轮到我转换身份，我去当讲师的时候，我感受到这份职业并不是想象中的那样轻松，所谓你要给他人一杯水，你得有一桶水才行，毕竟是第一次体验这样的经历，自己所学的知识不仅仅像工作那样靠手写出代码来那样，讲师还要一边手写一边通过嘴讲出来，对个人要求会更高，只有自己对这块知识特别熟练的前提下才能做到。所以我一个周末两天在确保教程质量的前提下只能录制十几分钟的课程，要经过自己备课PPT，自己练习案例Demo，自己无数次的演练直到讲到自己满意的效果为止，然后录完一个教程还要视频后期处理。刚开始在录制的过程中会有间接性的思维停滞导致自己不是很满意视频质量然后再重来，但到最后的时候自己也能熟练的一次性录完一个教程。这段经历让我明白，看似简单的事情，真真自己做起来的时候会超乎你的想象！我对讲师这份职业更加的尊敬！在此之后，我在学习视频教程的时候再也不快进看了，会认真体会思考讲师所说的每一句话。</p>
+<h2 id="三月"><a href="#三月" class="headerlink" title="三月"></a>三月</h2><p>离开，当初毕业的时候是满怀着憧憬进入本以为的大公司，但最终的结果是有点让我失望。但也有收获，收获是学习到项目开发的流程和管理，学习到敏捷开发模式。但有一些自己真实的感悟：</p>
 <ul>
-<li>pairs</li>
+<li>IT这行最重要的是靠自己去摸索和学习，而不要指望其他人能真正教你什么，别人顶多是提供一个方向或者思路指点，除了最亲的人或者知己或许会手把手的教你！</li>
+<li>在工作中，并不是说上班时间越长技术增长越快，这点我是不赞成的！如果一天24小时有18小时都在盲驴拉磨做重复性的工作，时间久了就会变得毫无思想，你的工作也仅仅只是工作而已，看似自己很”充实”，也就仅仅是看似而已。一周或者每天留给自己一点时间思考，这段时间的收获是什么，哪怕一点点，久而久之也会聚沙成塔，这里的收获不仅仅是技术的收获。</li>
 </ul>
-<p>pairs我们可以理解将Lua存储中的内容全部遍历出来，但Lua的存储有时候并不是像我们想象中的那样table中写了几个遍历就会存储几个变量，大致分为一下几种情况：</p>
-<p>1.纯array，例如{1,2,3,4,5}，或者{1,2,3,nil,5}这样的</p>
-<p><img src="/2018/10/10/2.png" alt=""></p>
-<p><img src="/2018/10/10/3.png" alt=""></p>
-<p>2.纯KeyValuePair(KV)，例如{[1] = 1,[2] = 2}这样的，但如果中间索引间断或者索引从1开始，例如{[3] = 2,[1]= 1}或者{[2]=2,[3]=3}</p>
-<p><img src="/2018/10/10/4.png" alt=""></p>
-<p><img src="/2018/10/10/5.png" alt=""></p>
-<p>3.array和kv混合的类型，例如{[1] = 1,[2] = 2,[3] = 3,4,5,6}或者{1,2,3,[3] = 4,5}或者{1,2,3,[4]=4,5}或者{1,2,3,nil,[4]=4}</p>
-<p><img src="/2018/10/10/6.png" alt=""></p>
-<p><img src="/2018/10/10/7.png" alt=""></p>
-<p><img src="/2018/10/10/8.png" alt=""></p>
-<p><img src="/2018/10/10/9.png" alt=""></p>
-<p>由此可见小结一下，pairs会遍历出所有的table内存里面的值，这里并不是我们所看到的所有值，table存储规律是优先存储array，并且索引从1开始，碰到nil会跳过并且索引+1，如果kv类型的值，key没有冲突，那则继续存储，如果key有冲突则忽略不会存储。pairs会将所有存储的值都打印出来。</p>
+<hr>
+<p>加入蛮牛专栏作家群，结识这行业好多技术伙伴。</p>
+<h2 id="四月"><a href="#四月" class="headerlink" title="四月"></a>四月</h2><p>经过朋友介绍一个德州棋牌项目，对自己而言是第一次接相对比较大的项目外包，之前在公司也就是一个项目的局部功能的工作，这既是挑战也是一种尝试，我想身边那么多技术伙伴，能有什么难事搞不定的态度就接下来这个任务，然后拉上另外一个伙伴兼职帮忙，我第一次尝试接触商业游戏的服务器开发，自己摸索，这段过程持续的比较漫长，中途也各种坎坷和心酸，漫长的时间里，一个人在家，要应对的不仅仅是项目本身，也不仅仅是客户，重要的是自己。当自己心身累了，疲倦了，厌倦了，自己怎么去调节，怎么去坚持，对我而言做这样的事情或许时机为时过早，在本不该这样的年龄去尝试这样的事情，但既然碰到了唯有去接受，有梦想的游戏人应该都会精力这样的事情，无论将来你是做项目的主程还是公司的技术负责人，都需要独当一面，承担一个项目，应对各种压力和挑战，这过程的辛酸只有自己精力自己才能感受。我虽不是创业，但这种体验也跟创业的艰辛少了多少，要随时应对各种突变。引用傅园慧的一句话，这过程鬼知道经历了什么。</p>
+<hr>
+<p>这个月第一次感受到家人的离世，奶奶因肺癌去世，之前外婆去世也让我倍感心痛，我体会到孝敬长辈要乘早，不要等到没有机会了而后悔莫及，所以对待自己的父母，也不要等到自己有能力或者说自己成功的时候再去孝敬，或许你平时的一个电话，一句亲切的问候对他们而言都是温馨的，不要等到他们不在的时候才感受到”子欲养而亲不待”的内涵。</p>
+<hr>
+<p>第一次收到比较大的offer，自己比较满意，但迫于项目的压力不得已放弃了，既然能收到这样的offer，说明boss对我的认可，工作过一段时间也感觉能胜任这样的岗位。</p>
+<h2 id="五月"><a href="#五月" class="headerlink" title="五月"></a>五月</h2><p>项目全力启动，技术方案选型成功，移动端安卓，iOS也都可行，五月六月游戏玩法初步可玩，也得到了客户第一笔项目定金。</p>
+<h2 id="六月"><a href="#六月" class="headerlink" title="六月"></a>六月</h2><p>我家人第一次去对象家访亲。</p>
+<h2 id="七月"><a href="#七月" class="headerlink" title="七月"></a>七月</h2><p>我成家了，不再是一个人面对生活，角色发生转变，要承担起养家糊口的责任。两人在一起生活难免会磕磕碰碰，有点小摩擦，但碰到问题也会相互倾诉，协商解决。生活不再是一个人的生活，要改变之前一个人生活的一些陋习。</p>
+<h2 id="八月"><a href="#八月" class="headerlink" title="八月"></a>八月</h2><p>被邀成为CSDN特邀专栏审核员，看到很多年轻有为的同学分享很多不错的技术文章，看到他们在学习在进步，深深感觉到这行业不容许原地踏步，没有沾沾自喜的资本，不进步就意味着退步，后面一群比你更年轻的伙伴再朝前进步，作为入行多年的人来讲自己得有一个立身之本。IT发展很快，技术更新、淘汰也很快，唯有不断学习才是硬道理！</p>
+<h2 id="九月"><a href="#九月" class="headerlink" title="九月"></a>九月</h2><p>德州项目初步成型，按照原本的需求做的七不离八。</p>
+<hr>
+<p>购买了第一台Mac Book，对我个人而言这是一笔天价，之前根本不敢想象自己也能用上这么昂贵的奢侈品，当然如果想要在这行深入下去，这种设备是刚需，不然无法完成iOS平台的开发，第一次购买Apple开发者证书，第一次有独立开发的萌芽。<br><img src="/2018/01/01/3.png" alt="这里写图片描述"></p>
+<h2 id="十月"><a href="#十月" class="headerlink" title="十月"></a>十月</h2><p>去客户那边驻扎开发，需求更新，对我来说简直噩耗，大多数更改的效果图跟预初都有很大的变动，项目要重新重构，可能一个界面一个简单设计的更新都会引起代码数据结构的变动都会带来很大的工作量。在客户那边几乎没日没夜的在工作，虽然很短暂的一周时间，但对精力是一个很大的消耗。得到的体会:</p>
 <ul>
-<li>ipairs</li>
+<li>他人往往会羡慕别人取得的硕果，而往往忽略他们在奋斗的路上所付出的辛酸和汗水。冰心的一句”成功之花,人们往往惊羡它现时的明艳, 然而当初,它的芽儿却浸透了奋斗的泪泉, 洒满了牺牲的血雨”</li>
+<li>不要指望客户会成为项目的策划，客户就是不明白需求的策划，他们就是看人家产品有什么功能，然后想要一个集大成的产品，我认为这是很错误的思想。</li>
+<li>项目预先的规划一定要留有余地，自己接的项目，百分百绝对是自己承担大头，千万不要指望其他人能帮助你太多。</li>
 </ul>
-<p>ipairs也是将table存储的值打印出来，只不过有个特殊的规律是从1开始打印，并且不能间断，如果碰到nil的值就不会继续遍历，下面我们也来用几组情况的数据说话</p>
-<p>1.纯array，例如{1,2,3,4,5}，或者{1,2,3,nil,5}这样的</p>
-<p><img src="/2018/10/10/10.png" alt=""></p>
-<p><img src="/2018/10/10/11.png" alt=""></p>
-<p><img src="/2018/10/10/12.png" alt=""></p>
-<p>2.纯KeyValuePair(KV)，例如{[1] = 1,[2] = 2}这样的，但如果中间索引间断或者索引从1开始，例如{[3] = 2,[1]= 1}或者{[2]=2,[3]=3}</p>
-<p><img src="/2018/10/10/13.png" alt=""></p>
-<p><img src="/2018/10/10/14.png" alt=""></p>
-<p><img src="/2018/10/10/15.png" alt=""></p>
-<p>3.array和kv混合的类型，例如{[1] = 1,[2] = 2,[3] = 3,4,5,6}或者{1,2,3,[3] = 4,5}或者{1,2,3,[4]=4,5}或者{1,2,3,nil,[4]=4}</p>
-<p><img src="/2018/10/10/16.png" alt=""></p>
-<p><img src="/2018/10/10/17.png" alt=""></p>
-<p><img src="/2018/10/10/18.png" alt=""></p>
-<p><img src="/2018/10/10/19.png" alt=""></p>
-<h3 id="计数"><a href="#计数" class="headerlink" title="#计数"></a>#计数</h3><p>计算table的长度，可以用#来统计，其实#就是统计table的存储长度，到底存了几个键值对，但我们就要搞懂Lua是如何存储的了。我经过几组数据来介绍一下：</p>
-<p>经过上面的规律，我们应该知道lua的存储规律，就是优先将array变成kv，依次从1开始，如果碰到nil则不存储并且索引号+1，array存储结束之后然后继续在当前的索引号的基础上+1继续找kv的值去存储，最后统计存储的kv的键值对数量</p>
-<p>1.纯array并且包含nil，例如{1,2,3,nil}或者{1,2,3,nil,5}</p>
-<p><img src="/2018/10/10/22.png" alt=""></p>
-<p><img src="/2018/10/10/23.png" alt=""></p>
-<p>2.纯kv，例如{[1] = 1,[3] = 3}或者{[2] = 2, [3] = 3}或者{[1] = 1,[2] = nil,[3] = 3}</p>
-<p><img src="/2018/10/10/24.png" alt=""></p>
-<p><img src="/2018/10/10/25.png" alt=""></p>
-<p><img src="/2018/10/10/27.png" alt=""></p>
-<p>3.array和kv混合，例如{1,2,3,nil,[4]=5}或者{1,2,3,nil,[5]=5}</p>
-<p><img src="/2018/10/10/21.png" alt=""></p>
-<p><img src="/2018/10/10/20.png" alt=""></p>
-<p><img src="/2018/10/10/26.png" alt=""></p>
-<p>总结一下，#的规律就是从1开始统计，优先统计array，如果碰到nil就不统计，如果纯数字，nil后面还有值的话(针对纯array而言)会索引++,也会计入统计,如果是kv,碰到nil就不统计了</p>
-<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>闭包是由函数以及它所访问的非局部变量组成，这个非局部变量也不是全局变量，这个变量称作upvalue，如果没有闭包的话，这个函数只能访问函数里面的变量或者全局变量。</p>
-<p>闭包实现原理：</p>
-<p>当Lua编译一个函数时，它会生成一个原型（prototype），原型中包括函数的虚拟机指令、函数中的常量（数值和字符串等）和一些调试信息。在任何时候只要Lua执行一个function .. end表达时，它都会创建一个新的闭包（closure）。每个闭包都有一个相应函数原型的引用以及一个数组，数组中每个元素都是一个对upvalue的引用，可以通过该数组来访问外部的局部变量（outer local variables）。值得注意的是，在Lua 5.2之前，闭包中还包括一个对环境（environment）的引用，环境实质就是一个table，函数可以在该表中索引全局变量，从Lua 5.2开始，取消了闭包中的环境，而引入一个变量_ENV来设置闭包环境。由此可见，函数是编译期概念，是静态的，而闭包是运行期概念，是动态的。 </p>
-<p>更多内容可以访问下面相关连接！</p>
-<h3 id="其他链接"><a href="#其他链接" class="headerlink" title="其他链接"></a>其他链接</h3><ul>
-<li><p><a href="http://www.runoob.com/lua/lua-metatables.html" target="_blank" rel="noopener">基本教程</a></p>
-</li>
-<li><p><a href="https://blog.csdn.net/MaximusZhou/article/details/44280109" target="_blank" rel="noopener">Lua闭包原理</a></p>
-</li>
+<h2 id="十一月"><a href="#十一月" class="headerlink" title="十一月"></a>十一月</h2><p>第一次尝试iOS支付对接，第一次尝试提交APP Store审核，虽然多次被拒，但第一次这种体验也能理解，这些坑第一次总是要踩踩的，以后就好了。</p>
+<p>德州效果图:</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/2018/01/01/4.jpg" alt="这里写图片描述"></h2><p>第一个属于自己的Logo<br><img src="/2018/01/01/5.png" alt="这里写图片描述"><br>要感谢设计者陆同学</p>
+<h2 id="十二月"><a href="#十二月" class="headerlink" title="十二月"></a>十二月</h2><p>第一次作为网络候选人，参加蛮牛专栏作家年终评选活动，目前49为候选人能排名前五已经很心满意足了，但自己贡献的技术文章却让我很是惭愧，感觉对不住大家热心的评选和支持，来年会多多分享技术文章。<br><img src="/2018/01/01/6.png" alt="这里写图片描述"></p>
+<hr>
+<h2 id="2016还有其他的更多的第一次体验"><a href="#2016还有其他的更多的第一次体验" class="headerlink" title="2016还有其他的更多的第一次体验"></a>2016还有其他的更多的第一次体验</h2><ul>
+<li>爱上游戏</li>
 </ul>
+<p>第一次爱上了一款手游——炉石传说，所谓暴雪出品必属精品，这款游戏的设计师才是我理想中的设计师，那么多职业，上千多张卡牌，职业跟卡牌之间的权衡和克制，让我真真感受到游戏作为人类第九种艺术的存在。重要的是能让免费玩家体会到游戏的乐趣，这点跟国内游戏设计者有很大的不同，国内的游戏出发点都是怎样设计才能设计出完美的坑让玩家去充值，我认为好的游戏就是玩家感受到乐趣之后自然而言的就会去充值获得更好的游戏体验，而不是绑架玩家去充值，不充值就玩不过去了。</p>
+<ul>
+<li>爱上git</li>
+</ul>
+<p>github老早之前就已经注册过并且使用过，但从来没有这样频繁的使用，现在我所有的项目都基本都放在git上，我感觉相比较网盘存储管理，git更方便更高效。有事没事也喜欢搜索一下git上相关的开源项目，向前辈们学习讨教！但git上优秀的排行前面的开源项目都是老外的居多，我觉得国内开发者并不比老外弱，但国内IT发展还没达到老外那种程度，我觉得根源就是国内没有老外那种开源精神。<br>我的git一年记录：<br><img src="/2018/01/01/7.jpg" alt="这里写图片描述"></p>
+<p>今年有太多难忘的第一次，有悲伤，有彷徨，有惊喜，有期待！今年蓄势，明年待发！</p>
 
       
 
@@ -376,13 +326,24 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Lua</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -432,7 +393,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://dingxiaowei.cn/2018/10/10/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://dingxiaowei.cn/2018/01/01/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -446,18 +407,18 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/11/17/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/10/10/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          如何搭建Jenkins导出Unity安卓环境
+          Lua相关的知识小结
         
       </div>
     </a>
   
   
-    <a href="/2018/01/01/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">”我的2018“-蜕变</div>
+    <a href="/2017/11/20/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【Aladdin-Unity3D-Shader编程】之六-模型实时阴影</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -477,19 +438,6 @@ var _hmt = _hmt || [];
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在线编辑器"><span class="toc-number">1.1.</span> <span class="toc-text">在线编辑器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元表"><span class="toc-number">1.2.</span> <span class="toc-text">元表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元方法"><span class="toc-number">1.3.</span> <span class="toc-text">元方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历"><span class="toc-number">1.4.</span> <span class="toc-text">遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计数"><span class="toc-number">1.5.</span> <span class="toc-text">#计数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">1.6.</span> <span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他链接"><span class="toc-number">1.7.</span> <span class="toc-text">其他链接</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
@@ -500,7 +448,7 @@ var _hmt = _hmt || [];
   
 
   
-  <div id="SOHUCS" sid="Lua相关的知识小结" ></div> 
+  <div id="SOHUCS" sid="”我的2018“-蜕变" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
