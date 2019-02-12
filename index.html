@@ -200,38 +200,15 @@
     <article id="post-【GFFrameWork】代码热更及资源下载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/05/">【GFFrameWork】代码热更及资源下载</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/05/" class="archive-article-date">
-  	<time datetime="2019-02-05T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-05</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>现在比较主流的逻辑更新是Lua方式，最常用的ToLua、SLua，XLua等等，但笔者是不太喜欢Lua开发，相比较直接写C#，lua的效率要低得多，这里GFFrameWork选择的是C#热更方案<a href="https://github.com/Ourpalm/ILRuntime" target="_blank" rel="noopener">ILRuntime</a>，这个方案由掌趣公司蓝大大维护，据我了解目前用这方案开发的项目还是不少的，ET框架也是采用这种方案，ILRuntime的前身其实是李总开发的L#方案，由于在大概15年左右，逻辑热更方案大战中L#方案没有sLua、uLua宣传的好，所以用的人就少了，然后李总就不太维护了，后面就有掌趣的蓝大接手维护，直到现在18年左右用的人还算不少，可能大家都比较信赖大厂维护吧，这跟Lua更新方案xLua类似，腾讯专人维护，后来居上的Lua热更方案，我用了一下ILRuntime，用一个demo尝试了一下，感觉还是蛮方便的，所以GFFrameWork就采用这种方案。关于AB更新和资源下载，我之前有写过一篇<a href="https://blog.csdn.net/dingxiaowei2013/article/details/77814966" target="_blank" rel="noopener">资源更新</a>也可以先看一下。</p>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="/2019/02/05/1.png" alt=""><br>下方会有资源下载进度，这也是游戏首页下载资源的常用方式，当然也可以显示下载百分比。正式上线的游戏一般还会提示要下载多少M的文件，提醒玩家尽量选择Wifi环境下下载。</p>
+        <hr>
+<p>title: 【GFFrameWork】代码热更及资源下载<br>copyright: true<br>toc: true<br>date: 2019-2-6 22:02:34<br>tags: [GFFrameWork,Unity,资源更新,ILRuntime,C#热更]<br>categories:<br>password:<br>description: 【GFFrameWork】C#热更及资源下载。</p>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>现在比较主流的逻辑更新是Lua方式，最常用的ToLua、SLua，XLua等等，但笔者是不太喜欢Lua开发，相比较直接写C#，lua的效率要低得多，这里GFFrameWork选择的是C#热更方案<a href="https://github.com/Ourpalm/ILRuntime" target="_blank" rel="noopener">ILRuntime</a>，这个方案由掌趣公司蓝大大维护，据我了解目前用这方案开发的项目还是不少的，ET框架也是采用这种方案，ILRuntime的前身其实是李总开发的L#方案，由于在大概15年左右，逻辑热更方案大战中L#方案没有sLua、uLua宣传的好，所以用的人就少了，然后李总就不太维护了，后面就有掌趣的蓝大接手维护，直到现在18年左右用的人还算不少，可能大家都比较信赖大厂维护吧，这跟Lua更新方案xLua类似，腾讯专人维护，后来居上的Lua热更方案，我用了一下ILRuntime，用一个demo尝试了一下，感觉还是蛮方便的，所以GFFrameWork就采用这种方案。关于AB更新和资源下载，我之前有写过一篇<a href="https://blog.csdn.net/dingxiaowei2013/article/details/77814966" target="_blank" rel="noopener">资源更新</a>也可以先看一下。</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="/2019/02/12/1.png" alt=""><br>下方会有资源下载进度，这也是游戏首页下载资源的常用方式，当然也可以显示下载百分比。正式上线的游戏一般还会提示要下载多少M的文件，提醒玩家尽量选择Wifi环境下下载。</p>
         
-          <a class="article-more-a" href="/2019/02/05/#more">more >></a>
+          <a class="article-more-a" href="/2019/02/12/#more">more >></a>
         
       
 
@@ -240,38 +217,11 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">资源更新</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ILRuntime</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">C#热更</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/05/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/02/12/">展开全文 >></a>
         </p>
       
 
@@ -304,37 +254,14 @@ var _hmt = _hmt || [];
     <article id="post-【GFFrameWork】管理器和游戏启动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/05/">【GFFrameWork】管理器和框架启动</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/05/" class="archive-article-date">
-  	<time datetime="2019-02-05T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-05</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>游戏开发中，我们会创建各种各样的管理器，可以说每一个模块我们就得创建一个管理器，例如ResourceManager、UIManager、DataManager、LogManager等等，作者之前项目是各种Manager继承字MonoBehaviour，然后挂在Hierarchy上,这样有一个弊端，我们每添加或者删除一个manager就要保存一次场景，做Unity开发的都知道git或者svn协同开发，唯独scene是不好合并的，所以如果涉及到频繁修改场景是非常不好的设计，其次是场景树中一堆Manager的节点，感觉不太雅观。</p>
+        <hr>
+<p>title: 【GFFrameWork】管理器和框架启动<br>copyright: true<br>toc: true<br>date: 2019-2-5 22:02:34<br>tags: [GFFrameWork,Unity,管理器和框架启动]<br>categories:<br>password:<br>description: GFFrameWork管理器和框架启动。</p>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>游戏开发中，我们会创建各种各样的管理器，可以说每一个模块我们就得创建一个管理器，例如ResourceManager、UIManager、DataManager、LogManager等等，作者之前项目是各种Manager继承字MonoBehaviour，然后挂在Hierarchy上,这样有一个弊端，我们每添加或者删除一个manager就要保存一次场景，做Unity开发的都知道git或者svn协同开发，唯独scene是不好合并的，所以如果涉及到频繁修改场景是非常不好的设计，其次是场景树中一堆Manager的节点，感觉不太雅观。</p>
         
-          <a class="article-more-a" href="/2019/02/05/#more">more >></a>
+          <a class="article-more-a" href="/2019/02/11/#more">more >></a>
         
       
 
@@ -343,30 +270,11 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">管理器和框架启动</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/05/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/02/11/">展开全文 >></a>
         </p>
       
 
@@ -1312,6 +1220,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
@@ -1325,10 +1237,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1356,10 +1264,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
@@ -1376,7 +1280,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1388,6 +1292,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Shader</a>
               </li>
              
@@ -1396,27 +1308,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ILRuntime</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1432,18 +1332,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
               </li>
              
@@ -1456,6 +1344,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
@@ -1464,15 +1356,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">美文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
