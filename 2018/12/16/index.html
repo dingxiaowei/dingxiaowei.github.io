@@ -6,22 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://dingxiaowei.cn">
-  <title>Unity游戏持久化存储模块 | Aladdin的博客</title>
+  <title>Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Unity游戏框架数据持久化存储方案">
-<meta name="keywords" content="持久化存储,PlayerPrefs替代方案,Unity数据存储">
+  <meta name="description" content="title: 【GFFrameWork】游戏Log模块copyright: truetop: 0toc: truedate: 2019-1-12 21:14:30tags: [GFFrameWork,Unity,Log]categories:password:description: Unity游戏框架Log模块  前言为了让项目功能模块化，支持可复用性和可扩展性的原则，将跟游戏关联不大的功能模">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unity游戏持久化存储模块">
+<meta property="og:title" content="Aladdin的博客">
 <meta property="og:url" content="http://dingxiaowei.cn/2018/12/16/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
-<meta property="og:description" content="Unity游戏框架数据持久化存储方案">
+<meta property="og:description" content="title: 【GFFrameWork】游戏Log模块copyright: truetop: 0toc: truedate: 2019-1-12 21:14:30tags: [GFFrameWork,Unity,Log]categories:password:description: Unity游戏框架Log模块  前言为了让项目功能模块化，支持可复用性和可扩展性的原则，将跟游戏关联不大的功能模">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/12/16/5.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/12/16/1.png">
-<meta property="og:updated_time" content="2018-12-16T13:57:23.002Z">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/12/16/2.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/12/16/3.png">
+<meta property="og:updated_time" content="2019-02-12T02:52:13.697Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Unity游戏持久化存储模块">
-<meta name="twitter:description" content="Unity游戏框架数据持久化存储方案">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2018/12/16/1.png">
+<meta name="twitter:title" content="Aladdin的博客">
+<meta name="twitter:description" content="title: 【GFFrameWork】游戏Log模块copyright: truetop: 0toc: truedate: 2019-1-12 21:14:30tags: [GFFrameWork,Unity,Log]categories:password:description: Unity游戏框架Log模块  前言为了让项目功能模块化，支持可复用性和可扩展性的原则，将跟游戏关联不大的功能模">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2018/12/16/5.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -199,47 +201,299 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Unity游戏持久化存储模块" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-【GFFrameWork】游戏Log模块" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Unity游戏持久化存储模块
-    </h1>
-  
-
-        
-        <a href="/2018/12/16/" class="archive-article-date">
-  	<time datetime="2018-12-16T13:24:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-16</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Unity开发数据本地保存也是重要的一个基础功能，单机游戏肯定要将数据存储在本地，网络游戏可以以服务器存储为主，但也有的数据需要存在本地，例如存储玩家账号，Unity也为我们提供了一个数据持久化存储方案<a href="https://docs.unity3d.com/ScriptReference/PlayerPrefs.html" target="_blank" rel="noopener">PlayerPrefas</a>,当然也能满足我们基本存账号的需求，但他的不足也很明显，就是Editor上存储在注册表上，会污染我们本地的注册表，其次就是存储的数据类型有限，只能存一些很基本的数据类型，后者我还可以忍，但前者我总感觉用他不爽，所以就相出一个替代方案，自己写文件保存到本地，一开始想的是如何用一个文件去存储那么多Key Value，而且要保证读写的高效，我首先想到的是sqllite数据库，但还要引入外部插件感觉麻烦，如果用txt存可以确保数据的读写是能够存的，但又不太好确保读写的高效性，看到网上有EasySave插件实现了我想要的功能，我就看了下他的实现，给了我启发，于是我就借鉴他的思路自己去实现了一个数据持久化存储方案，这样就不要用Unity内置的PlayerPrefs，但我又纳闷为啥Unity那么多大牛做引擎开发的，怎么不借鉴EasySave的实现方式去改造PlayerPrefs。</p>
-<a id="more"></a>
-<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>我们知道Unity有一个内置的可读写的文件存储路径是Application.persidentDataPath，我们可以将玩家存储的一个数据就保存成一个二进制文件，例如保存一个int类型12的数据，它对应的数据名叫“myint”，那么我们在这个路径创建一个名为myint的二进制文件，里面内存存储为12，但我们读的时候如何知道他是一个int值呢，这也是PlayerPrefs存储的值都是string的原因，他没有处理数据类型，全都当做string去存储，让开发者自己去强制转换成他想要的数据类型，但我们这里可以提供一个方案，就是再创建一个二进制文件，文件名就叫myint.int32，文件后缀是数据类型，这样我们保存值的时候就生成数据类型文件，获取值的时候去读取数据类型文件的后缀然后将值强转成对应的数值类型给开发者。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line">using GF.Debug;</span><br><span class="line">using System;</span><br><span class="line">using System.IO;</span><br><span class="line">using System.Runtime.Serialization.Formatters.Binary;</span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">namespace GF</span><br><span class="line">&#123;</span><br><span class="line">    /// &lt;summary&gt;</span><br><span class="line">    /// 数据存储</span><br><span class="line">    /// &lt;/summary&gt;</span><br><span class="line">    public class DataSave</span><br><span class="line">    &#123;</span><br><span class="line">        public static string DataExt(string dataName)</span><br><span class="line">        &#123;</span><br><span class="line">            string filePathData = string.Format(&quot;/Extensions/&#123;0&#125;.dat&quot;, dataName);</span><br><span class="line">            string fileExt = &quot;&quot;;</span><br><span class="line">            if (File.Exists(Application.persistentDataPath + filePathData))</span><br><span class="line">            &#123;</span><br><span class="line">                BinaryFormatter bf = new BinaryFormatter();</span><br><span class="line">                FileStream loadData = File.Open(Application.persistentDataPath + filePathData, FileMode.Open);</span><br><span class="line">                fileExt = (string)bf.Deserialize(loadData);</span><br><span class="line">                loadData.Close();</span><br><span class="line">            &#125;</span><br><span class="line">            return fileExt;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 保存数据</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;typeparam name=&quot;T&quot;&gt;数据类型&lt;/typeparam&gt;</span><br><span class="line">        /// &lt;param name=&quot;fileName&quot;&gt;数据存储Key&lt;/param&gt;</span><br><span class="line">        /// &lt;param name=&quot;data&quot;&gt;数据源&lt;/param&gt;</span><br><span class="line">        public static void Save&lt;T&gt;(string dataName, T data)</span><br><span class="line">        &#123;</span><br><span class="line">            Type dataType = data.GetType();</span><br><span class="line">            var extensionPath = string.Format(&quot;&#123;0&#125;/Extensions&quot;, Application.persistentDataPath);</span><br><span class="line">            var dataTypePath = string.Format(&quot;&#123;0&#125;/DataType&quot;, Application.persistentDataPath);</span><br><span class="line">            if (!Directory.Exists(extensionPath))</span><br><span class="line">                Directory.CreateDirectory(extensionPath);</span><br><span class="line">            if (!Directory.Exists(dataTypePath))</span><br><span class="line">                Directory.CreateDirectory(dataTypePath);</span><br><span class="line">            BinaryFormatter formatter = new BinaryFormatter();</span><br><span class="line">            string filePathData = &quot;/Extensions/&quot; + dataName + &quot;.dat&quot;;</span><br><span class="line">            FileStream saveStreamData = File.Create(Application.persistentDataPath + filePathData);</span><br><span class="line">            string dat = dataType.Name;</span><br><span class="line">            if (dat.Contains(&quot;`&quot;)) dat = dat.Split(&apos;`&apos;)[0];</span><br><span class="line">            if (dat.Contains(&quot;[]&quot;)) dat = &quot;Array&quot;;</span><br><span class="line">            formatter.Serialize(saveStreamData, dat);</span><br><span class="line">            saveStreamData.Close();</span><br><span class="line"></span><br><span class="line">            BinaryFormatter bf = new BinaryFormatter();</span><br><span class="line">            string filePath = string.Format(&quot;/DataType/&#123;0&#125;.&#123;1&#125;&quot;, dataName, dat);</span><br><span class="line">            FileStream saveStream = File.Create(Application.persistentDataPath + filePath);</span><br><span class="line">            bf.Serialize(saveStream, data);</span><br><span class="line">            saveStream.Close();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static T Load&lt;T&gt;(string dataName)</span><br><span class="line">        &#123;</span><br><span class="line">            T result = default(T);</span><br><span class="line">            string filePathData = string.Format(&quot;/Extensions/&#123;0&#125;.dat&quot;, dataName);</span><br><span class="line">            string fileExt = DataExt(dataName);</span><br><span class="line">            if (string.IsNullOrEmpty(fileExt))</span><br><span class="line">                return result;</span><br><span class="line"></span><br><span class="line">            string filePath = string.Format(&quot;/DataType/&#123;0&#125;.&#123;1&#125;&quot;, dataName, fileExt);</span><br><span class="line">            if (File.Exists(Application.persistentDataPath + filePath))</span><br><span class="line">            &#123;</span><br><span class="line">                BinaryFormatter bf = new BinaryFormatter();</span><br><span class="line">                FileStream fs = File.Open(Application.persistentDataPath + filePath, FileMode.Open);</span><br><span class="line">                result = (T)bf.Deserialize(fs);</span><br><span class="line">                fs.Close();</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                Debugger.LogError(&quot;Doesn&apos;t Exit:&quot; + filePath);</span><br><span class="line">            &#125;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 检查数据是否存在</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;param name=&quot;dataName&quot;&gt;&lt;/param&gt;</span><br><span class="line">        /// &lt;returns&gt;&lt;/returns&gt;</span><br><span class="line">        public static bool Exit(string dataName)</span><br><span class="line">        &#123;</span><br><span class="line">            string filePathData = string.Format(&quot;&#123;0&#125;/Extensions/&#123;1&#125;.dat&quot;, Application.persistentDataPath, dataName);</span><br><span class="line">            if (File.Exists(filePathData))</span><br><span class="line">                return true;</span><br><span class="line">            else</span><br><span class="line">                return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 删除某个数据</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;param name=&quot;dataName&quot;&gt;数据名&lt;/param&gt;</span><br><span class="line">        public static void Delete(string dataName)</span><br><span class="line">        &#123;</span><br><span class="line">            string filePathData = string.Format(&quot;&#123;0&#125;/Extensions/&#123;1&#125;.dat&quot;, Application.persistentDataPath, dataName);</span><br><span class="line">            if (File.Exists(filePathData))</span><br><span class="line">            &#123;</span><br><span class="line">                File.Delete(filePathData);</span><br><span class="line">            &#125;</span><br><span class="line">            string dataExt = DataExt(dataName);</span><br><span class="line">            if (!string.IsNullOrEmpty(dataExt))</span><br><span class="line">            &#123;</span><br><span class="line">                string filePath = string.Format(&quot;&#123;0&#125;/DataType/&#123;1&#125;.&#123;2&#125;&quot;, Application.persistentDataPath, dataName, dataExt);</span><br><span class="line">                if (File.Exists(filePath))</span><br><span class="line">                &#123;</span><br><span class="line">                    File.Delete(filePath);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 删除所有数据</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        public static void DeleteAllData()</span><br><span class="line">        &#123;</span><br><span class="line">            var path = string.Format(&quot;&#123;0&#125;/Extensions&quot;, Application.persistentDataPath);</span><br><span class="line">            if (Directory.Exists(path))</span><br><span class="line">            &#123;</span><br><span class="line">                foreach (string file in Directory.GetFiles(path))</span><br><span class="line">                &#123;</span><br><span class="line">                    File.Delete(file);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            path = string.Format(&quot;&#123;0&#125;/DataType&quot;, Application.persistentDataPath);</span><br><span class="line">            if (Directory.Exists(path))</span><br><span class="line">            &#123;</span><br><span class="line">                foreach (var file in Directory.GetFiles(path))</span><br><span class="line">                &#123;</span><br><span class="line">                    File.Decrypt(file);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p><img src="/2018/12/16/1.png" alt=""><br>基本上可以满足需求，能够存储绝大多数数据类型，包括视频，音频也是可以的哦！</p>
-<h2 id="可扩展"><a href="#可扩展" class="headerlink" title="可扩展"></a>可扩展</h2><ul>
-<li>可以添加数据加密</li>
-<li>可以继续扩展往EasySave功能上靠</li>
+        <hr>
+<p>title: 【GFFrameWork】游戏Log模块<br>copyright: true<br>top: 0<br>toc: true<br>date: 2019-1-12 21:14:30<br>tags: [GFFrameWork,Unity,Log]<br>categories:<br>password:<br>description: Unity游戏框架Log模块</p>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>为了让项目功能模块化，支持可复用性和可扩展性的原则，将跟游戏关联不大的功能模块单独拎出来添加到一个独立库工程。Log是游戏框架中比较重要和基础的一个功能模块。并且Log是调试的重要手段之一，游戏Debug版本在UI上显示Log也会显得尤为重要。</p>
+<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><p><img src="/2018/12/16/5.png" alt=""></p>
+<h2 id="功能说明"><a href="#功能说明" class="headerlink" title="功能说明"></a>功能说明</h2><p>目前Log模块支持的功能：</p>
+<ul>
+<li>支持UI可视化</li>
+<li>支持是否显示日志</li>
+<li>支持是否显示日志时间</li>
+<li>支持显示不同级别(一般/警告/错误)的日志</li>
+<li>是否将Log显示到本地持久化存储(持久化目录见 Debugger.LogFileDir)</li>
+<li>支持是否打印堆栈日志</li>
+<li>支持多参数的Log显示</li>
 </ul>
+<a id="more"></a>
+<h2 id="操作说明"><a href="#操作说明" class="headerlink" title="操作说明"></a>操作说明</h2><p><img src="/2018/12/16/1.png" alt=""></p>
+<ul>
+<li>可以在代码中控制Log显示(见前面三行)，也可以在库工程变量控制。</li>
+<li>可以显示三个等级的日志</li>
+</ul>
+<h2 id="如何修改库工程"><a href="#如何修改库工程" class="headerlink" title="如何修改库工程"></a>如何修改库工程</h2><h4 id="工程目录路径"><a href="#工程目录路径" class="headerlink" title="工程目录路径"></a>工程目录路径</h4><p>demo\app\fcg_client\fcg_client\Projects</p>
+<h4 id="工程说明"><a href="#工程说明" class="headerlink" title="工程说明"></a>工程说明</h4><ul>
+<li>UGUI 是UGUI的扩展工程库</li>
+<li>GFEditor 是游戏通用编辑工具扩展库</li>
+<li>GF 是游戏通用模块扩展库</li>
+<li>References 是工程依赖库以及导出库</li>
+</ul>
+<h4 id="修改操作步骤"><a href="#修改操作步骤" class="headerlink" title="修改操作步骤"></a>修改操作步骤</h4><ul>
+<li>打开对应工程编辑代码</li>
+<li>编译工程</li>
+<li>打开Unity菜单栏 Tools/CopyDll/CopyXXX</li>
+</ul>
+<p><img src="/2018/12/16/2.png" alt=""><br>修改对应的工程之后运行对应的拷贝功能<br><img src="/2018/12/16/3.png" alt=""><br>弹出这个弹框说明拷贝成功，然后关闭弹框，等待Unity菊花转完，更新成功！</p>
+<h2 id="可继续扩展功能"><a href="#可继续扩展功能" class="headerlink" title="可继续扩展功能"></a>可继续扩展功能</h2><ul>
+<li>菜单控制功能是否开启</li>
+<li>可以显示Log的文件名和行号</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>using System;
+using System.IO;
+using UnityEngine;
 
+namespace GF.Debug
+{
+    /// &lt;summary&gt;
+    /// 系统日志模块
+    /// &lt;/summary&gt;
+    public class Debugger
+    {
+        /// &lt;summary&gt;
+        /// 是否启动日志
+        /// &lt;/summary&gt;
+        public static bool EnableLog = true;
+        /// &lt;summary&gt;
+        /// 是否显示Log时间
+        /// &lt;/summary&gt;
+        public static bool EnableTime = true;
+        /// &lt;summary&gt;
+        /// 是否将日志保存到本地
+        /// &lt;/summary&gt;
+        public static bool EnableSave = false;
+        /// &lt;summary&gt;
+        /// 是否允许堆栈
+        /// &lt;/summary&gt;
+        public static bool EnableStack = false;
+        public static bool UseUnityEngine = true;
+        public static string LogFileDir = Application.persistentDataPath + &quot;/DebuggerLog/&quot;;
+        public static string LogFileName = &quot;&quot;;
+        /// &lt;summary&gt;
+        /// 开头标记，用于对Unity默认log做区分
+        /// &lt;/summary&gt;
+        public static string Prefix = &quot;&lt;color=#FFFF00&gt;&gt;&lt;/color&gt; &quot;;
+        public static StreamWriter LogFileWriter = null;
+
+
+        private static string GetLogText(string tag, string message)
+        {
+            string str = &quot;&quot;;
+            if (EnableTime)
+            {
+                str = DateTime.Now.ToString(&quot;HH:mm:ss.fff&quot;) + &quot; &quot;;
+            }
+            return (str + tag + &quot;::&quot; + message);
+        }
+
+        private static string GetLogTime()
+        {
+            string str = &quot;&quot;;
+            if (EnableTime)
+            {
+                str = DateTime.Now.ToString(&quot;HH:mm:ss.fff&quot;) + &quot; &quot;;
+            }
+            return str;
+        }
+
+        public static void Log(object message)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            string str = GetLogTime() + message;
+            UnityEngine.Debug.Log(Prefix + str, null);
+            LogToFile(&quot;[I]&quot; + str, false);
+        }
+
+        public static void Log(object message, UnityEngine.Object context)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            string str = GetLogTime() + message;
+            UnityEngine.Debug.Log(Prefix + str, context);
+            LogToFile(&quot;[I]&quot; + str, false);
+        }
+
+        public static void Log(string tag, string message)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            message = GetLogText(tag, message);
+            UnityEngine.Debug.Log(Prefix + message, null);
+            LogToFile(&quot;[I]&quot; + message, false);
+        }
+
+        public static void Log(string tag, string format, params object[] args)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            string logText = GetLogText(tag, string.Format(format, args));
+            UnityEngine.Debug.Log(Prefix + logText, null);
+            LogToFile(&quot;[I]&quot; + logText, false);
+        }
+
+        public static void LogError(object message)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            string str = GetLogTime() + message;
+            UnityEngine.Debug.LogError(Prefix + str, null);
+            LogToFile(&quot;[E]&quot; + str, true);
+        }
+
+        public static void LogError(object message, UnityEngine.Object context)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            string str = GetLogTime() + message;
+            UnityEngine.Debug.LogError(Prefix + str, context);
+            LogToFile(&quot;[E]&quot; + str, true);
+        }
+
+        public static void LogError(string tag, string message)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            message = GetLogText(tag, message);
+            UnityEngine.Debug.LogError(Prefix + message, null);
+            LogToFile(&quot;[E]&quot; + message, true);
+        }
+
+        public static void LogError(string tag, string format, params object[] args)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            string logText = GetLogText(tag, string.Format(format, args));
+            UnityEngine.Debug.LogError(Prefix + logText, null);
+            LogToFile(&quot;[E]&quot; + logText, true);
+        }
+
+        /// &lt;summary&gt;
+        /// 将日志写入到文件中
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;message&quot;&gt;&lt;/param&gt;
+        /// &lt;param name=&quot;EnableStack&quot;&gt;&lt;/param&gt;
+        private static void LogToFile(string message, bool EnableStack = false)
+        {
+            if (!Debugger.EnableSave)
+                return;
+
+            if (LogFileWriter == null)
+            {
+                LogFileName = DateTime.Now.GetDateTimeFormats(&apos;s&apos;)[0].ToString();
+                LogFileName = LogFileName.Replace(&quot;-&quot;, &quot;_&quot;);
+                LogFileName = LogFileName.Replace(&quot;:&quot;, &quot;_&quot;);
+                LogFileName = LogFileName.Replace(&quot; &quot;, &quot;&quot;);
+                LogFileName = LogFileName + &quot;.log&quot;;
+                if (string.IsNullOrEmpty(LogFileDir))
+                {
+                    try
+                    {
+                        if (UseUnityEngine)
+                        {
+                            LogFileDir = Application.persistentDataPath + &quot;/DebuggerLog/&quot;;
+                        }
+                        else
+                        {
+                            LogFileDir = AppDomain.CurrentDomain.BaseDirectory + &quot;/DebuggerLog/&quot;;
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        UnityEngine.Debug.Log(Prefix + &quot;获取 Application.persistentDataPath 报错！&quot; + exception.Message, null);
+                        return;
+                    }
+                }
+                string path = LogFileDir + LogFileName;
+                try
+                {
+                    if (!Directory.Exists(LogFileDir))
+                    {
+                        Directory.CreateDirectory(LogFileDir);
+                    }
+                    LogFileWriter = File.AppendText(path);
+                    LogFileWriter.AutoFlush = true;
+                }
+                catch (Exception exception2)
+                {
+                    LogFileWriter = null;
+                    UnityEngine.Debug.Log(&quot;LogToCache() &quot; + exception2.Message + exception2.StackTrace, null);
+                    return;
+                }
+            }
+            if (LogFileWriter != null)
+            {
+                try
+                {
+                    LogFileWriter.WriteLine(message);
+                    if ((EnableStack || Debugger.EnableStack) &amp;&amp; UseUnityEngine)
+                    {
+                        LogFileWriter.WriteLine(StackTraceUtility.ExtractStackTrace());
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        public static void LogWarning(object message)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            string str = GetLogTime() + message;
+            UnityEngine.Debug.LogWarning(Prefix + str, null);
+            LogToFile(&quot;[W]&quot; + str, false);
+        }
+
+        public static void LogWarning(object message, UnityEngine.Object context)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            string str = GetLogTime() + message;
+            UnityEngine.Debug.LogWarning(Prefix + str, context);
+            LogToFile(&quot;[W]&quot; + str, false);
+        }
+
+        public static void LogWarning(string tag, string message)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            message = GetLogText(tag, message);
+            UnityEngine.Debug.LogWarning(Prefix + message, null);
+            LogToFile(&quot;[W]&quot; + message, false);
+        }
+
+        public static void LogWarning(string tag, string format, params object[] args)
+        {
+            if (!Debugger.EnableLog)
+                return;
+
+            string logText = GetLogText(tag, string.Format(format, args));
+            UnityEngine.Debug.LogWarning(Prefix + logText, null);
+            LogToFile(&quot;[W]&quot; + logText, false);
+        }
+    }
+}
+
+</code></pre>
       
 
       
@@ -278,25 +532,6 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">持久化存储</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">PlayerPrefs替代方案</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Unity数据存储</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -361,9 +596,18 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
+    <a href="/2018/12/31/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ”我的2018&#34;-蜕变
+        
+      </div>
+    </a>
   
-    <a href="/2018/12/12/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Unity游戏Log模块说明</div>
+  
+    <a href="/2018/12/08/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何使用adb logcat查看模拟器异常</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -383,19 +627,6 @@ var _hmt = _hmt || [];
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现思路"><span class="toc-number">2.</span> <span class="toc-text">实现思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用法"><span class="toc-number">4.</span> <span class="toc-text">用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可扩展"><span class="toc-number">5.</span> <span class="toc-text">可扩展</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
@@ -406,7 +637,7 @@ var _hmt = _hmt || [];
   
 
   
-  <div id="SOHUCS" sid="Unity游戏持久化存储模块" ></div> 
+  <div id="SOHUCS" sid="【GFFrameWork】游戏Log模块" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -429,7 +660,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 丁小未
+    		&copy; 2019 丁小未
     	</div>
     </div>
 </footer>
@@ -508,6 +739,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
@@ -516,31 +755,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,35 +771,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -604,7 +811,39 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -612,7 +851,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终小结</a>
+                <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ILRuntime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,15 +883,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -644,15 +891,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -668,7 +907,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -677,6 +920,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">

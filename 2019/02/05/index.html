@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2019/02/05/6.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2019/02/05/7.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2019/02/05/8.png">
-<meta property="og:updated_time" content="2019-02-11T10:07:35.711Z">
+<meta property="og:updated_time" content="2019-02-12T02:52:13.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【GFFrameWork】管理器和框架启动">
 <meta name="twitter:description" content="GFFrameWork管理器和框架启动。">
@@ -254,10 +254,14 @@ var _hmt = _hmt || [];
 <p>以上代码就会获的关于String类的所有信息。</p>
 <h2 id="管理器"><a href="#管理器" class="headerlink" title="管理器"></a>管理器</h2><h5 id="管理器基类"><a href="#管理器基类" class="headerlink" title="管理器基类"></a>管理器基类</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">/// &lt;summary&gt;</span><br><span class="line">/// Manager基类</span><br><span class="line">/// &lt;/summary&gt;</span><br><span class="line">/// &lt;typeparam name=&quot;T&quot;&gt;Manager类型&lt;/typeparam&gt;</span><br><span class="line">/// &lt;typeparam name=&quot;V&quot;&gt;被管理者所用的类标签&lt;/typeparam&gt;</span><br><span class="line">public class ManagerBase&lt;T,V&gt;:IMgr  where T: IMgr, new()</span><br><span class="line">                                    where V: ManagerAtrribute</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    static private T i;</span><br><span class="line"></span><br><span class="line">    static public T Inst</span><br><span class="line">    &#123;</span><br><span class="line">        get</span><br><span class="line">        &#123;</span><br><span class="line">            if (i == null)</span><br><span class="line">            &#123;</span><br><span class="line">                i = new T();</span><br><span class="line">            &#125;</span><br><span class="line">            return i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected ManagerBase ()</span><br><span class="line">    &#123;</span><br><span class="line">        this.ClassDataMap = new Dictionary&lt;string, ClassData&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected Dictionary&lt;string, ClassData&gt; ClassDataMap</span><br><span class="line">    &#123;</span><br><span class="line">        get;</span><br><span class="line">        set;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    virtual  public void CheckType(Type type)</span><br><span class="line">    &#123;</span><br><span class="line">        var attrs = type.GetCustomAttributes(typeof(V), false);</span><br><span class="line">        if (attrs.Length &gt; 0)</span><br><span class="line">        &#123;</span><br><span class="line">            var attr = attrs[0];</span><br><span class="line">            if (attr is V)</span><br><span class="line">            &#123;</span><br><span class="line">                var _attr = (V)attr;</span><br><span class="line">                SaveAttribute(_attr.Tag, new ClassData() &#123; Attribute = _attr, Type = type &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    virtual public void Init()</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    virtual public void Start()</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    virtual public void Update()</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ClassData GetCalssData(string typeName)</span><br><span class="line">    &#123;</span><br><span class="line">        ClassData classData = null;</span><br><span class="line">        this.ClassDataMap.TryGetValue(typeName, out classData);</span><br><span class="line">        return classData;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void SaveAttribute(string name, ClassData data)</span><br><span class="line">    &#123;</span><br><span class="line">        this.ClassDataMap[name] = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public T2 CreateInstance&lt;T2&gt;(string typeName , params object[] args) where T2 : class</span><br><span class="line">    &#123;</span><br><span class="line">        var type = GetCalssData(typeName).Type;</span><br><span class="line">        if (type != null)</span><br><span class="line">        &#123;</span><br><span class="line">            if (args.Length == 0)</span><br><span class="line">            &#123;</span><br><span class="line">                return Activator.CreateInstance(type) as T2;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                return Activator.CreateInstance(type,args) as T2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>主要流程：<br>1.框架启动会拿到所有的程序集Assembly里面的所有Type<br>2.检查所有管理器找到继承自ManagerBase的管理器<br>3.实例化继承自ManagerBase的管理器<br>4.对应的管理器会根据V的类型标签中的Type去自动拿到Type信息<br>5.对应的管理器自己实现自己的业务逻辑<br>这样自动注册流程就完成了注册</p>
-<h5 id="UIManager-amp-SceneViewManager"><a href="#UIManager-amp-SceneViewManager" class="headerlink" title="UIManager &amp; SceneViewManager"></a>UIManager &amp; SceneViewManager</h5><p><img src="/2019/02/05/2.png" alt=""><br><img src="/2019/02/05/3.png" alt=""></p>
-<h5 id="UIAttribute-amp-ScreenViewAttribute-amp-ManagerAttribute"><a href="#UIAttribute-amp-ScreenViewAttribute-amp-ManagerAttribute" class="headerlink" title="UIAttribute &amp; ScreenViewAttribute &amp; ManagerAttribute"></a>UIAttribute &amp; ScreenViewAttribute &amp; ManagerAttribute</h5><p><img src="/2019/02/05/4.png" alt=""><br><img src="/2019/02/05/5.png" alt=""><br><img src="/2019/02/05/6.png" alt=""></p>
+<h5 id="UIManager-amp-SceneViewManager"><a href="#UIManager-amp-SceneViewManager" class="headerlink" title="UIManager &amp; SceneViewManager"></a>UIManager &amp; SceneViewManager</h5><p><img src="/2019/02/05/2.png" alt=""></p>
+<p><img src="/2019/02/05/3.png" alt=""></p>
+<h5 id="UIAttribute-amp-ScreenViewAttribute-amp-ManagerAttribute"><a href="#UIAttribute-amp-ScreenViewAttribute-amp-ManagerAttribute" class="headerlink" title="UIAttribute &amp; ScreenViewAttribute &amp; ManagerAttribute"></a>UIAttribute &amp; ScreenViewAttribute &amp; ManagerAttribute</h5><p><img src="/2019/02/05/4.png" alt=""></p>
+<p><img src="/2019/02/05/5.png" alt=""></p>
+<p><img src="/2019/02/05/6.png" alt=""></p>
 <p>这样定义特性标签之后，我们UI资源就可以根据设置标签来指定类型和位置，例如GameWindow界面<br><img src="/2019/02/05/7.png" alt=""><br>就通过UI标签来指定类型和指定资源路径<br><img src="/2019/02/05/8.png" alt=""></p>
 <h2 id="GFFramework地址"><a href="#GFFramework地址" class="headerlink" title="GFFramework地址"></a>GFFramework地址</h2><p><a href="https://github.com/dingxiaowei/GFFrameWork" target="_blank" rel="noopener">https://github.com/dingxiaowei/GFFrameWork</a></p>
+<h2 id="更多教程"><a href="#更多教程" class="headerlink" title="更多教程"></a>更多教程</h2><p><a href="http://dingxiaowei.cn/">http://dingxiaowei.cn/</a></p>
 
       
 
@@ -380,6 +384,15 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
+    <a href="/2019/02/05/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          【GFFrameWork】代码热更及资源下载
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/01/15/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">【GFFrameWork】多功能链式计时器</div>
@@ -409,7 +422,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#框架启动"><span class="toc-number">2.</span> <span class="toc-text">框架启动</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#优化加载方案"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">优化加载方案</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#定义IGameStart接口"><span class="toc-number">2.0.0.1.1.</span> <span class="toc-text">定义IGameStart接口</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#继承IGameStart接口的类"><span class="toc-number">2.0.0.1.2.</span> <span class="toc-text">继承IGameStart接口的类</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#如何加载这些继承自IGameStart接口的类呢？"><span class="toc-number">2.0.0.1.3.</span> <span class="toc-text">如何加载这些继承自IGameStart接口的类呢？</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#特性"><span class="toc-number">2.0.0.1.4.</span> <span class="toc-text">特性</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS-JIT和反射"><span class="toc-number">3.</span> <span class="toc-text">iOS JIT和反射</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#反射的原理"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">反射的原理</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理器"><span class="toc-number">4.</span> <span class="toc-text">管理器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#管理器基类"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">管理器基类</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#UIManager-amp-SceneViewManager"><span class="toc-number">4.0.0.2.</span> <span class="toc-text">UIManager &amp; SceneViewManager</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#UIAttribute-amp-ScreenViewAttribute-amp-ManagerAttribute"><span class="toc-number">4.0.0.3.</span> <span class="toc-text">UIAttribute &amp; ScreenViewAttribute &amp; ManagerAttribute</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GFFramework地址"><span class="toc-number">5.</span> <span class="toc-text">GFFramework地址</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#框架启动"><span class="toc-number">2.</span> <span class="toc-text">框架启动</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#优化加载方案"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">优化加载方案</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#定义IGameStart接口"><span class="toc-number">2.0.0.1.1.</span> <span class="toc-text">定义IGameStart接口</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#继承IGameStart接口的类"><span class="toc-number">2.0.0.1.2.</span> <span class="toc-text">继承IGameStart接口的类</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#如何加载这些继承自IGameStart接口的类呢？"><span class="toc-number">2.0.0.1.3.</span> <span class="toc-text">如何加载这些继承自IGameStart接口的类呢？</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#特性"><span class="toc-number">2.0.0.1.4.</span> <span class="toc-text">特性</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS-JIT和反射"><span class="toc-number">3.</span> <span class="toc-text">iOS JIT和反射</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#反射的原理"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">反射的原理</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理器"><span class="toc-number">4.</span> <span class="toc-text">管理器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#管理器基类"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">管理器基类</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#UIManager-amp-SceneViewManager"><span class="toc-number">4.0.0.2.</span> <span class="toc-text">UIManager &amp; SceneViewManager</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#UIAttribute-amp-ScreenViewAttribute-amp-ManagerAttribute"><span class="toc-number">4.0.0.3.</span> <span class="toc-text">UIAttribute &amp; ScreenViewAttribute &amp; ManagerAttribute</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GFFramework地址"><span class="toc-number">5.</span> <span class="toc-text">GFFramework地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多教程"><span class="toc-number">6.</span> <span class="toc-text">更多教程</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -543,15 +556,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,11 +580,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -579,11 +608,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,35 +628,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,7 +648,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -647,15 +656,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ILRuntime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,7 +684,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,10 +705,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -704,6 +721,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
