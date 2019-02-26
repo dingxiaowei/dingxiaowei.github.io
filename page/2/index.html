@@ -197,6 +197,133 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-【Aladdin-Unity3D-Shader编程】之一-基本入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: 【Aladdin Unity3D Shader编程】之一 基本入门<br>date: 2017-11-18 09:41:46<br>tags: [Shader]<br>comments: true<br>categories: Shader<br>description: Shader入门系列第一篇，Shader和渲染基本介绍。</p>
+<hr>
+<h2 id="OpenGL、DirectX以及GLSL、HLSL、CG"><a href="#OpenGL、DirectX以及GLSL、HLSL、CG" class="headerlink" title="OpenGL、DirectX以及GLSL、HLSL、CG"></a>OpenGL、DirectX以及GLSL、HLSL、CG</h2><ul>
+<li>OpenGL和DirectX是图像应用编程接口，用于渲染二维或者三维图形。</li>
+<li>GLSL着色语言是用来在OpenGL中着色编程的语言，有点在于跨平台性，可以再Windows、Linux、Mac甚至移动平台上工作。</li>
+<li>HLSL是微软控制着色的编译，几乎只支持微软自己的产品，如Windows，XBox等，其他平台没有可编译HLSL的编译器。</li>
+<li>CG是有英伟达公司出的真正意义上的跨平台着色器语言。</li>
+</ul>
+<h2 id="GPU渲染管线概述"><a href="#GPU渲染管线概述" class="headerlink" title="GPU渲染管线概述"></a>GPU渲染管线概述</h2><h3 id="1-顶点着色器"><a href="#1-顶点着色器" class="headerlink" title="1.顶点着色器"></a>1.顶点着色器</h3><p>顶点着色器是流水线的第一个阶段，它的输入来自于CPU。顶点着色器的处理单位是顶点，也就是说输入进来的每个顶点都会调用一次顶点着色器。</p>
+<p>顶点着色器需要完成的工作主要有:坐标变换和逐顶点光照。当然，除了这两个主要任务外，顶点着色器还可以输出后续阶段所需的数据。<br>坐标变换，顾名思义，就是对顶点的坐标进行某种变换。例如我们可以通过改变顶点位置来模拟水面，布料等。</p>
+        
+          <a class="article-more-a" href="/2018/10/07/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/07/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-【Aladdin-Unity3D-Shader编程】之二-光照模型-一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: 【Aladdin Unity3D Shader编程】之二 光照模型(一)<br>date: 2017-11-16 09:42:32<br>tags: [Shader]<br>comments: true<br>categories: Shader<br>description: Shader入门系列第二篇，Shader光照模型介绍。</p>
+<hr>
+<h2 id="光照模型"><a href="#光照模型" class="headerlink" title="光照模型"></a>光照模型</h2><p>光照模型就是一个公式，使用这个公式来计算在某个点的光照效果。<br>在标准光照模型里面，我们把进入摄像机的光分为下面四个部分：</p>
+<ul>
+<li>自发光<br>  类似生活中的萤火虫等自己能够发光</li>
+<li>高光反射<br>  类似生活中的镜子，近似认为百分百反射出去</li>
+<li>漫反射<br>  类似生活中的光照射到墙壁上、桌子上的反光不会百分百反射出去，各个方向都会反射。</li>
+<li>环境光<br>  类似生活中的光照照射在某个物体上，物体漫反射然后反射到其他物体上这些过程的光是环境光。</li>
+</ul>
+<p>以上都是模拟生活中的光照效果，并不等同于实际生活中的光照计算，实际生活中的光照会更加复杂。</p>
+<h2 id="光照模型中关于漫反射的计算"><a href="#光照模型中关于漫反射的计算" class="headerlink" title="光照模型中关于漫反射的计算"></a>光照模型中关于漫反射的计算</h2><p>漫反射计算放在顶点函数里面就是逐顶点光照<br>Disffuse = 直射光颜色*max(0,cosθ)  (θ是法线跟光照的夹角)  如果夹角小于0的话就是背光面就直接取黑色<br>理论知识:</p>
+<ul>
+<li><p>向量点乘(结果值)<br>  a*b=|a||b|cosθ</p>
+</li>
+<li><p>向量叉乘(结果是向量)<br>  a*b=c  c的一个向量，值是|a||b|sinθ</p>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2018/10/07/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/07/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-【Aladdin-Unity3D-Shader编程】之六-模型实时阴影" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -507,13 +634,13 @@ var _hmt = _hmt || [];
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/">【Aladdin Unity3D Shader编程】之三 光照模型(二)</a>
+      <a class="article-title" href="/2017/11/17/">【Aladdin Unity3D Shader编程】之三 光照模型(二)</a>
     </h1>
   
 
         
-        <a href="/2017/11/18/" class="archive-article-date">
-  	<time datetime="2017-11-18T01:42:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
+        <a href="/2017/11/17/" class="archive-article-date">
+  	<time datetime="2017-11-17T01:42:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-17</time>
 </a>
         
 		
@@ -533,9 +660,9 @@ var _hmt = _hmt || [];
       
         <h2 id="使用Blinn-Phong光照模型"><a href="#使用Blinn-Phong光照模型" class="headerlink" title="使用Blinn-Phong光照模型"></a>使用Blinn-Phong光照模型</h2><p>Specular=直射光颜色*pow(max(cosθ,0),10) θ:是发现和x的夹角 x是平行光和视野方向的平分线</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;AladdinShader/09 Specular Fragment Blinn Phong Shader&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _Diffuse(&quot;Diffuse&quot;,Color)=(1,1,1,1) //添加自身的颜色</span><br><span class="line">        _Specular(&quot;Specular&quot;,Color)=(1,1,1,1)</span><br><span class="line">        _Gloss(&quot;Gloss&quot;,Range(8,200)) = 10</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader &#123;</span><br><span class="line">        Pass </span><br><span class="line">        &#123;</span><br><span class="line">            Tags&#123;&quot;LightMode&quot;=&quot;ForwardBase&quot;&#125;</span><br><span class="line"></span><br><span class="line">        CGPROGRAM</span><br><span class="line">#include &quot;Lighting.cginc&quot; //引用一些写好的程序块 会包含一些获取光照的信息  </span><br><span class="line">//_LightColor0 取得第一个直射光的颜色</span><br><span class="line">//_WorldSpaceLightPos0 </span><br><span class="line"></span><br><span class="line">#pragma vertex vert</span><br><span class="line">#pragma fragment frag </span><br><span class="line">    </span><br><span class="line">        fixed4 _Diffuse;</span><br><span class="line">        fixed4 _Specular;</span><br><span class="line">        half _Gloss;</span><br><span class="line"></span><br><span class="line">        struct a2v </span><br><span class="line">        &#123;</span><br><span class="line">            float4 vertex:POSITION;</span><br><span class="line">            float3 normal:NORMAL; //模型空间下法线</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        struct v2f</span><br><span class="line">        &#123;</span><br><span class="line">            float4 position:SV_POSITION;</span><br><span class="line">            float3 worldNormal:TEXCOORD0;//世界空间下的法线方向 </span><br><span class="line">            float3 worldVertext:TEXCOORD1;//时间空间下的顶点坐标</span><br><span class="line">        &#125;;</span><br><span class="line">        v2f vert(a2v v)</span><br><span class="line">        &#123;</span><br><span class="line">            v2f f;</span><br><span class="line">            f.position = mul(UNITY_MATRIX_MVP, v.vertex);</span><br><span class="line">            f.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);</span><br><span class="line">            f.worldVertext = mul(v.vertex , unity_WorldToObject).xyz;</span><br><span class="line">            return f;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        fixed4 frag(v2f f):SV_Target</span><br><span class="line">        &#123;</span><br><span class="line">            fixed3 adbient = UNITY_LIGHTMODEL_AMBIENT.rgb;</span><br><span class="line">            fixed3 normalDir = normalize(f.worldNormal);</span><br><span class="line">            fixed3 lightDir = normalize(_WorldSpaceLightPos0.xyz);//对于每个顶点来说 光的位置就是光的方向 因为是平行光</span><br><span class="line">            fixed3 diffuse = _LightColor0.rgb * max(dot(normalDir,lightDir), 0) * _Diffuse.rgb;//取得漫反射的颜色</span><br><span class="line">            </span><br><span class="line">            //反射光方向</span><br><span class="line">            //fixed3 reflectDir = normalize(reflect(-lightDir,normalDir));</span><br><span class="line">            //视野方向</span><br><span class="line">            //相机是在世界空间下              </span><br><span class="line">            fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - f.worldVertext);</span><br><span class="line"></span><br><span class="line">            //平分线</span><br><span class="line">            fixed3 halfDir = normalize(viewDir + lightDir);  //视野方向和光照方向的平分线</span><br><span class="line"></span><br><span class="line">            //高光反射</span><br><span class="line">            fixed3 specular = _LightColor0.rgb * pow(max(dot(normalDir,halfDir),0),_Gloss) * _Specular.rgb;</span><br><span class="line">            fixed3 tempColor = diffuse + adbient + specular;</span><br><span class="line">            return fixed4(tempColor, 1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    FallBack  &quot;VertexLit&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/2017/11/18/8.png" alt=""><br>会发现高光部分会显得更大了，这也是平时用的比较多的高光反射模型。</p>
+<p><img src="/2017/11/17/8.png" alt=""><br>会发现高光部分会显得更大了，这也是平时用的比较多的高光反射模型。</p>
         
-          <a class="article-more-a" href="/2017/11/18/#more">more >></a>
+          <a class="article-more-a" href="/2017/11/17/#more">more >></a>
         
       
 
@@ -574,7 +701,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/11/17/">展开全文 >></a>
         </p>
       
 
@@ -604,20 +731,20 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-【Aladdin-Unity3D-Shader编程】之二-光照模型-一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-【Aladdin-Unity3D-Shader编程】之二-光照模型-一/未命名" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/">【Aladdin Unity3D Shader编程】之二 光照模型(一)</a>
+      <a class="article-title" href="/2017/11/15/">【Aladdin Unity3D Shader编程】之二 光照模型(一)</a>
     </h1>
   
 
         
-        <a href="/2017/11/18/" class="archive-article-date">
-  	<time datetime="2017-11-18T01:42:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
+        <a href="/2017/11/15/" class="archive-article-date">
+  	<time datetime="2017-11-15T01:42:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
 </a>
         
 		
@@ -665,7 +792,7 @@ var _hmt = _hmt || [];
 <pre><code>a*b=c  c的一个向量，值是|a||b|sinθ
 </code></pre>
         
-          <a class="article-more-a" href="/2017/11/18/#more">more >></a>
+          <a class="article-more-a" href="/2017/11/15/#more">more >></a>
         
       
 
@@ -700,112 +827,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-【Aladdin-Unity3D-Shader编程】之一-基本入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/">【Aladdin Unity3D Shader编程】之一 基本入门</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/18/" class="archive-article-date">
-  	<time datetime="2017-11-18T01:41:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="OpenGL、DirectX以及GLSL、HLSL、CG"><a href="#OpenGL、DirectX以及GLSL、HLSL、CG" class="headerlink" title="OpenGL、DirectX以及GLSL、HLSL、CG"></a>OpenGL、DirectX以及GLSL、HLSL、CG</h2><ul>
-<li>OpenGL和DirectX是图像应用编程接口，用于渲染二维或者三维图形。</li>
-<li>GLSL着色语言是用来在OpenGL中着色编程的语言，有点在于跨平台性，可以再Windows、Linux、Mac甚至移动平台上工作。</li>
-<li>HLSL是微软控制着色的编译，几乎只支持微软自己的产品，如Windows，XBox等，其他平台没有可编译HLSL的编译器。</li>
-<li>CG是有英伟达公司出的真正意义上的跨平台着色器语言。</li>
-</ul>
-<h2 id="GPU渲染管线概述"><a href="#GPU渲染管线概述" class="headerlink" title="GPU渲染管线概述"></a>GPU渲染管线概述</h2><h3 id="1-顶点着色器"><a href="#1-顶点着色器" class="headerlink" title="1.顶点着色器"></a>1.顶点着色器</h3><p>顶点着色器是流水线的第一个阶段，它的输入来自于CPU。顶点着色器的处理单位是顶点，也就是说输入进来的每个顶点都会调用一次顶点着色器。</p>
-<p>顶点着色器需要完成的工作主要有:坐标变换和逐顶点光照。当然，除了这两个主要任务外，顶点着色器还可以输出后续阶段所需的数据。<br>坐标变换，顾名思义，就是对顶点的坐标进行某种变换。例如我们可以通过改变顶点位置来模拟水面，布料等。</p>
-        
-          <a class="article-more-a" href="/2017/11/18/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Shader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Shader//" class="article-tag-list-link color2">Shader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/11/15/">展开全文 >></a>
         </p>
       
 
@@ -1123,98 +1145,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-Unity-AssetBundle资源更新以及多线程下载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/22/">AssetBundle资源更新以及多线程下载</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/22/" class="archive-article-date">
-  	<time datetime="2017-06-22T06:48:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1494902993&amp;di=76ef0051c42c8c9cdfcebf3cad9604e0&amp;imgtype=jpg&amp;er=1&amp;src=http://u.candou.com/2014/1010/1412905945671.jpg" alt="这里写图片描述"></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>此文章适合不太了解资源加载的萌新，有了入门基础之后再去github上搜大牛写的专业的资源加载方案才能得心应手，不然的话会看的很吃力或者说一脸懵逼。Unity里面关于资源加载我们都知道是下载更新AssetBundle，关于<a href="http://blog.csdn.net/dingxiaowei2013/article/details/71479045" target="_blank" rel="noopener">AssetBundle</a>我之前的文章已经详细介绍过，没看过的朋友可以在看一下。下面介绍的资源加载的Demo有以下几点：<br>1.WWW下载图片资源<br>2.HTTP下载apk文件，并且支持断点续传，并且显示加载进度条<br>3.HTTP多线程下载文件</p>
-        
-          <a class="article-more-a" href="/2017/06/22/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">AssetBundle资源更新</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/22/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1308,19 +1238,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Lua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Lua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1332,7 +1262,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1344,19 +1282,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1372,15 +1314,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1400,23 +1350,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1440,15 +1374,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1464,15 +1394,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1488,6 +1414,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
@@ -1496,15 +1426,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">美文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">

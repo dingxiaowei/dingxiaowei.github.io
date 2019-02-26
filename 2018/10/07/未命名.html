@@ -1,0 +1,885 @@
+<hr>
+<p>title: 【Aladdin Unity3D Shader编程】之二 光照模型(一)<br>date: 2017-11-15 09:42:32<br>tags: [Shader]<br>comments: true<br>categories: Shader<br>description: Shader入门系列第二篇，Shader光照模型介绍。</p>
+<hr>
+<h2 id="光照模型"><a href="#光照模型" class="headerlink" title="光照模型"></a>光照模型</h2><p>光照模型就是一个公式，使用这个公式来计算在某个点的光照效果。</p>
+<p>在标准光照模型里面，我们把进入摄像机的光分为下面四个部分：</p>
+<ul>
+<li><p>自发光</p>
+<p>  类似生活中的萤火虫等自己能够发光</p>
+</li>
+<li><p>高光反射</p>
+<p>  类似生活中的镜子，近似认为百分百反射出去</p>
+</li>
+<li><p>漫反射</p>
+<p>  类似生活中的光照射到墙壁上、桌子上的反光不会百分百反射出去，各个方向都会反射。</p>
+</li>
+<li><p>环境光</p>
+<p>  类似生活中的光照照射在某个物体上，物体漫反射然后反射到其他物体上这些过程的光是环境光。</p>
+</li>
+</ul>
+<p>以上都是模拟生活中的光照效果，并不等同于实际生活中的光照计算，实际生活中的光照会更加复杂。</p>
+<h2 id="光照模型中关于漫反射的计算"><a href="#光照模型中关于漫反射的计算" class="headerlink" title="光照模型中关于漫反射的计算"></a>光照模型中关于漫反射的计算</h2><p>漫反射计算放在顶点函数里面就是逐顶点光照</p>
+<p>Disffuse = 直射光颜色*max(0,cosθ)  (θ是法线跟光照的夹角)  如果夹角小于0的话就是背光面就直接取黑色</p>
+<p>理论知识:</p>
+<ul>
+<li>向量点乘(结果值)</li>
+</ul>
+<pre><code>a*b=|a||b|cosθ
+</code></pre><ul>
+<li>向量叉乘(结果是向量)</li>
+</ul>
+<pre><code>a*b=c  c的一个向量，值是|a||b|sinθ
+</code></pre><!-- more -->
+<h2 id="编写漫反射Shader"><a href="#编写漫反射Shader" class="headerlink" title="编写漫反射Shader"></a>编写漫反射Shader</h2><p>在Pass块里添加Tags{“LightMode”=”ForwardBase”}和#include “Lighting.cginc” //引用一些写好的程序块 会包含一些获取光照的信息</p>
+<p>只有定义了正确的LightMode才能得到一些Unity的内置光照变量。</p>
+<ul>
+<li>normalize() 将一个向量单位化</li>
+</ul>
+<ul>
+<li>max()用来取得函数中最大的一个</li>
+</ul>
+<ul>
+<li>dot()用来取得两个向量的点积</li>
+</ul>
+<ul>
+<li>_WorldSpaceLightPos0取得平行光的位置</li>
+</ul>
+<ul>
+<li>_LightColor0取得平行光的颜色</li>
+</ul>
+<p>UNITY_MATRIX_MVP 这个矩阵是将模型空间转换到剪裁空间</p>
+<ul>
+<li>_World2Object这个矩阵用来将一个方向从时间空间转换到模型空间</li>
+</ul>
+<ul>
+<li>UNITY_LIGHTMODEL_AMBIENT 用来获取环境光</li>
+</ul>
+<pre><code>
+Shader &quot;AladdinShader/04 Diffuse Tertex Shader&quot;
+
+{
+
+    Properties
+
+    {
+
+
+
+    }
+
+
+
+    SubShader {
+
+        Pass 
+
+        {
+
+            Tags{&quot;LightMode&quot;=&quot;ForwardBase&quot;}
+
+
+
+        CGPROGRAM
+
+#include &quot;Lighting.cginc&quot; //引用一些写好的程序块 会包含一些获取光照的信息  
+
+//_LightColor0 取得第一个直射光的颜色
+
+//_WorldSpaceLightPos0 
+
+#pragma vertex vert
+
+#pragma fragment frag 
+
+        struct a2v 
+
+        {
+
+            float4 vertex:POSITION;
+
+            float3 normal:NORMAL; //模型空间下法线
+
+        };
+
+        struct v2f
+
+        {
+
+            float4 position:SV_POSITION;
+
+            fixed3 color:COLOR;
+
+        };
+
+        v2f vert(a2v v)
+
+        {
+
+            v2f f;
+
+            f.position = mul(UNITY_MATRIX_MVP, v.vertex);
+
+            //获得世界空间的单位法线向量
+
+            fixed3 normalDir = normalize(mul(v.normal, (float3x3)unity_WorldToObject)); //从模型空间转到世界空间 float3x3 将一个4*4的矩阵强转成3*3的矩阵
+
+            //世界空间下的光照位置
+
+            fixed3  lightDir = _WorldSpaceLightPos0.xyz; //对于每一个点来说每一个光的位置就是光的方向（针对平行光）
+
+            //取得漫反射的颜色
+
+            fixed3 diffuse = _LightColor0.rgb * max(0, dot(normalDir, lightDir));//取得第一个直射光的颜色
+
+            f.color = diffuse;
+
+            return f;
+
+        }
+
+        fixed4 frag(v2f f):SV_Target
+
+        {
+
+            return fixed4(f.color,1);
+
+        }
+
+        ENDCG
+
+        }
+
+    }
+
+    FallBack  &quot;VertexLit&quot;
+
+}
+
+</code></pre><p><strong>效果：</strong></p>
+<p>没有写反射光照之前的效果，红色是均匀的</p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/11.png" alt="这里写图片描述"></p>
+<p>写了光照效果之后，会看到正对光照地方很亮，背对光照的地方就很暗甚至黑色。</p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/22.png" alt="这里写图片描述"></p>
+<p>现在是逐顶点光照，顶点的数量是有限的，如果将计算放在片元函数里面计算效果会更好，但计算量也会更大，那就叫逐片元光照。</p>
+<h1 id="给物体自身添加颜色和环境光共同控制"><a href="#给物体自身添加颜色和环境光共同控制" class="headerlink" title="给物体自身添加颜色和环境光共同控制"></a>给物体自身添加颜色和环境光共同控制</h1><p>上面物体的颜色只是受环境光的颜色影响，但实际生活中我们看到的物体的颜色是环境光和自身颜色混合的效果。我们在上面的例子的基础上，添加上物体本身的颜色：</p>
+<p>给物体添加颜色属性然后*环境光</p>
+<pre><code>
+Shader &quot;AladdinShader/04 Diffuse Tertex Shader&quot;
+
+{
+
+    Properties
+
+    {
+
+        _Diffuse(&quot;Diffuse&quot;,Color)=(1,1,1,1) //添加自身的颜色
+
+    }
+
+    SubShader {
+
+        Pass 
+
+        {
+
+            Tags{&quot;LightMode&quot;=&quot;ForwardBase&quot;}
+
+        CGPROGRAM
+
+#include &quot;Lighting.cginc&quot; //引用一些写好的程序块 会包含一些获取光照的信息  
+
+//_LightColor0 取得第一个直射光的颜色
+
+//_WorldSpaceLightPos0 
+
+#pragma vertex vert
+
+#pragma fragment frag 
+
+        fixed4 _Diffuse;
+
+        struct a2v 
+
+        {
+
+            float4 vertex:POSITION;
+
+            float3 normal:NORMAL; //模型空间下法线
+
+        };
+
+        struct v2f
+
+        {
+
+            float4 position:SV_POSITION;
+
+            fixed3 color:COLOR;
+
+        };
+
+        v2f vert(a2v v)
+
+        {
+
+            v2f f;
+
+            f.position = mul(UNITY_MATRIX_MVP, v.vertex);
+
+            fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.rgb;//获得系统内置的环境光
+
+            //获得世界空间的单位法线向量
+
+            fixed3 normalDir = normalize(mul(v.normal, (float3x3)unity_WorldToObject)); //从模型空间转到世界空间 float3x3 将一个4*4的矩阵强转成3*3的矩阵
+
+            //世界空间下的光照位置
+
+            fixed3  lightDir = _WorldSpaceLightPos0.xyz; //对于每一个点来说每一个光的位置就是光的方向（针对平行光）
+
+            //取得漫反射的颜色
+
+            fixed3 diffuse = _LightColor0.rgb * max(0, dot(normalDir, lightDir)) * _Diffuse.rgb;//取得第一个直射光的颜色 颜色融合
+
+            f.color = diffuse + ambient;  //颜色增加 增强
+
+            return f;
+
+        }
+
+        fixed4 frag(v2f f):SV_Target
+
+        {
+
+            return fixed4(f.color,1);
+
+        }
+
+        ENDCG
+
+        }
+
+    }
+
+    FallBack  &quot;VertexLit&quot;
+
+}
+
+</code></pre><p>效果：</p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/33.png" alt="这里写图片描述"></p>
+<p>这样直射光设置成白色，颜色本身设置成绿色，并且在面板中调整颜色，物体就显示成这种颜色。颜色融合一般是颜色的改变，颜色相加是强度增强。</p>
+<p>环境光设置:Window-&gt;Lighting-&gt;Ambient Source-&gt;Color 一般不建议很强的环境光</p>
+<h2 id="逐像素光照"><a href="#逐像素光照" class="headerlink" title="逐像素光照"></a>逐像素光照</h2><pre><code>
+Shader &quot;AladdinShader/05 Diffuse fragment Shader&quot;
+
+{
+
+    Properties
+
+    {
+
+        _Diffuse(&quot;Diffuse&quot;,Color)=(1,1,1,1) //添加自身的颜色
+
+    }
+
+    SubShader {
+
+        Pass 
+
+        {
+
+            Tags{&quot;LightMode&quot;=&quot;ForwardBase&quot;}
+
+        CGPROGRAM
+
+#include &quot;Lighting.cginc&quot; //引用一些写好的程序块 会包含一些获取光照的信息  
+
+//_LightColor0 取得第一个直射光的颜色
+
+//_WorldSpaceLightPos0 
+
+#pragma vertex vert
+
+#pragma fragment frag 
+
+        fixed4 _Diffuse;
+
+        struct a2v 
+
+        {
+
+            float4 vertex:POSITION;
+
+            float3 normal:NORMAL; //模型空间下法线
+
+        };
+
+        struct v2f
+
+        {
+
+            float4 position:SV_POSITION;
+
+            fixed3 worldNormalDir:COLOR0;
+
+        };
+
+        v2f vert(a2v v)
+
+        {
+
+            v2f f;
+
+            f.position = mul(UNITY_MATRIX_MVP, v.vertex);
+
+            f.worldNormalDir = mul(v.normal, (float3x3)unity_WorldToObject);
+
+            return f;
+
+        }
+
+        fixed4 frag(v2f f):SV_Target
+
+        {
+
+            fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.rgb;//获得系统内置的环境光
+
+            //获得世界空间的单位法线向量
+
+            fixed3 normalDir = normalize(f.worldNormalDir); //从模型空间转到世界空间 float3x3 将一个4*4的矩阵强转成3*3的矩阵
+
+            //世界空间下的光照位置
+
+            fixed3  lightDir = _WorldSpaceLightPos0.xyz; //对于每一个点来说每一个光的位置就是光的方向（针对平行光）
+
+            //取得漫反射的颜色
+
+            fixed3 diffuse = _LightColor0.rgb * max(0, dot(normalDir, lightDir)) * _Diffuse.rgb;//取得第一个直射光的颜色 颜色融合
+
+            fixed3 tempColor = diffuse + ambient;  //颜色增加 增强
+
+            return fixed4(tempColor,1);
+
+        }
+
+        ENDCG
+
+        }
+
+    }
+
+    FallBack  &quot;VertexLit&quot;
+
+}
+
+
+
+</code></pre><p>效果图：</p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/44.png" alt="这里写图片描述"></p>
+<p>一个是逐顶点光照，一个是逐像素光照，自己看还是能看出区别的。逐像素光照会更消耗性能一些，如果不需要很高的精度的话就可以用逐顶点光照代替。</p>
+<h1 id="半兰伯特光照模型"><a href="#半兰伯特光照模型" class="headerlink" title="半兰伯特光照模型"></a>半兰伯特光照模型</h1><p>模型表面的明亮度直接取决于光线向量（light vector）和表面法线（normal）两个向量将夹角的余弦值。</p>
+<p>如果漫反射光强设置为Diffuse，入射光光强为I，光方向和法线夹角为θ，那么兰伯特光照模型可以用下面的公式表示：Diffuse = I * cosθ。</p>
+<p>兰伯特光照模型 模型背面全都是黑色都看不清楚</p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/55.png" alt="这里写图片描述"></p>
+<p>为了解决这个问题，改造一些兰伯特光照模型的公式，让背光部分也随着光照强度改变而改变。</p>
+<p>半兰伯特光照模型：</p>
+<p>为了解决兰伯特模型背光面全都是黑的看不清楚的问题。</p>
+<p>Diffuse=直射光颜色 <em> (cosθ </em> 0.5 + 0.5)</p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/66.png" alt="这里写图片描述"></p>
+<p>Shader修改</p>
+<pre><code>
+Shader &quot;AladdinShader/06 Diffuse fragment Half Lanbote Shader&quot;
+
+{
+
+    Properties
+
+    {
+
+        _Diffuse(&quot;Diffuse&quot;,Color)=(1,1,1,1) //添加自身的颜色
+
+    }
+
+    SubShader {
+
+        Pass 
+
+        {
+
+            Tags{&quot;LightMode&quot;=&quot;ForwardBase&quot;}
+
+        CGPROGRAM
+
+#include &quot;Lighting.cginc&quot; //引用一些写好的程序块 会包含一些获取光照的信息  
+
+//_LightColor0 取得第一个直射光的颜色
+
+//_WorldSpaceLightPos0 
+
+#pragma vertex vert
+
+#pragma fragment frag 
+
+        fixed4 _Diffuse;
+
+        struct a2v 
+
+        {
+
+            float4 vertex:POSITION;
+
+            float3 normal:NORMAL; //模型空间下法线
+
+        };
+
+        struct v2f
+
+        {
+
+            float4 position:SV_POSITION;
+
+            fixed3 worldNormalDir:COLOR0;
+
+        };
+
+        v2f vert(a2v v)
+
+        {
+
+            v2f f;
+
+            f.position = mul(UNITY_MATRIX_MVP, v.vertex);
+
+            f.worldNormalDir = mul(v.normal, (float3x3)unity_WorldToObject);
+
+            return f;
+
+        }
+
+        fixed4 frag(v2f f):SV_Target
+
+        {
+
+            fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.rgb;//获得系统内置的环境光
+
+            //获得世界空间的单位法线向量
+
+            fixed3 normalDir = normalize(f.worldNormalDir); //从模型空间转到世界空间 float3x3 将一个4*4的矩阵强转成3*3的矩阵
+
+            //世界空间下的光照位置
+
+            fixed3  lightDir = _WorldSpaceLightPos0.xyz; //对于每一个点来说每一个光的位置就是光的方向（针对平行光）
+
+            float halfLambert = dot(normalDir, lightDir) * 0.5 + 0.5; //半兰伯特光照模型
+
+            //取得漫反射的颜色
+
+            fixed3 diffuse = _LightColor0.rgb * halfLambert * _Diffuse.rgb;//取得第一个直射光的颜色 颜色融合
+
+            fixed3 tempColor = diffuse + ambient;  //颜色增加 增强
+
+            return fixed4(tempColor,1);
+
+        }
+
+        ENDCG
+
+        }
+
+    }
+
+    FallBack  &quot;VertexLit&quot;
+
+}
+
+</code></pre><p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/77.png" alt="这里写图片描述"></p>
+<p>会明显的感觉模型亮度变亮了，而且背面也不会纯黑了也会渐变，而且正面颜色也会鲜明一些，这样整体效果会更好一些。</p>
+<h2 id="高光反射模型"><a href="#高光反射模型" class="headerlink" title="高光反射模型"></a>高光反射模型</h2><p>Specular=直射光*pow(max(cosθ,0),高光的参数) θ:是反射光和视野方向的夹角</p>
+<p>pow:余弦值的X次方</p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/1.png" alt=""></p>
+<h2 id="编写高光反射Shader"><a href="#编写高光反射Shader" class="headerlink" title="编写高光反射Shader"></a>编写高光反射Shader</h2><pre><code>
+Shader &quot;AladdinShader/07 Specular Vertex Shader&quot;
+
+{
+
+    Properties
+
+    {
+
+        _Diffuse(&quot;Diffuse&quot;,Color)=(1,1,1,1) //添加自身的颜色
+
+    }
+
+    SubShader {
+
+        Pass 
+
+        {
+
+            Tags{&quot;LightMode&quot;=&quot;ForwardBase&quot;}
+
+
+
+        CGPROGRAM
+
+
+
+#include &quot;Lighting.cginc&quot; //引用一些写好的程序块 会包含一些获取光照的信息  
+
+
+
+//_LightColor0 取得第一个直射光的颜色
+
+//_WorldSpaceLightPos0 
+
+#pragma vertex vert
+
+#pragma fragment frag 
+
+        fixed4 _Diffuse;
+
+        struct a2v 
+
+        {
+
+            float4 vertex:POSITION;
+
+            float3 normal:NORMAL; //模型空间下法线
+
+        };
+
+        struct v2f
+
+        {
+
+            float4 position:SV_POSITION;
+
+            fixed3 color:COLOR;
+
+        };
+
+
+
+        v2f vert(a2v v)
+
+        {
+
+            v2f f;
+
+            f.position = mul(UNITY_MATRIX_MVP, v.vertex);
+
+            fixed3 adbient = UNITY_LIGHTMODEL_AMBIENT.rgb;
+
+            fixed3 normalDir = normalize(mul(v.normal,(float3x3)unity_WorldToObject));
+
+            fixed3 lightDir = normalize(_WorldSpaceLightPos0.xyz);//对于每个顶点来说 光的位置就是光的方向 因为是平行光
+
+            fixed3 diffuse = _LightColor0.rgb * max(dot(normalDir,lightDir), 0) * _Diffuse.rgb;//取得漫反射的颜色
+
+            //反射光方向
+
+            fixed3 reflectDir = normalize(reflect(-lightDir,normalDir));
+
+            //视野方向
+
+            //相机是在世界空间下              
+
+            fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - mul(v.vertex,unity_WorldToObject).xyz);
+
+            //高光反射
+
+            fixed3 specular = _LightColor0.rgb * pow(max(dot(reflectDir,viewDir),0),10);
+
+            f.color = diffuse + adbient + specular;
+
+            return f;
+
+        }
+
+        fixed4 frag(v2f f):SV_Target
+
+        {
+
+            return fixed4(f.color, 1);
+
+        }
+
+        ENDCG
+
+        }
+
+    }
+
+    FallBack  &quot;VertexLit&quot;
+
+}
+
+</code></pre><p>效果图:</p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/2.png" alt=""></p>
+<h2 id="添加-Gloss和SpecularColor控制高光大小和高光颜色"><a href="#添加-Gloss和SpecularColor控制高光大小和高光颜色" class="headerlink" title="添加_Gloss和SpecularColor控制高光大小和高光颜色"></a>添加_Gloss和SpecularColor控制高光大小和高光颜色</h2><p>添加一个Range属性，将X次幂的值改成Range属性，做如下修改：</p>
+<pre><code>
+_Gloss(&quot;Gloss&quot;,Range(8,200)) = 10
+
+//高光反射
+
+fixed3 specular = _LightColor0.rgb * pow(max(dot(reflectDir,viewDir),0),_Gloss);
+
+</code></pre><p>就会看到高光光圈随着_Gloss改变而改变</p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/3.png" alt=""></p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/4.png" alt=""></p>
+<p>想要改变高光部分的颜色控制，我们添加一个颜色变量然后将高光颜色与我们设置的颜色属性进行融合计算就会得到新的高光部分的颜色</p>
+<pre><code>
+Shader &quot;AladdinShader/07 Specular Vertex Shader&quot;
+
+{
+
+    Properties
+
+    {
+
+        _Diffuse(&quot;Diffuse&quot;,Color)=(1,1,1,1) //添加自身的颜色
+
+        _Specular(&quot;Specular&quot;,Color)=(1,1,1,1)
+
+        _Gloss(&quot;Gloss&quot;,Range(8,200)) = 10
+
+    }
+
+    SubShader {
+
+        Pass 
+
+        {
+
+            Tags{&quot;LightMode&quot;=&quot;ForwardBase&quot;}
+
+        CGPROGRAM
+
+#include &quot;Lighting.cginc&quot; //引用一些写好的程序块 会包含一些获取光照的信息  
+
+//_LightColor0 取得第一个直射光的颜色
+
+//_WorldSpaceLightPos0 
+
+#pragma vertex vert
+
+#pragma fragment frag 
+
+        fixed4 _Diffuse;
+
+        fixed4 _Specular;
+
+        half _Gloss;
+
+        struct a2v 
+
+        {
+
+            float4 vertex:POSITION;
+
+            float3 normal:NORMAL; //模型空间下法线
+
+        };
+
+        struct v2f
+
+        {
+
+            float4 position:SV_POSITION;
+
+            fixed3 color:COLOR;
+
+        };
+
+
+
+        v2f vert(a2v v)
+
+        {
+
+            v2f f;
+
+            f.position = mul(UNITY_MATRIX_MVP, v.vertex);
+
+            fixed3 adbient = UNITY_LIGHTMODEL_AMBIENT.rgb;
+
+            fixed3 normalDir = normalize(mul(v.normal,(float3x3)unity_WorldToObject));
+
+            fixed3 lightDir = normalize(_WorldSpaceLightPos0.xyz);//对于每个顶点来说 光的位置就是光的方向 因为是平行光
+
+            fixed3 diffuse = _LightColor0.rgb * max(dot(normalDir,lightDir), 0) * _Diffuse.rgb;//取得漫反射的颜色
+
+            //反射光方向
+
+            fixed3 reflectDir = normalize(reflect(-lightDir,normalDir));
+
+            //视野方向
+
+            //相机是在世界空间下              
+
+            fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - mul(v.vertex,unity_WorldToObject).xyz);
+
+            //高光反射
+
+            fixed3 specular = _LightColor0.rgb * pow(max(dot(reflectDir,viewDir),0),_Gloss) * _Specular.rgb;
+
+            f.color = diffuse + adbient + specular;
+
+            return f;
+
+        }
+
+        fixed4 frag(v2f f):SV_Target
+
+        {
+
+            return fixed4(f.color, 1);
+
+        }
+
+        ENDCG
+
+        }
+
+    }
+
+    FallBack  &quot;VertexLit&quot;
+
+}
+
+
+
+</code></pre><p>效果图:</p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/5.png" alt=""></p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/6.png" alt=""></p>
+<h2 id="逐像素高光反射"><a href="#逐像素高光反射" class="headerlink" title="逐像素高光反射"></a>逐像素高光反射</h2><pre><code>
+
+
+Shader &quot;AladdinShader/08 Specular Fragment Shader&quot;
+
+{
+
+    Properties
+
+    {
+
+        _Diffuse(&quot;Diffuse&quot;,Color)=(1,1,1,1) //添加自身的颜色
+
+        _Specular(&quot;Specular&quot;,Color)=(1,1,1,1)
+
+        _Gloss(&quot;Gloss&quot;,Range(8,200)) = 10
+
+    }
+
+    SubShader {
+
+        Pass 
+
+        {
+
+            Tags{&quot;LightMode&quot;=&quot;ForwardBase&quot;}
+
+        CGPROGRAM
+
+
+
+#include &quot;Lighting.cginc&quot; //引用一些写好的程序块 会包含一些获取光照的信息  
+
+//_LightColor0 取得第一个直射光的颜色
+
+//_WorldSpaceLightPos0 
+
+#pragma vertex vert
+
+#pragma fragment frag 
+
+        fixed4 _Diffuse;
+
+        fixed4 _Specular;
+
+        half _Gloss;
+
+        struct a2v 
+
+        {
+
+            float4 vertex:POSITION;
+
+            float3 normal:NORMAL; //模型空间下法线
+
+        };
+
+        struct v2f
+
+        {
+
+            float4 position:SV_POSITION;
+
+            float3 worldNormal:TEXCOORD0;//世界空间下的法线方向 
+
+            float3 worldVertext:TEXCOORD1;//时间空间下的顶点坐标
+
+        };
+
+        v2f vert(a2v v)
+
+        {
+
+            v2f f;
+
+            f.position = mul(UNITY_MATRIX_MVP, v.vertex);
+
+            f.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);
+
+            f.worldVertext = mul(v.vertex , unity_WorldToObject).xyz;
+
+            return f;
+
+        }
+
+
+
+        fixed4 frag(v2f f):SV_Target
+
+        {
+
+            fixed3 adbient = UNITY_LIGHTMODEL_AMBIENT.rgb;
+
+            fixed3 normalDir = normalize(f.worldNormal);
+
+            fixed3 lightDir = normalize(_WorldSpaceLightPos0.xyz);//对于每个顶点来说 光的位置就是光的方向 因为是平行光
+
+            fixed3 diffuse = _LightColor0.rgb * max(dot(normalDir,lightDir), 0) * _Diffuse.rgb;//取得漫反射的颜色
+
+            //反射光方向
+
+            fixed3 reflectDir = normalize(reflect(-lightDir,normalDir));
+
+            //视野方向
+
+            //相机是在世界空间下              
+
+            fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - f.worldVertext);
+
+            //高光反射
+
+            fixed3 specular = _LightColor0.rgb * pow(max(dot(reflectDir,viewDir),0),_Gloss) * _Specular.rgb;
+
+            fixed3 tempColor = diffuse + adbient + specular;
+
+            return fixed4(tempColor, 1);
+
+        }
+
+        ENDCG
+
+        }
+
+    }
+
+    FallBack  &quot;VertexLit&quot;
+
+}
+
+</code></pre><p>效果图:</p>
+<p><img src="【Aladdin-Unity3D-Shader编程】之二-光照模型-一/7.png" alt=""></p>
+<p>会比逐顶点高光效果更好一些，背光面可以考虑之前说的半兰伯特来处理，这样就不会显示全黑效果不好的情况。</p>
