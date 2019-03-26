@@ -197,6 +197,112 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-【GFFrameWork】事件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/20/">【GFFrameWork】事件系统</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/20/" class="archive-article-date">
+  	<time datetime="2019-03-20T11:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-20</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>游戏开发中抛事件，收事件也是比较常用的解耦方式，我所理解的设计模式旁观者模式有类似的原理，所以事件系统在一个框架中还是蛮重要的一块，本生事件系统不算一个大系统，代码量不多，主要是思路就是注册监听。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>EventManager<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line">//-------------------------------------------</span><br><span class="line">// Copyright © Aladdin. All rights reserved.</span><br><span class="line">// Homepage: http://dingxiaowei.cn/</span><br><span class="line">// Author: Aladdin</span><br><span class="line">// Time: 2019/3/22 11:02:40</span><br><span class="line">//-------------------------------------------</span><br><span class="line"></span><br><span class="line">using GF.Debug;</span><br><span class="line">using System;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using System.Linq;</span><br><span class="line">using System.Reflection;</span><br><span class="line">using System.Text;</span><br><span class="line"></span><br><span class="line">namespace GF.EventSystem</span><br><span class="line">&#123;</span><br><span class="line">    /// &lt;summary&gt;</span><br><span class="line">    /// 消息分发器</span><br><span class="line">    /// &lt;/summary&gt;</span><br><span class="line">    public class EventManager</span><br><span class="line">    &#123;</span><br><span class="line">        private static EventManager instance;</span><br><span class="line">        public static EventManager Instance</span><br><span class="line">        &#123;</span><br><span class="line">            get</span><br><span class="line">            &#123;</span><br><span class="line">                if (null == instance)</span><br><span class="line">                    instance = new EventManager();</span><br><span class="line">                return instance;</span><br><span class="line">            &#125;</span><br><span class="line">            set</span><br><span class="line">            &#123;</span><br><span class="line">                instance = value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 委托事件</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;typeparam name=&quot;T&quot;&gt;&lt;/typeparam&gt;</span><br><span class="line">        /// &lt;param name=&quot;sender&quot;&gt;&lt;/param&gt;</span><br><span class="line">        /// &lt;param name=&quot;evt&quot;&gt;&lt;/param&gt;</span><br><span class="line">        public delegate void EventHandler&lt;T&gt;(object sender, T evt);</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 注册事件字典</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        public Dictionary&lt;Type, List&lt;object&gt;&gt; handlers = new Dictionary&lt;Type, List&lt;object&gt;&gt;();</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 注册事件</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;typeparam name=&quot;T&quot;&gt;Class类型&lt;/typeparam&gt;</span><br><span class="line">        /// &lt;param name=&quot;handler&quot;&gt;函数&lt;/param&gt;</span><br><span class="line">        public void Register&lt;T&gt;(EventHandler&lt;T&gt; handler)</span><br><span class="line">        &#123;</span><br><span class="line">            Debugger.Log(&quot;注册事件:&quot; + handler.Method.Name);</span><br><span class="line">            Register(typeof(T), handler);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private void Register&lt;T&gt;(Type EventType, EventHandler&lt;T&gt; handler)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!handlers.ContainsKey(EventType))</span><br><span class="line">            &#123;</span><br><span class="line">                handlers.Add(EventType, new List&lt;object&gt;());</span><br><span class="line">            &#125;</span><br><span class="line">            if (!handlers[EventType].Contains(handler))</span><br><span class="line">            &#123;</span><br><span class="line">                handlers[EventType].Add(handler);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 分发事件</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;typeparam name=&quot;T&quot;&gt;&lt;/typeparam&gt;</span><br><span class="line">        /// &lt;param name=&quot;sender&quot;&gt;&lt;/param&gt;</span><br><span class="line">        /// &lt;param name=&quot;evt&quot;&gt;&lt;/param&gt;</span><br><span class="line">        public void Publish&lt;T&gt;(object sender, T evt)</span><br><span class="line">        &#123;</span><br><span class="line">            subscribe(null, typeof(T), evt);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 发送通知事件</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;typeparam name=&quot;T&quot;&gt;&lt;/typeparam&gt;</span><br><span class="line">        /// &lt;param name=&quot;sender&quot;&gt;&lt;/param&gt;</span><br><span class="line">        /// &lt;param name=&quot;EventType&quot;&gt;&lt;/param&gt;</span><br><span class="line">        /// &lt;param name=&quot;evt&quot;&gt;&lt;/param&gt;</span><br><span class="line">        private void publish&lt;T&gt;(object sender, Type EventType, T evt)</span><br><span class="line">        &#123;</span><br><span class="line">            if (handlers.ContainsKey(EventType))</span><br><span class="line">            &#123;</span><br><span class="line">                Debugger.Log(&quot;public event key:&quot; + typeof(T));</span><br><span class="line">                //移除所有的无效事件</span><br><span class="line">                handlers[EventType].RemoveAll(delegate (object handler) &#123; return handler == null; &#125;);</span><br><span class="line"></span><br><span class="line">                for (int i = 0; i &lt; handlers[EventType].Count; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    object handler = handlers[EventType][i];</span><br><span class="line">                    MethodInfo method = handler.GetType().GetMethod(&quot;Invoke&quot;);</span><br><span class="line">                    method.Invoke(handler, new object[] &#123; sender, evt &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                Debugger.Log(string.Format(&quot;&lt;color=red&gt;未注册的Key:&#123;0&#125;&lt;/color&gt;&quot;, EventType));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 注销事件</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        /// &lt;typeparam name=&quot;T&quot;&gt;类型&lt;/typeparam&gt;</span><br><span class="line">        /// &lt;param name=&quot;handler&quot;&gt;注册函数名&lt;/param&gt;</span><br><span class="line">        public void UnRegister&lt;T&gt;(EventHandler&lt;T&gt; handler)</span><br><span class="line">        &#123;</span><br><span class="line">            UnRegister(typeof(T), handler);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private void UnRegister&lt;T&gt;(Type EventType, EventHandler&lt;T&gt; handler)</span><br><span class="line">        &#123;</span><br><span class="line">            if (handlers.ContainsKey(EventType))</span><br><span class="line">            &#123;</span><br><span class="line">                handlers[EventType].Remove(handler);</span><br><span class="line">                Debugger.Log(&quot;Remove Event:&quot; + handler);</span><br><span class="line"></span><br><span class="line">                if (0 == handlers[EventType].Count)//注册事件为空时，移除字典Key</span><br><span class="line">                &#123;</span><br><span class="line">                    handlers.Remove(EventType);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /// &lt;summary&gt;</span><br><span class="line">        /// 清空注册事件</span><br><span class="line">        /// &lt;/summary&gt;</span><br><span class="line">        public void Clear()</span><br><span class="line">        &#123;</span><br><span class="line">            handlers.Clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h5 id="监听消息"><a href="#监听消息" class="headerlink" title="监听消息"></a>监听消息</h5><p><code>EventManager.Instance.Register&lt;FishRoundData&gt;(onFrameData);</code></p>
+<h5 id="取消监听"><a href="#取消监听" class="headerlink" title="取消监听"></a>取消监听</h5><p><code>EventManager.Instance.UnRegister&lt;FishRoundData&gt;(onFrameData);</code></p>
+<h5 id="监听消息回调"><a href="#监听消息回调" class="headerlink" title="监听消息回调"></a>监听消息回调</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private void onFrameData(object sender, FishRoundData data)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="分发消息"><a href="#分发消息" class="headerlink" title="分发消息"></a>分发消息</h5><p><code>EventManager.Instance.Publish&lt;FishRoundData&gt;(this, roundData.Value);</code></p>
+<h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><p>我们可以将要监听的事件结构抽象一下，然后每新增一个消息就直接继承这个基类，这样我们监听消息回调就是一个统一的方法，然后强转data变成自定义的事件结构。</p>
+<h5 id="事件基类-GFEventArgs"><a href="#事件基类-GFEventArgs" class="headerlink" title="事件基类 GFEventArgs"></a>事件基类 GFEventArgs</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/// &lt;summary&gt;</span><br><span class="line">  /// 游戏框架中包含事件数据的类的基类。</span><br><span class="line">  /// &lt;/summary&gt;</span><br><span class="line">  public abstract class GFEventArgs : EventArgs</span><br><span class="line">  &#123;</span><br><span class="line">      /// &lt;summary&gt;</span><br><span class="line">      /// 初始化游戏框架中包含事件数据的类的新实例。</span><br><span class="line">      /// &lt;/summary&gt;</span><br><span class="line">      public GFEventArgs()</span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="游戏事件基类"><a href="#游戏事件基类" class="headerlink" title="游戏事件基类"></a>游戏事件基类</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/// &lt;summary&gt;</span><br><span class="line">    /// 游戏逻辑事件基类。</span><br><span class="line">    /// &lt;/summary&gt;</span><br><span class="line">    public abstract class GameEventArgs : GFEventArgs</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="EventManager"><a href="#EventManager" class="headerlink" title="EventManager"></a>EventManager</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">internal sealed class EventManager1</span><br><span class="line">&#123;</span><br><span class="line">    private readonly List&lt;GameEventArgs&gt; m_EventPool;</span><br><span class="line"></span><br><span class="line">    public EventManager1()</span><br><span class="line">    &#123;</span><br><span class="line">        m_EventPool = new List&lt;GameEventArgs&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public bool Check(int id, EventHandler&lt;GameEventArgs&gt; handler)</span><br><span class="line">    &#123;</span><br><span class="line">        //检查事件</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void Subscribe(int id, EventHandler&lt;GameEventArgs&gt; handler)</span><br><span class="line">    &#123;</span><br><span class="line">        //订阅消息</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void Unsubscribe(int id, EventHandler&lt;GameEventArgs&gt; handler)</span><br><span class="line">    &#123;</span><br><span class="line">        //取消订阅</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void Fire(object sender, GameEventArgs e)</span><br><span class="line">    &#123;</span><br><span class="line">        //放入事件响应队列</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void FireNow(object sender, GameEventArgs e)</span><br><span class="line">    &#123;</span><br><span class="line">        //立刻响应</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h2><p><code>Event.Subscribe(OpenUIFormSuccessEventArgs.EventId, OnOpenUIFormSuccess);</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private void OnOpenUIFormSuccess(object sender, GameEventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    OpenUIFormSuccessEventArgs ne = (OpenUIFormSuccessEventArgs)e;</span><br><span class="line">    // 判断userData是否为自己</span><br><span class="line">    if (ne.UserData != this)</span><br><span class="line">    &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    Log.Debug(&quot;UI_Menu：恭喜你，成功地召唤了我。&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="GFFramework地址"><a href="#GFFramework地址" class="headerlink" title="GFFramework地址"></a>GFFramework地址</h2><p><a href="https://github.com/dingxiaowei/GFFrameWork" target="_blank" rel="noopener">https://github.com/dingxiaowei/GFFrameWork</a></p>
+<h2 id="更多教程"><a href="#更多教程" class="headerlink" title="更多教程"></a>更多教程</h2><p><a href="http://dingxiaowei.cn/">http://dingxiaowei.cn/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/20/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-【GFFrameWork】UI框架2-UI界面自动生成模板代码工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1145,114 +1251,9 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-如何搭建Jenkins导出Unity安卓环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/17/">如何搭建Jenkins导出Unity安卓环境</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/17/" class="archive-article-date">
-  	<time datetime="2018-11-17T12:12:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-17</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Unity开发环境，就只要浏览器打开Jenkins然后点击打包即可。</p>
-<h2 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h2><ul>
-<li>准备Jenkins环境，可以选择去Jenkins<a href="https://jenkins.io/" target="_blank" rel="noopener">官网</a>下载,我这里准备了一个Jenkins的war包。</li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/11/17/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jenkins</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/工具//" class="article-tag-list-link color3">工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/17/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1359,11 +1360,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1395,11 +1396,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1415,31 +1436,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1455,11 +1456,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+                <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1471,23 +1476,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ILRuntime</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1503,11 +1492,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+                <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ILRuntime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1523,6 +1528,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
@@ -1535,11 +1548,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1552,10 +1561,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
