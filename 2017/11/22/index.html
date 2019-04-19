@@ -24,7 +24,8 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2017/11/22/2.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/11/22/3.jpg">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/11/22/4.png">
-<meta property="og:updated_time" content="2019-04-12T07:35:38.720Z">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/11/22/5.png">
+<meta property="og:updated_time" content="2019-04-19T10:55:40.904Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Aladdin-Unity3D-Shader编程】之八-2D图常用的Shader效果">
 <meta name="twitter:description" content="Shader入门系列第八篇，2D图常用的效果。">
@@ -259,6 +260,10 @@ var _hmt = _hmt || [];
 <p>高斯公式：</p>
 <p><img src="/2017/11/22/4.png" alt=""></p>
 <h4 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//-----------------------------------------------【Shader说明】--------------------------------------------------------</span><br><span class="line">//     Shader功能：   2D模糊</span><br><span class="line">//	   核心思路：  在片源着色器里对单个图元累加周边的颜色然后再取平均，高斯模糊涉及到高斯公式(高斯正太分布公式)</span><br><span class="line">//     使用语言：   Shaderlab</span><br><span class="line">//     开发所用IDE版本：Unity2018.3.6 、Visual Studio 2017</span><br><span class="line">//     2016年9月16日  Created by Aladdin(阿拉丁)</span><br><span class="line">//     更多内容或交流请访问我的博客：http://blog.csdn.net/s10141303/article/category/6670402</span><br><span class="line">//---------------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Shader &quot;阿拉丁Shader编程/4-4.2D模糊&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">	&#123;</span><br><span class="line">		_MainTex (&quot;Texture&quot;, 2D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">		_BlurRadius (&quot;BlurRadius&quot;, Range(2, 15)) = 5  //模糊半径</span><br><span class="line">		_TextureSize (&quot;TextureSize&quot;, Float) = 640</span><br><span class="line">	&#125;</span><br><span class="line">	SubShader</span><br><span class="line">	&#123;</span><br><span class="line">		Cull Off ZWrite Off ZTest Always</span><br><span class="line"></span><br><span class="line">		Pass</span><br><span class="line">		&#123;</span><br><span class="line">			CGPROGRAM</span><br><span class="line">			#pragma vertex vert</span><br><span class="line">			#pragma fragment frag</span><br><span class="line"></span><br><span class="line">			#include &quot;UnityCG.cginc&quot;</span><br><span class="line"></span><br><span class="line">			struct appdata</span><br><span class="line">			&#123;</span><br><span class="line">				float4 vertex : POSITION;</span><br><span class="line">				float2 uv : TEXCOORD0;</span><br><span class="line">			&#125;;</span><br><span class="line"></span><br><span class="line">			struct v2f</span><br><span class="line">			&#123;</span><br><span class="line">				float2 uv : TEXCOORD0;</span><br><span class="line">				float4 vertex : SV_POSITION;</span><br><span class="line">			&#125;;</span><br><span class="line"></span><br><span class="line">			v2f vert (appdata v)</span><br><span class="line">			&#123;</span><br><span class="line">				v2f o;</span><br><span class="line">				o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">				o.uv = v.uv;</span><br><span class="line">				return o;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			sampler2D _MainTex;</span><br><span class="line">			int _BlurRadius;</span><br><span class="line">			float _TextureSize;</span><br><span class="line"></span><br><span class="line">			//这一步其实可以用计算出来的常量来替代，不需要在循环中每一步计算</span><br><span class="line">			float GetGaussWeight(float x, float y, float sigma)</span><br><span class="line">			&#123;</span><br><span class="line">				float sigma2 = pow(sigma, 2.0f);		//pow 次方公式 这里是平方</span><br><span class="line">				float left = 1 / (2 * sigma2 * 3.1415926f);</span><br><span class="line">				float right = exp(-(x*x+y*y)/(2*sigma2));	 //e的指数幂</span><br><span class="line">				return left * right;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			fixed4 GaussBlur(float2 uv)		 //高斯模糊 根据高斯公式计算出的颜色值</span><br><span class="line">			&#123;</span><br><span class="line">				//因为高斯函数中3σ以外的点的权重已经很小了，因此σ取半径r/3的值</span><br><span class="line">				float sigma = (float)_BlurRadius / 3.0f;</span><br><span class="line">				float4 col = float4(0, 0, 0, 0);</span><br><span class="line">				for (int x = - _BlurRadius; x &lt;= _BlurRadius; ++x)</span><br><span class="line">				&#123;</span><br><span class="line">					for (int y = - _BlurRadius; y &lt;= _BlurRadius; ++y)</span><br><span class="line">					&#123;</span><br><span class="line">						//获取周围像素的颜色</span><br><span class="line">						//因为uv是0-1的一个值，而像素坐标是整形，我们要取材质对应位置上的颜色，需要将整形的像素坐标</span><br><span class="line">						//转为uv上的坐标值</span><br><span class="line">						float4 color = tex2D(_MainTex, uv + float2(x / _TextureSize, y / _TextureSize));</span><br><span class="line">						//获取此像素的权重</span><br><span class="line">						float weight = GetGaussWeight(x, y, sigma);</span><br><span class="line">						//计算此点的最终颜色</span><br><span class="line">						col += color * weight;	//颜色乘以权重</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				return col;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			fixed4 SimpleBlur(float2 uv)</span><br><span class="line">			&#123;</span><br><span class="line">				float4 col = float4(0, 0, 0, 0);</span><br><span class="line">				for (int x = - _BlurRadius; x &lt;= _BlurRadius; ++x)</span><br><span class="line">				&#123;</span><br><span class="line">					for (int y = - _BlurRadius; y &lt;= _BlurRadius; ++y)</span><br><span class="line">					&#123;</span><br><span class="line">						float4 color = tex2D(_MainTex, uv + float2(x / _TextureSize, y / _TextureSize));</span><br><span class="line">						//简单的进行颜色累加</span><br><span class="line">						col += color;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				//取平均数，所取像素为边长为(半径*2+1)的矩阵</span><br><span class="line">				col = col / pow(_BlurRadius * 2 + 1, 2.0f);</span><br><span class="line">				return col;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			fixed4 frag (v2f i) : SV_Target</span><br><span class="line">			&#123;</span><br><span class="line">				//float4 col = GaussBlur(i.uv);</span><br><span class="line">				float4 col = SimpleBlur(i.uv);</span><br><span class="line">				return col;</span><br><span class="line">			&#125;</span><br><span class="line">			ENDCG</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    FallBack &quot;Diffuse&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="像素风格"><a href="#像素风格" class="headerlink" title="像素风格"></a>像素风格</h2><h4 id="前言-2"><a href="#前言-2" class="headerlink" title="前言"></a>前言</h4><p>我们有时候做像素游戏 例如像素鸟游戏，像素风格的渲染就派上用上了。</p>
+<h4 id="效果-4"><a href="#效果-4" class="headerlink" title="效果"></a>效果</h4><p><img src="/2017/11/22/5.png" alt=""></p>
+<h4 id="核心思路-4"><a href="#核心思路-4" class="headerlink" title="核心思路"></a>核心思路</h4><p>对UV进行放大，然后截取整数部分，然后再缩回原大小，UV精度丢失，就形成马赛克效果</p>
+<h4 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">//-----------------------------------------------【Shader说明】--------------------------------------------------------</span><br><span class="line">//     Shader功能：   2D像素风格</span><br><span class="line">//	   核心思路：   对UV进行放大，然后截取整数部分，然后再缩回原大小，UV精度丢失，就形成马赛克效果</span><br><span class="line">//     使用语言：   Shaderlab</span><br><span class="line">//     开发所用IDE版本：Unity2018.3.6 、Visual Studio 2017</span><br><span class="line">//     2016年9月16日  Created by Aladdin(阿拉丁)   </span><br><span class="line">//     更多内容或交流请访问我的博客：http://blog.csdn.net/s10141303/article/category/6670402</span><br><span class="line">//---------------------------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Shader &quot;阿拉丁Shader编程/4-5.2D像素风格&quot; &#123;</span><br><span class="line">	Properties</span><br><span class="line">	&#123;</span><br><span class="line">		_MainTex(&quot;Texture&quot;, 2D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">		_PixelSize(&quot;Pixel Size&quot;, Range(1,256)) = 64</span><br><span class="line">	&#125;</span><br><span class="line">		SubShader</span><br><span class="line">		&#123;</span><br><span class="line">			Tags &#123; &quot;Queue&quot; = &quot;Transparent&quot; &#125;</span><br><span class="line">			Blend SrcAlpha OneMinusSrcAlpha</span><br><span class="line"></span><br><span class="line">			Pass</span><br><span class="line">			&#123;</span><br><span class="line">				CGPROGRAM</span><br><span class="line">				#pragma vertex vert</span><br><span class="line">				#pragma fragment frag</span><br><span class="line"></span><br><span class="line">				#include &quot;UnityCG.cginc&quot;</span><br><span class="line"></span><br><span class="line">				struct appdata</span><br><span class="line">				&#123;</span><br><span class="line">					float4 vertex : POSITION;</span><br><span class="line">					float2 uv : TEXCOORD0;</span><br><span class="line">				&#125;;</span><br><span class="line"></span><br><span class="line">				struct v2f</span><br><span class="line">				&#123;</span><br><span class="line">					float2 uv : TEXCOORD0;</span><br><span class="line">					float4 vertex : SV_POSITION;</span><br><span class="line">				&#125;;</span><br><span class="line"></span><br><span class="line">				sampler2D _MainTex;</span><br><span class="line">				float4 _MainTex_ST;</span><br><span class="line">				float _PixelSize;</span><br><span class="line"></span><br><span class="line">				v2f vert(appdata v)</span><br><span class="line">				&#123;</span><br><span class="line">					v2f o;</span><br><span class="line">					o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">					o.uv = TRANSFORM_TEX(v.uv, _MainTex);</span><br><span class="line">					return o;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				fixed4 frag(v2f i) : SV_Target</span><br><span class="line">				&#123;</span><br><span class="line">					fixed4 col;</span><br><span class="line"></span><br><span class="line">					float ratioX = (int)(i.uv.x * _PixelSize) / _PixelSize;</span><br><span class="line">					float ratioY = (int)(i.uv.y * _PixelSize) / _PixelSize;</span><br><span class="line"></span><br><span class="line">					col = tex2D(_MainTex, float2(ratioX, ratioY));</span><br><span class="line"></span><br><span class="line">					if (col.a &lt; 0.5)</span><br><span class="line">					&#123;</span><br><span class="line">						col.a = 0;</span><br><span class="line">					&#125;</span><br><span class="line"></span><br><span class="line">					return col;</span><br><span class="line">				&#125;</span><br><span class="line">				ENDCG</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="更多效果待添加。。。"><a href="#更多效果待添加。。。" class="headerlink" title="更多效果待添加。。。"></a>更多效果待添加。。。</h2><h2 id="更多系列教程"><a href="#更多系列教程" class="headerlink" title="更多系列教程"></a>更多系列教程</h2><p><a href="https://blog.csdn.net/dingxiaowei2013/article/category/6670402" target="_blank" rel="noopener">https://blog.csdn.net/dingxiaowei2013/article/category/6670402</a></p>
 <h2 id="工程地址"><a href="#工程地址" class="headerlink" title="工程地址"></a>工程地址</h2><p><a href="https://github.com/dingxiaowei/AladdinShader" target="_blank" rel="noopener">https://github.com/dingxiaowei/AladdinShader</a></p>
 <h2 id="Shader交流群"><a href="#Shader交流群" class="headerlink" title="Shader交流群"></a>Shader交流群</h2><p>316977780</p>
@@ -425,7 +430,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片灰态"><span class="toc-number">2.</span> <span class="toc-text">图片灰态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#效果"><span class="toc-number">2.0.1.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思路"><span class="toc-number">2.0.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码"><span class="toc-number">2.0.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#边缘着色"><span class="toc-number">3.</span> <span class="toc-text">边缘着色</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#效果-1"><span class="toc-number">3.0.1.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思路-1"><span class="toc-number">3.0.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码-1"><span class="toc-number">3.0.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#圆角头像"><span class="toc-number">4.</span> <span class="toc-text">圆角头像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#效果-2"><span class="toc-number">4.0.1.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思路-2"><span class="toc-number">4.0.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码-2"><span class="toc-number">4.0.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片模糊"><span class="toc-number">5.</span> <span class="toc-text">图片模糊</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言-1"><span class="toc-number">5.0.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#效果-3"><span class="toc-number">5.0.2.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思路-3"><span class="toc-number">5.0.3.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码-3"><span class="toc-number">5.0.4.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多效果待添加。。。"><span class="toc-number">6.</span> <span class="toc-text">更多效果待添加。。。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多系列教程"><span class="toc-number">7.</span> <span class="toc-text">更多系列教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工程地址"><span class="toc-number">8.</span> <span class="toc-text">工程地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shader交流群"><span class="toc-number">9.</span> <span class="toc-text">Shader交流群</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片灰态"><span class="toc-number">2.</span> <span class="toc-text">图片灰态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#效果"><span class="toc-number">2.0.1.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思路"><span class="toc-number">2.0.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码"><span class="toc-number">2.0.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#边缘着色"><span class="toc-number">3.</span> <span class="toc-text">边缘着色</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#效果-1"><span class="toc-number">3.0.1.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思路-1"><span class="toc-number">3.0.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码-1"><span class="toc-number">3.0.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#圆角头像"><span class="toc-number">4.</span> <span class="toc-text">圆角头像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#效果-2"><span class="toc-number">4.0.1.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思路-2"><span class="toc-number">4.0.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码-2"><span class="toc-number">4.0.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片模糊"><span class="toc-number">5.</span> <span class="toc-text">图片模糊</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言-1"><span class="toc-number">5.0.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#效果-3"><span class="toc-number">5.0.2.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思路-3"><span class="toc-number">5.0.3.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码-3"><span class="toc-number">5.0.4.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#像素风格"><span class="toc-number">6.</span> <span class="toc-text">像素风格</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#前言-2"><span class="toc-number">6.0.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#效果-4"><span class="toc-number">6.0.2.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#核心思路-4"><span class="toc-number">6.0.3.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码-4"><span class="toc-number">6.0.4.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多效果待添加。。。"><span class="toc-number">7.</span> <span class="toc-text">更多效果待添加。。。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多系列教程"><span class="toc-number">8.</span> <span class="toc-text">更多系列教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工程地址"><span class="toc-number">9.</span> <span class="toc-text">工程地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shader交流群"><span class="toc-number">10.</span> <span class="toc-text">Shader交流群</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -543,14 +548,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Lua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
@@ -559,7 +556,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color4">Lua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,11 +568,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,6 +581,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -595,31 +604,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -635,6 +624,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
@@ -643,7 +644,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,15 +656,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+                <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,7 +680,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,10 +693,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -715,6 +720,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
               </li>
              
@@ -731,23 +740,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">美文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -759,7 +756,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">美文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
