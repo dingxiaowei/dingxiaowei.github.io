@@ -23,7 +23,13 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/5.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/6.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/7.png">
-<meta property="og:updated_time" content="2019-01-24T16:10:04.859Z">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/10.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/9.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/11.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/12.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/13.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2018/11/17/14.jpg">
+<meta property="og:updated_time" content="2019-05-12T01:30:45.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建Jenkins导出Unity安卓环境">
 <meta name="twitter:description" content="前言早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Unity开发环境，就只要浏览器打开Jenkins然后点击打包即可。 准备工具 准备Jenkins环境，可以选择去Jenkins官网下载,我这里准备了一个Jenkins的war包。">
@@ -271,6 +277,14 @@ var _hmt = _hmt || [];
 </ul>
 <p><img src="/2018/11/17/7.png" alt=""></p>
 <p>更深入的配置可以参考以下链接，更多Jenkins插件和功能可以摸索研究。Mac中导出iOS配置后续添加或者想尝试的朋友参考文末雨凇的文章。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>更新了jenkins之后会发现构建没有报错但没有生成apk，但我们在bat运行却能生成apk，详细看log会发现其实是有提示的，需要将sdk添加到jenkins环境变量里。<br><img src="/2018/11/17/10.png" alt=""></p>
+<p>解决办法：<br><img src="/2018/11/17/9.png" alt=""></p>
+<h2 id="邮件通知"><a href="#邮件通知" class="headerlink" title="邮件通知"></a>邮件通知</h2><p>构建完成，打包出apk，我们可以将apk上传到服务器，以便下载，然后通过邮件通知构建完成，这样我们就不需要一直等待，邮件可以将apk添加到附件。</p>
+<h4 id="邮件通知配置："><a href="#邮件通知配置：" class="headerlink" title="邮件通知配置："></a>邮件通知配置：</h4><p><img src="/2018/11/17/11.png" alt=""></p>
+<h4 id="邮件主题配置："><a href="#邮件主题配置：" class="headerlink" title="邮件主题配置："></a>邮件主题配置：</h4><p>【构建通知】PROJECT_NAME - Build #BUILD_NUMBER - $BUILD_STATUS!</p>
+<h4 id="邮件内容模板配置："><a href="#邮件内容模板配置：" class="headerlink" title="邮件内容模板配置："></a>邮件内容模板配置：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;    </span><br><span class="line">&lt;html&gt;    </span><br><span class="line">&lt;head&gt;    </span><br><span class="line">&lt;meta charset=&quot;UTF-8&quot;&gt;    </span><br><span class="line">&lt;title&gt;$&#123;ENV, var=&quot;JOB_NAME&quot;&#125;-第$&#123;BUILD_NUMBER&#125;次构建日志&lt;/title&gt;    </span><br><span class="line">&lt;/head&gt;    </span><br><span class="line">&lt;body leftmargin=&quot;8&quot; marginwidth=&quot;0&quot; topmargin=&quot;8&quot; marginheight=&quot;4&quot;    </span><br><span class="line">    offset=&quot;0&quot;&gt;    </span><br><span class="line">    &lt;table width=&quot;95%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;  style=&quot;font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif&quot;&gt;    </span><br><span class="line">        &lt;tr&gt;    </span><br><span class="line">            本邮件由系统自动发出，无需回复！&lt;br/&gt;            </span><br><span class="line">            各位同事，大家好，以下为$&#123;PROJECT_NAME &#125;项目构建信息&lt;/br&gt; </span><br><span class="line">            &lt;td&gt;&lt;font color=&quot;#CC0000&quot;&gt;构建结果 - $&#123;BUILD_STATUS&#125;&lt;/font&gt;&lt;/td&gt;   </span><br><span class="line">        &lt;/tr&gt;    </span><br><span class="line">        &lt;tr&gt;    </span><br><span class="line">            &lt;td&gt;&lt;br /&gt;    </span><br><span class="line">            &lt;b&gt;&lt;font color=&quot;#0B610B&quot;&gt;构建信息&lt;/font&gt;&lt;/b&gt;    </span><br><span class="line">            &lt;hr size=&quot;2&quot; width=&quot;100%&quot; align=&quot;center&quot; /&gt;&lt;/td&gt;    </span><br><span class="line">        &lt;/tr&gt;    </span><br><span class="line">        &lt;tr&gt;    </span><br><span class="line">            &lt;td&gt;    </span><br><span class="line">                &lt;ul&gt;    </span><br><span class="line">                    &lt;li&gt;项目名称 ： $&#123;PROJECT_NAME&#125;&lt;/li&gt;    </span><br><span class="line">                    &lt;li&gt;构建编号 ： 第$&#123;BUILD_NUMBER&#125;次构建&lt;/li&gt;    </span><br><span class="line">                    &lt;li&gt;触发原因： $&#123;CAUSE&#125;&lt;/li&gt;    </span><br><span class="line">                    &lt;li&gt;构建状态： $&#123;BUILD_STATUS&#125;&lt;/li&gt;    </span><br><span class="line">                    &lt;li&gt;构建日志： &lt;a href=&quot;$&#123;BUILD_URL&#125;console&quot;&gt;$&#123;BUILD_URL&#125;console&lt;/a&gt;&lt;/li&gt;    </span><br><span class="line">                    &lt;li&gt;构建  Url ： &lt;a href=&quot;$&#123;BUILD_URL&#125;&quot;&gt;$&#123;BUILD_URL&#125;&lt;/a&gt;&lt;/li&gt;    </span><br><span class="line">                    &lt;li&gt;工作目录 ： &lt;a href=&quot;$&#123;PROJECT_URL&#125;ws&quot;&gt;$&#123;PROJECT_URL&#125;ws&lt;/a&gt;&lt;/li&gt;    </span><br><span class="line">                    &lt;li&gt;项目  Url ： &lt;a href=&quot;$&#123;PROJECT_URL&#125;&quot;&gt;$&#123;PROJECT_URL&#125;&lt;/a&gt;&lt;/li&gt;    </span><br><span class="line">                &lt;/ul&gt;    </span><br><span class="line"></span><br><span class="line">&lt;h4&gt;&lt;font color=&quot;#0B610B&quot;&gt;失败用例&lt;/font&gt;&lt;/h4&gt;</span><br><span class="line">&lt;hr size=&quot;2&quot; width=&quot;100%&quot; /&gt;</span><br><span class="line">$FAILED_TESTS&lt;br/&gt;</span><br><span class="line"></span><br><span class="line">&lt;h4&gt;&lt;font color=&quot;#0B610B&quot;&gt;最近提交(#$SVN_REVISION)&lt;/font&gt;&lt;/h4&gt;</span><br><span class="line">&lt;hr size=&quot;2&quot; width=&quot;100%&quot; /&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">$&#123;CHANGES_SINCE_LAST_SUCCESS, reverse=true, format=&quot;%c&quot;, changesFormat=&quot;&lt;li&gt;%d [%a] %m&lt;/li&gt;&quot;&#125;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">详细提交: &lt;a href=&quot;$&#123;PROJECT_URL&#125;changes&quot;&gt;$&#123;PROJECT_URL&#125;changes&lt;/a&gt;&lt;br/&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/td&gt;    </span><br><span class="line">        &lt;/tr&gt;    </span><br><span class="line">    &lt;/table&gt;    </span><br><span class="line">&lt;/body&gt;    </span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="将邮件添加到任务中"><a href="#将邮件添加到任务中" class="headerlink" title="将邮件添加到任务中"></a>将邮件添加到任务中</h4><p><img src="/2018/11/17/12.png" alt=""><br>设置完成，再次构建下我们的任务，AssetBundle打包完成，apk生成完毕，邮件发送事件被触发<br><img src="/2018/11/17/13.png" alt=""></p>
+<h4 id="邮件通知-1"><a href="#邮件通知-1" class="headerlink" title="邮件通知"></a>邮件通知</h4><p><img src="/2018/11/17/14.jpg" alt=""></p>
 <h2 id="下载链接"><a href="#下载链接" class="headerlink" title="下载链接"></a>下载链接</h2><ul>
 <li><a href="https://gitee.com/dingxiaowei/JenkinsTest" target="_blank" rel="noopener">https://gitee.com/dingxiaowei/JenkinsTest</a></li>
 </ul>
@@ -450,7 +464,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工具"><span class="toc-number">2.</span> <span class="toc-text">准备工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建步骤"><span class="toc-number">3.</span> <span class="toc-text">搭建步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载链接"><span class="toc-number">4.</span> <span class="toc-text">下载链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后续"><span class="toc-number">6.</span> <span class="toc-text">后续</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工具"><span class="toc-number">2.</span> <span class="toc-text">准备工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建步骤"><span class="toc-number">3.</span> <span class="toc-text">搭建步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意事项"><span class="toc-number">4.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#邮件通知"><span class="toc-number">5.</span> <span class="toc-text">邮件通知</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#邮件通知配置："><span class="toc-number">5.0.1.</span> <span class="toc-text">邮件通知配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#邮件主题配置："><span class="toc-number">5.0.2.</span> <span class="toc-text">邮件主题配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#邮件内容模板配置："><span class="toc-number">5.0.3.</span> <span class="toc-text">邮件内容模板配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将邮件添加到任务中"><span class="toc-number">5.0.4.</span> <span class="toc-text">将邮件添加到任务中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#邮件通知-1"><span class="toc-number">5.0.5.</span> <span class="toc-text">邮件通知</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载链接"><span class="toc-number">6.</span> <span class="toc-text">下载链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后续"><span class="toc-number">8.</span> <span class="toc-text">后续</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -576,10 +590,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
@@ -592,7 +602,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -604,14 +622,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
@@ -620,55 +630,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,11 +654,67 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UI框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -704,35 +730,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UI框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -748,11 +750,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+                <a href="javascript:void(0)" class="js-tag color4">单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -781,18 +807,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">单片机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
               </li>
              
               <li class="article-tag-list-item">
