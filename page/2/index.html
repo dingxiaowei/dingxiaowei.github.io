@@ -197,6 +197,112 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-【GFFrameWork】游戏Log模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/12/">【GFFrameWork】游戏Log模块</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/12/" class="archive-article-date">
+  	<time datetime="2019-01-12T13:14:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-12</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>为了让项目功能模块化，支持可复用性和可扩展性的原则，将跟游戏关联不大的功能模块单独拎出来添加到一个独立库工程。Log是游戏框架中比较重要和基础的一个功能模块。并且Log是调试的重要手段之一，游戏Debug版本在UI上显示Log也会显得尤为重要。</p>
+<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><p><img src="/2019/01/12/5.png" alt=""></p>
+<h2 id="功能说明"><a href="#功能说明" class="headerlink" title="功能说明"></a>功能说明</h2><p>目前Log模块支持的功能：</p>
+<ul>
+<li>支持UI可视化</li>
+<li>支持是否显示日志</li>
+<li>支持是否显示日志时间</li>
+<li>支持显示不同级别(一般/警告/错误)的日志</li>
+<li>是否将Log显示到本地持久化存储(持久化目录见 Debugger.LogFileDir)</li>
+<li>支持是否打印堆栈日志</li>
+<li>支持多参数的Log显示</li>
+</ul>
+        
+          <a class="article-more-a" href="/2019/01/12/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Log</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/12/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-【GFFrameWork】游戏持久化存储模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1112,111 +1218,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-【Aladdin-Unity3D-Shader编程】之四-贴图纹理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/">【Aladdin Unity3D Shader编程】之四 贴图纹理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/18/" class="archive-article-date">
-  	<time datetime="2017-11-18T01:43:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="关于纹理贴图介绍"><a href="#关于纹理贴图介绍" class="headerlink" title="关于纹理贴图介绍"></a>关于纹理贴图介绍</h2><p>纹理坐标也叫UV坐标,UV坐标都是0~1,并不是我们所理解的像素坐标,相当于是一个百分比。</p>
-<h2 id="编写shader映射纹理"><a href="#编写shader映射纹理" class="headerlink" title="编写shader映射纹理"></a>编写shader映射纹理</h2><p>将纹理的颜色取代漫反射的颜色</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;AladdinShader/11 Single Texture Shader&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        // _Diffuse(&quot;Diffuse Color&quot;, Color)=(1,1,1,1) //漫反射的颜色</span><br><span class="line">        _MainTex(&quot;Main Tex&quot;, 2D) = &quot;white&quot;&#123;&#125; //纹理贴图 默认白色</span><br><span class="line">        _Color(&quot;Color&quot;, Color) = (1,1,1,1) //整体一个色调</span><br><span class="line">        _Specular(&quot;Specular Color&quot;, Color)=(1,1,1,1)</span><br><span class="line">        _Gloss(&quot;Gloss&quot;,Range(10,200))=20</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader &#123;</span><br><span class="line">        Pass&#123;</span><br><span class="line">            //只有正确定义Tags 才能获取跟光相关的属性</span><br><span class="line">            Tags &#123; &quot;LightMode&quot;=&quot;ForwardBase&quot; &#125;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">#include &quot;Lighting.cginc&quot; </span><br><span class="line">#pragma vertex vert </span><br><span class="line">#pragma fragment frag </span><br><span class="line"></span><br><span class="line">            // fixed4 _Diffuse;</span><br><span class="line">            sampler2D _MainTex;</span><br><span class="line">            fixed4 _Color;</span><br><span class="line">            fixed4 _Specular;</span><br><span class="line">            half _Gloss;</span><br><span class="line">            //顶点函数参数</span><br><span class="line">            struct a2v&#123;</span><br><span class="line">                float4 vertex:POSITION; //顶点位置</span><br><span class="line">                float3 normal:NORMAL; //模型空间下的法线</span><br><span class="line"></span><br><span class="line">                //纹理坐标只能在定点函数取到</span><br><span class="line">                float4 texcoord:TEXCOORD0; </span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            struct v2f&#123;</span><br><span class="line">                float4 svPos:SV_POSITION;</span><br><span class="line">                fixed3 worldNormal:TEXCOORD0;//世界空间下的法线</span><br><span class="line">                float4 worldVertex:TEXCOORD1;</span><br><span class="line"></span><br><span class="line">                //将取到的纹理坐标传递到片元函数</span><br><span class="line">                float4 uv:TEXCOORD2;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            v2f vert(a2v v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f f;</span><br><span class="line">                f.svPos = mul(UNITY_MATRIX_MVP,v.vertex); //模型空间位置到剪裁空间的顶点位置的转换</span><br><span class="line">                f.worldNormal = UnityObjectToWorldNormal(v.normal); //模型空间的法线转成时间空间下的法线</span><br><span class="line">                f.worldVertex = mul(v.vertex,unity_WorldToObject);</span><br><span class="line">                f.uv = v.texcoord;</span><br><span class="line">                return f;</span><br><span class="line">            &#125; </span><br><span class="line"></span><br><span class="line">            //片元函数返回颜色</span><br><span class="line">            fixed4 frag(v2f f):SV_Target&#123;</span><br><span class="line">                //漫反射</span><br><span class="line">                //漫反射颜色 先不管透明度</span><br><span class="line">                //_LightColor0 平行光的颜色 cos夹角 光的方向和视野的夹角</span><br><span class="line">                fixed3 normalDir = normalize(f.worldNormal);</span><br><span class="line">                //光的方向</span><br><span class="line">                fixed3 lightDir = normalize(WorldSpaceLightDir(f.worldVertex));</span><br><span class="line"></span><br><span class="line">                //返回贴图上某像素颜色的值</span><br><span class="line">                fixed3 texColor = tex2D(_MainTex, f.uv.xy) * _Color.rgb;</span><br><span class="line"></span><br><span class="line">                //漫反射的颜色</span><br><span class="line">                // fixed3 diffuse = _LightColor0.rgb *_Diffuse.rgb * max(dot(normalDir, lightDir),0);</span><br><span class="line">                fixed3 diffuse = _LightColor0.rgb * texColor * max(dot(normalDir, lightDir), 0);</span><br><span class="line"></span><br><span class="line">                //相机方向</span><br><span class="line">                fixed3 viewDir = normalize(UnityWorldSpaceViewDir(f.worldVertex));</span><br><span class="line"></span><br><span class="line">                //光和相机方向的平分线</span><br><span class="line">                fixed3 halfDir = normalize(lightDir + viewDir);</span><br><span class="line">                //高光反射</span><br><span class="line">                fixed3  specular = _LightColor0.rgb * _Specular.rgb * pow(max(dot(normalDir,halfDir),0),_Gloss);</span><br><span class="line">                //环境光</span><br><span class="line">                // fixed3 tempColor = diffuse + specular + UNITY_LIGHTMODEL_AMBIENT.rgb; </span><br><span class="line"></span><br><span class="line">                //使用了纹理之后 一般环境光也跟纹理做一个融合</span><br><span class="line">                fixed3 tempColor = diffuse + specular + UNITY_LIGHTMODEL_AMBIENT.rbg * texColor;</span><br><span class="line">                return fixed4(tempColor,1);</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    FallBack  &quot;Specular&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们找一个纹理贴图<br><img src="/2017/11/18/1.png" alt=""><br>然后将贴图赋值给_MainTex属性，调整一下高光颜色和整体贴图颜色属性并且查看效果<br>第一组效果:<br><img src="/2017/11/18/2.png" alt=""><br><img src="/2017/11/18/3.png" alt=""><br>第二组效果:<br><img src="/2017/11/18/4.png" alt=""><br><img src="/2017/11/18/5.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/11/18/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Shader</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">纹理贴图</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Shader//" class="article-tag-list-link color2">Shader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1310,14 +1311,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
@@ -1334,15 +1327,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1354,6 +1343,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
@@ -1362,27 +1355,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1406,6 +1383,34 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
@@ -1414,15 +1419,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+                <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1462,11 +1463,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PlayerPrefs替代方案</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity数据存储</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1474,7 +1495,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1514,35 +1535,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AssetBudnle</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PlayerPrefs替代方案</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity数据存储</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
