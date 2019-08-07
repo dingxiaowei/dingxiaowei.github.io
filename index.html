@@ -231,17 +231,28 @@ var _hmt = _hmt || [];
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Wwise是一款音频中间件，据我了解大厂项目使用的特别多，腾讯的王者荣耀、网易(也有的项目是用Fmod,类似的产品)、巨人、米哈游的崩坏3、游族的权利的游戏等等，Wwise自带的Demo中有一个Limbo(地狱边境)的游戏的案例，在14年的时候我也很痴迷这款非常益智的游戏，真的很烧脑，没想到游戏里面的音效竟然是用到了Wwise，里面的音效也特别丰富，Wwise比较适合对音效要求很高的项目，有人会问Unity已经有内置的声音引擎为啥要选择第三方的声音引擎？这就不得不说Wwise的优势了，下面会介绍Wwise的优势。我从刚接手这个引擎也是很不适应，官方文档我觉得写的很简单，其次是github上没有什么比较成熟的案例分享，包括官方案例都是一些将音效拖放到Hierarchy上播放的方式，实际我们开发商业项目肯定都是要考虑动态加载、动态更新的，所以这些案例只能当了解Wwise引擎来参考，最后我也是经过一番摸爬滚打才将Wwise集成到公司项目中，我要吐槽Wwise的是更新实在太慢了，而且在外网，可能也是因为在外网而且Wwise插件本身很大，就算一个HelloWorld的工程集成了Wwise都要四五个的G，所以下载贼慢，不翻墙或许还下载失败，要是有个国内镜像就好了。还有初期创建Wwise项目的时候最好就勾选上所有的平台，以免以后要添加平台不知道从那边找，这个我也是折腾了好久，后来才知道可以选择添加平台的。要彻底搞透Wwise还是不容易的，毕竟这是音效师的饭碗工具，就相当于Unity对于我们前端程序一样也是饭碗工具，所以我作为前端程序也就是了解个大概，方便以后跟外包人员对接，下面系列文章就是分享我的一些学习心得，最后我也会将我学习Wwise做的一个小项目开源分享出来，希望能帮到更多的小伙伴们！</p>
 <h2 id="视频简介"><a href="#视频简介" class="headerlink" title="视频简介"></a>视频简介</h2><p><a href="https://www.youtube.com/user/AudiokineticWwise，这个是Wwise官方的视频介绍，当然需要翻墙访问。" target="_blank" rel="noopener">https://www.youtube.com/user/AudiokineticWwise，这个是Wwise官方的视频介绍，当然需要翻墙访问。</a></p>
 <h2 id="Wwise的优势"><a href="#Wwise的优势" class="headerlink" title="Wwise的优势"></a>Wwise的优势</h2><ul>
-<li>1.Unity跟音效模块完全分离，音效完全交给音效师或者外包来完成，程序只管调用事件就行，这也就是所谓的耦合性很低吧。</li>
-<li>2.具有性能调试工具，类似Unity的Profile，能够分析性能瓶颈，方便优化。</li>
-<li>3.具有丰富的混音器，如果我们要实现一个百鸟争鸣的效果，在Unity我们或许要调用多个AudioClip，但或许还很难达到我们想要的效果，Wwise只要将这些Audio音效做一个Blend音效即可。</li>
-<li>4.开关切换，例如我们要实现角色在不同材质上走实现不用的音效控制，就可以用switch完成。策划配置不同材料的switch名，客户端根据导表信息自动设置switch，就会播放对应的音效。</li>
-<li>5.具有动态混淆功能，例如吃鸡游戏，在房间里打枪和平地上打枪，由于房间内声音回来会反射，所以混响效果应该是不同的。通过游戏过程中对RTPC实时变量的控制，可以达到效果。</li>
-<li>6.音效播放各种效果，例如淡入淡出，播放之后停顿几秒继续播放</li>
-<li>7.支持多平台，只要设置相关平台就会为不同平台导出不同的音效bank。</li>
-<li>8.对音源文件的内存优化，例如一段很长的背景音乐，可以设置只加载正在播放的那一段。</li>
-<li>9.多语言版本，例如不同语种的配音。</li>
-<li>10.随机播放音效，例如当一类音效需要随机播放一个的时候，原来Unity的设计可以通过代码来随笔播放某个clip，但Wwise有随机container，我们程序只管发送事件就行，引擎内部可以帮我们随机一个。</li>
-<li>11.多Listener支持，可以多达八个，Unity原生的AudioListener只能有一个。</li>
+<li><p>1.Unity跟音效模块完全分离，音效完全交给音效师或者外包来完成，程序只管调用事件就行，这也就是所谓的耦合性很低吧。</p>
+</li>
+<li><p>2.具有性能调试工具，类似Unity的Profile，能够分析性能瓶颈，方便优化。</p>
+</li>
+<li><p>3.具有丰富的混音器，如果我们要实现一个百鸟争鸣的效果，在Unity我们或许要调用多个AudioClip，但或许还很难达到我们想要的效果，Wwise只要将这些Audio音效做一个Blend音效即可。</p>
+</li>
+<li><p>4.开关切换，例如我们要实现角色在不同材质上走实现不用的音效控制，就可以用switch完成。策划配置不同材料的switch名，客户端根据导表信息自动设置switch，就会播放对应的音效。</p>
+</li>
+<li><p>5.具有动态混淆功能，例如吃鸡游戏，在房间里打枪和平地上打枪，由于房间内声音回来会反射，所以混响效果应该是不同的。通过游戏过程中对RTPC实时变量的控制，可以达到效果。</p>
+</li>
+<li><p>6.音效播放各种效果，例如淡入淡出，播放之后停顿几秒继续播放</p>
+</li>
+<li><p>7.支持多平台，只要设置相关平台就会为不同平台导出不同的音效bank。</p>
+</li>
+<li><p>8.对音源文件的内存优化，例如一段很长的背景音乐，可以设置只加载正在播放的那一段。</p>
+</li>
+<li><p>9.多语言版本，例如不同语种的配音。</p>
+</li>
+<li><p>10.随机播放音效，例如当一类音效需要随机播放一个的时候，原来Unity的设计可以通过代码来随笔播放某个clip，但Wwise有随机container，我们程序只管发送事件就行，引擎内部可以帮我们随机一个。</p>
+</li>
+<li><p>11.多Listener支持，可以多达八个，Unity原生的AudioListener只能有一个。</p>
+</li>
 </ul>
         
           <a class="article-more-a" href="/2019/08/05/#more">more >></a>
@@ -1331,15 +1342,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1351,39 +1354,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1403,11 +1386,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1415,7 +1418,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1423,7 +1426,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1432,14 +1447,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UI框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1459,15 +1466,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1483,6 +1486,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1492,10 +1499,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1511,15 +1514,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1535,7 +1542,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1544,6 +1551,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
