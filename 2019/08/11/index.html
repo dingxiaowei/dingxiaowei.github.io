@@ -6,25 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://dingxiaowei.cn">
-  <title>【Aladdin-Unity-Wwise】Wwise入门之三-利用Switch实现不同材质的脚步声 | Aladdin的博客</title>
+  <title>Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="利用Switch实现不同材质的脚步声">
-<meta name="keywords" content="Unity,Wwise">
+  <meta name="description" content="title: 【Aladdin-Unity-Wwise】Wwise入门之四-使用RTPC实现控制玩家心跳声copyright: truetoc: truedate: 2019-8-11 22:01:01tags: [Unity,Wwise]categories: Unitypassword:description: 使用RTPC实现角色心跳声随着HP的变化而变化  前言Wwise中另外一个重要的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Aladdin-Unity-Wwise】Wwise入门之三-利用Switch实现不同材质的脚步声">
+<meta property="og:title" content="Aladdin的博客">
 <meta property="og:url" content="http://dingxiaowei.cn/2019/08/11/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
-<meta property="og:description" content="利用Switch实现不同材质的脚步声">
+<meta property="og:description" content="title: 【Aladdin-Unity-Wwise】Wwise入门之四-使用RTPC实现控制玩家心跳声copyright: truetoc: truedate: 2019-8-11 22:01:01tags: [Unity,Wwise]categories: Unitypassword:description: 使用RTPC实现角色心跳声随着HP的变化而变化  前言Wwise中另外一个重要的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://dingxiaowei.cn/2019/08/11/1.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2019/08/11/2.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2019/08/11/3.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2019/08/11/4.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2019/08/11/5.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2019/08/11/6.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2019/08/11/7.png">
-<meta property="og:updated_time" content="2019-08-11T08:41:35.114Z">
+<meta property="og:image" content="http://dingxiaowei.cn/2019/08/11/8.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2019/08/11/9.png">
+<meta property="og:updated_time" content="2019-08-11T11:21:13.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【Aladdin-Unity-Wwise】Wwise入门之三-利用Switch实现不同材质的脚步声">
-<meta name="twitter:description" content="利用Switch实现不同材质的脚步声">
+<meta name="twitter:title" content="Aladdin的博客">
+<meta name="twitter:description" content="title: 【Aladdin-Unity-Wwise】Wwise入门之四-使用RTPC实现控制玩家心跳声copyright: truetoc: truedate: 2019-8-11 22:01:01tags: [Unity,Wwise]categories: Unitypassword:description: 使用RTPC实现角色心跳声随着HP的变化而变化  前言Wwise中另外一个重要的">
 <meta name="twitter:image" content="http://dingxiaowei.cn/2019/08/11/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
@@ -203,48 +205,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-【Aladdin-Unity-Wwise】Wwise入门之三-利用Switch实现不同材质的脚步声" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-【Aladdin-Unity-Wwise】Wwise入门之四-使用RTPC实现控制玩家心跳声" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      【Aladdin-Unity-Wwise】Wwise入门之三-利用Switch实现不同材质的脚步声
-    </h1>
-  
-
-        
-        <a href="/2019/08/11/" class="archive-article-date">
-  	<time datetime="2019-08-11T14:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>吃鸡游戏中实现人物走在不同材质的路面上实现不同的脚步声也是常见的需求之一，下面就写一个用Wwise实现这个效果的步骤。</p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-导入不同材质的脚步声音效"><a href="#1-导入不同材质的脚步声音效" class="headerlink" title="1.导入不同材质的脚步声音效"></a>1.导入不同材质的脚步声音效</h5><p><img src="/2019/08/11/1.png" alt=""><br>我们将每种类型的音效放在RandomContainer容器中，并且将这些音效放在SwitchContainer中。</p>
+        <hr>
+<p>title: 【Aladdin-Unity-Wwise】Wwise入门之四-使用RTPC实现控制玩家心跳声<br>copyright: true<br>toc: true<br>date: 2019-8-11 22:01:01<br>tags: [Unity,Wwise]<br>categories: Unity<br>password:<br>description: 使用RTPC实现角色心跳声随着HP的变化而变化</p>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Wwise中另外一个重要的GameSync类型叫做GameParameter(游戏参数),又叫做RTPC（Real Time Parameter Control,实时参数控制）。是用来让声音对在一定范围内变化的数值信息做出反应。Game Parameter 非常适合用来表示游戏中在一定范围内连续变化的任何类型的信息。Game parameter 可以代表汽车的发动机转速、任务完成的百分比，甚至连一天中的时间数值都可以表示。我们在吃鸡游戏中，有一个重要的变量就是玩家的生命值（HP值）。玩家（主角）在游戏开始时的 HP 值为 100，但如果遭到坏蛋攻击，我们的主角 HP 值就会一路下降，当 HP 值降到零的时候就会死掉。<br>在玩游戏的过程中，屏幕左下角可以看见 HP 值，但在激战当中，你很难做到能一直盯着 HP 值看。这个时候如果玩家的 HP 值可以关联上一个听觉反馈，会非常有用。当心跳声越来越响亮时，代表玩家的“身体状况”每况愈下，引起玩家的警惕。</p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-导入心跳音效"><a href="#1-导入心跳音效" class="headerlink" title="1.导入心跳音效"></a>1.导入心跳音效</h5><p><img src="/2019/08/11/1.png" alt=""><br>设置为循环模式</p>
 <a id="more"></a>
-<h5 id="2-创建SwitchGroup"><a href="#2-创建SwitchGroup" class="headerlink" title="2.创建SwitchGroup"></a>2.创建SwitchGroup</h5><p><img src="/2019/08/11/2.png" alt=""><br>创建Material类型的Switch以及下面对应的不同的材质state。</p>
-<h5 id="3-设置SwitchContainer的属性"><a href="#3-设置SwitchContainer的属性" class="headerlink" title="3.设置SwitchContainer的属性"></a>3.设置SwitchContainer的属性</h5><p><img src="/2019/08/11/3.png" alt=""><br>设置Switch属性的Group和DefaultSwitch/State。</p>
-<p><img src="/2019/08/11/5.png" alt=""><br>将不同的音效拖动到不同的材质State上。</p>
-<h5 id="4-测试音效"><a href="#4-测试音效" class="headerlink" title="4.测试音效"></a>4.测试音效</h5><p><img src="/2019/08/11/7.png" alt=""><br>可以选择不同的switch材质然后按住空格键来测试不同的材质音效是否正确。</p>
-<h5 id="5-添加Event事件"><a href="#5-添加Event事件" class="headerlink" title="5.添加Event事件"></a>5.添加Event事件</h5><p>可以按空格键来听一下事件是否有效</p>
-<h5 id="6-代码测试"><a href="#6-代码测试" class="headerlink" title="6.代码测试"></a>6.代码测试</h5><p>生成Bank并且刷新Unity音效，然后通过代码来测试效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public AKRESULT SetSwitch(uint switchGroup, uint switchState, GameObject gameObj = null)</span><br><span class="line">&#123;</span><br><span class="line">    if (gameObj == null)</span><br><span class="line">        gameObj = mGlobalObject;</span><br><span class="line">    AKRESULT result = AkSoundEngine.SetSwitch(switchGroup, switchState, gameObj);</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public AKRESULT SetSwitch(string switchGroup, string switchState, GameObject gameObj = null)</span><br><span class="line">&#123;</span><br><span class="line">    if (gameObj == null)</span><br><span class="line">        gameObj = mGlobalObject;</span><br><span class="line">    AKRESULT result = AkSoundEngine.SetSwitch(switchGroup, switchState, gameObj);</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">WwiseAudioManager.Instance.SetSwitch(&quot;Material&quot;, &quot;Water&quot;);</span><br><span class="line">WwiseAudioManager.Instance.PlaySound(&quot;Foot_Player&quot;);</span><br></pre></td></tr></table></figure></p>
-<p>然后听效果是我们想要的效果。</p>
-<p>本章利用Wwise实现不同材质的脚步声音效你学会了嘛？如有问题可以下方留言！</p>
+<h5 id="2-添加PlayerHealth参数"><a href="#2-添加PlayerHealth参数" class="headerlink" title="2.添加PlayerHealth参数"></a>2.添加PlayerHealth参数</h5><p><img src="/2019/08/11/2.png" alt=""><br>默认值一般是50，我们修改为100，因为玩家的血量初始值是100。</p>
+<h5 id="3-设置音效的RTPC参数"><a href="#3-设置音效的RTPC参数" class="headerlink" title="3.设置音效的RTPC参数"></a>3.设置音效的RTPC参数</h5><p><img src="/2019/08/11/4.png" alt=""><br>Y轴代表音量，X轴代表血量。</p>
+<h5 id="4-设置RTPC曲线"><a href="#4-设置RTPC曲线" class="headerlink" title="4.设置RTPC曲线"></a>4.设置RTPC曲线</h5><p><img src="/2019/08/11/5.png" alt=""><br>曲线设置成100-50听不到声音，0-50随着HP的减少音量越来越大，呈曲线状态，修改成如下图<br><img src="/2019/08/11/6.png" alt=""></p>
+<p><img src="/2019/08/11/7.png" alt=""></p>
+<h5 id="5-测试音效"><a href="#5-测试音效" class="headerlink" title="5.测试音效"></a>5.测试音效</h5><p><img src="/2019/08/11/8.png" alt=""><br>在Wwise中测试音效，改变变量看是否满足我们想要的效果。</p>
+<h5 id="6-设置Event导出Bank"><a href="#6-设置Event导出Bank" class="headerlink" title="6.设置Event导出Bank"></a>6.设置Event导出Bank</h5><p><img src="/2019/08/11/9.png" alt=""></p>
+<h5 id="7-代码测试"><a href="#7-代码测试" class="headerlink" title="7.代码测试"></a>7.代码测试</h5><pre><code>//播放心跳声
+WwiseAudioManager.Instance.SetRTPCParam(&quot;PlayerHealth&quot;, 10);
+WwiseAudioManager.Instance.PlaySound(&quot;Player_HeartBeat&quot;);
+</code></pre><p>在Unity中运行跟我们想要的效果一样，你学到了嘛！如有问题下方留言解答。</p>
 <h2 id="更多精品教程"><a href="#更多精品教程" class="headerlink" title="更多精品教程"></a>更多精品教程</h2><p><a href="http://dingxiaowei.cn/">http://dingxiaowei.cn/</a></p>
 
       
@@ -285,33 +266,7 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Wwise</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -375,18 +330,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/08/11/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          【Aladdin-Unity-Wwise】Wwise入门之四-使用RTPC实现控制玩家心跳声
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/06/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">【Aladdin-Unity-Wwise】Wwise入门之二-Wwise的多语言</div>
+    <a href="/2019/08/10/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【Aladdin-Unity-Wwise】Wwise入门之三-利用Switch实现不同材质的脚步声</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -406,19 +352,6 @@ var _hmt = _hmt || [];
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作步骤"><span class="toc-number">2.</span> <span class="toc-text">操作步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-导入不同材质的脚步声音效"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1.导入不同材质的脚步声音效</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-创建SwitchGroup"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">2.创建SwitchGroup</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-设置SwitchContainer的属性"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">3.设置SwitchContainer的属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-测试音效"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">4.测试音效</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-添加Event事件"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">5.添加Event事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-代码测试"><span class="toc-number">2.0.0.6.</span> <span class="toc-text">6.代码测试</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多精品教程"><span class="toc-number">3.</span> <span class="toc-text">更多精品教程</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
@@ -429,7 +362,7 @@ var _hmt = _hmt || [];
   
 
   
-  <div id="SOHUCS" sid="【Aladdin-Unity-Wwise】Wwise入门之三-利用Switch实现不同材质的脚步声" ></div> 
+  <div id="SOHUCS" sid="【Aladdin-Unity-Wwise】Wwise入门之四-使用RTPC实现控制玩家心跳声" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -531,14 +464,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
@@ -547,7 +472,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,15 +484,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Scut</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,7 +496,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,35 +520,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -631,6 +544,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
@@ -639,11 +572,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,10 +600,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
               </li>
              
@@ -683,19 +612,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PlayerPrefs替代方案</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity数据存储</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -703,7 +624,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -719,27 +640,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PlayerPrefs替代方案</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity数据存储</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">简历</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">单片机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -748,6 +665,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -763,7 +684,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+                <a href="javascript:void(0)" class="js-tag color4">单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -772,6 +701,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
