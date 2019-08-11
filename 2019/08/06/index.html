@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2019/08/06/6.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2019/08/06/8.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2019/08/06/9.png">
-<meta property="og:updated_time" content="2019-08-11T08:41:05.466Z">
+<meta property="og:updated_time" content="2019-08-11T08:57:19.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Aladdin-Unity-Wwise】Wwise入门之二-Wwise的多语言">
 <meta name="twitter:description" content="Wwise的多语言">
@@ -239,9 +239,10 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>游戏的多语言我们并不陌生，常见的是文字的多语言配置，那音效多语言怎么处理呢？一般音效的多语言是指配音的多语言化，一些背景音乐，音效是部分语言的，配音多语言我们如果在没接触Wwise之前或许会这样处理，通过陪表来显示，每一列配置代表一种语言，这当然也可以，但Wwise给我们提供了多语言配音机制，多语言案例官网介绍的不详细，官方Demo我貌似也没找到，通过一顿摸索最终实现了效果，下面我就分享一下操作过程。</p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-创建多语言"><a href="#1-创建多语言" class="headerlink" title="1.创建多语言"></a>1.创建多语言</h5><p>Wwise默认是添加的English(US)语言，他是默认参考语言，我们如果要添加我们想要的语言，打开LanguageManager添加即可<br><img src="/2019/08/06/1.png" alt=""><br>在Language处就会出现我们添加的语言，添加平台也是类似的操作，这个后续再介绍，<br><img src="/2019/08/06/2.png" alt=""></p>
-<h5 id="2-导入配音"><a href="#2-导入配音" class="headerlink" title="2.导入配音"></a>2.导入配音</h5><p>准备不同语言的配音，注意：对应的wav的命名要一致，然后我们在添加Audio的时候 Import as可以选择SoundVoice还是SoundFX，Wwise默认将声音分成配音和音效两种，我们设置为配音类型<br><img src="/2019/08/06/3.png" alt=""><br>导入第二种Chinese配音的时候ImportMode要选择Localize languages类型，并且Destination language选择为Chinese，这样Wwise就会根据wav的名字来对应不同语言的配音版本。<br><img src="/2019/08/06/4.png" alt=""><br>下面我们会看到Wwise的处理方式，在ContentsEditor中可以看到分成了不同语言平台的配音并且对应了我们刚刚导入的资源。<br><img src="/2019/08/06/5.png" alt=""><br>我们通过Space按键来感受一下不同语言平台的音效吧，我们播放Voices Container，然后切换语言平台，会听到同一个Voices播放出了不同语言的声音，是不是很神奇，这就是Wwise帮我们做的工作，非常的方便。<br><img src="/2019/08/06/7.png" alt=""></p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-创建多语言"><a href="#1-创建多语言" class="headerlink" title="1.创建多语言"></a>1.创建多语言</h5><p>Wwise默认是添加的English(US)语言，他是默认参考语言，我们如果要添加我们想要的语言，打开LanguageManager添加即可<br><img src="/2019/08/06/1.png" alt=""></p>
 <a id="more"></a>
+<p>在Language处就会出现我们添加的语言，添加平台也是类似的操作，这个后续再介绍，<br><img src="/2019/08/06/2.png" alt=""></p>
+<h5 id="2-导入配音"><a href="#2-导入配音" class="headerlink" title="2.导入配音"></a>2.导入配音</h5><p>准备不同语言的配音，注意：对应的wav的命名要一致，然后我们在添加Audio的时候 Import as可以选择SoundVoice还是SoundFX，Wwise默认将声音分成配音和音效两种，我们设置为配音类型<br><img src="/2019/08/06/3.png" alt=""><br>导入第二种Chinese配音的时候ImportMode要选择Localize languages类型，并且Destination language选择为Chinese，这样Wwise就会根据wav的名字来对应不同语言的配音版本。<br><img src="/2019/08/06/4.png" alt=""><br>下面我们会看到Wwise的处理方式，在ContentsEditor中可以看到分成了不同语言平台的配音并且对应了我们刚刚导入的资源。<br><img src="/2019/08/06/5.png" alt=""><br>我们通过Space按键来感受一下不同语言平台的音效吧，我们播放Voices Container，然后切换语言平台，会听到同一个Voices播放出了不同语言的声音，是不是很神奇，这就是Wwise帮我们做的工作，非常的方便。<br><img src="/2019/08/06/7.png" alt=""></p>
 <h4 id="3-添加事件"><a href="#3-添加事件" class="headerlink" title="3.添加事件"></a>3.添加事件</h4><p>Wwise音效一切都是跟事件挂钩，事件也是音效师和程序员之间沟通的纽带。<br><img src="/2019/08/06/6.png" alt=""></p>
 <h4 id="4-添加Bank"><a href="#4-添加Bank" class="headerlink" title="4.添加Bank"></a>4.添加Bank</h4><p>Wwise一切音效相关的都包含在一个Bank包中，程序也是先加载Bank然后再播放音效事件。<br><img src="/2019/08/06/8.png" alt=""><br>生成Bank资源。<br><img src="/2019/08/06/9.png" alt=""><br>注意：记得在UnityWwisePicker也更新一下哦，不然会有问题的！</p>
 <h4 id="5-程序测试"><a href="#5-程序测试" class="headerlink" title="5.程序测试"></a>5.程序测试</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var akResult = AkSoundEngine.SetCurrentLanguage(&quot;English(US)&quot;);</span><br><span class="line">//var akResult = AkSoundEngine.SetCurrentLanguage(&quot;Chinese&quot;);</span><br><span class="line">mBankInfoDict.Add(&quot;vo_AOh&quot;, &quot;Voice&quot;);</span><br><span class="line">AkSoundEngine.PostEvent(eventName, gameObject);</span><br></pre></td></tr></table></figure>
@@ -533,14 +534,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
@@ -549,11 +542,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -573,10 +574,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
@@ -589,15 +586,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,22 +635,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,7 +666,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,35 +690,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -725,11 +710,39 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">单片机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -753,27 +766,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AssetBudnle</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">单片机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
