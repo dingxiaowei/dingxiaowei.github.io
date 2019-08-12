@@ -197,20 +197,20 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-【Aladdin-Unity-Wwise】Wwise入门之五-使用State实现玩家生死状态切换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-【Aladdin-Unity-Wwise】Wwise入门之六-利用Attenuation实现3D衰减音效" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/12/">【Aladdin-Unity-Wwise】Wwise入门之五-使用State实现玩家生死状态切换</a>
+      <a class="article-title" href="/2019/08/12/">【Aladdin-Unity-Wwise】Wwise入门之六-利用Attenuation实现3D衰减音效</a>
     </h1>
   
 
         
         <a href="/2019/08/12/" class="archive-article-date">
-  	<time datetime="2019-08-12T07:01:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-12</time>
+  	<time datetime="2019-08-12T10:01:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-12</time>
 </a>
         
 		
@@ -228,9 +228,9 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Wwise中GameSync类型还有一个叫做States，States是一种特殊的游戏调用，通常用来让声音响应全局游戏事件，并产生渐变效果。比如模拟玩家被震晕或者浮出/入水面的情况。下面我们利用States来实现角色生死状态的音效切换，并有过渡效果。这也是Wwise比原生Unity音效强的地方，原来的音效系统想要实现音效状态切换，我们在切换AudioClip的时候还要通过代码来控制音效的变化，比较麻烦，Wwise可以帮我们轻松搞定这一需求。</p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-导入心跳音效"><a href="#1-导入心跳音效" class="headerlink" title="1.导入心跳音效"></a>1.导入心跳音效</h5><p>并设置为循环模式</p>
-<h5 id="2-在GameSyncs添加State参数"><a href="#2-在GameSyncs添加State参数" class="headerlink" title="2.在GameSyncs添加State参数"></a>2.在GameSyncs添加State参数</h5><p><img src="/2019/08/12/1.png" alt=""><br>这里代表玩家生存和死亡两种状态</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在Wwise中，声音是有方向的，Wwise有一个api接口是SetPosition就要求我们设置方向，我们设想一下，如果一个声源套一个锥形的喇叭，那我们正对和背对声源的位置所听到的声音效果是不一样的。下面我们就来实现一下这样的3D衰减的声音效果。</p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-导入环境音效"><a href="#1-导入环境音效" class="headerlink" title="1.导入环境音效"></a>1.导入环境音效</h5><p>并设置为循环模式</p>
+<h5 id="2-设置音效的Position参数"><a href="#2-设置音效的Position参数" class="headerlink" title="2.设置音效的Position参数"></a>2.设置音效的Position参数</h5><p><img src="/2019/08/12/1.png" alt=""><br>3D Spatialzation设置为Position+Orientation模式，也就是会受到位置和方向的影响，这也就是3D音效。然后勾选上Attenuation(衰减)属性。<br><img src="/2019/08/12/2.png" alt=""></p>
         
           <a class="article-more-a" href="/2019/08/12/#more">more >></a>
         
@@ -301,20 +301,20 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-【Aladdin-Unity-Wwise】Wwise入门之六-利用Attenuation实现3D衰减音效" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-【Aladdin-Unity-Wwise】Wwise入门之五-使用State实现玩家生死状态切换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/12/">【Aladdin-Unity-Wwise】Wwise入门之六-利用Attenuation实现3D衰减音效</a>
+      <a class="article-title" href="/2019/08/12/">【Aladdin-Unity-Wwise】Wwise入门之五-使用State实现玩家生死状态切换</a>
     </h1>
   
 
         
         <a href="/2019/08/12/" class="archive-article-date">
-  	<time datetime="2019-08-12T06:01:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-12</time>
+  	<time datetime="2019-08-12T07:01:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-12</time>
 </a>
         
 		
@@ -332,9 +332,9 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在Wwise中，声音是有方向的，Wwise有一个api接口是SetPosition就要求我们设置方向，我们设想一下，如果一个声源套一个锥形的喇叭，那我们正对和背对声源的位置所听到的声音效果是不一样的。下面我们就来实现一下这样的3D衰减的声音效果。</p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-导入环境音效"><a href="#1-导入环境音效" class="headerlink" title="1.导入环境音效"></a>1.导入环境音效</h5><p>并设置为循环模式</p>
-<h5 id="2-设置音效的Position参数"><a href="#2-设置音效的Position参数" class="headerlink" title="2.设置音效的Position参数"></a>2.设置音效的Position参数</h5><p><img src="/2019/08/12/1.png" alt=""><br>3D Spatialzation设置为Position+Orientation模式，也就是会受到位置和方向的影响，这也就是3D音效。然后勾选上Attenuation(衰减)属性。<br><img src="/2019/08/12/2.png" alt=""></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Wwise中GameSync类型还有一个叫做States，States是一种特殊的游戏调用，通常用来让声音响应全局游戏事件，并产生渐变效果。比如模拟玩家被震晕或者浮出/入水面的情况。下面我们利用States来实现角色生死状态的音效切换，并有过渡效果。这也是Wwise比原生Unity音效强的地方，原来的音效系统想要实现音效状态切换，我们在切换AudioClip的时候还要通过代码来控制音效的变化，比较麻烦，Wwise可以帮我们轻松搞定这一需求。</p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-导入心跳音效"><a href="#1-导入心跳音效" class="headerlink" title="1.导入心跳音效"></a>1.导入心跳音效</h5><p>并设置为循环模式</p>
+<h5 id="2-在GameSyncs添加State参数"><a href="#2-在GameSyncs添加State参数" class="headerlink" title="2.在GameSyncs添加State参数"></a>2.在GameSyncs添加State参数</h5><p><img src="/2019/08/12/1.png" alt=""><br>这里代表玩家生存和死亡两种状态</p>
         
           <a class="article-more-a" href="/2019/08/12/#more">more >></a>
         
@@ -1367,11 +1367,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1383,35 +1387,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1427,15 +1407,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1451,15 +1451,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UI框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1475,23 +1483,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1507,11 +1499,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1531,7 +1539,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">美文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1543,23 +1555,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">美文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1568,6 +1564,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
