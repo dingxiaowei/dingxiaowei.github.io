@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2019/08/10/3.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2019/08/10/5.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2019/08/10/7.png">
-<meta property="og:updated_time" content="2019-08-11T11:21:13.049Z">
+<meta property="og:updated_time" content="2019-08-22T14:20:51.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Aladdin-Unity-Wwise】Wwise入门之三-利用Switch实现不同材质的脚步声">
 <meta name="twitter:description" content="利用Switch实现不同材质的脚步声">
@@ -253,6 +253,7 @@ var _hmt = _hmt || [];
 <p>然后听效果是我们想要的效果。</p>
 <p>本章利用Wwise实现不同材质的脚步声音效你学会了嘛？如有问题可以下方留言！</p>
 <h2 id="更多精品教程"><a href="#更多精品教程" class="headerlink" title="更多精品教程"></a>更多精品教程</h2><p><a href="http://dingxiaowei.cn/">http://dingxiaowei.cn/</a></p>
+<h2 id="Wwise交流群"><a href="#Wwise交流群" class="headerlink" title="Wwise交流群"></a>Wwise交流群</h2><p>欢迎加入QQ群 714459256 进行学习交流</p>
 
       
 
@@ -420,7 +421,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作步骤"><span class="toc-number">2.</span> <span class="toc-text">操作步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-导入不同材质的脚步声音效"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1.导入不同材质的脚步声音效</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-创建SwitchGroup"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">2.创建SwitchGroup</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-设置SwitchContainer的属性"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">3.设置SwitchContainer的属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-测试音效"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">4.测试音效</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-添加Event事件"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">5.添加Event事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-代码测试"><span class="toc-number">2.0.0.6.</span> <span class="toc-text">6.代码测试</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多精品教程"><span class="toc-number">3.</span> <span class="toc-text">更多精品教程</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作步骤"><span class="toc-number">2.</span> <span class="toc-text">操作步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-导入不同材质的脚步声音效"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1.导入不同材质的脚步声音效</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-创建SwitchGroup"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">2.创建SwitchGroup</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-设置SwitchContainer的属性"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">3.设置SwitchContainer的属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-测试音效"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">4.测试音效</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-添加Event事件"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">5.添加Event事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-代码测试"><span class="toc-number">2.0.0.6.</span> <span class="toc-text">6.代码测试</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多精品教程"><span class="toc-number">3.</span> <span class="toc-text">更多精品教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wwise交流群"><span class="toc-number">4.</span> <span class="toc-text">Wwise交流群</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -538,19 +539,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">元表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,6 +567,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
@@ -574,19 +583,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,11 +595,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,18 +631,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -638,19 +639,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,10 +683,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
               </li>
              
@@ -706,7 +703,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -722,7 +719,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -731,10 +736,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">简历</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -770,15 +771,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AssetBudnle</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
