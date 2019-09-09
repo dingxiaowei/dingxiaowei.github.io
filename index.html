@@ -204,641 +204,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-【Aladdin-Unity-Wwise】Wwise入门之六-利用Attenuation实现3D衰减音效" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/13/">【Aladdin-Unity-Wwise】Wwise入门之六-利用Attenuation实现3D衰减音效</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/13/" class="archive-article-date">
-  	<time datetime="2019-08-13T14:01:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-13</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在Wwise中，声音是有方向的，Wwise有一个api接口是SetPosition就要求我们设置方向，我们设想一下，如果一个声源套一个锥形的喇叭，那我们正对和背对声源的位置所听到的声音效果是不一样的。下面我们就来实现一下这样的3D衰减的声音效果。</p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-导入环境音效"><a href="#1-导入环境音效" class="headerlink" title="1.导入环境音效"></a>1.导入环境音效</h5><p>并设置为循环模式</p>
-<h5 id="2-设置音效的Position参数"><a href="#2-设置音效的Position参数" class="headerlink" title="2.设置音效的Position参数"></a>2.设置音效的Position参数</h5><p><img src="/2019/08/13/1.png" alt=""><br>3D Spatialzation设置为Position+Orientation模式，也就是会受到位置和方向的影响，这也就是3D音效。然后勾选上Attenuation(衰减)属性。<br><img src="/2019/08/13/2.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2019/08/13/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Wwise</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/13/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-【Aladdin-Unity-Wwise】Wwise入门之五-使用State实现玩家生死状态切换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/12/">【Aladdin-Unity-Wwise】Wwise入门之五-使用State实现玩家生死状态切换</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/12/" class="archive-article-date">
-  	<time datetime="2019-08-12T07:01:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-12</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Wwise中GameSync类型还有一个叫做States，States是一种特殊的游戏调用，通常用来让声音响应全局游戏事件，并产生渐变效果。比如模拟玩家被震晕或者浮出/入水面的情况。下面我们利用States来实现角色生死状态的音效切换，并有过渡效果。这也是Wwise比原生Unity音效强的地方，原来的音效系统想要实现音效状态切换，我们在切换AudioClip的时候还要通过代码来控制音效的变化，比较麻烦，Wwise可以帮我们轻松搞定这一需求。</p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-导入心跳音效"><a href="#1-导入心跳音效" class="headerlink" title="1.导入心跳音效"></a>1.导入心跳音效</h5><p>并设置为循环模式</p>
-<h5 id="2-在GameSyncs添加State参数"><a href="#2-在GameSyncs添加State参数" class="headerlink" title="2.在GameSyncs添加State参数"></a>2.在GameSyncs添加State参数</h5><p><img src="/2019/08/12/1.png" alt=""><br>这里代表玩家生存和死亡两种状态</p>
-        
-          <a class="article-more-a" href="/2019/08/12/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Wwise</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/12/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-【Aladdin-Unity-Wwise】Wwise入门之四-使用RTPC实现控制玩家心跳声" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/11/">【Aladdin-Unity-Wwise】Wwise入门之四-使用RTPC实现控制玩家心跳声</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/11/" class="archive-article-date">
-  	<time datetime="2019-08-11T14:01:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Wwise中另外一个重要的GameSync类型叫做GameParameter(游戏参数),又叫做RTPC（Real Time Parameter Control,实时参数控制）。是用来让声音对在一定范围内变化的数值信息做出反应。Game Parameter 非常适合用来表示游戏中在一定范围内连续变化的任何类型的信息。Game parameter 可以代表汽车的发动机转速、任务完成的百分比，甚至连一天中的时间数值都可以表示。我们在吃鸡游戏中，有一个重要的变量就是玩家的生命值（HP值）。玩家（主角）在游戏开始时的 HP 值为 100，但如果遭到坏蛋攻击，我们的主角 HP 值就会一路下降，当 HP 值降到零的时候就会死掉。<br>在玩游戏的过程中，屏幕左下角可以看见 HP 值，但在激战当中，你很难做到能一直盯着 HP 值看。这个时候如果玩家的 HP 值可以关联上一个听觉反馈，会非常有用。当心跳声越来越响亮时，代表玩家的“身体状况”每况愈下，引起玩家的警惕。</p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-导入心跳音效"><a href="#1-导入心跳音效" class="headerlink" title="1.导入心跳音效"></a>1.导入心跳音效</h5><p><img src="/2019/08/11/1.png" alt=""><br>设置为循环模式</p>
-        
-          <a class="article-more-a" href="/2019/08/11/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Wwise</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/11/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-【Aladdin-Unity-Wwise】Wwise入门之三-利用Switch实现不同材质的脚步声" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/10/">【Aladdin-Unity-Wwise】Wwise入门之三-利用Switch实现不同材质的脚步声</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/10/" class="archive-article-date">
-  	<time datetime="2019-08-10T14:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-10</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>吃鸡游戏中实现人物走在不同材质的路面上实现不同的脚步声也是常见的需求之一，下面就写一个用Wwise实现这个效果的步骤。</p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-导入不同材质的脚步声音效"><a href="#1-导入不同材质的脚步声音效" class="headerlink" title="1.导入不同材质的脚步声音效"></a>1.导入不同材质的脚步声音效</h5><p><img src="/2019/08/10/1.png" alt=""><br>我们将每种类型的音效放在RandomContainer容器中，并且将这些音效放在SwitchContainer中。</p>
-        
-          <a class="article-more-a" href="/2019/08/10/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Wwise</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/10/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-【Aladdin-Unity-Wwise】Wwise入门之二-Wwise的多语言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/06/">【Aladdin-Unity-Wwise】Wwise入门之二-Wwise的多语言</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/06/" class="archive-article-date">
-  	<time datetime="2019-08-06T14:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-06</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>游戏的多语言我们并不陌生，常见的是文字的多语言配置，那音效多语言怎么处理呢？一般音效的多语言是指配音的多语言化，一些背景音乐，音效是部分语言的，配音多语言我们如果在没接触Wwise之前或许会这样处理，通过陪表来显示，每一列配置代表一种语言，这当然也可以，但Wwise给我们提供了多语言配音机制，多语言案例官网介绍的不详细，官方Demo我貌似也没找到，通过一顿摸索最终实现了效果，下面我就分享一下操作过程。</p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-创建多语言"><a href="#1-创建多语言" class="headerlink" title="1.创建多语言"></a>1.创建多语言</h5><p>Wwise默认是添加的English(US)语言，他是默认参考语言，我们如果要添加我们想要的语言，打开LanguageManager添加即可<br><img src="/2019/08/06/1.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2019/08/06/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Wwise</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/06/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-【Aladdin-Unity-Wwise】Wwise入门之一-初识Wwise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/05/">【Aladdin-Unity-Wwise】Wwise入门之一-初识Wwise</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/05/" class="archive-article-date">
-  	<time datetime="2019-08-05T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Wwise是一款音频中间件，据我了解大厂项目使用的特别多，腾讯的王者荣耀、网易(也有的项目是用Fmod,类似的产品)、巨人、米哈游的崩坏3、游族的权利的游戏等等，Wwise自带的Demo中有一个Limbo(地狱边境)的游戏的案例，在14年的时候我也很痴迷这款非常益智的游戏，真的很烧脑，没想到游戏里面的音效竟然是用到了Wwise，里面的音效也特别丰富，Wwise比较适合对音效要求很高的项目，有人会问Unity已经有内置的声音引擎为啥要选择第三方的声音引擎？这就不得不说Wwise的优势了，下面会介绍Wwise的优势。我从刚接手这个引擎也是很不适应，官方文档我觉得写的很简单，其次是github上没有什么比较成熟的案例分享，包括官方案例都是一些将音效拖放到Hierarchy上播放的方式，实际我们开发商业项目肯定都是要考虑动态加载、动态更新的，所以这些案例只能当了解Wwise引擎来参考，最后我也是经过一番摸爬滚打才将Wwise集成到公司项目中，我要吐槽Wwise的是更新实在太慢了，而且在外网，可能也是因为在外网而且Wwise插件本身很大，就算一个HelloWorld的工程集成了Wwise都要四五个的G，所以下载贼慢，不翻墙或许还下载失败，要是有个国内镜像就好了。还有初期创建Wwise项目的时候最好就勾选上所有的平台，以免以后要添加平台不知道从那边找，这个我也是折腾了好久，后来才知道可以选择添加平台的。要彻底搞透Wwise还是不容易的，毕竟这是音效师的饭碗工具，就相当于Unity对于我们前端程序一样也是饭碗工具，所以我作为前端程序也就是了解个大概，方便以后跟外包人员对接，下面系列文章就是分享我的一些学习心得，最后我也会将我学习Wwise做的一个小项目开源分享出来，希望能帮到更多的小伙伴们！</p>
-<h2 id="视频简介"><a href="#视频简介" class="headerlink" title="视频简介"></a>视频简介</h2><p>这个是Wwise官方的视频介绍，当然需要翻墙访问。<br><a href="https://www.youtube.com/user/AudiokineticWwise" target="_blank" rel="noopener">https://www.youtube.com/user/AudiokineticWwise</a></p>
-<p>腾讯天美团队的分享<br><a href="https://v.youku.com/v_show/id_XNDEyMTE3OTY5Mg==.html?spm=a2h0k.11417342.soresults.dtitle" target="_blank" rel="noopener">https://v.youku.com/v_show/id_XNDEyMTE3OTY5Mg==.html?spm=a2h0k.11417342.soresults.dtitle</a></p>
-<h2 id="Wwise的优势"><a href="#Wwise的优势" class="headerlink" title="Wwise的优势"></a>Wwise的优势</h2><ul>
-<li>1.Unity跟音效模块完全分离，音效完全交给音效师或者外包来完成，程序只管调用事件就行，这也就是所谓的耦合性很低吧。</li>
-<li>2.具有性能调试工具，类似Unity的Profile，能够分析性能瓶颈，方便优化。</li>
-<li>3.具有丰富的混音器，如果我们要实现一个百鸟争鸣的效果，在Unity我们或许要调用多个AudioClip，但或许还很难达到我们想要的效果，Wwise只要将这些Audio音效做一个Blend音效即可。</li>
-<li>4.开关切换，例如我们要实现角色在不同材质上走实现不用的音效控制，就可以用switch完成。策划配置不同材料的switch名，客户端根据导表信息自动设置switch，就会播放对应的音效。</li>
-<li>5.具有动态混淆功能，例如吃鸡游戏，在房间里打枪和平地上打枪，由于房间内声音回来会反射，所以混响效果应该是不同的。通过游戏过程中对RTPC实时变量的控制，可以达到效果。</li>
-<li>6.音效播放各种效果，例如淡入淡出，播放之后停顿几秒继续播放</li>
-<li>7.支持多平台，只要设置相关平台就会为不同平台导出不同的音效bank。</li>
-<li>8.对音源文件的内存优化，例如一段很长的背景音乐，可以设置只加载正在播放的那一段。</li>
-<li>9.多语言版本，例如不同语种的配音。</li>
-<li>10.随机播放音效，例如当一类音效需要随机播放一个的时候，原来Unity的设计可以通过代码来随笔播放某个clip，但Wwise有随机container，我们程序只管发送事件就行，引擎内部可以帮我们随机一个。</li>
-<li>11.多Listener支持，可以多达八个，Unity原生的AudioListener只能有一个。</li>
-</ul>
-<h2 id="成熟案例"><a href="#成熟案例" class="headerlink" title="成熟案例"></a>成熟案例</h2><p><img src="/2019/08/05/4.png" alt=""><br><img src="/2019/08/05/5.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2019/08/05/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Wwise</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/05/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-Unity粒子系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1265,9 +630,602 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-Unity表格配置编辑工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/06/">Unity表格配置编辑工具</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/06/" class="archive-article-date">
+  	<time datetime="2019-07-06T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-06</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>游戏开发中表格配置是必有的功能，我们会将一些游戏数据配置在表格中，一般流程是Excel编辑数据，然后导出C#的Model类和Unity中可用的二进制或者json/xml数据等，但如果碰到要一个需求，策划想要频繁修改数据并且在游戏中测试，这就发现我们需要频繁的在Excel中修改然后导出，然后启动Unity测试，这样的流程就显得很繁琐，而且我们不能保证我们填写的数据就是正确的，难免有手滑手误的时候，但也有针对这种情况的解决方案是程序写一个表格检查工具来检查Excel配置的数据书否合法，但还是显得比较麻烦，针对这一问题可以做的优化，在Unity中写一个Editor编辑工具来编辑对应的Excel数据，并且对应的数据根据类型来给一个约束，例如：范围类型的数据，可以配置一个Range滑动类型，这样策划修改的数据就不会超出这个范围，再比如配置一个bool类型，我们给一个toggle选择，如果其他类型我们可以写一个数据监测，如果策划配置的数据不正确会立马给出提示，这样就能确保数据的正确性，并且可以及时的在游戏中进行测试，确保配置的数据是自己想要的效果，然后在Editor中保存到Excel，就不需要再Excel中进行配置。Excel的读写我用的NPOI，然后Excel类型的读取我用的反射，这样可以确保策划可以随意的修改Excel的字段类型确保工具的健壮性。关于C#的反射，不熟的或者不了解的可以看我之前写的一篇，<a href="https://aladdin.blog.csdn.net/article/details/93988274" target="_blank" rel="noopener">关于C#的反射，你真的运用自如嘛？</a></p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="/2019/07/06/1.png" alt=""></p>
+        
+          <a class="article-more-a" href="/2019/07/06/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/06/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Unity动画生成器工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/01/">Unity动画生成器工具</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/01/" class="archive-article-date">
+  	<time datetime="2019-07-01T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>美术做一个模型，附带很多动画，然后就创建和管理动画状态机，然后类似的模型可能有很多，也就是我们所理解的皮肤，低级的是换贴图，高级一点的换模型，如果模型比较多的话，美术要创建和管理很多相同的动画，重复性的劳动，这会就需要有个动画生成器了。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们可以根据美术的要求通过代码创建一个AnimatorController,但一旦美术修改什么需求我们就要跟着修改会比较麻烦，比较简便的是美术先创建一个动画控制器模板，然后接下来重复性的劳动我们就通过程序工具来解决。思路是copy模板，修改模板里面动画状态的Motion，指向当前模型的动画clip，Motion有的是简单的动画clip，这个直接替换没啥好说的，有的是混合树BlendTree，这个替换会碰到小坑，如果我们获取到混合树的Motion然后遍历里面的Children，替换每个child的Motion是替换不了的，这个我也是查看了BlendTree的源码才知道，源码里面Children的管理(增加和删除)都是通过覆盖的方式替换Children数组，但我也有通过替换Children数组的方式来实现还是没有替换成功，最后还是通过代码创建BlendTree的方式来替换BlendTree才成功了。</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="/2019/07/01/1.gif" alt=""></p>
+        
+          <a class="article-more-a" href="/2019/07/01/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-关于C#的反射，你真的运用自如嘛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/">关于C#的反射，你真的运用自如嘛</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/21/" class="archive-article-date">
+  	<time datetime="2019-06-21T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们都知道反射在编程语言里是非常方便也是非常强大的，但或许有人会觉得在学习或者工作中用的可能并不是那么多，这对于刚入行不久的人而言的，我的理解是反射在写框架和写工具是用的比较多的。举个栗子：写一个Excel的表格编辑器，我们能够在控制台修改Excel里面的内容，或许有人会觉得这有啥难的，直接手撸对应的Model，如果哪一天策划手滑或者手贱修改了命名，或者增加/减少一列，那我们程序是不是也要跟着修改，因为我们保存数据或许是写死的字段名，如果全部通过反射，那就随便策划怎么折腾excel，我有反射神器，我不怕！至于为啥要写Excel的编辑器，或许有人会疑惑，我直接在Excel里面编辑修改不行嘛，这样策划要修改个数据然后要导出数据，然后在游戏里面跑，会比较麻烦，如果有对应的表格编辑器直接在游戏运行时就修改测试就很方便，如果是bool类型就给策划toggle选项，如果是枚举类型就弄个下拉框，如果是范围类型就给个Range，这样策划就不会填错，如果编辑器是基于反射做的，不是字段写死的，策划随便修改excel的字段都不会出问题。</p>
+        
+          <a class="article-more-a" href="/2019/06/21/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/21/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-游戏开发防作弊以及原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/">游戏开发防作弊以及原理</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/20/" class="archive-article-date">
+  	<time datetime="2019-06-20T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-20</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如何防作弊在游戏开发中还是占蛮重的比例的，这也涉及到游戏盈利的问题，如果不做防作弊措施，或许我们开发出来的app当前上线或许第二天就出破解免费版了，这个事情我亲身经历过，当然这是基于app做的比较好被外挂公司盯上了，一度很火的吃鸡游戏端游版本其实外挂非常猖獗，这也是因为没有做防外挂，如何防作弊在求职者求职的时候也会经常被问到，当然我们能想到最简单的方案就是不要信任客户端任何数据，以服务器数据校验为准，当然这种方案在一些客户端服务器交互比较少的情况是可以这样设计的，假设FPS，我们每次射击造成的伤害，一帧里面会射击好多次，不可能每次都去向服务器校验吧，交互太频繁了，体验也很差，但如果不校验的话，客户端就是修改武器属性值，这就是客户端作弊了，如何解决这样的问题，下文会介绍到防作弊的思路。</p>
+<h2 id="客户端如何作弊"><a href="#客户端如何作弊" class="headerlink" title="客户端如何作弊"></a>客户端如何作弊</h2><h4 id="手机端"><a href="#手机端" class="headerlink" title="手机端"></a>手机端</h4><p>我在当初手游刚起步的时候，flappy bird想必玩游戏的人都知道，是一款非常虐的手游，当时也非常火，朋友圈都在晒分数，后来我知道用一款《八门神器》的app能够作弊修改分数，然后修改成很高的分数晒在朋友圈就显得自己“很牛逼”,满足一下自己的虚荣心，原理就是修改分数内存值来达到作弊的效果。</p>
+        
+          <a class="article-more-a" href="/2019/06/20/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/20/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Unity-行为树分享" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/01/">Unity行为树分享</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/01/" class="archive-article-date">
+  	<time datetime="2019-04-01T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-01</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前在公司做了一个简单的行为树相关的知识分享，感觉还是花了不少心思和精力在准备上，现在分享给大家！</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>三个敌人默认在老巢，如果检测到周围有“敌人”(主角)，就追随主角并且达到一定距离范围就射击，如果“敌人”跑远追不上了则返回老巢，如果在追击“敌人”的过程中，自己被射击血量低于20%则向老巢方向逃跑，并且返回老巢指定位置进行回血，当血量回满之后则返回初始位置。我方主角由玩家自己控制，可以移动，可以射击。这里AI主要是设计敌方的AI。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>根据上面需求，可以看出来敌方AI大体分为待机巡视、追击、返回、回血几个阶段，具体设计可以看下面效果的第六步。</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>1.敌人初始化并且返回老巢调整面向<br><img src="/2019/04/01/20190412210920527.gif" alt="在这里插入图片描述"></p>
+        
+          <a class="article-more-a" href="/2019/04/01/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">行为树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-【GFFrameWork】事件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/20/">【GFFrameWork】事件系统</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/20/" class="archive-article-date">
+  	<time datetime="2019-03-20T11:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-20</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>游戏开发中抛事件，收事件也是比较常用的解耦方式，我所理解的设计模式旁观者模式有类似的原理，所以事件系统在一个框架中还是蛮重要的一块，本生事件系统不算一个大系统，代码量不多，主要是思路就是注册监听。</p>
+        
+          <a class="article-more-a" href="/2019/03/20/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/20/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1358,19 +1316,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Lua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Lua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1394,6 +1352,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
@@ -1402,19 +1364,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1430,14 +1404,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -1446,27 +1412,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1486,7 +1444,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1498,15 +1456,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1522,15 +1476,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1551,6 +1501,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1586,15 +1540,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">美文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
