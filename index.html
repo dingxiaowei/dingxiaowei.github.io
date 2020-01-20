@@ -204,139 +204,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-使用Jenkins实现Unity自动化打包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>伟人曾说过“科技是第一生产力”，而工具恰恰是科技的产物，有了优秀的工具能让我们达到事半功倍的效果，Jenkins自动化打包已然成为了一线游戏公司的标配，如果你们项目还在用人工的方式手动打包，那就是太out了，就非常有必要了解一下本系列的文章。</p>
-<p>关于Unity的打包，我想先拿两个我待过的公司举例，某中小型公司A，主城负责手动出包，主城上午一到公司就开始出包，经过漫长的编译和等待，由于做不了其他事情所以就一边出包一边玩手机游戏，当包出好之后不知不觉就快到午餐时间了。可想而知没有自动化出包流程会大大浪费程序的时间，员工的时间是很宝贵的，所谓Time is money。大多数有点规模的公司应该会有自己的自动化出包流程的，但也有的流程是有问题的，再拿一个我待过的上市公司举例，QA往往上午来公司是没啥活干的，因为上午基本是等待程序开发，最早要到中午才开始打包测试程序上午开发的功能，到了要下班的时候再打包测试程序下午开发的功能，然后要用下班之后的加班时间去测试，久而久之就是QA加班很多，苦不堪言，其实这虽然是有自动化流程，但工作流也是有问题的，在本系列文章中会介绍如何工具的配置对这种情况做优化。其实关于Unity的自动化打包，网上有很多关于Jenkins出包的教程，但我觉得大多数还是不够详细，或者说有的都是过时的文档，不是开发环境太老，要么就是api过时，反正就是会碰到各种各样的问题，也没有做后续的升级和优化，以及分享其中碰到的问题，几乎都没有提供详细的教程案例的，所以我就写下本系列教程，附带详细案例操作，确保尽量满足初学者都能学会Unity的自动化打包。Jenkins打包安卓apk的教程相对较多，打包安卓相对而言也比较简单。但Jenkins打包iOS的ipa相对就没那么容易了，一方面也是iOS平台学习成本稍高，另一方面iOS出包也涉及到开发者证书的配置，网上的教程大多都是在Windows平台上部署Jenkins，Mac平台的相对较少，Mac平台上部署碰到的问题可能也会相对多一些，会涉及到一些权限的问题，下面就详细介绍一下本次课程。</p>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/2020/01/20/1.png" alt=""></p>
-<h5 id="打包exe"><a href="#打包exe" class="headerlink" title="打包exe"></a>打包exe</h5><p><img src="/2020/01/20/9.png" alt=""></p>
-<h5 id="打包apk"><a href="#打包apk" class="headerlink" title="打包apk"></a>打包apk</h5><p><img src="/2020/01/20/10.png" alt=""></p>
-<h5 id="打包ipa"><a href="#打包ipa" class="headerlink" title="打包ipa"></a>打包ipa</h5><p><img src="/2020/01/20/3.png" alt=""></p>
-<h2 id="Shell的简介和常用语法"><a href="#Shell的简介和常用语法" class="headerlink" title="Shell的简介和常用语法"></a>Shell的简介和常用语法</h2><p>三大常用的操作系统都有自己的命令语言，Shell相比较bat具有跨平台的优势，更具有通用性，因此想要实现一些自动化就有必要了解一下Shell脚本，或许有人会问Shell只支持Mac OS和Linux，为啥说是跨平台的呢？其实windows也可以借助一些第三方软件，例如安装cygwin可以运行Shell脚本，至于如何安装，可自行百度，代码我们就开始学习一些简单的常用的shell命令，为下面要学习的内容打下基础。Shell是C语言编写的程序，它是用户使用Linux/Mac OS的桥梁。</p>
-<h4 id="从一段最基本的Shell开始"><a href="#从一段最基本的Shell开始" class="headerlink" title="从一段最基本的Shell开始"></a>从一段最基本的Shell开始</h4><p>创建一个HelloShell.sh的Shell文件</p>
-<pre><code>#!/bin/bash
-echo &quot;Hello Shell!&quot;
-</code></pre><p>“#!” 是一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种Shell，echo命令用于向窗口输出文本。</p>
-<h4 id="Shell如何执行"><a href="#Shell如何执行" class="headerlink" title="Shell如何执行"></a>Shell如何执行</h4><p>如何执行上面的HelloShell文件呢？可以在控制台输入./HelloShell.sh或者sh HelloShell.sh来执行，第一次运行可能会出现权限不足(permition denied)的报错，需要我们赋予当前用户执行该脚本的权限命令，解决办法：运行sudo chmod 777 HelloShell.sh 或者 chmod +x HelloShell.sh，至于两者有啥区别或者chmod相关的一些命令参数的意义可以自行百度，sudo是系统管理指令，拥有最高权限。</p>
-<h4 id="Jenkins自动化开发中常用的Shell语法和模块"><a href="#Jenkins自动化开发中常用的Shell语法和模块" class="headerlink" title="Jenkins自动化开发中常用的Shell语法和模块"></a>Jenkins自动化开发中常用的Shell语法和模块</h4><h5 id="根据用户输入删除某个目录"><a href="#根据用户输入删除某个目录" class="headerlink" title="根据用户输入删除某个目录"></a>根据用户输入删除某个目录</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">Project_RootPath=&quot;/Users/Shared/Project&quot;</span><br><span class="line">Android_Project_Name=&quot;HelloUnity&quot;</span><br><span class="line">Android_Build_Path=&quot;$Project_RootPath/build/android&quot;</span><br><span class="line">iPhone_Build_Path=&quot;$Project_RootPath/build/iPhone&quot;</span><br><span class="line"></span><br><span class="line">echo &quot;删除本地已编译的文件&quot;</span><br><span class="line">echo &quot;~~~~~~删除平台~~~~~~&quot;</span><br><span class="line">echo &quot;~    1.Android     ~&quot;</span><br><span class="line">echo &quot;~    2.iOS         ~&quot;</span><br><span class="line">echo &quot;~    3.All         ~&quot;</span><br><span class="line">echo &quot;~~~~~~~~~~~~~~~~~~~~&quot;</span><br><span class="line"></span><br><span class="line">read parameter</span><br><span class="line">sleep 0.5</span><br><span class="line">method=&quot;$parameter&quot;</span><br><span class="line">if [ -n &quot;$method&quot; ]; then</span><br><span class="line">	if [ &quot;$method&quot; = &quot;1&quot; ]; then</span><br><span class="line">		echo &quot;选择1&quot;</span><br><span class="line">		rm -rf &quot;$Android_Build_Path&quot;</span><br><span class="line">	elif [ &quot;$method&quot; = &quot;2&quot; ]; then</span><br><span class="line">		echo &quot;选择2&quot;</span><br><span class="line">		rm -rf &quot;$iPhone_Build_Path&quot;</span><br><span class="line">	elif [ &quot;$method&quot; = &quot;3&quot; ]; then</span><br><span class="line">		echo &quot;选择3&quot;</span><br><span class="line">		rm -rf &quot;$Android_Build_Path&quot;</span><br><span class="line">		rm -rf &quot;$iPhone_Build_Path&quot;</span><br><span class="line">	else</span><br><span class="line">		echo &quot;参数无效&quot;</span><br><span class="line">		exit 1</span><br><span class="line">	fi</span><br><span class="line">fi</span><br><span class="line">echo &quot;删除成功&quot;</span><br></pre></td></tr></table></figure>
-<p>这里涉及到Shell的变量、条件判断、文件删除等知识，不懂的同学可以百度深入了解，其中rm -rf是表示永久删除，意思就是不会出现在回收站里，用这个命令需要谨慎，我就因为一不小心误删我200G文件，那个肉疼。</p>
-<p>运行效果：<br><img src="/2020/01/20/4.png" alt=""></p>
-<h5 id="相关到参数介绍"><a href="#相关到参数介绍" class="headerlink" title="$相关到参数介绍"></a>$相关到参数介绍</h5><p>Shell中有一些特殊变量，我们想要在Shell脚本里面接受用户输入的参数除了上面那种方法之外还可以在执行./xxx.sh的后面追加参数，类似一个exe程序后面添加参数一样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">printf &quot;The complete list is %s\n&quot; &quot;$$&quot;</span><br><span class="line">printf &quot;The complete list is %s\n&quot; &quot;$!&quot;</span><br><span class="line">printf &quot;The complete list is %s\n&quot; &quot;$?&quot;</span><br><span class="line">printf &quot;The complete list is %s\n&quot; &quot;$*&quot;</span><br><span class="line">printf &quot;The complete list is %s\n&quot; &quot;$@&quot;</span><br><span class="line">printf &quot;The complete list is %s\n&quot; &quot;$#&quot;</span><br><span class="line">printf &quot;The complete list is %s\n&quot; &quot;$0&quot;</span><br><span class="line">printf &quot;The complete list is %s\n&quot; &quot;$1&quot;</span><br><span class="line">printf &quot;The complete list is %s\n&quot; &quot;$2&quot;</span><br></pre></td></tr></table></figure>
-<p>$1-$n是用于接受上面介绍的./xxx.sh后面的追加参数，运行效果：</p>
-<p><img src="/2020/01/20/5.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">shell变量$#,$@,$0,$1,$2的含义解释:</span><br><span class="line">变量说明:</span><br><span class="line">$$</span><br><span class="line">Shell本身的PID（ProcessID）</span><br><span class="line">$!</span><br><span class="line">Shell最后运行的后台Process的PID</span><br><span class="line">$?</span><br><span class="line">最后运行的命令的结束代码（返回值）</span><br><span class="line">$-</span><br><span class="line">使用Set命令设定的Flag一览</span><br><span class="line">$*</span><br><span class="line">所有参数列表。如&quot;$*&quot;用「&quot;」括起来的情况、以&quot;$1 $2 … $n&quot;的形式输出所有参数。</span><br><span class="line">$@</span><br><span class="line">所有参数列表。如&quot;$@&quot;用「&quot;」括起来的情况、以&quot;$1&quot; &quot;$2&quot; … &quot;$n&quot; 的形式输出所有参数。</span><br><span class="line">$#</span><br><span class="line">添加到Shell的参数个数</span><br><span class="line">$0</span><br><span class="line">Shell本身的文件名</span><br><span class="line">$1～$n</span><br><span class="line">添加到Shell的各参数值。$1是第1参数、$2是第2参数…。</span><br></pre></td></tr></table></figure>
-<h5 id="Shell之间调用执行"><a href="#Shell之间调用执行" class="headerlink" title="Shell之间调用执行"></a>Shell之间调用执行</h5><p>我有一个test.sh和test1.sh，想在test2.sh中分别调用执行这两个Shell脚本<br><img src="/2020/01/20/7.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">echo &quot;开始执行&quot;</span><br><span class="line">sh test.sh</span><br><span class="line">sh test1.sh</span><br><span class="line">echo &quot;完成执行&quot;</span><br></pre></td></tr></table></figure>
-<p>执行效果：<br><img src="/2020/01/20/6.png" alt=""><br>可以看到已经分别调执行用了两个脚本。</p>
-<h5 id="export关键字的作用"><a href="#export关键字的作用" class="headerlink" title="export关键字的作用"></a>export关键字的作用</h5><p>上一个案例中，作为细心的程序员的你肯定看到了Project_RootPath变量分别在两个脚本中都定义了一下，这明显就重复定义了，如果有一百个这样的文件我们岂不是要定义一百遍这样的变量，这是不能忍的，所以就要想办法进行优化，此时export关键字就能派出用场了。export创建一个环境变量，这个变量就对其子shell可见，没有export声明对变量，仅对当前shell可见，加上export也就类似我们程序开发中public这样的访问修饰符的作用类似，我们利用export对上面代码进行改进。只要在test2.sh中加上export定义的Project_RootPath变量即可，这样即使在test.sh和test1.sh中不定义这个变量都是照样可以用的。<br><img src="/2020/01/20/8.png" alt=""><br>运行结果还是一样的。</p>
-<p>有了以上的Shell简单基础，我们就可以玩转Jenkins自动化了。</p>
-<h2 id="Jenkins的介绍和安装"><a href="#Jenkins的介绍和安装" class="headerlink" title="Jenkins的介绍和安装"></a>Jenkins的介绍和安装</h2><p>关于Jenkins的详细<a href="https://baike.baidu.com/item/Jenkins/10917210" target="_blank" rel="noopener">介绍</a>可以看百度百科，简而言之就是基于Java开发的一款开源的持续集成工具，它只是一个平台，真正运作的都是插件，Jenkins具有丰富的插件，也支持自定义插件扩展，所以就变得很流行。</p>
-<p>Jenkins官网：<a href="https://jenkins.io/zh/" target="_blank" rel="noopener">https://jenkins.io/zh/</a></p>
-<p>无论是哪个平台，因为Jenkins本身是基于Java开发的，所以Java开发环境配置这是必须的，这个自己自行百度配置即可，Jenkins提供了exe和pkg的安装包，包方便新手直接安装，但如果通过apk直接安装Jenkins的话后面会碰到其他各种文件权限的问题，这个问题后面再说。这里要介绍的方式是通过下载jenkins的war包，然后通过java命令<code>java -jar jenkins.war</code>去运行即可，Mac平台我们通过Tomcat来作为Jenkins的web容器。</p>
-<h4 id="Tomcat安装和Jenkins启动"><a href="#Tomcat安装和Jenkins启动" class="headerlink" title="Tomcat安装和Jenkins启动"></a>Tomcat安装和Jenkins启动</h4><p>1.下载<a href="http://tomcat.apache.org" target="_blank" rel="noopener">Tomcat</a>,点击左侧Download，下载zip文件放在~/Library/目录<br>2.终端切换到Tomcat的bin目录<br>3.输入./startup.sh启动Tomcat，可能会出现permission denied，这个是Mac平台常见的问题，根本原因是权限不够，可以添加文件访问权限，sudo chomod 777 startup.sh，然后再运行启动tomcat<br>4.关闭Tomcat可以通过bin下面的./shutdown.sh<br>5.然后将jenkins.war包放在tomcat的webapps目录下<br>6.启动成功后浏览器打开<a href="http://localhost:8080/jenkins即可进入Jenkins配置页" target="_blank" rel="noopener">http://localhost:8080/jenkins即可进入Jenkins配置页</a></p>
-<p>注意:在使用Jenkins打包的时候必须确保打包机上的Unity处于非打开状态，不然无法正常打包!</p>
-<h3 id="Jenkins实现Unity自动化打包的原理"><a href="#Jenkins实现Unity自动化打包的原理" class="headerlink" title="Jenkins实现Unity自动化打包的原理"></a>Jenkins实现Unity自动化打包的原理</h3><p>Jenkins实现Unity的自动化打包的本质是调用本地的shell/python/bat脚本来实现打包功能，也就是说单独手动执行这些脚本就能实现打包的功能，而这些脚本本身也是调用了Unity的命令来实现的。</p>
-<p>下面就以最简单的HelloWorld工程来介绍Jenkins如何打包apk和ipa，这里需要一些基于Unity Editor扩展的基础。</p>
-<h3 id="自动化打包Android-apk包"><a href="#自动化打包Android-apk包" class="headerlink" title="自动化打包Android apk包"></a>自动化打包Android apk包</h3><p>首先我们创建一个Build脚本放在Unity的Editor目录，安卓相关的打包脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">static string GetBuildPathAndroid()</span><br><span class="line">&#123;</span><br><span class="line">    string dirPath = Application.dataPath.Replace(&quot;/Assets&quot;, &quot;&quot;) + &quot;/../build/android/&quot;+Application.productName+&quot;.apk&quot;;</span><br><span class="line">    if (!System.IO.Directory.Exists(dirPath))</span><br><span class="line">    &#123;</span><br><span class="line">        System.IO.Directory.CreateDirectory(dirPath);</span><br><span class="line">    &#125;</span><br><span class="line">    return dirPath;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[UnityEditor.MenuItem(&quot;Tools/PerformBuild/Build android step&quot;)]</span><br><span class="line">static void CommandLineBuildAndroid()</span><br><span class="line">&#123;</span><br><span class="line">    Debug.Log(&quot;Command line build android version\n------------------\n------------------&quot;);</span><br><span class="line"></span><br><span class="line">    string[] scenes = GetBuildScenes();</span><br><span class="line">    string path = GetBuildPathAndroid();</span><br><span class="line">    if (scenes == null || scenes.Length == 0 || path == null)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.LogError(&quot;Please add scene to buildsetting...&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Debug.Log(string.Format(&quot;Path: \&quot;&#123;0&#125;\&quot;&quot;, path));</span><br><span class="line">    for (int i = 0; i &lt; scenes.Length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(string.Format(&quot;Scene[&#123;0&#125;]: \&quot;&#123;1&#125;\&quot;&quot;, i, scenes[i]));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Debug.Log(&quot;Starting Android Build!&quot;);</span><br><span class="line">    BuildPipeline.BuildPlayer(scenes, path, BuildTarget.Android, BuildOptions.None);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>导出安卓apk的shell脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#！/bin/bash</span><br><span class="line">Project_Path=&quot;/Users/dingxiaowei/Desktop/JenkinsTest&quot;</span><br><span class="line">echo &quot;Delete build/android&quot;</span><br><span class="line">rm -rf $Project_Path/build/android</span><br><span class="line">echo &quot;Delete Success&quot;</span><br><span class="line"></span><br><span class="line">echo &quot;Build Android&quot;</span><br><span class="line">UNITY_PATH=&quot;/Applications/Unity/Unity.app/Contents/MacOS/Unity&quot;</span><br><span class="line">PROJ_PATH=&quot;$Project_Path/HelloUnity/&quot;</span><br><span class="line">UNITY3D_BUILD_METHOD=&quot;PerformBuild.CommandLineBuildAndroid&quot;</span><br><span class="line"></span><br><span class="line">$&#123;UNITY_PATH&#125; -quit -batchmode -nographics -projectPath $PROJ_PATH -executeMethod $&#123;UNITY3D_BUILD_METHOD&#125; -logFile &quot;log.txt&quot;</span><br><span class="line">echo &quot;Build Success!&quot;</span><br></pre></td></tr></table></figure></p>
-<h3 id="自动化打包iOS-ipa包"><a href="#自动化打包iOS-ipa包" class="headerlink" title="自动化打包iOS ipa包"></a>自动化打包iOS ipa包</h3><p>Unity想要导出ipa需要经过两步，首先是导出xcode，其次再是导出ipa，这里我使用的xcode版本是10.3。</p>
-<p>#####第一步、Unity导出Xcode工程<br>我们在上面创建的Build脚本里添加上导出xcode工程的代码，然后在Unity的菜单栏点击我们自定义的扩展菜单Build xcode step<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">static string GetBuildiOSPath()</span><br><span class="line">&#123;</span><br><span class="line">    string dirPath = Application.dataPath + &quot;/../build/iPhone&quot;;</span><br><span class="line">    if (!System.IO.Directory.Exists(dirPath))</span><br><span class="line">    &#123;</span><br><span class="line">        System.IO.Directory.CreateDirectory(dirPath);</span><br><span class="line">    &#125;</span><br><span class="line">    return dirPath;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[UnityEditor.MenuItem(&quot;Tools/PerformBuild/Build xcode step&quot;)]</span><br><span class="line">static void CommandLineBuildXCode()</span><br><span class="line">&#123;</span><br><span class="line">    Debug.Log(&quot;Command line build\n------------------\n------------------&quot;);</span><br><span class="line"></span><br><span class="line">    string[] scenes = GetBuildScenes();</span><br><span class="line">    string path = GetBuildiOSPath();</span><br><span class="line">    if (scenes == null || scenes.Length == 0 || path == null)</span><br><span class="line">        return;</span><br><span class="line"></span><br><span class="line">    Debug.Log(string.Format(&quot;Path: \&quot;&#123;0&#125;\&quot;&quot;, path));</span><br><span class="line">    for (int i = 0; i &lt; scenes.Length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(string.Format(&quot;Scene[&#123;0&#125;]: \&quot;&#123;1&#125;\&quot;&quot;, i, scenes[i]));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Debug.Log(&quot;Starting Build!&quot;);</span><br><span class="line">    BuildPipeline.BuildPlayer(scenes, path, BuildTarget.iOS, BuildOptions.None);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>导出xcode工程的Shell脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#！/bin/bash</span><br><span class="line">echo &quot;Build XCode&quot;</span><br><span class="line"></span><br><span class="line">export UNITY_PATH=&quot;/Applications/Unity/Unity.app/Contents/MacOS/Unity&quot;</span><br><span class="line">export PROJ_PATH=&quot;/Users/dingxiaowei/Desktop/JenkinsTest/HelloUnity/&quot;</span><br><span class="line">export UNITY3D_BUILD_METHOD=&quot;PerformBuild.CommandLineBuildXCode&quot;</span><br><span class="line"></span><br><span class="line">$UNITY_PATH -projectPath $PROJ_PATH -executeMethod $&#123;UNITY3D_BUILD_METHOD&#125; -logFile &quot;BuildXcodeLog.txt&quot; -quit</span><br><span class="line"></span><br><span class="line">echo &quot;Build XCode Success!&quot;</span><br></pre></td></tr></table></figure></p>
-<h5 id="第二步、Xcode导出ipa"><a href="#第二步、Xcode导出ipa" class="headerlink" title="第二步、Xcode导出ipa"></a>第二步、Xcode导出ipa</h5><p>xcode导出ipa的Shell脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#！/bin/bash</span><br><span class="line">echo &quot;Build IPA&quot;</span><br><span class="line"></span><br><span class="line">#工程名字(Target名字)</span><br><span class="line">Project_Name=&quot;Unity-iPhone&quot;</span><br><span class="line"></span><br><span class="line">#配置环境，Release或者Debug</span><br><span class="line">Configuration=&quot;Release&quot;</span><br><span class="line"></span><br><span class="line">#AdHoc版本的Bundle ID</span><br><span class="line">AdHocBundleID=&quot;com.aladdin.HelloUnity&quot;</span><br><span class="line"></span><br><span class="line"># ADHOC</span><br><span class="line">#证书名#描述文件</span><br><span class="line">ADHOCCODE_SIGN_IDENTITY=&quot;Apple Distribution: Aladdin Game NetWork aladdin (P4AATCK8AF)&quot;</span><br><span class="line">ADHOCPROVISIONING_PROFILE_NAME=&quot;2fc1fdde-8867-48c2-be7a-15e677f8bdf4&quot;</span><br><span class="line"></span><br><span class="line">#版本的plist文件</span><br><span class="line">ADHOCExportOptionsPlist=&quot;$Project_Path/ExportOptions.plist&quot;</span><br><span class="line"></span><br><span class="line">#clean下</span><br><span class="line">xcodebuild clean -xcodeproj $Project_Path/build/iPhone/$Project_Name.xcodeproj -configuration $Configuration -alltargets</span><br><span class="line"></span><br><span class="line">#adhoc脚本</span><br><span class="line">xcodebuild -project &quot;$Project_Path/build/iPhone/$Project_Name.xcodeproj&quot; -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-adhoc.xcarchive clean archive build CODE_SIGN_IDENTITY=&quot;$&#123;ADHOCCODE_SIGN_IDENTITY&#125;&quot; PROVISIONING_PROFILE=&quot;$&#123;ADHOCPROVISIONING_PROFILE_NAME&#125;&quot; PRODUCT_BUNDLE_IDENTIFIER=&quot;$&#123;AdHocBundleID&#125;&quot;</span><br><span class="line">xcodebuild -exportArchive -archivePath build/$Project_Name-adhoc.xcarchive -exportOptionsPlist $ADHOCExportOptionsPlist -exportPath $Project_Path/$Configuration/$Project_Name-adhoc.ipa</span><br></pre></td></tr></table></figure></p>
-<p>上面shell脚本中提到的ADHOCCODE_SIGN_IDENTITY是开发者证书名，ADHOCPROVISIONING_PROFILE_NAME是描述文件，可以从苹果开发者后台下载开发者证书即可查询到相关信息<br><img src="/2020/01/20/28.png" alt=""></p>
-<p><img src="/2020/01/20/29.png" alt=""><br>下载下来mobileprovision文件，然后用记事本打开获取想要的信息</p>
-<p><img src="/2020/01/20/25.png" alt=""><br>ADHOCExportOptionsPlist是Xcode导出ipa的一些配置信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span><br><span class="line">&lt;plist version=&quot;1.0&quot;&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">	&lt;key&gt;provisioningProfiles&lt;/key&gt;</span><br><span class="line">	&lt;dict&gt;</span><br><span class="line">		&lt;key&gt;com.aladdin.HelloUnity&lt;/key&gt;</span><br><span class="line">		&lt;string&gt;2fc1fdde-8867-48c2-be7a-15e677f8bdf4&lt;/string&gt;</span><br><span class="line">	&lt;/dict&gt;</span><br><span class="line">	&lt;key&gt;compileBitcode&lt;/key&gt;</span><br><span class="line">	&lt;true/&gt;</span><br><span class="line">	&lt;key&gt;destination&lt;/key&gt;</span><br><span class="line">	&lt;string&gt;export&lt;/string&gt;</span><br><span class="line">	&lt;key&gt;method&lt;/key&gt;</span><br><span class="line">	&lt;string&gt;ad-hoc&lt;/string&gt;</span><br><span class="line">	&lt;key&gt;signingStyle&lt;/key&gt;</span><br><span class="line">	&lt;string&gt;automatic&lt;/string&gt;</span><br><span class="line">	&lt;key&gt;stripSwiftSymbols&lt;/key&gt;</span><br><span class="line">	&lt;true/&gt;</span><br><span class="line">	&lt;key&gt;teamID&lt;/key&gt;</span><br><span class="line">	&lt;string&gt;P4AATCK8AF&lt;/string&gt;</span><br><span class="line">	&lt;key&gt;thinning&lt;/key&gt;</span><br><span class="line">	&lt;string&gt;&amp;lt;thin-for-all-variants&amp;gt;&lt;/string&gt;</span><br><span class="line">&lt;/dict&gt;</span><br><span class="line">&lt;/plist&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h2><h5 id="如果是pkg安装的Jenkins会出现文件访问权限的问题"><a href="#如果是pkg安装的Jenkins会出现文件访问权限的问题" class="headerlink" title="如果是pkg安装的Jenkins会出现文件访问权限的问题"></a>如果是pkg安装的Jenkins会出现文件访问权限的问题</h5><p>通过pkg安装Jenkins会创建一个Jenkins账户，这跟我们系统账户是相互独立的，Mac系统不同的账户相互访问文件默认是不允许的，这处于安全考虑，我们如果把项目放在自己的系统账户里，那么通过Jenkins打包就会碰到好多文件访问权限的问题，因为我们通过浏览器访问Jenkins，这其实是通过Jenkins账户在访问我们默认账户上的文件，虽然上问有提到如何添加文件访问权限，但也是非常的麻烦，所以非常不建议通过pkg的方式安装Jenkins。</p>
-<h5 id="8080端口被占用"><a href="#8080端口被占用" class="headerlink" title="8080端口被占用"></a>8080端口被占用</h5><p>Jenkins默认端口是8080端口，如果这个端口预先被其他程序占用，可能就会报错，那么我们就需要更改我们的端口号，可以使用以下命令启动Jenkins，最后一个参数是我们想要设置的端口号：<br><code>java -jar jenkins.war --httpPort=8081</code></p>
-<h5 id="打不出来包"><a href="#打不出来包" class="headerlink" title="打不出来包"></a>打不出来包</h5><p>或许你会发现在Jenkins打包的时候，通过控制台发现命令已经执行完了，但是没打出来包，虽然我们直接运行批处理是能打出apk的，但通过jenkins就不行，需要细心的看log提示，会提示没找到sdk<br><img src="/2020/01/20/23.png" alt=""><br>解决：就需要将sdk添加到环境变量<br><img src="/2020/01/20/24.png" alt=""></p>
-<h5 id="打出来的是空目录"><a href="#打出来的是空目录" class="headerlink" title="打出来的是空目录"></a>打出来的是空目录</h5><p><img src="/2020/01/20/27.png" alt=""><br>如果工程有报错的话，Unity打出来的就是空目录，而不是一个文件，可以稍微修改一下shell脚本添加上是否是文件还是目录的判断来决定是否上传到ftp服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if [ -d &quot;$filename&quot; ]; then</span><br><span class="line">  	echo &quot;$filename is a directory,can&apos;t copy &quot;</span><br><span class="line">  	echo &quot;Copy apk failure&quot;</span><br><span class="line">elif [ -f &quot;$filename&quot; ]; then</span><br><span class="line">  	echo &quot;$filename is a file&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></p>
-<h2 id="一些流程优化"><a href="#一些流程优化" class="headerlink" title="一些流程优化"></a>一些流程优化</h2><h5 id="去掉Jenkins账号验证"><a href="#去掉Jenkins账号验证" class="headerlink" title="去掉Jenkins账号验证"></a>去掉Jenkins账号验证</h5><p>如果有账号验证，可能显得安全性会高一些，但有的时候为了方便不想输入繁琐的账号，直接浏览器打开Jenkins就能使用，就可以去除验证账号，我们只要在Manager Jenkins改一下配置即可：<br><img src="/2020/01/20/21.png" alt=""></p>
-<h5 id="开机自启动Jenkins"><a href="#开机自启动Jenkins" class="headerlink" title="开机自启动Jenkins"></a>开机自启动Jenkins</h5><p>一般情况下Jenkins打开之后就没啥问题，但如果出现异常断电的情况，我们是不是需要手动启动Jenkins，所以开机自启动Jenkins也就显得非常有必要，Windows的开机自启动，我们只需要按住Ctrl+Shift_Esc就会出现任务管理器就会有启动项的设置，我们只需要将启动的bat添加进自启动即可，或者其他百度搜索途径，Mac上的设置步骤:打开系统偏好设置-&gt;用户与群组-&gt;登录项，将我们需要自启动的shell添加进去即可，这样开启的时候就会自动执行。<br><img src="/2020/01/20/22.png" alt=""></p>
-<h5 id="路径的优化"><a href="#路径的优化" class="headerlink" title="路径的优化"></a>路径的优化</h5><p>我们如果有多个Shell脚本，例如打包表格、打包音效、打包AB、打包apk等，那我们是不是需要在每个shell脚本里面都要写一遍项目配置的通用变量，就显得很冗余，而且如果项目地址或者某个变量的值变了，那我们岂不是要每个脚本里都要改一下，这让有”洁癖”或者说”懒”的程序就会很狂抓，程序员最不喜欢做重复性的劳动了，其实可以将一些公共变量写在外面，通过export的形式，这样我们修改起来就会很方便，脚本内部通过变量应用即可，效果如下：<br><img src="/2020/01/20/20.png" alt=""></p>
-<h5 id="邮件通知"><a href="#邮件通知" class="headerlink" title="邮件通知"></a>邮件通知</h5><p>如果出包时间比较长，我们需要一段时间去盯着Jenkins看打包的进度就显得浪费时间，我们可以通过配置邮件通知提醒来解决这以问题，在出包之后第一时间给我们发送邮件，邮件中可以将包设置为邮件附件，这样我们在手机上打开邮件下载附件就可以直接安装到手机上，非常的方便。</p>
-<p>说明：本文使用的是QQ邮箱，如果使用其他邮箱有问题可以在下文中反馈。<br>1.开启QQ邮箱的SMTP服务<br><img src="/2020/01/20/30.png" alt=""><br><img src="/2020/01/20/31.png" alt=""><br>记录授权码用于配置</p>
-<p>2.添加邮件相关的插件<br>打开Jenkins的ManageJenkins，然后选择Manage Plugins，然后添加以下两个插件即可<br><img src="/2020/01/20/33.png" alt=""><br>安装完之后重启Jenkins</p>
-<p>3.邮件通知配置<br><img src="/2020/01/20/16.png" alt=""></p>
-<p>4.设置邮件内容模板<br><img src="/2020/01/20/32.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;$&#123;ENV, var=&quot;JOB_NAME&quot;&#125;-第$&#123;BUILD_NUMBER&#125;次构建日志&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body leftmargin=&quot;8&quot; marginwidth=&quot;0&quot; topmargin=&quot;8&quot; marginheight=&quot;4&quot;</span><br><span class="line">    offset=&quot;0&quot;&gt;</span><br><span class="line">    &lt;table width=&quot;95%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;  style=&quot;font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif&quot;&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            本邮件由系统自动发出，无需回复！&lt;br/&gt;</span><br><span class="line">            各位同事，大家好，以下为$&#123;PROJECT_NAME &#125;项目构建信息&lt;/br&gt;</span><br><span class="line">            &lt;td&gt;&lt;font color=&quot;#CC0000&quot;&gt;构建结果 - $&#123;BUILD_STATUS&#125;&lt;/font&gt;&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;&lt;br /&gt;</span><br><span class="line">            &lt;b&gt;&lt;font color=&quot;#0B610B&quot;&gt;构建信息&lt;/font&gt;&lt;/b&gt;</span><br><span class="line">            &lt;hr size=&quot;2&quot; width=&quot;100%&quot; align=&quot;center&quot; /&gt;&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li&gt;项目名称 ： $&#123;PROJECT_NAME&#125;&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;构建编号 ： 第$&#123;BUILD_NUMBER&#125;次构建&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;触发原因： $&#123;CAUSE&#125;&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;构建状态： $&#123;BUILD_STATUS&#125;&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;构建日志： &lt;a href=&quot;$&#123;BUILD_URL&#125;console&quot;&gt;$&#123;BUILD_URL&#125;console&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;构建  Url ： &lt;a href=&quot;$&#123;BUILD_URL&#125;&quot;&gt;$&#123;BUILD_URL&#125;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;工作目录 ： &lt;a href=&quot;$&#123;PROJECT_URL&#125;ws&quot;&gt;$&#123;PROJECT_URL&#125;ws&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;项目  Url ： &lt;a href=&quot;$&#123;PROJECT_URL&#125;&quot;&gt;$&#123;PROJECT_URL&#125;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">&lt;h4&gt;&lt;font color=&quot;#0B610B&quot;&gt;失败用例&lt;/font&gt;&lt;/h4&gt;</span><br><span class="line">&lt;hr size=&quot;2&quot; width=&quot;100%&quot; /&gt;</span><br><span class="line">$FAILED_TESTS&lt;br/&gt;</span><br><span class="line"></span><br><span class="line">&lt;h4&gt;&lt;font color=&quot;#0B610B&quot;&gt;最近提交(#$SVN_REVISION)&lt;/font&gt;&lt;/h4&gt;</span><br><span class="line">&lt;hr size=&quot;2&quot; width=&quot;100%&quot; /&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">$&#123;CHANGES_SINCE_LAST_SUCCESS, reverse=true, format=&quot;%c&quot;, changesFormat=&quot;&lt;li&gt;%d [%a] %m&lt;/li&gt;&quot;&#125;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">详细提交: &lt;a href=&quot;$&#123;PROJECT_URL&#125;changes&quot;&gt;$&#123;PROJECT_URL&#125;changes&lt;/a&gt;&lt;br/&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<p>设置DefaultTriggers为Always,这就意味着无论是构建成功还是失败都会邮件通知，如果只想成功或者失败发邮件通知可以勾选Success或者Failure。</p>
-<p>5.将邮件添加到构建任务中<br><img src="/2020/01/20/17.png" alt=""><br>6.效果<br><img src="/2020/01/20/19.jpg" alt=""></p>
-<h5 id="定时执行"><a href="#定时执行" class="headerlink" title="定时执行"></a>定时执行</h5><p>因为一般出包需要一段时间，尤其是项目后期项目资源多了之后出包甚至要半小时一小时，所以如果我们设置半夜定时出包，早上QA就可以直接从服务器上下载最新的包进行测试即可，就优化了工作效率。<br><img src="/2020/01/20/12.png" alt=""><br>上图是设置12点执行，0代表时间(24小时制)，如果想要夜间11点执行就设置为23即可。</p>
-<h5 id="上传到FTP服务器"><a href="#上传到FTP服务器" class="headerlink" title="上传到FTP服务器"></a>上传到FTP服务器</h5><p>如果我们没有设置邮件通知，或者说没有将打出来的包作为附件添加到邮件中，那我们就需要手动copy包到FTP或者Web服务器上，我们可以通过批处理来实现这一步操作，就省去了人工拷贝的时间，这里我的FTP服务器是架设在Windows服务器上。</p>
-<h6 id="Mac上Shell上传包到FTP服务器："><a href="#Mac上Shell上传包到FTP服务器：" class="headerlink" title="Mac上Shell上传包到FTP服务器："></a>Mac上Shell上传包到FTP服务器：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#！/bin/bash</span><br><span class="line">echo &quot;Copy android apk to ftpserver&quot;</span><br><span class="line">REVISION=`svn info $Project_Path | sed -ne &apos;s/^Revision: //p&apos;`</span><br><span class="line">mkdir -p $Project_Path/../Volumes/apk</span><br><span class="line">mount_smbfs //meishuadmin:test111@192.168.83.201/Release/apk $Project_Path/../Volumes/apk</span><br><span class="line">mv -f $OUTPUT_PATH_NAME/$PRODUCT_NAME.apk $Project_Path/../Volumes/apk/$&#123;PRODUCT_NAME&#125;_$&#123;REVISION&#125;.apk</span><br><span class="line">umount $Project_Path/../Volumes/apk</span><br><span class="line">echo &quot;Copy apk Success!&quot;</span><br></pre></td></tr></table></figure>
-<h6 id="Windows上直接Copy包到指定FTP服务器目录"><a href="#Windows上直接Copy包到指定FTP服务器目录" class="headerlink" title="Windows上直接Copy包到指定FTP服务器目录"></a>Windows上直接Copy包到指定FTP服务器目录</h6><p>主要bat命令 <code>move /Y &quot;%EXE_ZIP_FILE%&quot; E:/Release/exe/</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;Copy win exe&quot;</span><br><span class="line">svn info %Project_Path% | findstr &quot;Rev:&quot;  &gt; Version.txt</span><br><span class="line">for /f &quot;tokens=4 delims= &quot; %%i in (Version.txt) do set REVISION=%%i</span><br><span class="line">set EXE_ZIP_FILE=%PRODUCT_NAME%_%REVISION%.zip</span><br><span class="line">rd /q/s &quot;%OUTPUT_PATH_NAME%\%PRODUCT_NAME%_BackUpThisFolder_ButDontShipItWithYourGame&quot;</span><br><span class="line">&quot;C:\Program Files\7-Zip\7z.exe&quot; a %EXE_ZIP_FILE% %OUTPUT_PATH_NAME%\*</span><br><span class="line">move /Y &quot;%EXE_ZIP_FILE%&quot; E:/Release/exe/</span><br><span class="line">del /f /s /q Version.txt</span><br><span class="line">echo &quot;Copy exe Success!&quot;</span><br></pre></td></tr></table></figure></p>
-<p>exe打包出来是一些散的文件，这里用到了7z压缩软件的命令，将一个版本就压缩成一个7z包，更方便一些。</p>
-<h5 id="apk根据svn版本号来出包"><a href="#apk根据svn版本号来出包" class="headerlink" title="apk根据svn版本号来出包"></a>apk根据svn版本号来出包</h5><p>我们在开发的时候一般都是用版本管理工具git或者svn，工具是会有版本号的，如果我们出来的包只有这个包是什么时间生成的，我们如果想知道这个包是哪个版本，就需要通过出包时间然后去版本工具里查找对应的版本记录时间才会知道对应包是哪个版本，为了解决这个问题，我们可以在出的包名就加上我们最新的版本号就可以，例如上文一开始的效果图那些包名。</p>
-<h5 id="获取svn版本号"><a href="#获取svn版本号" class="headerlink" title="获取svn版本号"></a>获取svn版本号</h5><p><code>REVISION=</code>svn info $Project_Path | sed -ne ‘s/^Revision: //p’<code></code></p>
-<p>然后在Copy的时候直接更新包名即可，即在包名后面添加上版本号</p>
-<p><code>mv -f $OUTPUT_PATH_NAME/$PRODUCT_NAME.apk $Project_Path/../Volumes/apk/${PRODUCT_NAME}_${REVISION}.apk</code></p>
-<h5 id="windows执行shell"><a href="#windows执行shell" class="headerlink" title="windows执行shell"></a>windows执行shell</h5><p>Mac平台终端是执行shell，Windows平台控制台是批处理，如果我们想写出来的Shell也能在Windows上执行，那么我们就不需要两个平台写两种语言了，Windows 10提供了PowerShell终端，如果是win7的话可以安装第三方终端，例如Hyper或者Fluent Terminal等，这个可以自行搜索Windows执行shell即可</p>
-<h5 id="提交代码之后就自动触发构建"><a href="#提交代码之后就自动触发构建" class="headerlink" title="提交代码之后就自动触发构建"></a>提交代码之后就自动触发构建</h5><p>如果我们有这个需求，提交一次代码就触发一次构建也是可以的，不过这种设置的话最好是提交没那么频繁。<br>我们在源码管理上配置我们的认证权限：<br><img src="/2020/01/20/13.png" alt=""></p>
-<p><img src="/2020/01/20/14.png" alt=""><br>上面是svn和git的权限配置。</p>
-<h6 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h6><p>在Jenkins中安装一些插件，选择 系统管理-&gt;管理插件，搜索Gitlab Hook Plugin和GitLab Plugin等插件，然后点击直接安装，重启即可。</p>
-<h6 id="添加自动构建触发器"><a href="#添加自动构建触发器" class="headerlink" title="添加自动构建触发器"></a>添加自动构建触发器</h6><p>然后在Jenkins工程的配置页，找到构建触发器部分，勾选Build when a change is pushed to GitLab即可<br><img src="/2020/01/20/15.png" alt=""></p>
-<h2 id="Jenkins-Pipeline"><a href="#Jenkins-Pipeline" class="headerlink" title="Jenkins Pipeline"></a>Jenkins Pipeline</h2><p><a href="https://jenkins.io/zh/doc/book/pipeline/getting-started/" target="_blank" rel="noopener">https://jenkins.io/zh/doc/book/pipeline/getting-started/</a><br><a href="https://www.bilibili.com/video/av26270306?from=search&amp;seid=4723325301232029491" target="_blank" rel="noopener">https://www.bilibili.com/video/av26270306?from=search&amp;seid=4723325301232029491</a></p>
-<h4 id="Jenkinsfile构成"><a href="#Jenkinsfile构成" class="headerlink" title="Jenkinsfile构成"></a>Jenkinsfile构成</h4><ul>
-<li>pipeline{…}</li>
-<li>agent</li>
-<li>stages{…}</li>
-<li>stage(‘’){…}</li>
-<li>steps{…}</li>
-<li>post{…}</li>
-</ul>
-<p>agent是指配置节点</p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">pipeline</span><br><span class="line">&#123;</span><br><span class="line">	agent any</span><br><span class="line">    parameters&#123;</span><br><span class="line">    	string(name:&apos;str&apos;, defaultValue:&apos;DEFAULT&apos;,description:&apos;这是一个描述&apos;,trim:true)</span><br><span class="line">        booleanParam(name:&apos;bool&apos;,defaultValue:false,description:&apos;这是一个布尔参数&apos;)</span><br><span class="line">        //choice(name:&apos;chs&apos;,choice:[&apos;ios&apos;,&apos;andriod&apos;,&apos;ps4&apos;],description:&apos;这是一个选项参数&apos;)</span><br><span class="line">        choice(name:&apos;chs&apos;,choices:&apos;ios\nps4\nandroid&apos;,description:&apos;这是一个选项参数&apos;)</span><br><span class="line">        text(name:&apos;tex&apos;,defaultValue:&apos;文本参数默认值&apos;,description:&apos;这是一个文本参数的描述&apos;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    options&#123;</span><br><span class="line">    	disableConcurrentBuilds() //禁止并行</span><br><span class="line">        timestamps() //时间戳</span><br><span class="line">        //timeout(activity:true,time:5,uint:&apos;SECONDS&apos;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    environment&#123;</span><br><span class="line">        foo = &apos;today is Friday&apos;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages&#123;</span><br><span class="line">    	stage(&apos;打包&apos;)&#123;</span><br><span class="line">        	steps&#123;</span><br><span class="line">            	sh label:&apos;&apos;,script:&quot;echo build,echo $&#123;params.str&#125;&quot;</span><br><span class="line">                sh label:&apos;&apos;,script:&quot;echo build,echo $&#123;params.bool&#125;&quot;</span><br><span class="line">                sh label:&apos;&apos;,script:&quot;echo build,echo $&#123;params.chs&#125;&quot;</span><br><span class="line">                sh label:&apos;&apos;,script:&quot;echo build,echo $&#123;params.tex&#125;&quot;</span><br><span class="line">                sleep(time:20,uint:&apos;SECONDS&apos;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;发布&apos;)&#123;</span><br><span class="line">            environment&#123;</span><br><span class="line">                bar = &apos;merry chrismas&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        	steps&#123;</span><br><span class="line">            	sh label:&apos;&apos;,script:&apos;echo deploy&apos;</span><br><span class="line">                sh label:&apos;&apos;,script:&apos;echo $&#123;foo&#125;&apos;</span><br><span class="line">                sh label:&apos;&apos;,script:&apos;echo $&#123;bar&#125;&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;测试&apos;)&#123;</span><br><span class="line">            environment&#123;</span><br><span class="line">                bar = &apos;merry chrismas&apos;</span><br><span class="line">            &#125;</span><br><span class="line">            steps&#123;</span><br><span class="line">                script&#123;</span><br><span class="line">                    print(bar)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    post&#123;</span><br><span class="line">    	always&#123;</span><br><span class="line">        	sh label:&apos;&apos;,script:&apos;echo always&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        success&#123;</span><br><span class="line">        	sh label:&apos;&apos;,script:&apos;echo success&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        failure&#123;</span><br><span class="line">        	sh label:&apos;&apos;,script:&apos;echo failure&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        aborted&#123;</span><br><span class="line">        	sh label:&apos;&apos;,script:&apos;echo aborted&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>timeout(20) = timeout(time:20,uint:’MINUTES’) 默认是分钟为单位<br>sleep(20) = sleep(time:20,uint:’SECONDS’) 默认是秒为单位</p>
-<p><img src="/2020/01/20/34.png" alt=""></p>
-<p><img src="/2020/01/20/35.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">pipeline</span><br><span class="line">&#123;</span><br><span class="line">	agent any</span><br><span class="line">	parameters&#123;</span><br><span class="line">        string(name:&apos;Project_Path&apos;,defaultValue:&apos;/Users/Shared/Project/robot_craft_client&apos;,description:&apos;工程地址&apos;,trim:true)</span><br><span class="line">        string(name:&apos;Unity_Build_Method&apos;,defaultValue:&apos;CustomBuild.BuildAndroid&apos;,description:&apos;编译方法&apos;,trim:true)</span><br><span class="line">        string(name:&apos;Unity_Path&apos;,defaultValue:&apos;/Applications/Unity/Unity.app/Contents/MacOS/Unity&apos;,description:&apos;Unity路径&apos;,trim:true)</span><br><span class="line"></span><br><span class="line">        string(name:&apos;VERSION&apos;,defaultValue:&apos;1.0.0&apos;,description:&apos;版本号&apos;,trim:true)</span><br><span class="line">        //string(name:&apos;OUTPUT_PATH_NAME&apos;,defaultValue:&apos;$Project_Path/../build/Android&apos;,description:&apos;输出路径&apos;,trim:true)</span><br><span class="line">        string(name:&apos;BUNDLEID_ID_Name&apos;,defaultValue:&apos;com.kingnet.robotcraft&apos;,description:&apos;ID&apos;,trim:true)</span><br><span class="line">        string(name:&apos;BUNDLE_VERSION_NAME&apos;,defaultValue:&apos;1.0.0&apos;,description:&apos;BuildVersionId&apos;,trim:true)</span><br><span class="line">        string(name:&apos;DEFINE_SYMBOLS_NAME&apos;,defaultValue:&apos;BAYATGAMES;BAYATGAMES_SAVEGAMEPRO;ODIN_INSPECTOR;UNITY_POST_PROCESSING_STACK_V2;SUBSTANCE_PLUGIN_ENABLED;DISABLE_ILRUNTIME;&apos;,description:&apos;Symbols&apos;,trim:true)</span><br><span class="line">        string(name:&apos;PRODUCT_NAME&apos;,defaultValue:&apos;Robotcraft&apos;,description:&apos;包Name&apos;,trim:true)</span><br><span class="line">        string(name:&apos;ANDROID_VERSION_CODE_NAME&apos;,defaultValue:&apos;&apos;,description:&apos;ANDROID_VERSION_CODE_NAME&apos;,trim:true)</span><br><span class="line">        string(name:&apos;DEV_BUILD&apos;,defaultValue:&apos;-DEV_BUILD&apos;,description:&apos;DEV_BUILD&apos;,trim:true)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    options&#123;</span><br><span class="line">    	disableConcurrentBuilds()</span><br><span class="line">        timestamps()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    environment&#123;</span><br><span class="line">        OUTPUT_PATH_NAME = &apos;$Project_Path/../build/Android&apos;</span><br><span class="line">        Sh_RunPath = &apos;/Users/Shared/Project/robot_craft_client/Tools/CustomBuild&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    stages&#123;</span><br><span class="line">    	stage(&apos;更新&apos;)&#123;</span><br><span class="line">        	steps&#123;</span><br><span class="line">            	sh label:&apos;&apos;,script:&quot;sh $&#123;Sh_RunPath&#125;/UpdateSvn.sh&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">		stage(&apos;编译Audio&apos;)&#123;</span><br><span class="line">        	steps&#123;</span><br><span class="line">            	sh label:&apos;&apos;,script:&quot;sh $&#123;Sh_RunPath&#125;/BuildAudio.sh&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">		stage(&apos;编译Data&apos;)&#123;</span><br><span class="line">        	steps&#123;</span><br><span class="line">            	sh label:&apos;&apos;,script:&quot;sh $&#123;Sh_RunPath&#125;/BuildData.sh&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">		stage(&apos;编译ILRuntime&apos;)&#123;</span><br><span class="line">        	steps&#123;</span><br><span class="line">            	sh label:&apos;&apos;,script:&quot;sh $&#123;Sh_RunPath&#125;/BuildILRuntime.sh&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">		stage(&apos;编译AB&apos;)&#123;</span><br><span class="line">        	steps&#123;</span><br><span class="line">            	sh label:&apos;&apos;,script:&quot;sh $&#123;Sh_RunPath&#125;/BuildAssetBundle.sh&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">		stage(&apos;打包APK&apos;)&#123;</span><br><span class="line">        	steps&#123;</span><br><span class="line">            	sh label:&apos;&apos;,script:&quot;sh $&#123;Sh_RunPath&#125;/BuildAndroid.sh&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">		stage(&apos;CopyAPK&apos;)&#123;</span><br><span class="line">        	steps&#123;</span><br><span class="line">            	sh label:&apos;&apos;,script:&quot;sh $&#123;Sh_RunPath&#125;/CopyApk.sh&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    post&#123;</span><br><span class="line">    	always&#123;</span><br><span class="line">        	sh label:&apos;&apos;,script:&apos;echo always&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        success&#123;</span><br><span class="line">        	sh label:&apos;&apos;,script:&apos;echo success&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        failure&#123;</span><br><span class="line">        	sh label:&apos;&apos;,script:&apos;echo failure&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        aborted&#123;</span><br><span class="line">        	sh label:&apos;&apos;,script:&apos;echo aborted&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="案例工程下载地址"><a href="#案例工程下载地址" class="headerlink" title="案例工程下载地址"></a>案例工程下载地址</h2><p><a href="https://gitee.com/dingxiaowei/JenkinsTest" target="_blank" rel="noopener">https://gitee.com/dingxiaowei/JenkinsTest</a></p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p><img src="/2020/01/20/26.png" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/20/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-【优化】移动游戏性能优化通用技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -416,6 +283,97 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/01/01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-使用Jenkins实现Unity自动化打包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/10/">使用Jenkins实现Unity自动化打包</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/10/" class="archive-article-date">
+  	<time datetime="2019-10-10T15:55:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-10</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        请输入密码后阅读.
+        
+          <a class="article-more-a" href="/2019/10/10/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jenkins</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/10/">展开全文 >></a>
         </p>
       
 
@@ -1405,11 +1363,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1425,23 +1383,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1465,10 +1419,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
@@ -1481,6 +1431,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -1489,11 +1447,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1501,7 +1459,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1513,7 +1471,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1529,11 +1487,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1546,10 +1504,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1569,7 +1523,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1585,11 +1551,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1609,10 +1575,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
               </li>
              
@@ -1622,10 +1584,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">夫妻不和家必败</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
