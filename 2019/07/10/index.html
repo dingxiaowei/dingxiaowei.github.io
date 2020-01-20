@@ -17,7 +17,7 @@
 <meta property="og:description" content="FairyGUI自动导出工具">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://dingxiaowei.cn/2019/07/10/1.png">
-<meta property="og:updated_time" content="2019-12-15T02:09:47.754Z">
+<meta property="og:updated_time" content="2020-01-20T14:31:33.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FairyGUI自动导出工具">
 <meta name="twitter:description" content="FairyGUI自动导出工具">
@@ -239,6 +239,7 @@ var _hmt = _hmt || [];
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>美术同事做好FairyGUI的界面，需要导出然后提交过程比较繁琐，就索性做一个Editor的工具方便美术操作。</p>
 <h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="/2019/07/10/1.png" alt=""></p>
+<a id="more"></a>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h5 id="FairyGUICommitWindow"><a href="#FairyGUICommitWindow" class="headerlink" title="FairyGUICommitWindow"></a>FairyGUICommitWindow</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br></pre></td><td class="code"><pre><span class="line">using System.Collections;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using UnityEngine;</span><br><span class="line">using UnityEditor;</span><br><span class="line">using BayatGames.SaveGamePro;</span><br><span class="line">using System.Text;</span><br><span class="line"></span><br><span class="line">namespace BDFramework.Editor.Tools</span><br><span class="line">&#123;</span><br><span class="line">	public class FairyGUICommitWindow : EditorWindow</span><br><span class="line">	&#123;</span><br><span class="line">        const string SVN_EXE_PATH = &quot;SVN_EXE_PATH&quot;;</span><br><span class="line">        const string FAIRYGUI_PROJECT_PATH = &quot;FAIRYGUI_PROJECT_PATH&quot;;</span><br><span class="line">        const string FUI_PATH = &quot;/InnerResources/FairyUI&quot;;</span><br><span class="line">        const string FUI_CSHARP_PATH = &quot;/Code/Game@hotfix/UI/Component&quot;;</span><br><span class="line"></span><br><span class="line">        string[] mPackageArray = new string[14] &#123; &quot;All&quot;, &quot;Battle&quot;, &quot;Battle_Alpha&quot;, &quot;Battle_NoAlpha&quot;, &quot;BattleResult&quot;, &quot;Common&quot;, &quot;Common_Alpha&quot;</span><br><span class="line">        , &quot;Common_NoAlpha&quot;, &quot;Login&quot;, &quot;Login_Alpha&quot;, &quot;Login_NoAlpha&quot;, &quot;System&quot;, &quot;System_Alpha&quot;, &quot;System_NoAlpha&quot;&#125;;</span><br><span class="line">        StringBuilder mNeedExportPackageNames = new StringBuilder();</span><br><span class="line"></span><br><span class="line">        string mSvnExePath;</span><br><span class="line">        string mFairyGUIProjectPath;</span><br><span class="line">        string mHint;</span><br><span class="line">        //string commitLog;</span><br><span class="line"></span><br><span class="line">        Vector2 mScrollViewContentOffset = Vector2.zero;</span><br><span class="line">        bool[] mToggleValues = new bool[14];</span><br><span class="line">        bool[] mLastToggleValues = new bool[14];</span><br><span class="line"></span><br><span class="line">        [MenuItem(&quot;Tools/FairyGUI/SVN Commit&quot;)]</span><br><span class="line">        public static void GetWindow()</span><br><span class="line">        &#123;</span><br><span class="line">            Rect rect = new Rect(0, 0, 800, 760);</span><br><span class="line">            var window = EditorWindow.GetWindowWithRect(typeof(FairyGUICommitWindow), rect, true, &quot;FairyGUI 上传工具&quot;);</span><br><span class="line">            window.Show();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        void OnGUI()</span><br><span class="line">        &#123;</span><br><span class="line">            GUILayout.BeginArea(new Rect(30, 20, 700, 720));</span><br><span class="line">            ShowSvnExePath();</span><br><span class="line">            ShowFairyGUIProjectPath();</span><br><span class="line">            RevertAndUpdate();</span><br><span class="line">            ExportPackage();</span><br><span class="line">            CommitToSvn();</span><br><span class="line">            ShowLog();</span><br><span class="line">            GUILayout.EndArea();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        void ShowSvnExePath()</span><br><span class="line">        &#123;</span><br><span class="line">            mSvnExePath = SaveGame.Load(SVN_EXE_PATH, &quot;&quot;);</span><br><span class="line"></span><br><span class="line">            GUILayout.BeginHorizontal();</span><br><span class="line">            GUILayout.Label(&quot;SVN TortoiseProc.exe 路径：&quot;, GUILayout.Width(180));</span><br><span class="line">            GUILayout.TextField(mSvnExePath, GUILayout.Width(400), GUILayout.Height(20));</span><br><span class="line">            if (GUILayout.Button(&quot;...&quot;, GUILayout.Width(30), GUILayout.Height(20)))</span><br><span class="line">            &#123;</span><br><span class="line">                mSvnExePath = EditorUtility.OpenFilePanel(&quot;Select TortoiseProc.exe&quot;, mSvnExePath, &quot;exe&quot;);</span><br><span class="line">                SaveGame.Save(SVN_EXE_PATH, mSvnExePath);</span><br><span class="line">            &#125;</span><br><span class="line">            GUILayout.EndHorizontal();</span><br><span class="line"></span><br><span class="line">            GUILayout.BeginHorizontal();</span><br><span class="line">            GUILayout.Label(&quot;提示：选择TortoiseProc.exe文件，一般在SVN工具（TortoiseSVN）安装目录的 bin 文件夹下&quot;);</span><br><span class="line">            GUILayout.EndHorizontal();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        void ShowFairyGUIProjectPath()</span><br><span class="line">        &#123;</span><br><span class="line">            GUILayout.Space(20);</span><br><span class="line">            mFairyGUIProjectPath = SaveGame.Load(FAIRYGUI_PROJECT_PATH, &quot;&quot;);</span><br><span class="line"></span><br><span class="line">            GUILayout.BeginHorizontal();</span><br><span class="line">            GUILayout.Label(&quot;fairyGUI工程的 .fairy 文件路径：&quot;, GUILayout.Width(180));</span><br><span class="line">            GUILayout.TextField(mFairyGUIProjectPath, GUILayout.Width(400), GUILayout.Height(20));</span><br><span class="line">            if (GUILayout.Button(&quot;...&quot;, GUILayout.Width(30), GUILayout.Height(20)))</span><br><span class="line">            &#123;</span><br><span class="line">                mFairyGUIProjectPath = EditorUtility.OpenFilePanel(&quot;Select TortoiseProc.exe&quot;, mFairyGUIProjectPath, &quot;fairy&quot;);</span><br><span class="line">                SaveGame.Save(FAIRYGUI_PROJECT_PATH, mFairyGUIProjectPath);</span><br><span class="line">            &#125;</span><br><span class="line">            GUILayout.EndHorizontal();</span><br><span class="line"></span><br><span class="line">            GUILayout.BeginHorizontal();</span><br><span class="line">            GUILayout.Label(&quot;提示：DemoProject/UI/robotcraft/robotcraft.fairy&quot;);</span><br><span class="line">            GUILayout.EndHorizontal();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        void RevertAndUpdate()</span><br><span class="line">        &#123;</span><br><span class="line">            GUILayout.Space(20);</span><br><span class="line"></span><br><span class="line">            if (GUILayout.Button(&quot;回退与更新&quot;, GUILayout.Width(200), GUILayout.Height(30)))</span><br><span class="line">            &#123;</span><br><span class="line">                if (string.IsNullOrEmpty(mSvnExePath))</span><br><span class="line">                &#123;</span><br><span class="line">                    mHint = &quot;TortoiseProc.exe 的路径为空&quot;;</span><br><span class="line">                    return;</span><br><span class="line">                &#125;</span><br><span class="line">                SvnUtil.RevertAndUpdateSvnDirectory(mSvnExePath, Application.dataPath + FUI_PATH);</span><br><span class="line">                SvnUtil.RevertAndUpdateSvnDirectory(mSvnExePath, Application.dataPath + FUI_CSHARP_PATH);</span><br><span class="line">                AssetDatabase.Refresh();</span><br><span class="line">                mHint = &quot;回退更新成功&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        void ExportPackage()</span><br><span class="line">        &#123;</span><br><span class="line">            GUILayout.Space(20);</span><br><span class="line">            GUILayout.Label(&quot;选择要导出的FairyGUI Package （不选则为全导出）：&quot;);</span><br><span class="line">            mScrollViewContentOffset = GUILayout.BeginScrollView(mScrollViewContentOffset, GUILayout.Width(680), GUILayout.Height(270));</span><br><span class="line">            for (int i = 0; i &lt; mPackageArray.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                GUILayout.BeginHorizontal();</span><br><span class="line">                mToggleValues[i] = GUILayout.Toggle(mToggleValues[i], mPackageArray[i], GUILayout.Width(200));</span><br><span class="line">                if (mToggleValues[i] != mLastToggleValues[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    ToggleOnClicked(i);</span><br><span class="line">                &#125;</span><br><span class="line">                GUILayout.EndHorizontal();</span><br><span class="line">            &#125;</span><br><span class="line">            GUILayout.EndScrollView();</span><br><span class="line"></span><br><span class="line">            if (GUILayout.Button(&quot;导出FairyGUI&quot;, GUILayout.Width(200), GUILayout.Height(30)))</span><br><span class="line">            &#123;</span><br><span class="line">                if (string.IsNullOrEmpty(mFairyGUIProjectPath))</span><br><span class="line">                &#123;</span><br><span class="line">                    mHint = &quot;请选择要导出的FairyGUI工程&quot;;</span><br><span class="line">                    return;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                string packageNames = GetSelectedPackage();</span><br><span class="line"></span><br><span class="line">                if (mToggleValues[0] == true || string.IsNullOrEmpty(packageNames))</span><br><span class="line">                &#123;</span><br><span class="line">                    EditorUtil.ExecuteProcess(Application.dataPath + &quot;/../Tools/FairyGUI-Editor/FairyGUIPublish.bat&quot;, $&quot;\&quot;-p &#123;mFairyGUIProjectPath&#125;\&quot;&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">                else</span><br><span class="line">                &#123;</span><br><span class="line">                    EditorUtil.ExecuteProcess(Application.dataPath + &quot;/../Tools/FairyGUI-Editor/FairyGUIPublish.bat&quot;, $&quot;\&quot;-p &#123;mFairyGUIProjectPath&#125; -b &#123;packageNames&#125;\&quot;&quot;);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                AssetDatabase.Refresh();</span><br><span class="line">                mHint = &quot;FairyGUI导出成功&quot;;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            GUILayout.Label(&quot;导出的资源路径为：Assets&quot; + FUI_PATH);</span><br><span class="line">            GUILayout.Label(&quot;导出的脚本路径为：Assets&quot; + FUI_CSHARP_PATH);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        void CommitToSvn()</span><br><span class="line">        &#123;            </span><br><span class="line">            GUILayout.Space(20);</span><br><span class="line"></span><br><span class="line">            //GUILayout.BeginHorizontal();</span><br><span class="line">            //GUILayout.Label(&quot;svn 提交日志：&quot;, GUILayout.Width(80));</span><br><span class="line">            //commitLog = GUILayout.TextField(commitLog, GUILayout.Width(400), GUILayout.Height(20));</span><br><span class="line">            //GUILayout.EndHorizontal();</span><br><span class="line"></span><br><span class="line">            if (GUILayout.Button(&quot;提交修改&quot;, GUILayout.Width(200), GUILayout.Height(30)))</span><br><span class="line">            &#123;</span><br><span class="line">                if (string.IsNullOrEmpty(mSvnExePath))</span><br><span class="line">                &#123;</span><br><span class="line">                    mHint = &quot;TortoiseProc.exe 的路径为空&quot;;</span><br><span class="line">                    return;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                //if (string.IsNullOrEmpty(commitLog))</span><br><span class="line">                //&#123;</span><br><span class="line">                //    mHint = &quot;请填写日志&quot;;</span><br><span class="line">                //    return;</span><br><span class="line">                //&#125;</span><br><span class="line"></span><br><span class="line">                SvnUtil.CommitSvnDirectory(mSvnExePath, Application.dataPath + FUI_PATH);</span><br><span class="line">                SvnUtil.CommitSvnDirectory(mSvnExePath, Application.dataPath + FUI_CSHARP_PATH);</span><br><span class="line"></span><br><span class="line">                AssetDatabase.Refresh();</span><br><span class="line">                mHint = &quot;导出文件提交成功&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        void ShowLog()</span><br><span class="line">        &#123;</span><br><span class="line">            GUILayout.Space(20);</span><br><span class="line"></span><br><span class="line">            GUILayout.BeginHorizontal();</span><br><span class="line">            GUILayout.Label(mHint, new GUIStyle</span><br><span class="line">            &#123;</span><br><span class="line">                normal = new GUIStyleState()</span><br><span class="line">                &#123;</span><br><span class="line">                    textColor = Color.red,</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            GUILayout.EndHorizontal();</span><br><span class="line"></span><br><span class="line">            GUILayout.Space(20);</span><br><span class="line">            GUILayout.Label(&quot;重要：如果FairyGUI导出后，Unity编译不通过，即有报红，无法运行的情况，请找程序大大&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        void ToggleOnClicked(int index)</span><br><span class="line">        &#123;</span><br><span class="line">            if (index == 0)</span><br><span class="line">            &#123;</span><br><span class="line">                for (int i = 1; i &lt; mToggleValues.Length; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    mToggleValues[i] = mToggleValues[index];</span><br><span class="line">                    mLastToggleValues[i] = mToggleValues[index];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                if(mToggleValues[index] == false)</span><br><span class="line">                &#123;</span><br><span class="line">                    mToggleValues[0] = false;</span><br><span class="line">                    mLastToggleValues[0] = false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            mLastToggleValues[index] = mToggleValues[index];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        string GetSelectedPackage()</span><br><span class="line">        &#123;</span><br><span class="line">            mNeedExportPackageNames.Clear();</span><br><span class="line">            for (int i = 1; i &lt; mToggleValues.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                if (mToggleValues[i] == true)</span><br><span class="line">                &#123;</span><br><span class="line">                    mNeedExportPackageNames.Append(mPackageArray[i]);</span><br><span class="line">                    mNeedExportPackageNames.Append(&quot;,&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if (mNeedExportPackageNames.Length &gt; 0)</span><br><span class="line">            &#123;</span><br><span class="line">                mNeedExportPackageNames.Remove(mNeedExportPackageNames.Length - 1, 1);</span><br><span class="line">                return mNeedExportPackageNames.ToString();</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private void OnDestroy()</span><br><span class="line">        &#123;</span><br><span class="line">            mNeedExportPackageNames.Clear();</span><br><span class="line">            mNeedExportPackageNames = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="EditorUtil"><a href="#EditorUtil" class="headerlink" title="EditorUtil"></a>EditorUtil</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using System.Collections;</span><br><span class="line">using System.IO;</span><br><span class="line">using System.Diagnostics;</span><br><span class="line">using System;</span><br><span class="line"></span><br><span class="line">public static class EditorUtil</span><br><span class="line">&#123;</span><br><span class="line">    public static bool IsFileLocked(string path)</span><br><span class="line">    &#123;</span><br><span class="line">        FileStream stream = null;</span><br><span class="line">        try</span><br><span class="line">        &#123;</span><br><span class="line">            stream = new FileStream(path, FileMode.Open, FileAccess.Read);</span><br><span class="line">        &#125;</span><br><span class="line">        catch (IOException)</span><br><span class="line">        &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        finally</span><br><span class="line">        &#123;</span><br><span class="line">            if (stream != null)</span><br><span class="line">                stream.Close();</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void ExecuteProcess(string filePath, string command, string workPath = &quot;&quot;, int seconds = 0)</span><br><span class="line">    &#123;</span><br><span class="line">        if (string.IsNullOrEmpty(filePath))</span><br><span class="line">        &#123;</span><br><span class="line">            UnityEngine.Debug.LogError(filePath + &quot; 找不到&quot;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        Process process = new Process();//创建进程对象</span><br><span class="line">        process.StartInfo.WorkingDirectory = workPath;</span><br><span class="line">        process.StartInfo.FileName = filePath;</span><br><span class="line">        process.StartInfo.Arguments = command;</span><br><span class="line">        process.StartInfo.CreateNoWindow = true;</span><br><span class="line">        process.StartInfo.RedirectStandardOutput = false;//不重定向输出</span><br><span class="line">        try</span><br><span class="line">        &#123;</span><br><span class="line">            if (process.Start())</span><br><span class="line">            &#123;</span><br><span class="line">                if (seconds == 0)</span><br><span class="line">                &#123;</span><br><span class="line">                    process.WaitForExit(); //无限等待进程结束</span><br><span class="line">                &#125;</span><br><span class="line">                else</span><br><span class="line">                &#123;</span><br><span class="line">                    process.WaitForExit(seconds); //等待毫秒</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        catch (Exception e)</span><br><span class="line">        &#123;</span><br><span class="line">            UnityEngine.Debug.LogError(e.Message);</span><br><span class="line">        &#125;</span><br><span class="line">        finally</span><br><span class="line">        &#123;</span><br><span class="line">            process.Close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="FairyGUIPublish-bat"><a href="#FairyGUIPublish-bat" class="headerlink" title="FairyGUIPublish.bat"></a>FairyGUIPublish.bat</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd Tools\FairyGUI-Editor</span><br><span class="line">FairyGUI-Editor %1 %2</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
@@ -537,10 +538,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
@@ -549,7 +546,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,7 +554,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,7 +566,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -577,11 +574,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,11 +622,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -633,19 +634,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,7 +658,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -693,6 +694,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
               </li>
              
@@ -709,10 +714,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -721,7 +722,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -737,15 +746,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -758,10 +763,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -789,15 +790,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AssetBudnle</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
