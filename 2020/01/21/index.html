@@ -6,29 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://dingxiaowei.cn">
-  <title>Aladdin的博客</title>
+  <title>Unity新输入系统InputSystem | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: 【Aladdin-Unity-Wwise】Wwise入门之二-Wwise的多语言copyright: truetoc: truedate: 2019-8-6 22:00:00tags: [Unity,Wwise]categories: Unitypassword:description: Wwise的多语言  前言游戏的多语言我们并不陌生，常见的是文字的多语言配置，那音效多语言怎么">
+  <meta name="description" content="前言前端技术更新速度很快，Unity也不例外，Unity推出新的输入系统InputSystem，网传在手机游戏开发上老的UnityEngine.Input其实用着还凑合，但随着VR的兴起，各种VR厂商各种设备输入都各不相同，各种VR设备都有自己的Unity SDK，并且SDK代码风格迥异，所以老的输入系统就不能很好的满足各种变化的需求，于是就有了新的InputSystem输入系统，下面我们来尝尝鲜">
+<meta name="keywords" content="Unity,InputSystem">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Aladdin的博客">
+<meta property="og:title" content="Unity新输入系统InputSystem">
 <meta property="og:url" content="http://dingxiaowei.cn/2020/01/21/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
-<meta property="og:description" content="title: 【Aladdin-Unity-Wwise】Wwise入门之二-Wwise的多语言copyright: truetoc: truedate: 2019-8-6 22:00:00tags: [Unity,Wwise]categories: Unitypassword:description: Wwise的多语言  前言游戏的多语言我们并不陌生，常见的是文字的多语言配置，那音效多语言怎么">
+<meta property="og:description" content="前言前端技术更新速度很快，Unity也不例外，Unity推出新的输入系统InputSystem，网传在手机游戏开发上老的UnityEngine.Input其实用着还凑合，但随着VR的兴起，各种VR厂商各种设备输入都各不相同，各种VR设备都有自己的Unity SDK，并且SDK代码风格迥异，所以老的输入系统就不能很好的满足各种变化的需求，于是就有了新的InputSystem输入系统，下面我们来尝尝鲜">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/4.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/1.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/4.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/2.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/3.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/4.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/5.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/7.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/6.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/7.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/8.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2020/01/21/9.png">
-<meta property="og:updated_time" content="2020-01-21T11:45:58.814Z">
+<meta property="og:updated_time" content="2020-01-21T12:40:10.318Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aladdin的博客">
-<meta name="twitter:description" content="title: 【Aladdin-Unity-Wwise】Wwise入门之二-Wwise的多语言copyright: truetoc: truedate: 2019-8-6 22:00:00tags: [Unity,Wwise]categories: Unitypassword:description: Wwise的多语言  前言游戏的多语言我们并不陌生，常见的是文字的多语言配置，那音效多语言怎么">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2020/01/21/1.png">
+<meta name="twitter:title" content="Unity新输入系统InputSystem">
+<meta name="twitter:description" content="前言前端技术更新速度很快，Unity也不例外，Unity推出新的输入系统InputSystem，网传在手机游戏开发上老的UnityEngine.Input其实用着还凑合，但随着VR的兴起，各种VR厂商各种设备输入都各不相同，各种VR设备都有自己的Unity SDK，并且SDK代码风格迥异，所以老的输入系统就不能很好的满足各种变化的需求，于是就有了新的InputSystem输入系统，下面我们来尝尝鲜">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2020/01/21/4.png">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -213,29 +214,56 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-【Aladdin-Unity-Wwise】Wwise入门之二-Wwise的多语言" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Unity新的输入系统InputSystem" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Unity新输入系统InputSystem
+    </h1>
+  
+
+        
+        <a href="/2020/01/21/" class="archive-article-date">
+  	<time datetime="2020-01-21T15:11:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-21</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: 【Aladdin-Unity-Wwise】Wwise入门之二-Wwise的多语言<br>copyright: true<br>toc: true<br>date: 2019-8-6 22:00:00<br>tags: [Unity,Wwise]<br>categories: Unity<br>password:<br>description: Wwise的多语言</p>
-<hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>游戏的多语言我们并不陌生，常见的是文字的多语言配置，那音效多语言怎么处理呢？一般音效的多语言是指配音的多语言化，一些背景音乐，音效是部分语言的，配音多语言我们如果在没接触Wwise之前或许会这样处理，通过陪表来显示，每一列配置代表一种语言，这当然也可以，但Wwise给我们提供了多语言配音机制，多语言案例官网介绍的不详细，官方Demo我貌似也没找到，通过一顿摸索最终实现了效果，下面我就分享一下操作过程。</p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h5 id="1-创建多语言"><a href="#1-创建多语言" class="headerlink" title="1.创建多语言"></a>1.创建多语言</h5><p>Wwise默认是添加的English(US)语言，他是默认参考语言，我们如果要添加我们想要的语言，打开LanguageManager添加即可<br><img src="/2020/01/21/1.png" alt=""></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前端技术更新速度很快，Unity也不例外，Unity推出新的输入系统InputSystem，网传在手机游戏开发上老的UnityEngine.Input其实用着还凑合，但随着VR的兴起，各种VR厂商各种设备输入都各不相同，各种VR设备都有自己的Unity SDK，并且SDK代码风格迥异，所以老的输入系统就不能很好的满足各种变化的需求，于是就有了新的InputSystem输入系统，下面我们来尝尝鲜。</p>
+<h2 id="优势和说明"><a href="#优势和说明" class="headerlink" title="优势和说明"></a>优势和说明</h2><p>既然推出新功能来取代现有的功能，那说明新功能肯定是有他优势的一面的，据官方介绍说新一代的输入系统具有简单易用、多平台一致和灵活的特性，github上介绍是：”Unity的高效多功能输入系统”，据说会随着2020.1版本正式推出，我们可以在2019.1版本上进行体验。</p>
 <a id="more"></a>
-<p>在Language处就会出现我们添加的语言，添加平台也是类似的操作，这个后续再介绍，<br><img src="/2020/01/21/2.png" alt=""></p>
-<h5 id="2-导入配音"><a href="#2-导入配音" class="headerlink" title="2.导入配音"></a>2.导入配音</h5><p>准备不同语言的配音，注意：对应的wav的命名要一致，然后我们在添加Audio的时候 Import as可以选择SoundVoice还是SoundFX，Wwise默认将声音分成配音和音效两种，我们设置为配音类型<br><img src="/2020/01/21/3.png" alt=""><br>导入第二种Chinese配音的时候ImportMode要选择Localize languages类型，并且Destination language选择为Chinese，这样Wwise就会根据wav的名字来对应不同语言的配音版本。<br><img src="/2020/01/21/4.png" alt=""><br>下面我们会看到Wwise的处理方式，在ContentsEditor中可以看到分成了不同语言平台的配音并且对应了我们刚刚导入的资源。<br><img src="/2020/01/21/5.png" alt=""><br>我们通过Space按键来感受一下不同语言平台的音效吧，我们播放Voices Container，然后切换语言平台，会听到同一个Voices播放出了不同语言的声音，是不是很神奇，这就是Wwise帮我们做的工作，非常的方便。<br><img src="/2020/01/21/7.png" alt=""></p>
-<h4 id="3-添加事件"><a href="#3-添加事件" class="headerlink" title="3.添加事件"></a>3.添加事件</h4><p>Wwise音效一切都是跟事件挂钩，事件也是音效师和程序员之间沟通的纽带。<br><img src="/2020/01/21/6.png" alt=""></p>
-<h4 id="4-添加Bank"><a href="#4-添加Bank" class="headerlink" title="4.添加Bank"></a>4.添加Bank</h4><p>Wwise一切音效相关的都包含在一个Bank包中，程序也是先加载Bank然后再播放音效事件。<br><img src="/2020/01/21/8.png" alt=""><br>生成Bank资源。<br><img src="/2020/01/21/9.png" alt=""><br>注意：记得在UnityWwisePicker也更新一下哦，不然会有问题的！</p>
-<h4 id="5-程序测试"><a href="#5-程序测试" class="headerlink" title="5.程序测试"></a>5.程序测试</h4><pre><code>var akResult = AkSoundEngine.SetCurrentLanguage(&quot;English(US)&quot;);
-//var akResult = AkSoundEngine.SetCurrentLanguage(&quot;Chinese&quot;);
-mBankInfoDict.Add(&quot;vo_AOh&quot;, &quot;Voice&quot;);
-AkSoundEngine.PostEvent(eventName, gameObject);
-</code></pre><p>上面两行是设置当前Language环境，这个是对应我们生成目录下面的多语言目录名，下面两行是加载Bank然后播放配音事件，带上耳机即可听到不同语言版本的配音。</p>
-<p>以上就是分享的多语言配音的操作，希望能帮到你！</p>
-<h2 id="更多精品教程"><a href="#更多精品教程" class="headerlink" title="更多精品教程"></a>更多精品教程</h2><p><a href="http://dingxiaowei.cn/">http://dingxiaowei.cn/</a></p>
-<h2 id="Wwise交流群"><a href="#Wwise交流群" class="headerlink" title="Wwise交流群"></a>Wwise交流群</h2><p>欢迎加入QQ群 714459256 进行学习交流</p>
+<h2 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h2><p>Unity 2019.2.3 + .NET 4 runtime，注意不要选择.NET 3.5<br><img src="/2020/01/21/4.png" alt=""></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>打开Window &gt; Package Manager，确保选上Preview Packages，因为还是预览版，然后搜索Input System安装<br><img src="/2020/01/21/1.png" alt=""><br>在Unity的Edit-&gt;Project Setting-&gt;Player中设置使用新的输入系统，Unity会重启生效<br><img src="/2020/01/21/4.png" alt=""></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h4 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h4><p><img src="/2020/01/21/2.png" alt=""><br>只有添加了InputSystem模块之后才会在右击Create中创建出InputActions的配置文件，老的输入系统是我们在Unity的内置Editor中配置输入的参数，新的输入系统需要我们手动配置输入映射文件，我们可以在编辑器中定义各种动作，极具灵活性。<br><img src="/2020/01/21/3.png" alt=""><br><img src="/2020/01/21/5.png" alt=""><br>注意:记得点击上方的Auto-Save文件会帮我们自动保存</p>
+<h4 id="生成配置C-文件"><a href="#生成配置C-文件" class="headerlink" title="生成配置C#文件"></a>生成配置C#文件</h4><p><img src="/2020/01/21/6.png" alt=""><br><img src="/2020/01/21/7.png" alt=""></p>
+<p>查看生成的C#文件，其中给我们生成了一个OnJump事件，这个跟我们手写的配置文件Jump有什么关联呢？就是对应的关系，我们自定义了一个Jump事件绑定监听了键盘的Space键，当我们按下Space键的时候就会触发OnJump方法。</p>
+<h4 id="在主角身上添加上行为控制脚本"><a href="#在主角身上添加上行为控制脚本" class="headerlink" title="在主角身上添加上行为控制脚本"></a>在主角身上添加上行为控制脚本</h4><p>添加上Controller脚本，并且实现OnJump方法，并且要添加PlayerInput内置的组件才行。<br><img src="/2020/01/21/8.png" alt=""></p>
+<p>同理，我们定义了Move事件绑定了WASD键，添加OnMove方法会发现当键盘按下这四个键会触发OnMove事件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using UnityEngine.InputSystem;</span><br><span class="line"></span><br><span class="line">public class PlayerController : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    private float MoveSpeed = 1f;</span><br><span class="line">    private Vector2 MoveValue;</span><br><span class="line">    private void OnJump()</span><br><span class="line">    &#123;</span><br><span class="line">        transform.Translate(new Vector3(0, 1, 0));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void OnMove(InputValue value)</span><br><span class="line">    &#123;</span><br><span class="line">        MoveValue = value.Get&lt;Vector2&gt;();</span><br><span class="line">        transform.Translate(new Vector3(MoveValue.x, 0, MoveValue.y) * MoveSpeed);</span><br><span class="line">        Debug.Log(&quot;行走&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="测试效果"><a href="#测试效果" class="headerlink" title="测试效果"></a>测试效果</h4><p>当按下Space键的时候胶囊体就会跳跃了，按下WASD会上下左右移动。</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>这篇只是作者入门InputSystem，更深入的学习还是看官方的demo，在下面第四个链接。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://www.bilibili.com/video/av81666919?p=3" target="_blank" rel="noopener">https://www.bilibili.com/video/av81666919?p=3</a></li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/index.html" target="_blank" rel="noopener">https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/index.html</a></li>
+<li><a href="https://connect.unity.com/p/unityxin-yi-dai-shu-ru-xi-tong-jie-shao" target="_blank" rel="noopener">https://connect.unity.com/p/unityxin-yi-dai-shu-ru-xi-tong-jie-shao</a></li>
+<li><a href="https://github.com/Unity-Technologies/InputSystem" target="_blank" rel="noopener">https://github.com/Unity-Technologies/InputSystem</a></li>
+</ul>
+<h2 id="更多好文"><a href="#更多好文" class="headerlink" title="更多好文"></a>更多好文</h2><p><a href="http://dingxiaowei.cn/">http://dingxiaowei.cn/</a></p>
 
       
 
@@ -275,7 +303,33 @@ AkSoundEngine.PostEvent(eventName, gameObject);
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">InputSystem</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -340,8 +394,8 @@ AkSoundEngine.PostEvent(eventName, gameObject);
 <nav id="article-nav">
   
   
-    <a href="/2020/01/20/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Unity新输入系统InputSystem</div>
+    <a href="/2020/01/19/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Unity性能优化从魂斗罗谈起</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -371,7 +425,7 @@ AkSoundEngine.PostEvent(eventName, gameObject);
   
 
   
-  <div id="SOHUCS" sid="【Aladdin-Unity-Wwise】Wwise入门之二-Wwise的多语言" ></div> 
+  <div id="SOHUCS" sid="Unity新的输入系统InputSystem" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -481,6 +535,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
@@ -497,14 +555,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
@@ -517,7 +567,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -525,43 +575,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -577,11 +599,39 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,7 +639,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,7 +667,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,19 +679,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UI框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,6 +695,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
               </li>
              
@@ -657,15 +719,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,18 +748,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">程序员的职业素养</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,11 +787,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
+                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
