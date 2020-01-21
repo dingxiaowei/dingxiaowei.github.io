@@ -204,20 +204,20 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-【GFFrameWork】游戏持久化存储模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Unity利用FinalIK实现角色脚掌贴着地面行走工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/05/">【GFFrameWork】游戏持久化存储模块</a>
+      <a class="article-title" href="/2019/07/07/">Unity利用FinalIK实现角色脚掌贴着地面行走工具</a>
     </h1>
   
 
         
-        <a href="/2019/01/05/" class="archive-article-date">
-  	<time datetime="2019-01-05T13:24:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-05</time>
+        <a href="/2019/07/07/" class="archive-article-date">
+  	<time datetime="2019-07-07T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-07</time>
 </a>
         
 		
@@ -235,9 +235,615 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Unity开发数据本地保存也是重要的一个基础功能，单机游戏肯定要将数据存储在本地，网络游戏可以以服务器存储为主，但也有的数据需要存在本地，例如存储玩家账号，Unity也为我们提供了一个数据持久化存储方案<a href="https://docs.unity3d.com/ScriptReference/PlayerPrefs.html" target="_blank" rel="noopener">PlayerPrefas</a>,当然也能满足我们基本存账号的需求，但他的不足也很明显，就是Editor上存储在注册表上，会污染我们本地的注册表，其次就是存储的数据类型有限，只能存一些很基本的数据类型，后者我还可以忍，但前者我总感觉用他不爽，所以就相出一个替代方案，自己写文件保存到本地，一开始想的是如何用一个文件去存储那么多Key Value，而且要保证读写的高效，我首先想到的是sqllite数据库，但还要引入外部插件感觉麻烦，如果用txt存可以确保数据的读写是能够存的，但又不太好确保读写的高效性，看到网上有EasySave插件实现了我想要的功能，我就看了下他的实现，给了我启发，于是我就借鉴他的思路自己去实现了一个数据持久化存储方案，这样就不要用Unity内置的PlayerPrefs，但我又纳闷为啥Unity那么多大牛做引擎开发的，怎么不借鉴EasySave的实现方式去改造PlayerPrefs。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>说到IK(反向动力学)，我在上一个足球项目中有用到，比如守门员接球，美术只是提供几种接球动作，例如：跳起接球、蹲下抱球、左扑、右扑，这里左扑和右扑可以优化，设置动画的mirror选项，mirror就好比镜面，如果左边扑救的动画添加上mirror选项就能够有右扑的效果，当然这个不是这篇文章的主讲，简单的讲反向动力学就是设置子关节的位置或者形态反向计算父关节的位置或者形态，例如守门员要实现扑球的动作，预先计算球到球门的位置，然后手关节设置到这个位置，并且设置当前状态到那个位置所需要的时间。再举个栗子，例如吃鸡游戏，我们控制的角色要捡地上的装备，我们只需要将手的位置放置到地面装备上，Unity会在Time.deltime中每一小段时间移动一点位移，最终移动到我们想要移动的位置，Unity中对应的API是SetMarchTarget。Unity中打开动画的IK的操作 Window-&gt;Animator打开动画控制器窗口，勾选IK Pass。本文的主要讲解的是如何通过FinalIK插件来实现角色脚掌贴合地面，当然插件中给我们实现的一个样例Grounder，主要就是在角色GameObject上添加上GrounderIK组件即可。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们当然可以参照Grounder的例子来手动给每个角色模型添加上IK，但这种重复性的机械操作就需要程序来造轮子解决，让配置的工作交给策划，GrounderIK下面的子组件LimbIK需要设置三个Bone节点，分别是大腿根部节点，小腿关节节点，脚掌关键节点，但由于事先没有跟美术商量好，不然的话可以将我们要设置的三个关节点在GameObject特殊标记起来，也由于各个模型的关节名和位置没有统一，所以我下面做的工具就讲这个选择权交给策划，由策划来点击选择这是想要设置的关节点。</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>我们看一下Final IK的实现脚步贴合地面的效果，原本Robot的脚是不会贴合地面的。<br><img src="/2019/07/07/2.gif" alt=""></p>
         
-          <a class="article-more-a" href="/2019/01/05/#more">more >></a>
+          <a class="article-more-a" href="/2019/07/07/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Final IK</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/07/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Unity表格配置编辑工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/06/">Unity表格配置编辑工具</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/06/" class="archive-article-date">
+  	<time datetime="2019-07-06T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-06</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>游戏开发中表格配置是必有的功能，我们会将一些游戏数据配置在表格中，一般流程是Excel编辑数据，然后导出C#的Model类和Unity中可用的二进制或者json/xml数据等，但如果碰到要一个需求，策划想要频繁修改数据并且在游戏中测试，这就发现我们需要频繁的在Excel中修改然后导出，然后启动Unity测试，这样的流程就显得很繁琐，而且我们不能保证我们填写的数据就是正确的，难免有手滑手误的时候，但也有针对这种情况的解决方案是程序写一个表格检查工具来检查Excel配置的数据书否合法，但还是显得比较麻烦，针对这一问题可以做的优化，在Unity中写一个Editor编辑工具来编辑对应的Excel数据，并且对应的数据根据类型来给一个约束，例如：范围类型的数据，可以配置一个Range滑动类型，这样策划修改的数据就不会超出这个范围，再比如配置一个bool类型，我们给一个toggle选择，如果其他类型我们可以写一个数据监测，如果策划配置的数据不正确会立马给出提示，这样就能确保数据的正确性，并且可以及时的在游戏中进行测试，确保配置的数据是自己想要的效果，然后在Editor中保存到Excel，就不需要再Excel中进行配置。Excel的读写我用的NPOI，然后Excel类型的读取我用的反射，这样可以确保策划可以随意的修改Excel的字段类型确保工具的健壮性。关于C#的反射，不熟的或者不了解的可以看我之前写的一篇，<a href="https://aladdin.blog.csdn.net/article/details/93988274" target="_blank" rel="noopener">关于C#的反射，你真的运用自如嘛？</a></p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="/2019/07/06/1.png" alt=""></p>
+        
+          <a class="article-more-a" href="/2019/07/06/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/06/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Unity动画生成器工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/01/">Unity动画生成器工具</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/01/" class="archive-article-date">
+  	<time datetime="2019-07-01T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>美术做一个模型，附带很多动画，然后就创建和管理动画状态机，然后类似的模型可能有很多，也就是我们所理解的皮肤，低级的是换贴图，高级一点的换模型，如果模型比较多的话，美术要创建和管理很多相同的动画，重复性的劳动，这会就需要有个动画生成器了。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们可以根据美术的要求通过代码创建一个AnimatorController,但一旦美术修改什么需求我们就要跟着修改会比较麻烦，比较简便的是美术先创建一个动画控制器模板，然后接下来重复性的劳动我们就通过程序工具来解决。思路是copy模板，修改模板里面动画状态的Motion，指向当前模型的动画clip，Motion有的是简单的动画clip，这个直接替换没啥好说的，有的是混合树BlendTree，这个替换会碰到小坑，如果我们获取到混合树的Motion然后遍历里面的Children，替换每个child的Motion是替换不了的，这个我也是查看了BlendTree的源码才知道，源码里面Children的管理(增加和删除)都是通过覆盖的方式替换Children数组，但我也有通过替换Children数组的方式来实现还是没有替换成功，最后还是通过代码创建BlendTree的方式来替换BlendTree才成功了。</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="/2019/07/01/1.gif" alt=""></p>
+        
+          <a class="article-more-a" href="/2019/07/01/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-关于C#的反射，你真的运用自如嘛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/">关于C#的反射，你真的运用自如嘛</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/21/" class="archive-article-date">
+  	<time datetime="2019-06-21T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们都知道反射在编程语言里是非常方便也是非常强大的，但或许有人会觉得在学习或者工作中用的可能并不是那么多，这对于刚入行不久的人而言的，我的理解是反射在写框架和写工具是用的比较多的。举个栗子：写一个Excel的表格编辑器，我们能够在控制台修改Excel里面的内容，或许有人会觉得这有啥难的，直接手撸对应的Model，如果哪一天策划手滑或者手贱修改了命名，或者增加/减少一列，那我们程序是不是也要跟着修改，因为我们保存数据或许是写死的字段名，如果全部通过反射，那就随便策划怎么折腾excel，我有反射神器，我不怕！至于为啥要写Excel的编辑器，或许有人会疑惑，我直接在Excel里面编辑修改不行嘛，这样策划要修改个数据然后要导出数据，然后在游戏里面跑，会比较麻烦，如果有对应的表格编辑器直接在游戏运行时就修改测试就很方便，如果是bool类型就给策划toggle选项，如果是枚举类型就弄个下拉框，如果是范围类型就给个Range，这样策划就不会填错，如果编辑器是基于反射做的，不是字段写死的，策划随便修改excel的字段都不会出问题。</p>
+        
+          <a class="article-more-a" href="/2019/06/21/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/21/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-游戏开发防作弊以及原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/">游戏开发防作弊以及原理</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/20/" class="archive-article-date">
+  	<time datetime="2019-06-20T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-20</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如何防作弊在游戏开发中还是占蛮重的比例的，这也涉及到游戏盈利的问题，如果不做防作弊措施，或许我们开发出来的app当前上线或许第二天就出破解免费版了，这个事情我亲身经历过，当然这是基于app做的比较好被外挂公司盯上了，一度很火的吃鸡游戏端游版本其实外挂非常猖獗，这也是因为没有做防外挂，如何防作弊在求职者求职的时候也会经常被问到，当然我们能想到最简单的方案就是不要信任客户端任何数据，以服务器数据校验为准，当然这种方案在一些客户端服务器交互比较少的情况是可以这样设计的，假设FPS，我们每次射击造成的伤害，一帧里面会射击好多次，不可能每次都去向服务器校验吧，交互太频繁了，体验也很差，但如果不校验的话，客户端就是修改武器属性值，这就是客户端作弊了，如何解决这样的问题，下文会介绍到防作弊的思路。</p>
+<h2 id="客户端如何作弊"><a href="#客户端如何作弊" class="headerlink" title="客户端如何作弊"></a>客户端如何作弊</h2><h4 id="手机端"><a href="#手机端" class="headerlink" title="手机端"></a>手机端</h4><p>我在当初手游刚起步的时候，flappy bird想必玩游戏的人都知道，是一款非常虐的手游，当时也非常火，朋友圈都在晒分数，后来我知道用一款《八门神器》的app能够作弊修改分数，然后修改成很高的分数晒在朋友圈就显得自己“很牛逼”,满足一下自己的虚荣心，原理就是修改分数内存值来达到作弊的效果。</p>
+        
+          <a class="article-more-a" href="/2019/06/20/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/20/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Unity-行为树分享" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/01/">Unity行为树分享</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/01/" class="archive-article-date">
+  	<time datetime="2019-04-01T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-01</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前在公司做了一个简单的行为树相关的知识分享，感觉还是花了不少心思和精力在准备上，现在分享给大家！</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>三个敌人默认在老巢，如果检测到周围有“敌人”(主角)，就追随主角并且达到一定距离范围就射击，如果“敌人”跑远追不上了则返回老巢，如果在追击“敌人”的过程中，自己被射击血量低于20%则向老巢方向逃跑，并且返回老巢指定位置进行回血，当血量回满之后则返回初始位置。我方主角由玩家自己控制，可以移动，可以射击。这里AI主要是设计敌方的AI。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>根据上面需求，可以看出来敌方AI大体分为待机巡视、追击、返回、回血几个阶段，具体设计可以看下面效果的第六步。</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>1.敌人初始化并且返回老巢调整面向<br><img src="/2019/04/01/20190412210920527.gif" alt="在这里插入图片描述"></p>
+        
+          <a class="article-more-a" href="/2019/04/01/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">行为树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-【GFFrameWork】事件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/20/">【GFFrameWork】事件系统</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/20/" class="archive-article-date">
+  	<time datetime="2019-03-20T11:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-20</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>游戏开发中抛事件，收事件也是比较常用的解耦方式，我所理解的设计模式旁观者模式有类似的原理，所以事件系统在一个框架中还是蛮重要的一块，本生事件系统不算一个大系统，代码量不多，主要是思路就是注册监听。</p>
+        
+          <a class="article-more-a" href="/2019/03/20/#more">more >></a>
         
       
 
@@ -259,15 +865,7 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">持久化存储</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">PlayerPrefs替代方案</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Unity数据存储</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件系统</a>
         		</li>
       		
 		</ul>
@@ -277,7 +875,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/05/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/03/20/">展开全文 >></a>
         </p>
       
 
@@ -307,20 +905,20 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-我的2018-蜕变" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-【GFFrameWork】UI框架2-UI界面自动生成模板代码工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/31/">”我的2018&#34;-蜕变</a>
+      <a class="article-title" href="/2019/03/08/">【GFFrameWork】UI框架2-UI界面自动生成模板代码工具</a>
     </h1>
   
 
         
-        <a href="/2018/12/31/" class="archive-article-date">
-  	<time datetime="2018-12-31T15:11:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-31</time>
+        <a href="/2019/03/08/" class="archive-article-date">
+  	<time datetime="2019-03-08T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-08</time>
 </a>
         
 		
@@ -338,115 +936,10 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2018/12/31/1.jpg" alt=""><br>一年即将结束，新年的钟声即将敲响，在这夜深人静的时候，躺在床上，拿起电脑，好好小结一下这一年。<br></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们写UI界面会发现有这么一些重复步骤，创建UI Prefab，然后创建对应界面的View脚本，然后创建跟UI节点组件绑定属性字段还有一些框架层面的接口方法。虽然有时候写这些代码不需要经过大脑，并且键盘敲的啪啪啪爽的飞起，但其实很浪费时间，笔者就想可以写个自动生成UI模板的工具，就减少了这样重复机械式的代码，也节约了大量的时间，我们程序员应该善于创造工具，让自己变”懒”。</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="/2019/03/08/1.png" alt=""></p>
         
-          <a class="article-more-a" href="/2018/12/31/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/31/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="w-如何使用Logcat来查看模拟器异常" class="article article-type-w  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/08/">如何使用adb logcat查看模拟器异常</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/08/" class="archive-article-date">
-  	<time datetime="2018-12-08T13:42:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-08</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们做的app有时候会跑出模拟其妙的异常，比如闪退呀、卡住呀等等，碰到这种问题是蛮头疼的，尤其是概率性触发的问题，这时候我们就需要用到adb catlog工具。</p>
-<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
-<li><p>添加adb工具到环境变量 adb.exe一般是放在sdk目录下/platform-tools下的，我自己电脑上的路径是E:\AndroidSDK\platform-tools </p>
-</li>
-<li><p>链接<br>可以使用命令 adb connect 127.0.0.1:26944，链接之前先启动模拟器，不然可能会出现闪退的情况<br><img src="/2018/12/08/1.png" alt=""></p>
-</li>
-<li><p>保存log到txt<br>我们在cmd中查看log有时候不太方便，需要保存到本地才看，我们可以使用命令 adb logcat &gt; E:\logcat.txt 就会在E盘生成log的Txt存档<br><img src="/2018/12/08/2.png" alt=""></p>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/12/08/#more">more >></a>
+          <a class="article-more-a" href="/2019/03/08/#more">more >></a>
         
       
 
@@ -468,116 +961,15 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android-logcat//" class="article-tag-list-link color5">Android logcat</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/08/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何搭建Jenkins导出Unity安卓环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/17/">如何搭建Jenkins导出Unity安卓环境</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/17/" class="archive-article-date">
-  	<time datetime="2018-11-17T12:12:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-17</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>早早去公司上班，老大经常会叫我出一个demo的包，我就想起来可以配置一个打包工具，让他随时想要一个运行包就可以自己打包看效果，就想起来可以配置一个Jenkins打包环境。这样在同一个局域网内不需要Unity开发环境，就只要浏览器打开Jenkins然后点击打包即可。</p>
-<h2 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h2><ul>
-<li>准备Jenkins环境，可以选择去Jenkins<a href="https://jenkins.io/" target="_blank" rel="noopener">官网</a>下载,我这里准备了一个Jenkins的war包。</li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/11/17/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">UI框架</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Jenkins</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">自动生成UI模板代码</a>
         		</li>
       		
 		</ul>
@@ -598,7 +990,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/17/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/03/08/">展开全文 >></a>
         </p>
       
 
@@ -628,20 +1020,20 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-【算法】求垂直相交点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-【GFFrameWork】UI框架" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/16/">【读书】代码整洁之道</a>
+      <a class="article-title" href="/2019/02/08/">【GFFrameWork】UI框架</a>
     </h1>
   
 
         
-        <a href="/2018/11/16/" class="archive-article-date">
-  	<time datetime="2018-11-16T12:10:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-16</time>
+        <a href="/2019/02/08/" class="archive-article-date">
+  	<time datetime="2019-02-08T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-08</time>
 </a>
         
 		
@@ -659,10 +1051,10 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>在一个三维空间中，已知P点、A点、B点，如下图所示。求一个C点，满足：PB垂直于AC，PB和AC相交，PA和PC长度相等。请写出代码</p>
-<p><img src="/2018/11/16/1.png" alt=""><br></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>曾经的老大说过，游戏开发70%跟UI打交道，貌似也是，UI是游戏开发里面的大头，这么说一个不错的UI框架就比较重要，UI界面会比较多，大项目大几十个系统界面，管理不当会造成比较大的麻烦。之前NGUI项目界面层级通过Depth管理界面的显示层级，Depth越大就显示在前面，后来UGUI通过设置SetSiblingIndex，值越大越显示在前面。有时候我们有需求某些界面固定显示在最上面，例如引导界面，有的显示在中间，有的显示在后面，GFFrameWork设置了三层显示层级，加载的界面由开发者自行执行放在哪一层上，然后每一层的界面进行设置显示前后顺序。</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本UI结构基于UGUI，后续也考虑对接<a href="http://www.fairygui.com/" target="_blank" rel="noopener">FairyGUI</a>，一款非常强大的UI编辑器。</p>
         
-          <a class="article-more-a" href="/2018/11/16/#more">more >></a>
+          <a class="article-more-a" href="/2019/02/08/#more">more >></a>
         
       
 
@@ -676,7 +1068,15 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">UI框架</a>
         		</li>
       		
 		</ul>
@@ -686,7 +1086,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/16/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/02/08/">展开全文 >></a>
         </p>
       
 
@@ -716,20 +1116,20 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-Lua相关的知识小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-【GFFrameWork】代码热更及资源下载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/10/">Lua相关的知识小结</a>
+      <a class="article-title" href="/2019/02/06/">【GFFrameWork】代码热更及资源下载</a>
     </h1>
   
 
         
-        <a href="/2018/10/10/" class="archive-article-date">
-  	<time datetime="2018-10-10T12:12:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-10</time>
+        <a href="/2019/02/06/" class="archive-article-date">
+  	<time datetime="2019-02-06T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-06</time>
 </a>
         
 		
@@ -747,24 +1147,13 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！</p>
-<h3 id="在线编辑器"><a href="#在线编辑器" class="headerlink" title="在线编辑器"></a>在线编辑器</h3><ul>
-<li><a href="https://www.dooccn.com/lua/" target="_blank" rel="noopener">最佳推荐(有api提示)</a></li>
-</ul>
-<ul>
-<li><a href="hhttps://c.runoob.com/compile/66" target="_blank" rel="noopener">菜鸟工具</a></li>
-</ul>
-<ul>
-<li><a href="https://tool.lu/coderunner/" target="_blank" rel="noopener">在线工具</a></li>
-</ul>
-<h3 id="元表"><a href="#元表" class="headerlink" title="元表"></a>元表</h3><p>Lua我们访问对应的key来得到value的值，但无法对两个table进行操作。因此Lua提供了元表(Metatable),允许我们改变的行为，每个行为对应一个元方法，元方法下面介绍。</p>
-<p>Lua本身不是面向对象语言，但可以利用Lua的table来扩展面向对象，也就是我们常用的继承。我们如何实现一个子类继承父类并且能打印出子类的方法和父类的方法。主要思想是setmetatable和getmetable，子类定义个super变量指向父类对象，然后子类就通过这个super变量来访问父类的成员，下面是代码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">local parent=&#123;&#125;</span><br><span class="line"></span><br><span class="line">parent.__index=parent</span><br><span class="line"></span><br><span class="line">--类实例--</span><br><span class="line"></span><br><span class="line">function parent:New()</span><br><span class="line"></span><br><span class="line">    local self = &#123;&#125;;    --初始化self，如果没有这句，那么类所建立的对象改变，其他对象都会改变</span><br><span class="line"></span><br><span class="line">  setmetatable(self, parent);  --将self的元表设定为Class</span><br><span class="line"></span><br><span class="line">    return self;    --返回自身</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function parent.Hello( ... )</span><br><span class="line"></span><br><span class="line">  print(&quot;Parent&quot;)</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">local Child=parent:New()</span><br><span class="line"></span><br><span class="line">Child.__index=Child;</span><br><span class="line"></span><br><span class="line">function Child:New( )</span><br><span class="line"></span><br><span class="line">  local self=&#123;super=getmetatable(Child)&#125;</span><br><span class="line"></span><br><span class="line">  setmetatable(self, Child);  --将self的元表设定为Class</span><br><span class="line"></span><br><span class="line">  return self;    --返回自身</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function Child:Hello( ... )</span><br><span class="line"></span><br><span class="line">  print(&quot;Child&quot;);</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<p>运行结果:</p>
-<p><img src="/2018/10/10/1.png" alt=""></p>
-<p>由此可见打印了子类和父类的Hello方法</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>现在比较主流的逻辑更新是Lua方式，最常用的ToLua、SLua，XLua等等，但笔者是不太喜欢Lua开发，相比较直接写C#，lua的效率要低得多，这里GFFrameWork选择的是C#热更方案<a href="https://github.com/Ourpalm/ILRuntime" target="_blank" rel="noopener">ILRuntime</a>，这个方案由掌趣公司蓝大大维护，据我了解目前用这方案开发的项目还是不少的，ET框架也是采用这种方案，ILRuntime的前身其实是李总开发的L#方案，由于在大概15年左右，逻辑热更方案大战中L#方案没有sLua、uLua宣传的好，所以用的人就少了，然后李总就不太维护了，后面就有掌趣的蓝大接手维护，直到现在18年左右用的人还算不少，可能大家都比较信赖大厂维护吧，这跟Lua更新方案xLua类似，腾讯专人维护，后来居上的Lua热更方案，我用了一下ILRuntime，用一个demo尝试了一下，感觉还是蛮方便的，所以GFFrameWork就采用这种方案。关于AB更新和资源下载，我之前有写过一篇<a href="https://blog.csdn.net/dingxiaowei2013/article/details/77814966" target="_blank" rel="noopener">资源更新</a>也可以先看一下。</p>
+<h2 id="C-VS-Lua"><a href="#C-VS-Lua" class="headerlink" title="C# VS Lua"></a>C# VS Lua</h2><p>Lua是一个已经非常成熟的解决方案，但是对于Unity项目而言，也有非常明显的缺点。就是如果使用Lua来进行逻辑开发，就势必要求团队当中的人员需要同时对Lua和C#都特别熟悉，或者将团队中的人员分成C#小组和Lua小组。不管哪一种方案，对于中小型团队都是非常痛苦的一件事情。</p>
+<p>用C#来作为热更语言最大的优势就是项目可以用同一个语言来进行开发，对Unity项目而言，这种方式肯定是开发效率最高的。</p>
+<p>Lua的优势在于解决方案足够成熟，之前的C++团队可能比起C#，更加习惯使用Lua来进行逻辑开发。此外借助luajit，在某些情况下的执行效率会非常不错，但是luajit现在维护情况也不容乐观，官方还是推荐使用公版Lua来开发。</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="/2019/02/06/1.gif" alt=""><br>下方会有资源下载进度，这也是游戏首页下载资源的常用方式，当然也可以显示下载百分比。正式上线的游戏一般还会提示要下载多少M的文件，提醒玩家尽量选择Wifi环境下下载。</p>
         
-          <a class="article-more-a" href="/2018/10/10/#more">more >></a>
+          <a class="article-more-a" href="/2019/02/06/#more">more >></a>
         
       
 
@@ -778,7 +1167,23 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Lua</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">资源更新</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ILRuntime</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">C#热更</a>
         		</li>
       		
 		</ul>
@@ -788,404 +1193,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/10/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-【Aladdin-Unity3D-Shader编程】之八-2D图常用的Shader效果" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/22/">【Aladdin-Unity3D-Shader编程】之八-2D图常用的Shader效果</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/22/" class="archive-article-date">
-  	<time datetime="2017-11-22T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Shader效果常用于3D模型，但2D图也有不少常用的效果，例如：圆角头像，图片灰态，边缘着色，图片模糊等等，下面我就依次做一个介绍。</p>
-<h2 id="图片灰态"><a href="#图片灰态" class="headerlink" title="图片灰态"></a>图片灰态</h2><h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><p><img src="/2017/11/22/dark.gif" alt=""></p>
-<h4 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h4><p>在片元着色器里面对每个图元进行采样，将图元的颜色x，y，z分别乘上灰度系数然后赋值给片源颜色，就将彩色变成了灰色了。</p>
-        
-          <a class="article-more-a" href="/2017/11/22/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Shader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Shader//" class="article-tag-list-link color2">Shader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/22/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-【Aladdin-Unity3D-Shader编程】之七-波光粼粼的鱼" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/21/">【Aladdin-Unity3D-Shader编程】之七-波光粼粼的鱼</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/21/" class="archive-article-date">
-  	<time datetime="2017-11-21T14:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通过shader实现一个波光粼粼的鱼的效果，效果如下图所示，鱼的游动是用的animator，我们也可以用shader通过模型vertex偏移来实现鱼儿的游动。</p>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="/2017/11/21/1.gif" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/11/21/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Shader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Shader//" class="article-tag-list-link color2">Shader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/21/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-【Aladdin-Unity3D-Shader编程】之六-模型实时阴影" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/20/">【Aladdin-Unity3D-Shader编程】之六-模型实时阴影</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/20/" class="archive-article-date">
-  	<time datetime="2017-11-20T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-20</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在游戏开发中实时阴影是比较常见的需求，我们最常见的方法是实时光照，但是这个会带来性能的问题，如果场景中模型比较多，例如我最近在做的3D足球游戏，场景中22个球员，如果采用实时光照DC会增加好几百，会造成渲染的压力，就有必要采用关照贴图的方案，比关闭掉实时光，但这种方案就降低了DC，减轻了渲染压力，这就要求阴影必须采用其他方案，我这里介绍Shader来现在的方案，貌似是王者荣耀采用的一种方案，专门用一个pass来渲染球员的阴影。</p>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/2017/11/20/shadow.gif" alt=""><br>会看到模型有实时阴影效果。</p>
-        
-          <a class="article-more-a" href="/2017/11/20/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Shader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Shader//" class="article-tag-list-link color2">Shader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/20/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-【Aladdin-Unity3D-Shader编程】之五-模型常见特效" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/19/">【Aladdin-Unity3D-Shader编程】之五-模型常见特效</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/19/" class="archive-article-date">
-  	<time datetime="2017-11-19T13:42:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-19</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先来看一个表情,<img src="/2017/11/19/11.gif" alt="搞笑">是不是感觉很酷炫，这就是流光效果。我们也可以在模型上面来添加上这个效果，下面会介绍。</p>
-<h2 id="一、缩放效果"><a href="#一、缩放效果" class="headerlink" title="一、缩放效果"></a>一、缩放效果</h2><h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="/2017/11/19/1.gif" alt=""><br><img src="/2017/11/19/1.png" alt=""><br>会看到模型有一个伸缩的效果</p>
-        
-          <a class="article-more-a" href="/2017/11/19/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Shader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Shader//" class="article-tag-list-link color2">Shader</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/19/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/02/06/">展开全文 >></a>
         </p>
       
 
@@ -1217,7 +1225,7 @@ var _hmt = _hmt || [];
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -1308,10 +1316,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity</a>
               </li>
              
@@ -1328,11 +1332,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1348,19 +1360,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1369,26 +1373,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">内购</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1404,6 +1388,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
               </li>
              
@@ -1412,7 +1400,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1420,7 +1424,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1436,7 +1452,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1444,15 +1464,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UI框架</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1468,30 +1488,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
               </li>
              
@@ -1504,11 +1500,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1524,6 +1524,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
               </li>
              
@@ -1533,14 +1553,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1560,11 +1572,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
+                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
               <li class="article-tag-list-item">
