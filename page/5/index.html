@@ -204,6 +204,208 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Lua相关的知识小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/10/">Lua相关的知识小结</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/10/" class="archive-article-date">
+  	<time datetime="2018-10-10T12:12:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-10</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Lua是Unity开发比较重要的一个脚本语言，它的存储就是Key-Value，Lua用于热更新脚本语言。但学习Lua比较难理解的我认为应该属于元表和遍历这两块了，当然闭包也可以小结一下，下面就针对这几个方面做一个总结归纳，以便我日后忘记可以回顾！</p>
+<h3 id="在线编辑器"><a href="#在线编辑器" class="headerlink" title="在线编辑器"></a>在线编辑器</h3><ul>
+<li><a href="https://www.dooccn.com/lua/" target="_blank" rel="noopener">最佳推荐(有api提示)</a></li>
+</ul>
+<ul>
+<li><a href="hhttps://c.runoob.com/compile/66" target="_blank" rel="noopener">菜鸟工具</a></li>
+</ul>
+<ul>
+<li><a href="https://tool.lu/coderunner/" target="_blank" rel="noopener">在线工具</a></li>
+</ul>
+<h3 id="元表"><a href="#元表" class="headerlink" title="元表"></a>元表</h3><p>Lua我们访问对应的key来得到value的值，但无法对两个table进行操作。因此Lua提供了元表(Metatable),允许我们改变的行为，每个行为对应一个元方法，元方法下面介绍。</p>
+<p>Lua本身不是面向对象语言，但可以利用Lua的table来扩展面向对象，也就是我们常用的继承。我们如何实现一个子类继承父类并且能打印出子类的方法和父类的方法。主要思想是setmetatable和getmetable，子类定义个super变量指向父类对象，然后子类就通过这个super变量来访问父类的成员，下面是代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">local parent=&#123;&#125;</span><br><span class="line"></span><br><span class="line">parent.__index=parent</span><br><span class="line"></span><br><span class="line">--类实例--</span><br><span class="line"></span><br><span class="line">function parent:New()</span><br><span class="line"></span><br><span class="line">    local self = &#123;&#125;;    --初始化self，如果没有这句，那么类所建立的对象改变，其他对象都会改变</span><br><span class="line"></span><br><span class="line">  setmetatable(self, parent);  --将self的元表设定为Class</span><br><span class="line"></span><br><span class="line">    return self;    --返回自身</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function parent.Hello( ... )</span><br><span class="line"></span><br><span class="line">  print(&quot;Parent&quot;)</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">local Child=parent:New()</span><br><span class="line"></span><br><span class="line">Child.__index=Child;</span><br><span class="line"></span><br><span class="line">function Child:New( )</span><br><span class="line"></span><br><span class="line">  local self=&#123;super=getmetatable(Child)&#125;</span><br><span class="line"></span><br><span class="line">  setmetatable(self, Child);  --将self的元表设定为Class</span><br><span class="line"></span><br><span class="line">  return self;    --返回自身</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function Child:Hello( ... )</span><br><span class="line"></span><br><span class="line">  print(&quot;Child&quot;);</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<p><img src="/2018/10/10/1.png" alt=""></p>
+<p>由此可见打印了子类和父类的Hello方法</p>
+        
+          <a class="article-more-a" href="/2018/10/10/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Lua</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/10/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-【Aladdin-Unity3D-Shader编程】之八-2D图常用的Shader效果" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/22/">【Aladdin-Unity3D-Shader编程】之八-2D图常用的Shader效果</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/22/" class="archive-article-date">
+  	<time datetime="2017-11-22T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Shader效果常用于3D模型，但2D图也有不少常用的效果，例如：圆角头像，图片灰态，边缘着色，图片模糊等等，下面我就依次做一个介绍。</p>
+<h2 id="图片灰态"><a href="#图片灰态" class="headerlink" title="图片灰态"></a>图片灰态</h2><h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><p><img src="/2017/11/22/dark.gif" alt=""></p>
+<h4 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h4><p>在片元着色器里面对每个图元进行采样，将图元的颜色x，y，z分别乘上灰度系数然后赋值给片源颜色，就将彩色变成了灰色了。</p>
+        
+          <a class="article-more-a" href="/2017/11/22/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Shader</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Shader//" class="article-tag-list-link color2">Shader</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/22/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-【Aladdin-Unity3D-Shader编程】之七-波光粼粼的鱼" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1050,202 +1252,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-UGUI原理和优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/01/">UGUI原理和优化</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/01/" class="archive-article-date">
-  	<time datetime="2017-11-01T05:25:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-01</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/2017/11/01/1.png" alt=""></p>
-<p><img src="/2017/11/01/2.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/11/01/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">UGUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">UGUI原理和优化</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-代码统计小工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/11/">代码统计小工具</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/11/" class="archive-article-date">
-  	<time datetime="2017-10-11T05:25:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-11</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天加班到早晨五六点，到家都七点了，回到家倒头就睡，下午来公司感觉头还有点晕乎，突然想看看我们工程有多少代码量，就想起来写个工程代码统计工具。</p>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/2017/10/11/1.png" alt=""></p>
-<p>上图是平时积累的小工具，积累我认识也是程序员必备的素养！</p>
-        
-          <a class="article-more-a" href="/2017/10/11/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/工具//" class="article-tag-list-link color3">工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/11/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -1343,11 +1349,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+                <a href="javascript:void(0)" class="js-tag color4">ECS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1356,6 +1362,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">元表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1399,6 +1409,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
@@ -1439,23 +1453,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1463,7 +1461,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1472,14 +1490,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1495,6 +1505,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
               </li>
              
@@ -1504,6 +1522,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1519,7 +1541,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1531,19 +1553,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">代码整洁之道</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">程序员的职业素养</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1563,23 +1593,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">代码整洁之道</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">程序员的职业素养</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1603,6 +1617,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
@@ -1612,10 +1630,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
