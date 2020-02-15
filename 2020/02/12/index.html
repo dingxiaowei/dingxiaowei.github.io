@@ -6,18 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://dingxiaowei.cn">
-  <title>Archives: 2019 | Aladdin的博客</title>
+  <title>EntityComponentSystemSamples进阶篇笔记 | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术来源于一点一滴的积累">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Aladdin的博客">
-<meta property="og:url" content="http://dingxiaowei.cn/archives/2019/page/3/index.html">
+  <meta name="description" content="前言Advanced示例相比较HelloCube稍微难一些，HelloCube是一些ECS的入门案例，进阶篇的学习更利于实战开发。 1.FixedTimestepWorkaround效果图">
+<meta name="keywords" content="Unity,ECS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EntityComponentSystemSamples进阶篇笔记">
+<meta property="og:url" content="http://dingxiaowei.cn/2020/02/12/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
-<meta property="og:description" content="技术来源于一点一滴的积累">
+<meta property="og:description" content="前言Advanced示例相比较HelloCube稍微难一些，HelloCube是一些ECS的入门案例，进阶篇的学习更利于实战开发。 1.FixedTimestepWorkaround效果图">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/02/12/1.gif">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/02/12/2.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/02/12/3.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/02/12/4.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/02/12/9.png">
+<meta property="og:updated_time" content="2020-02-15T01:37:06.925Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aladdin的博客">
-<meta name="twitter:description" content="技术来源于一点一滴的积累">
+<meta name="twitter:title" content="EntityComponentSystemSamples进阶篇笔记">
+<meta name="twitter:description" content="前言Advanced示例相比较HelloCube稍微难一些，HelloCube是一些ECS的入门案例，进阶篇的学习更利于实战开发。 1.FixedTimestepWorkaround效果图">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2020/02/12/1.gif">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -202,36 +210,135 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-EntityComponentSystemSamples进阶篇学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/" class="archive-article-date">
-  	<time datetime="2019-06-21T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/">关于C#的反射，你真的运用自如嘛</a>
+    <h1 class="article-title" itemprop="name">
+      EntityComponentSystemSamples进阶篇笔记
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/02/12/" class="archive-article-date">
+  	<time datetime="2020-02-12T11:10:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Advanced示例相比较HelloCube稍微难一些，HelloCube是一些ECS的入门案例，进阶篇的学习更利于实战开发。</p>
+<h2 id="1-FixedTimestepWorkaround"><a href="#1-FixedTimestepWorkaround" class="headerlink" title="1.FixedTimestepWorkaround"></a>1.FixedTimestepWorkaround</h2><h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="/2020/02/12/1.gif" alt=""></p>
+<a id="more"></a>
+<p>直观的操作感受就是拖动进度条下面一个发射器发射的”子弹”频率会不同，感觉比之前的案例稍微复杂一些，还有UI的交互了，然后UI的交互也就是改变了某个频率的参数而已，并没有那么唬人。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>先看上面一个固定频率发射的例子，VariableSpawner还是跟之前的案例一样挂上了ConvertToEntity组件和自定义的VariableRateSpawnerAuthoring脚本。</p>
+<h4 id="VariableSpawner"><a href="#VariableSpawner" class="headerlink" title="VariableSpawner"></a>VariableSpawner</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">namespace Samples.FixedTimestepSystem.Authoring</span><br><span class="line">&#123;</span><br><span class="line">    [AddComponentMenu(<span class="string">"DOTS Samples/FixedTimestepWorkaround/Variable Rate Spawner"</span>)]</span><br><span class="line">    [ConverterVersion(<span class="string">"joe"</span>, <span class="number">1</span>)]</span><br><span class="line">    public class VariableRateSpawnerAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclareReferencedPrefabs</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> GameObject projectilePrefab;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Convert</span><span class="params">(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            var spawnerData = <span class="keyword">new</span> VariableRateSpawner</span><br><span class="line">            &#123;</span><br><span class="line">                Prefab = conversionSystem.GetPrimaryEntity(projectilePrefab), <span class="comment">//将Prefab转成Entity</span></span><br><span class="line">            &#125;;</span><br><span class="line">            dstManager.AddComponentData(entity, spawnerData);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DeclareReferencedPrefabs</span><span class="params">(List&lt;GameObject&gt; referencedPrefabs)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            referencedPrefabs.Add(projectilePrefab);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码还是参考上一篇案例中写的，一模一样，没啥特殊的地方，先声明自己的预设，然后将自身转化为实体，然后在System中利用预设实体来不断生成新的实体。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">namespace Samples.FixedTimestepSystem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> struct VariableRateSpawner : IComponentData</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> Entity Prefab;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 波动生成系统</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    public class VariableRateSpawnerSystem : ComponentSystem</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">protected</span> override <span class="keyword">void</span> <span class="title">OnUpdate</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">//遍历所有的带有VariableRateSpawner和Translation组件的实体，发送更新命令，在更新命令中为其添加组件，并把数据交给组件存储</span></span><br><span class="line">            Entities.ForEach((Entity spawnerEntity, ref VariableRateSpawner spawnerData, ref Translation translation) =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                var spawnTime = (<span class="keyword">float</span>)Time.ElapsedTime;</span><br><span class="line">                var newEntity = PostUpdateCommands.Instantiate(spawnerData.Prefab);</span><br><span class="line">                PostUpdateCommands.AddComponent(newEntity, <span class="keyword">new</span> Parent &#123;Value = spawnerEntity&#125;);</span><br><span class="line">                PostUpdateCommands.AddComponent(newEntity, <span class="keyword">new</span> LocalToParent());</span><br><span class="line">                PostUpdateCommands.SetComponent(newEntity, <span class="keyword">new</span> Translation &#123;Value = <span class="keyword">new</span> float3(<span class="number">0</span>, <span class="number">0.3f</span> * math.sin(<span class="number">5.0f</span> * spawnTime), <span class="number">0</span>)&#125;); <span class="comment">//根据时间设置坐标，主要是设置Y的坐标，会显得有波动感</span></span><br><span class="line">                PostUpdateCommands.SetComponent(newEntity, <span class="keyword">new</span> ProjectileSpawnTime&#123;SpawnTime = spawnTime&#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里把组件和系统一起写了，因为组件太简单了就一条信息，如果有强迫症的话其实是可以分成两个脚本的。这段代码的大概意思就是遍历spawner实体，然后不断生成新的临时的实体，这些临时的实体会移动，这里用到一个新的功能类PostUpdateCommands，它负责将更新命令发送给处理系统，这些更新命令会按照权重缓存起来，然后在主线程中排队执行，Instantiate是实例化Entity，SetComponent是设置组件数据，Translation组件是移动组件，使得Entity能够移动，这里有添加上两个新的组件Parent和LocalToParent，这两个是之前没有接触过的，我们来新学习一下。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;summary&gt;</span></span><br><span class="line"><span class="comment">/// 类似原来的Transform组件</span></span><br><span class="line"><span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">namespace Unity.Transforms</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 父组件，只储存了实体的父实体</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    [Serializable]</span><br><span class="line">    [WriteGroup(typeof(LocalToWorld))]</span><br><span class="line">    <span class="keyword">public</span> struct Parent : IComponentData</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> Entity Value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 前任父组件，储存上一任父实体</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    [Serializable]</span><br><span class="line">    <span class="keyword">public</span> struct PreviousParent : ISystemStateComponentData</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> Entity Value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 子实体</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    [Serializable]</span><br><span class="line">    [InternalBufferCapacity(<span class="number">8</span>)]</span><br><span class="line">    [WriteGroup(typeof(ParentScaleInverse))]</span><br><span class="line">    <span class="keyword">public</span> struct Child : ISystemStateBufferElementData</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> Entity Value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// &lt;summary&gt;</span></span><br><span class="line"><span class="comment">/// 发射体的生成时间</span></span><br><span class="line"><span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">[Serializable]</span><br><span class="line"><span class="keyword">public</span> struct ProjectileSpawnTime : IComponentData</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> SpawnTime;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// &lt;summary&gt;</span></span><br><span class="line"><span class="comment">/// 相对于父实体的本地坐标</span></span><br><span class="line"><span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">[Serializable]</span><br><span class="line">[WriteGroup(typeof(LocalToWorld))]</span><br><span class="line"><span class="keyword">public</span> struct LocalToParent : IComponentData</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> float4x4 Value;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> float3 Right =&gt; <span class="keyword">new</span> float3(Value.c0.x, Value.c0.y, Value.c0.z);</span><br><span class="line">    <span class="keyword">public</span> float3 Up =&gt; <span class="keyword">new</span> float3(Value.c1.x, Value.c1.y, Value.c1.z);</span><br><span class="line">    <span class="keyword">public</span> float3 Forward =&gt; <span class="keyword">new</span> float3(Value.c2.x, Value.c2.y, Value.c2.z);</span><br><span class="line">    <span class="keyword">public</span> float3 Position =&gt; <span class="keyword">new</span> float3(Value.c3.x, Value.c3.y, Value.c3.z);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Parent组件会引用父级的LocalToWorld，更多相关内容可以查看<a href="https://github.com/iothua/HuaECS/wiki/ECS%E5%AE%98%E6%96%B9%E4%B8%AD%E6%96%87API(%E8%87%AA%E8%AF%91" target="_blank" rel="noopener">官方文档</a>)</p>
+<p>下面是生成时间的数据组件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;summary&gt;</span></span><br><span class="line"><span class="comment">/// 发射体的生成时间组件</span></span><br><span class="line"><span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">[Serializable]</span><br><span class="line"><span class="keyword">public</span> struct ProjectileSpawnTime : IComponentData</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> SpawnTime;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// &lt;summary&gt;</span></span><br><span class="line"><span class="comment">/// 发射体生成时间设置</span></span><br><span class="line"><span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">[RequiresEntityConversion]</span><br><span class="line">public class ProjectileSpawnTimeAuthoring : MonoBehaviour, IConvertGameObjectToEntity</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> SpawnTime;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Convert</span><span class="params">(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        var data = <span class="keyword">new</span> ProjectileSpawnTime &#123; SpawnTime = SpawnTime &#125;;</span><br><span class="line">        dstManager.AddComponentData(entity, data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后一个就是子弹移动系统MoveProjectilesSystem<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">using Unity.Burst;</span><br><span class="line">using Unity.Collections;</span><br><span class="line">using Unity.Entities;</span><br><span class="line">using Unity.Jobs;</span><br><span class="line">using Unity.Transforms;</span><br><span class="line"></span><br><span class="line">namespace Samples.FixedTimestepSystem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 发射体移动系统，负责将发射体不断向前移动，并在超出寿命后摧毁实体</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    public class MoveProjectilesSystem : JobComponentSystem</span><br><span class="line">    &#123;</span><br><span class="line">        [BurstCompile]</span><br><span class="line">        struct MoveProjectileJob : IJobForEachWithEntity&lt;ProjectileSpawnTime, Translation&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">public</span> EntityCommandBuffer.Concurrent Commands;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">float</span> TimeSinceLoad;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">float</span> ProjectileSpeed;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//超过生命周期的实体进行删除，没有超过时间的则向前移动</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span><span class="params">(Entity entity, <span class="keyword">int</span> index, [ReadOnly] ref ProjectileSpawnTime spawnTime, ref Translation translation)</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                <span class="keyword">float</span> aliveTime = (TimeSinceLoad - spawnTime.SpawnTime);</span><br><span class="line">                <span class="keyword">if</span> (aliveTime &gt; <span class="number">5.0f</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    Commands.DestroyEntity(index, entity);</span><br><span class="line">                &#125;</span><br><span class="line">                translation.Value.x = aliveTime * ProjectileSpeed;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        BeginSimulationEntityCommandBufferSystem m_beginSimEcbSystem;</span><br><span class="line">        <span class="function"><span class="keyword">protected</span> override <span class="keyword">void</span> <span class="title">OnCreate</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            m_beginSimEcbSystem = World.GetOrCreateSystem&lt;BeginSimulationEntityCommandBufferSystem&gt;();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> override JobHandle <span class="title">OnUpdate</span><span class="params">(JobHandle inputDependencies)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            var jobHandle = <span class="keyword">new</span> MoveProjectileJob()</span><br><span class="line">            &#123;</span><br><span class="line">                Commands = m_beginSimEcbSystem.CreateCommandBuffer().ToConcurrent(),</span><br><span class="line">                TimeSinceLoad = (<span class="keyword">float</span>)Time.ElapsedTime,</span><br><span class="line">                ProjectileSpeed = <span class="number">5.0f</span>,</span><br><span class="line">            &#125;.Schedule(<span class="keyword">this</span>, inputDependencies);</span><br><span class="line">            m_beginSimEcbSystem.AddJobHandleForProducer(jobHandle); <span class="comment">//添加任务到待处理</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> jobHandle;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="FixedSpawner"><a href="#FixedSpawner" class="headerlink" title="FixedSpawner"></a>FixedSpawner</h4><p>手动控制发射频率的案例跟上面案例不同之处就在于可以UI上进度条控制Update的频率<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">using Unity.Entities;</span><br><span class="line">using UnityEngine;</span><br><span class="line">using UnityEngine.UI;</span><br><span class="line"></span><br><span class="line">namespace Samples.FixedTimestepSystem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// FixedUpdate中手动更新创建的系统</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    [AddComponentMenu(<span class="string">"DOTS Samples/FixedTimestepWorkaround/Fixed Timestep Updater"</span>)]</span><br><span class="line">    public class FixedTimestepUpdater : MonoBehaviour</span><br><span class="line">    &#123;</span><br><span class="line">        FixedRateSpawnerSystem spawnerSystem;</span><br><span class="line">        <span class="keyword">public</span> Slider fixedTimestepSlider; <span class="comment">//控制更新频率的进度条</span></span><br><span class="line"></span><br><span class="line">        Text sliderLabelText;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            sliderLabelText = fixedTimestepSlider.GetComponentInChildren&lt;Text&gt;();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">FixedUpdate</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (spawnerSystem == <span class="keyword">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                spawnerSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem&lt;FixedRateSpawnerSystem&gt;();</span><br><span class="line">            &#125;</span><br><span class="line">            Time.fixedDeltaTime = fixedTimestepSlider.value; <span class="comment">//将进度条上的时间赋值给Time.fixedDeltaTime从而来影响系统的Update时间</span></span><br><span class="line">            sliderLabelText.text = $<span class="string">"Fixed Timestep: &#123;fixedTimestepSlider.value*1000&#125; ms"</span>;</span><br><span class="line">            spawnerSystem.Update();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">using Unity.Entities;</span><br><span class="line">using Unity.Mathematics;</span><br><span class="line">using Unity.Transforms;</span><br><span class="line"></span><br><span class="line">namespace Samples.FixedTimestepSystem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> struct FixedRateSpawner : IComponentData</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> Entity Prefab;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [DisableAutoCreation] <span class="comment">//避免在默认世界的初始化期间来创建本系统</span></span><br><span class="line">    public class FixedRateSpawnerSystem : ComponentSystem</span><br><span class="line">    &#123;</span><br><span class="line">        EntityQuery m_MainGroup; <span class="comment">//找出FixedRateSpawner和Translation的实体群</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> override <span class="keyword">void</span> <span class="title">OnCreate</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            m_MainGroup = GetEntityQuery(</span><br><span class="line">                ComponentType.ReadOnly&lt;FixedRateSpawner&gt;(),</span><br><span class="line">                ComponentType.ReadOnly&lt;Translation&gt;());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> override <span class="keyword">void</span> <span class="title">OnUpdate</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            Entities.ForEach((Entity spawnerEntity, ref FixedRateSpawner spawnerData, ref Translation translation) =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                var spawnTime = UnityEngine.Time.time;</span><br><span class="line">                var newEntity = PostUpdateCommands.Instantiate(spawnerData.Prefab);</span><br><span class="line">                PostUpdateCommands.AddComponent(newEntity, <span class="keyword">new</span> Parent &#123;Value = spawnerEntity&#125;);</span><br><span class="line">                PostUpdateCommands.AddComponent(newEntity, <span class="keyword">new</span> LocalToParent());</span><br><span class="line">                PostUpdateCommands.SetComponent(newEntity, <span class="keyword">new</span> Translation &#123;Value = <span class="keyword">new</span> float3(<span class="number">0</span>, <span class="number">0.3f</span> * math.sin(<span class="number">5.0f</span> * spawnTime), <span class="number">0</span>)&#125;); <span class="comment">//设置实体Y的坐标</span></span><br><span class="line">                PostUpdateCommands.SetComponent(newEntity, <span class="keyword">new</span> ProjectileSpawnTime&#123;SpawnTime = spawnTime&#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要的代码还是大同小异，这里有一个搜集指定组件的Entity群。GetEntityQuery也有好几种搜索方式，这是其中一种，添加上ComponentType.ReadOnly搜索效率会高一点。<br>其他查询相关的知识点:</p>
+<ul>
+<li>EntityQueryDesc<br>这里的Desc我们一般会理解为下降，但这里是描述(describe)的意思</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var query = new EntityQueryDesc</span><br><span class="line">&#123;</span><br><span class="line">   None = new ComponentType[]&#123; typeof(Frozen) &#125;,</span><br><span class="line">   All = new ComponentType[]&#123; typeof(RotationQuaternion), ComponentType.ReadOnly&lt;RotationSpeed&gt;() &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>查询选项<br>当你创建一个EntityQueryDesc,你还可以设置他的Options 变量. options变量允许进行一些特殊的查询(通常您不需要设置它们):</p>
+<ul>
+<li>Default — 无设置选项;通常的查询行为.</li>
+<li>IncludePrefab — 包括拥有特殊预制标签组件的原型</li>
+<li>IncludeDisabled — 包括拥有特殊禁用标记组件的原型</li>
+<li>FilterWriteGroup — 考虑任何被查询组件的WriteGroup属性</li>
+</ul>
+</li>
+</ul>
+<p>当你设置了 FilterWriteGroup 选项，如果存在一些组件来自于某一个Write Group（写入组），那么只有它们显式地被包含在查询条件中，对应的实体才会包含在视图中，如果某些实体包含位于同一WriteGroup的任何其他组件，它们将会排除在外。{译者注：也就是每一类WriteGroup来说，尽可能同时只允许一个结构来执行访问}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public struct C1: IComponentData&#123;&#125;</span><br><span class="line"></span><br><span class="line">[WriteGroup(C1)]</span><br><span class="line">public struct C2: IComponentData&#123;&#125;</span><br><span class="line"></span><br><span class="line">[WriteGroup(C1)]</span><br><span class="line">public struct C3: IComponentData&#123;&#125;</span><br><span class="line"></span><br><span class="line">var query = new EntityQueryDesc&#123;</span><br><span class="line">    All = new ComponentType&#123;typeof(C1), ComponentType.ReadOnly&lt;C3&gt;()&#125;,</span><br><span class="line">    Options = EntityQueryDescOptions.FilterWriteGroup</span><br><span class="line">&#125;;</span><br><span class="line">var m_group = GetEntityQuery(query);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>组合查询</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var query0 = new EntityQueryDesc</span><br><span class="line">&#123;</span><br><span class="line">   All = new ComponentType[] &#123;typeof(RotationQuaternion)&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var query1 = new EntityQueryDesc</span><br><span class="line">&#123;</span><br><span class="line">   All = new ComponentType[] &#123;typeof(RotationSpeed)&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">EntityQuery m_Group = GetEntityQuery(new EntityQueryDesc[] &#123;query0, query1&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建EntityQuery</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EntityQuery m_Group = CreateEntityQuery(typeof(RotationQuaternion), ComponentType.ReadOnly&lt;RotationSpeed&gt;());</span><br></pre></td></tr></table></figure>
+<ul>
+<li>筛选出数据变化的组件<ul>
+<li>Shared component values —根据共享组件的不同数值样本，来筛选实体集</li>
+<li>Change filter — 根据指定类型的组件是否可能已经发生了变化，来筛选实体集</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">m_Group = GetEntityQuery(typeof(LocalToWorld), ComponentType.ReadOnly&lt;Translation&gt;());</span><br><span class="line">m_Group.SetFilterChanged(typeof(Translation));</span><br></pre></td></tr></table></figure>
+<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p><img src="/2020/02/12/2.png" alt=""></p>
+<h2 id="2-Boids"><a href="#2-Boids" class="headerlink" title="2.Boids"></a>2.Boids</h2><p>这个案例向我们展示了大量鱼群（50000）实体的风采，是不是非常的壮观，我目前用的是Unity2019.3.0免费版的，貌似这个场景运行不了，会卡死，据说收费版的是可以的，目前还没找到原因，效果图是我找的网上的，主要是学习代码。</p>
+<h3 id="效果图-1"><a href="#效果图-1" class="headerlink" title="效果图"></a>效果图</h3><p><img src="/2020/02/12/3.png" alt=""></p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><p>代码主要选一些跟之前案例不一样的挑选看一下，一样的就略过了。</p>
+<p>鱼群的共享数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;summary&gt;</span></span><br><span class="line"><span class="comment">/// 大群的共享数据</span></span><br><span class="line"><span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">[Serializable]</span><br><span class="line">[WriteGroup(typeof(LocalToWorld))]</span><br><span class="line"><span class="keyword">public</span> struct Boid : ISharedComponentData</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 单元半径</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> CellRadius;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 间隔宽度</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> SeparationWeight;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 对齐宽度</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> AlignmentWeight;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 目标宽度</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> TargetWeight;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 排斥距离</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> ObstacleAversionDistance;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 移动速度</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> MoveSpeed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;summary&gt;</span></span><br><span class="line"><span class="comment">/// 麦克在GDC上面的讲话‘面向数据的方式来使用组件系统’对于开发大群的案例代码来说有非常大的参考价值</span></span><br><span class="line"><span class="comment">/// https://youtu.be/p65Yt20pw0g?t=1446 （这是油管链接，需要翻墙观看，有兴趣的朋友可以在参考）</span></span><br><span class="line"><span class="comment">/// 它解释了这个案例之前版本的实现，但是几乎所有的信息仍然具有参考价值。</span></span><br><span class="line"><span class="comment">/// 目标（2条红鱼）和对手（1条鲨鱼）基于Unity UI里的ActorAnimation（角色动画）栏移动</span></span><br><span class="line"><span class="comment">/// 这样它们才能基于关键帧动画来移动</span></span><br><span class="line"><span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">namespace Samples.Boids</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// S:大群系统，在模拟系统组中更新，在Transform系统组之前更新</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    [UpdateInGroup(typeof(SimulationSystemGroup))]</span><br><span class="line">    [UpdateBefore(typeof(TransformSystemGroup))]</span><br><span class="line">    public class BoidSystem : JobComponentSystem</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> EntityQuery  m_BoidQuery;<span class="comment">//大群实体查询缓存</span></span><br><span class="line">        <span class="keyword">private</span> EntityQuery  m_TargetQuery;<span class="comment">//目标实体查询缓存</span></span><br><span class="line">        <span class="keyword">private</span> EntityQuery  m_ObstacleQuery;<span class="comment">//对手实体查询缓存</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">        <span class="comment">/// 在这个案例中总共有3个独特的大群变体，各有各的共享组件值</span></span><br><span class="line">        <span class="comment">/// （提示：这包含了在索引0上默认未初始化的值，该值并未被实际用在这个案例中，）</span></span><br><span class="line">        <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">        <span class="keyword">private</span> List&lt;Boid&gt;                               m_UniqueTypes = <span class="keyword">new</span> List&lt;Boid&gt;(<span class="number">3</span>);</span><br><span class="line">        <span class="keyword">private</span> List&lt;NativeMultiHashMap&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; m_PrevFrameHashmaps = <span class="keyword">new</span> List&lt;NativeMultiHashMap&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">        <span class="comment">/// `CopyPositions`和`CopyHeadings`都是为了提取相对位置、导向组件到NativeArrays（原生数组）</span></span><br><span class="line">        <span class="comment">/// 这样它们才能被`MergeCells`（合并单元）和`Steer`（导航）任务随机访问到 （下面是这两个结构体）</span></span><br><span class="line">        <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">        [BurstCompile]</span><br><span class="line">        struct CopyPositions : IJobForEachWithEntity&lt;LocalToWorld&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">            <span class="comment">/// 位置，原生数组</span></span><br><span class="line">            <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">            <span class="keyword">public</span> NativeArray&lt;float3&gt; positions;</span><br><span class="line">            <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">            <span class="comment">/// 把本地位置放到原生数组里</span></span><br><span class="line">            <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">            <span class="comment">/// &lt;param name="entity"&gt;实体&lt;/param&gt;</span></span><br><span class="line">            <span class="comment">/// &lt;param name="index"&gt;索引&lt;/param&gt;</span></span><br><span class="line">            <span class="comment">/// &lt;param name="localToWorld"&gt;只读本地位置&lt;/param&gt;</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span><span class="params">(Entity entity, <span class="keyword">int</span> index, [ReadOnly]ref LocalToWorld localToWorld)</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                positions[index] = localToWorld.Position;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//同上</span></span><br><span class="line">        [BurstCompile]</span><br><span class="line">        struct CopyHeadings : IJobForEachWithEntity&lt;LocalToWorld&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">public</span> NativeArray&lt;float3&gt; headings;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span><span class="params">(Entity entity, <span class="keyword">int</span> index, [ReadOnly]ref LocalToWorld localToWorld)</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                headings[index] = localToWorld.Forward;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">        <span class="comment">/// 生成一个哈希表，每一栏里包含了所有大群的索引，其位置量化成同一个值，即提供的单元半径</span></span><br><span class="line">        <span class="comment">/// 这样它们才能被`MergeCells`（合并单元）和`Steer`（导航）任务随机访问到 </span></span><br><span class="line">        <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">        [BurstCompile]</span><br><span class="line">        [RequireComponentTag(typeof(Boid))]</span><br><span class="line">        struct HashPositions : IJobForEachWithEntity&lt;LocalToWorld&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">public</span> NativeMultiHashMap&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;.ParallelWriter hashMap;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">float</span>                                       cellRadius;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span><span class="params">(Entity entity, <span class="keyword">int</span> index, [ReadOnly]ref LocalToWorld localToWorld)</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                var hash = (<span class="keyword">int</span>)math.hash(<span class="keyword">new</span> int3(math.floor(localToWorld.Position / cellRadius)));</span><br><span class="line">                hashMap.Add(hash, index);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">        <span class="comment">/// 合并所有单元</span></span><br><span class="line">        <span class="comment">/// 这里收集了所有单元大群的位置和导向，为了做以下三件事情：</span></span><br><span class="line">        <span class="comment">/// 1.计算每个单元的数量</span></span><br><span class="line">        <span class="comment">/// 2.找到最近的对手并将互相标记为目标</span></span><br><span class="line">        <span class="comment">/// 3.找到包含已收集每个大群单元值的数组索引</span></span><br><span class="line">        <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">        [BurstCompile]</span><br><span class="line">        struct MergeCells : IJobNativeMultiHashMapMergedSharedKeyIndices</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">public</span> NativeArray&lt;<span class="keyword">int</span>&gt;                 cellIndices;<span class="comment">//单元索引原生数组</span></span><br><span class="line">            <span class="keyword">public</span> NativeArray&lt;float3&gt;              cellAlignment;<span class="comment">//单元对齐原生数组</span></span><br><span class="line">            <span class="keyword">public</span> NativeArray&lt;float3&gt;              cellSeparation;<span class="comment">//单元间隔</span></span><br><span class="line">            <span class="keyword">public</span> NativeArray&lt;<span class="keyword">int</span>&gt;                 cellObstaclePositionIndex;<span class="comment">//单元对手位置索引</span></span><br><span class="line">            <span class="keyword">public</span> NativeArray&lt;<span class="keyword">float</span>&gt;               cellObstacleDistance;<span class="comment">//单元对手距离</span></span><br><span class="line">            <span class="keyword">public</span> NativeArray&lt;<span class="keyword">int</span>&gt;                 cellTargetPositionIndex;<span class="comment">//单元目标位置索引</span></span><br><span class="line">            <span class="keyword">public</span> NativeArray&lt;<span class="keyword">int</span>&gt;                 cellCount;<span class="comment">//单元数量</span></span><br><span class="line">            [ReadOnly] <span class="keyword">public</span> NativeArray&lt;float3&gt;   targetPositions;<span class="comment">//目标位置</span></span><br><span class="line">            [ReadOnly] <span class="keyword">public</span> NativeArray&lt;float3&gt;   obstaclePositions;<span class="comment">//对手位置</span></span><br><span class="line">            <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">            <span class="comment">/// 循环数组找到最近的位置</span></span><br><span class="line">            <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">            <span class="comment">/// &lt;param name="targets"&gt;目标&lt;/param&gt;</span></span><br><span class="line">            <span class="comment">/// &lt;param name="position"&gt;位置&lt;/param&gt;</span></span><br><span class="line">            <span class="comment">/// &lt;param name="nearestPositionIndex"&gt;最近位置索引&lt;/param&gt;</span></span><br><span class="line">            <span class="comment">/// &lt;param name="nearestDistance"&gt;最近距离&lt;/param&gt;</span></span><br><span class="line">            <span class="function"><span class="keyword">void</span> <span class="title">NearestPosition</span><span class="params">(NativeArray&lt;float3&gt; targets, float3 position, out <span class="keyword">int</span> nearestPositionIndex, out <span class="keyword">float</span> nearestDistance )</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                nearestPositionIndex = <span class="number">0</span>;</span><br><span class="line">                nearestDistance      = math.lengthsq(position-targets[<span class="number">0</span>]);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; targets.Length; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    var targetPosition = targets[i];</span><br><span class="line">                    var distance       = math.lengthsq(position-targetPosition);</span><br><span class="line">                    var nearest        = distance &lt; nearestDistance;</span><br><span class="line"></span><br><span class="line">                    nearestDistance      = math.select(nearestDistance, distance, nearest);</span><br><span class="line">                    nearestPositionIndex = math.select(nearestPositionIndex, i, nearest);</span><br><span class="line">                &#125;</span><br><span class="line">                nearestDistance = math.sqrt(nearestDistance);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">            <span class="comment">/// 首先执行：找到最近的对手和目标，并储存单元索引</span></span><br><span class="line">            <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">            <span class="comment">/// &lt;param name="index"&gt;&lt;/param&gt;</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ExecuteFirst</span><span class="params">(<span class="keyword">int</span> index)</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                var position = cellSeparation[index] / cellCount[index];</span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> obstaclePositionIndex;</span><br><span class="line">                <span class="keyword">float</span> obstacleDistance;</span><br><span class="line">                NearestPosition(obstaclePositions, position, out obstaclePositionIndex, out obstacleDistance);</span><br><span class="line">                cellObstaclePositionIndex[index] = obstaclePositionIndex;</span><br><span class="line">                cellObstacleDistance[index]      = obstacleDistance;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> targetPositionIndex;</span><br><span class="line">                <span class="keyword">float</span> targetDistance;</span><br><span class="line">                NearestPosition(targetPositions, position, out targetPositionIndex, out targetDistance);</span><br><span class="line">                cellTargetPositionIndex[index] = targetPositionIndex;</span><br><span class="line"></span><br><span class="line">                cellIndices[index] = index;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">            <span class="comment">/// 其次执行：合计被考虑到的实际索引的对齐和间隔，并保存我们正在保存单元的第一个值的索引</span></span><br><span class="line">            <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">            <span class="comment">/// &lt;param name="cellIndex"&gt;单元索引&lt;/param&gt;</span></span><br><span class="line">            <span class="comment">/// &lt;param name="index"&gt;索引&lt;/param&gt;</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ExecuteNext</span><span class="params">(<span class="keyword">int</span> cellIndex, <span class="keyword">int</span> index)</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                cellCount[cellIndex]      += <span class="number">1</span>;</span><br><span class="line">                cellAlignment[cellIndex]  = cellAlignment[cellIndex] + cellAlignment[index];</span><br><span class="line">                cellSeparation[cellIndex] = cellSeparation[cellIndex] + cellSeparation[index];</span><br><span class="line">                cellIndices[index]        = cellIndex;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">        <span class="comment">/// 导航：这里读取之前计算的大群信息，再基于使用标准集群蜂拥算法新计算出来的导向，</span></span><br><span class="line">        <span class="comment">/// 用来更新每一个大群的本地位置</span></span><br><span class="line">        <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">        [BurstCompile]</span><br><span class="line">        [RequireComponentTag(typeof(Boid))]</span><br><span class="line">        struct Steer : IJobForEachWithEntity&lt;LocalToWorld&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">float</span>                                                       dt; </span><br><span class="line">            [ReadOnly] <span class="keyword">public</span> Boid                                             settings;</span><br><span class="line">            [DeallocateOnJobCompletion] [ReadOnly] <span class="keyword">public</span> NativeArray&lt;<span class="keyword">int</span>&gt;     cellIndices;</span><br><span class="line">            [DeallocateOnJobCompletion] [ReadOnly] <span class="keyword">public</span> NativeArray&lt;float3&gt;  targetPositions;</span><br><span class="line">            [DeallocateOnJobCompletion] [ReadOnly] <span class="keyword">public</span> NativeArray&lt;float3&gt;  obstaclePositions;</span><br><span class="line">            [DeallocateOnJobCompletion] [ReadOnly] <span class="keyword">public</span> NativeArray&lt;float3&gt;  cellAlignment;</span><br><span class="line">            [DeallocateOnJobCompletion] [ReadOnly] <span class="keyword">public</span> NativeArray&lt;float3&gt;  cellSeparation;</span><br><span class="line">            [DeallocateOnJobCompletion] [ReadOnly] <span class="keyword">public</span> NativeArray&lt;<span class="keyword">int</span>&gt;     cellObstaclePositionIndex;</span><br><span class="line">            [DeallocateOnJobCompletion] [ReadOnly] <span class="keyword">public</span> NativeArray&lt;<span class="keyword">float</span>&gt;   cellObstacleDistance;</span><br><span class="line">            [DeallocateOnJobCompletion] [ReadOnly] <span class="keyword">public</span> NativeArray&lt;<span class="keyword">int</span>&gt;     cellTargetPositionIndex;</span><br><span class="line">            [DeallocateOnJobCompletion] [ReadOnly] <span class="keyword">public</span> NativeArray&lt;<span class="keyword">int</span>&gt;     cellCount;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span><span class="params">(Entity entity, <span class="keyword">int</span> index, ref LocalToWorld localToWorld)</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                <span class="comment">// temporarily storing the values for code readability</span></span><br><span class="line">                <span class="comment">//为了代码的可读性缓存这些值</span></span><br><span class="line">                var forward                           = localToWorld.Forward;</span><br><span class="line">                var currentPosition                   = localToWorld.Position;</span><br><span class="line">                var cellIndex                         = cellIndices[index];</span><br><span class="line">                var neighborCount                     = cellCount[cellIndex];</span><br><span class="line">                var alignment                         = cellAlignment[cellIndex];</span><br><span class="line">                var separation                        = cellSeparation[cellIndex];</span><br><span class="line">                var nearestObstacleDistance           = cellObstacleDistance[cellIndex];</span><br><span class="line">                var nearestObstaclePositionIndex      = cellObstaclePositionIndex[cellIndex];</span><br><span class="line">                var nearestTargetPositionIndex        = cellTargetPositionIndex[cellIndex];</span><br><span class="line">                var nearestObstaclePosition           = obstaclePositions[nearestObstaclePositionIndex];</span><br><span class="line">                var nearestTargetPosition             = targetPositions[nearestTargetPositionIndex];</span><br><span class="line"></span><br><span class="line">                <span class="comment">//基于集群模拟算法的导航计算</span></span><br><span class="line">                var obstacleSteering                  = currentPosition - nearestObstaclePosition;</span><br><span class="line">                var avoidObstacleHeading              = (nearestObstaclePosition + math.normalizesafe(obstacleSteering)</span><br><span class="line">                                                        * settings.ObstacleAversionDistance)- currentPosition;</span><br><span class="line">                var targetHeading                     = settings.TargetWeight</span><br><span class="line">                                                        * math.normalizesafe(nearestTargetPosition - currentPosition);</span><br><span class="line">                var nearestObstacleDistanceFromRadius = nearestObstacleDistance - settings.ObstacleAversionDistance;</span><br><span class="line">                var alignmentResult                   = settings.AlignmentWeight</span><br><span class="line">                                                        * math.normalizesafe((alignment/neighborCount)-forward);</span><br><span class="line">                var separationResult                  = settings.SeparationWeight</span><br><span class="line">                                                        * math.normalizesafe((currentPosition * neighborCount) - separation);</span><br><span class="line">                var normalHeading                     = math.normalizesafe(alignmentResult + separationResult + targetHeading);</span><br><span class="line">                var targetForward                     = math.select(normalHeading, avoidObstacleHeading, nearestObstacleDistanceFromRadius &lt; <span class="number">0</span>);</span><br><span class="line">                var nextHeading                       = math.normalizesafe(forward + dt*(targetForward-forward));</span><br><span class="line"></span><br><span class="line">                <span class="comment">//基于新的导向更新本地位置</span></span><br><span class="line">                localToWorld = <span class="keyword">new</span> LocalToWorld</span><br><span class="line">                &#123;</span><br><span class="line">                    Value = float4x4.TRS(</span><br><span class="line">                        <span class="keyword">new</span> float3(localToWorld.Position + (nextHeading * settings.MoveSpeed * dt)),</span><br><span class="line">                        quaternion.LookRotationSafe(nextHeading, math.up()),</span><br><span class="line">                        <span class="keyword">new</span> float3(<span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>))</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">        <span class="comment">/// 停止运行的时候释放上一帧的哈希表</span></span><br><span class="line">        <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> override <span class="keyword">void</span> <span class="title">OnStopRunning</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (var i = <span class="number">0</span>; i &lt; m_PrevFrameHashmaps.Count; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                m_PrevFrameHashmaps[i].Dispose();</span><br><span class="line">            &#125;</span><br><span class="line">            m_PrevFrameHashmaps.Clear();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> override JobHandle <span class="title">OnUpdate</span><span class="params">(JobHandle inputDeps)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            EntityManager.GetAllUniqueSharedComponentData(m_UniqueTypes);</span><br><span class="line"></span><br><span class="line">            var obstacleCount = m_ObstacleQuery.CalculateEntityCount();</span><br><span class="line">            var targetCount = m_TargetQuery.CalculateEntityCount();</span><br><span class="line"></span><br><span class="line">            <span class="comment">///暂时还不能在哈希表上调用释放内存定语（[DeallocateOnJobCompletion]），</span></span><br><span class="line">            <span class="comment">///所以在这里手动释放上一次迭代循环产生的哈希</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m_PrevFrameHashmaps.Count; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                m_PrevFrameHashmaps[i].Dispose();</span><br><span class="line">            &#125;</span><br><span class="line">            m_PrevFrameHashmaps.Clear();</span><br><span class="line"></span><br><span class="line">            <span class="comment">///每一个大群的变体代表一个不同的SharedComponentData值，并且是独立的</span></span><br><span class="line">            <span class="comment">///意味着同一种变体的群只与别的变体群互动。因此这个循环单独处理每一个变体类型</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> boidVariantIndex = <span class="number">0</span>; boidVariantIndex &lt; m_UniqueTypes.Count; boidVariantIndex++)</span><br><span class="line">            &#123;</span><br><span class="line">                var settings = m_UniqueTypes[boidVariantIndex];</span><br><span class="line">                m_BoidQuery.SetFilter(settings);</span><br><span class="line">                var boidCount = m_BoidQuery.CalculateEntityCount();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (boidCount == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">///如果变体不包含任何大群，则提前跳过当前循环。</span></span><br><span class="line">                    <span class="comment">/// 举个栗子，变体0总是会跳过，因为它代表默认的，未初始化的</span></span><br><span class="line">                    <span class="comment">/// 大群结构体并没有在这个案例里出现</span></span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">///下面计算相邻大群单元之间的空间</span></span><br><span class="line">                <span class="comment">/// 注意：使用的是一个稀疏的网格而不是密集带边界的网格，</span></span><br><span class="line">                <span class="comment">/// 所以这里没有预定义的空间边界</span></span><br><span class="line">                var hashMap                   = <span class="keyword">new</span> NativeMultiHashMap&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;(boidCount,Allocator.TempJob);</span><br><span class="line"></span><br><span class="line">                var cellIndices               = <span class="keyword">new</span> NativeArray&lt;<span class="keyword">int</span>&gt;(boidCount, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);</span><br><span class="line">                var cellObstaclePositionIndex = <span class="keyword">new</span> NativeArray&lt;<span class="keyword">int</span>&gt;(boidCount, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);</span><br><span class="line">                var cellTargetPositionIndex   = <span class="keyword">new</span> NativeArray&lt;<span class="keyword">int</span>&gt;(boidCount, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);</span><br><span class="line"></span><br><span class="line">                var cellCount                 = <span class="keyword">new</span> NativeArray&lt;<span class="keyword">int</span>&gt;(boidCount, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);</span><br><span class="line"></span><br><span class="line">                var cellObstacleDistance      = <span class="keyword">new</span> NativeArray&lt;<span class="keyword">float</span>&gt;(boidCount, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);</span><br><span class="line">                var cellAlignment             = <span class="keyword">new</span> NativeArray&lt;float3&gt;(boidCount, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);</span><br><span class="line">                var cellSeparation            = <span class="keyword">new</span> NativeArray&lt;float3&gt;(boidCount, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);</span><br><span class="line"></span><br><span class="line">                var copyTargetPositions       = <span class="keyword">new</span> NativeArray&lt;float3&gt;(targetCount, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);</span><br><span class="line">                var copyObstaclePositions     = <span class="keyword">new</span> NativeArray&lt;float3&gt;(obstacleCount, Allocator.TempJob, NativeArrayOptions.UninitializedMemory);</span><br><span class="line"></span><br><span class="line">                <span class="comment">///接下来的任务全部并行，因为在安排任务的时候同一个JobHandle被传递给它们的输入依赖，</span></span><br><span class="line">                <span class="comment">///因此它们可以任意顺序运行（或并发运行），并发是它们任务安排的属性，而不是任务结构体本身</span></span><br><span class="line">                var initialCellAlignmentJob = <span class="keyword">new</span> CopyHeadings</span><br><span class="line">                &#123;</span><br><span class="line">                    headings = cellAlignment</span><br><span class="line">                &#125;;</span><br><span class="line">                var initialCellAlignmentJobHandle = initialCellAlignmentJob.Schedule(m_BoidQuery, inputDeps);</span><br><span class="line"></span><br><span class="line">                var initialCellSeparationJob = <span class="keyword">new</span> CopyPositions</span><br><span class="line">                &#123;</span><br><span class="line">                    positions = cellSeparation</span><br><span class="line">                &#125;;</span><br><span class="line">                var initialCellSeparationJobHandle = initialCellSeparationJob.Schedule(m_BoidQuery, inputDeps);</span><br><span class="line"></span><br><span class="line">                var copyTargetPositionsJob = <span class="keyword">new</span> CopyPositions</span><br><span class="line">                &#123;</span><br><span class="line">                    positions = copyTargetPositions</span><br><span class="line">                &#125;;</span><br><span class="line">                var copyTargetPositionsJobHandle = copyTargetPositionsJob.Schedule(m_TargetQuery, inputDeps);</span><br><span class="line"></span><br><span class="line">                var copyObstaclePositionsJob = <span class="keyword">new</span> CopyPositions</span><br><span class="line">                &#123;</span><br><span class="line">                    positions = copyObstaclePositions</span><br><span class="line">                &#125;;</span><br><span class="line">                var copyObstaclePositionsJobHandle = copyObstaclePositionsJob.Schedule(m_ObstacleQuery, inputDeps);</span><br><span class="line"></span><br><span class="line">                <span class="comment">///暂时还不能在哈希表上调用释放内存定语（[DeallocateOnJobCompletion]），</span></span><br><span class="line">                <span class="comment">/// 所以把已解决的哈希添加到列表，这样它们就能在接下来的单元任务中使用了，并且也能直接清除</span></span><br><span class="line">                m_PrevFrameHashmaps.Add(hashMap);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// setting up the jobs for position and cell count</span></span><br><span class="line">                <span class="comment">///为位置和单元数量设置任务</span></span><br><span class="line">                var hashPositionsJob = <span class="keyword">new</span> HashPositions</span><br><span class="line">                &#123;</span><br><span class="line">                    hashMap        = hashMap.AsParallelWriter(),</span><br><span class="line">                    cellRadius     = settings.CellRadius</span><br><span class="line">                &#125;;</span><br><span class="line">                var hashPositionsJobHandle = hashPositionsJob.Schedule(m_BoidQuery, inputDeps);</span><br><span class="line"></span><br><span class="line">                var initialCellCountJob = <span class="keyword">new</span> MemsetNativeArray&lt;<span class="keyword">int</span>&gt;</span><br><span class="line">                &#123;</span><br><span class="line">                    Source = cellCount,</span><br><span class="line">                    Value  = <span class="number">1</span></span><br><span class="line">                &#125;;</span><br><span class="line">                var initialCellCountJobHandle = initialCellCountJob.Schedule(boidCount, <span class="number">64</span>, inputDeps);</span><br><span class="line"></span><br><span class="line">                var initialCellBarrierJobHandle = JobHandle.CombineDependencies(initialCellAlignmentJobHandle, initialCellSeparationJobHandle, initialCellCountJobHandle);</span><br><span class="line">                var copyTargetObstacleBarrierJobHandle = JobHandle.CombineDependencies(copyTargetPositionsJobHandle, copyObstaclePositionsJobHandle);</span><br><span class="line">                var mergeCellsBarrierJobHandle = JobHandle.CombineDependencies(hashPositionsJobHandle, initialCellBarrierJobHandle, copyTargetObstacleBarrierJobHandle);</span><br><span class="line">                <span class="comment">//合并所有单元</span></span><br><span class="line">                var mergeCellsJob = <span class="keyword">new</span> MergeCells</span><br><span class="line">                &#123;</span><br><span class="line">                    cellIndices               = cellIndices,</span><br><span class="line">                    cellAlignment             = cellAlignment,</span><br><span class="line">                    cellSeparation            = cellSeparation,</span><br><span class="line">                    cellObstacleDistance      = cellObstacleDistance,</span><br><span class="line">                    cellObstaclePositionIndex = cellObstaclePositionIndex,</span><br><span class="line">                    cellTargetPositionIndex   = cellTargetPositionIndex,</span><br><span class="line">                    cellCount                 = cellCount,</span><br><span class="line">                    targetPositions           = copyTargetPositions,</span><br><span class="line">                    obstaclePositions         = copyObstaclePositions</span><br><span class="line">                &#125;;</span><br><span class="line">                var mergeCellsJobHandle = mergeCellsJob.Schedule(hashMap,<span class="number">64</span>,mergeCellsBarrierJobHandle);</span><br><span class="line">                <span class="comment">//导航</span></span><br><span class="line">                var steerJob = <span class="keyword">new</span> Steer</span><br><span class="line">                &#123;</span><br><span class="line">                    cellIndices               = cellIndices,</span><br><span class="line">                    settings                  = settings,</span><br><span class="line">                    cellAlignment             = cellAlignment,</span><br><span class="line">                    cellSeparation            = cellSeparation,</span><br><span class="line">                    cellObstacleDistance      = cellObstacleDistance,</span><br><span class="line">                    cellObstaclePositionIndex = cellObstaclePositionIndex,</span><br><span class="line">                    cellTargetPositionIndex   = cellTargetPositionIndex,</span><br><span class="line">                    cellCount                 = cellCount,</span><br><span class="line">                    targetPositions           = copyTargetPositions,</span><br><span class="line">                    obstaclePositions         = copyObstaclePositions,</span><br><span class="line">                    dt                        = Time.deltaTime,</span><br><span class="line">                &#125;;</span><br><span class="line">                var steerJobHandle = steerJob.Schedule(m_BoidQuery, mergeCellsJobHandle);</span><br><span class="line"></span><br><span class="line">                inputDeps = steerJobHandle;</span><br><span class="line">                m_BoidQuery.AddDependency(inputDeps);</span><br><span class="line">            &#125;</span><br><span class="line">            m_UniqueTypes.Clear();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> inputDeps;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> override <span class="keyword">void</span> <span class="title">OnCreate</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">///查询大群</span></span><br><span class="line">            m_BoidQuery = GetEntityQuery(<span class="keyword">new</span> EntityQueryDesc</span><br><span class="line">            &#123;</span><br><span class="line">                All = <span class="keyword">new</span> [] &#123; ComponentType.ReadOnly&lt;Boid&gt;(), ComponentType.ReadWrite&lt;LocalToWorld&gt;() &#125;,</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="comment">//目标大群</span></span><br><span class="line">            m_TargetQuery = GetEntityQuery(<span class="keyword">new</span> EntityQueryDesc</span><br><span class="line">            &#123;</span><br><span class="line">                All = <span class="keyword">new</span> [] &#123; ComponentType.ReadOnly&lt;BoidTarget&gt;(), ComponentType.ReadOnly&lt;LocalToWorld&gt;() &#125;,</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="comment">//对手大群</span></span><br><span class="line">            m_ObstacleQuery = GetEntityQuery(<span class="keyword">new</span> EntityQueryDesc</span><br><span class="line">            &#123;</span><br><span class="line">                All = <span class="keyword">new</span> [] &#123; ComponentType.ReadOnly&lt;BoidObstacle&gt;(), ComponentType.ReadOnly&lt;LocalToWorld&gt;() &#125;,</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="流程图-1"><a href="#流程图-1" class="headerlink" title="流程图"></a>流程图</h3><p><img src="/2020/02/12/4.png" alt=""></p>
+<h2 id="2019-3版本ECS代码改进"><a href="#2019-3版本ECS代码改进" class="headerlink" title="2019.3版本ECS代码改进"></a>2019.3版本ECS代码改进</h2><p><img src="/2020/02/12/9.png" alt=""><br>新版本针对一些繁琐的模板代码做了一些改进，可以对比看出简洁了不少，不过Lambda表达式的方式会产生额外的GC，所以还需要进一步改进。</p>
+<h2 id="更多参考资料"><a href="#更多参考资料" class="headerlink" title="更多参考资料"></a>更多参考资料</h2><ul>
+<li><a href="https://blog.csdn.net/lrh3025/article/details/103646556" target="_blank" rel="noopener">https://blog.csdn.net/lrh3025/article/details/103646556</a> LocalToWorld和Parent相关的文档</li>
+<li><a href="https://github.com/iothua/HuaECS/wiki/ECS%E5%AE%98%E6%96%B9%E4%B8%AD%E6%96%87API(%E8%87%AA%E8%AF%91)" target="_blank" rel="noopener">https://github.com/iothua/HuaECS/wiki/ECS%E5%AE%98%E6%96%B9%E4%B8%AD%E6%96%87API(%E8%87%AA%E8%AF%91)</a></li>
+<li><a href="https://blog.csdn.net/AndrewFan/article/details/90619637" target="_blank" rel="noopener">https://blog.csdn.net/AndrewFan/article/details/90619637</a> EntityQuery相关的</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>努力赚奶粉钱<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -239,11 +346,15 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ECS</a>
+        		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -256,460 +367,122 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://dingxiaowei.cn/2020/02/12/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/20/" class="archive-article-date">
-  	<time datetime="2019-06-20T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-20</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/02/15/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          EntityComponentSystemPhysicsSamples学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/11/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">EntityComponentSystemSamples学习笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/20/">游戏开发防作弊以及原理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Unity//" class="article-tag-list-link color1">Unity</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/01/" class="archive-article-date">
-  	<time datetime="2019-04-01T13:00:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/01/">Unity行为树分享</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">行为树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/20/" class="archive-article-date">
-  	<time datetime="2019-03-20T11:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/20/">【GFFrameWork】事件系统</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/08/" class="archive-article-date">
-  	<time datetime="2019-03-08T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/08/">【GFFrameWork】UI框架2-UI界面自动生成模板代码工具</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">UI框架</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">自动生成UI模板代码</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/工具//" class="article-tag-list-link color3">工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/08/" class="archive-article-date">
-  	<time datetime="2019-02-08T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/08/">【GFFrameWork】UI框架</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">UI框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/06/" class="archive-article-date">
-  	<time datetime="2019-02-06T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/06/">【GFFrameWork】代码热更及资源下载</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">资源更新</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ILRuntime</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">C#热更</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/05/" class="archive-article-date">
-  	<time datetime="2019-02-05T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/05/">【GFFrameWork】管理器和框架启动</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">管理器和框架启动</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/15/" class="archive-article-date">
-  	<time datetime="2019-01-15T14:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/15/">【GFFrameWork】多功能链式计时器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多功能链式计时器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/12/" class="archive-article-date">
-  	<time datetime="2019-01-12T13:14:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/12/">【GFFrameWork】游戏Log模块</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GFFrameWork</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Log</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2019/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/2019/">1</a><a class="page-number" href="/archives/2019/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/2019/page/4/">4</a><a class="extend next" rel="next" href="/archives/2019/page/4/">Next &raquo;</a>
-    </nav>
+  
+  <div id="SOHUCS" sid="EntityComponentSystemSamples进阶篇学习笔记" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cytjYHUHN",
+        conf: "ea24434ef1bf1bd9532706cf61872684"
+    });
+</script>
+</script>
+  
+
+  
+
   
 
 
@@ -729,8 +502,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
