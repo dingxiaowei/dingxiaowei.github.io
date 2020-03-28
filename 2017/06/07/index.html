@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="1.前言最近在看《游戏开发与设计模式》一书，看到控制反转设计模式，作者说：上层模块不应该依赖于下层模块，上层模块和下层模块都应该依赖于接口，这样能减少耦合。然后附带举了个例子，我觉得特别好，就是一台计算机是属于上层模块，里面硬盘属于下层模块，计算机依赖于硬盘，硬盘是计算机的基本组成部件之一。这里提到依赖一词，下面就详细谈谈依赖。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-12T22:27:49.890Z">
+<meta property="og:updated_time" content="2020-01-20T12:29:05.350Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Unity 设计模式]IOC依赖倒置">
 <meta name="twitter:description" content="1.前言最近在看《游戏开发与设计模式》一书，看到控制反转设计模式，作者说：上层模块不应该依赖于下层模块，上层模块和下层模块都应该依赖于接口，这样能减少耦合。然后附带举了个例子，我觉得特别好，就是一台计算机是属于上层模块，里面硬盘属于下层模块，计算机依赖于硬盘，硬盘是计算机的基本组成部件之一。这里提到依赖一词，下面就详细谈谈依赖。">
@@ -394,11 +394,11 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2017/06/08/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/06/18/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-           [Unity 设计模式]桥接模式(BridgePattern)
+          Lua-元表
         
       </div>
     </a>
@@ -549,6 +549,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
@@ -557,15 +561,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,11 +581,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,19 +625,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,19 +641,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,15 +649,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,7 +693,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+                <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ILRuntime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -709,11 +709,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,15 +729,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ILRuntime</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
+                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -753,27 +757,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -789,7 +777,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -809,10 +797,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
@@ -822,6 +806,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">酒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
               <li class="article-tag-list-item">
