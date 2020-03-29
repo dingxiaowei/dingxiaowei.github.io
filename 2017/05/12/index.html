@@ -9,7 +9,7 @@
   <title>[Unity设计模式与游戏开发]UML | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前言UML类图对软件开发者而言应该是必须要了解的工具之一，也是大学软件设计专业必学的课程之一，对我们理解设计模式有非常大的好处，但很惭愧由于我的大学专业并不是软件设计所以我之前其实对UML只是大致了解，但有一些符号还是有些模糊，因此也就特地在整理巩固一下。 UML基本介绍1) UML就是统一建模语言，是一种用于软件系统分析和设计的语言工具，它用于帮助软件开发人员进行思考和记录思路的类图。2) UM">
-<meta name="keywords" content="设计模式,Unity设计模式与游戏开发,UML">
+<meta name="keywords" content="Unity设计模式与游戏开发,设计模式,UML">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Unity设计模式与游戏开发]UML">
 <meta property="og:url" content="http://dingxiaowei.cn/2017/05/12/index.html">
@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/12/2.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/12/3.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/12/9.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2017/05/12/11.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/05/12/13.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/12/4.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/12/5.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/12/6.png">
@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/12/8.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/12/12.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/12/10.png">
-<meta property="og:updated_time" content="2020-03-29T08:55:36.518Z">
+<meta property="og:updated_time" content="2020-03-29T09:41:13.675Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Unity设计模式与游戏开发]UML">
 <meta name="twitter:description" content="前言UML类图对软件开发者而言应该是必须要了解的工具之一，也是大学软件设计专业必学的课程之一，对我们理解设计模式有非常大的好处，但很惭愧由于我的大学专业并不是软件设计所以我之前其实对UML只是大致了解，但有一些符号还是有些模糊，因此也就特地在整理巩固一下。 UML基本介绍1) UML就是统一建模语言，是一种用于软件系统分析和设计的语言工具，它用于帮助软件开发人员进行思考和记录思路的类图。2) UM">
@@ -254,7 +254,7 @@ var _hmt = _hmt || [];
 <h2 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h2><p><img src="/2017/05/12/3.png" alt=""><br>在所有UML图中，类图是使用评率最高的UML图。类图用于描述系统中所包含的类已经他们之间的相互关系，帮助人们简化对系统的理解，它是系统分析和设计阶段的重要产物，也是系统该变化和测试的重要模型依据。<br>类图主要关系有：泛化(Generalization),实现(Realization),关联(Association),聚合(Aggregation),组合(Composition),依赖(Dependency)。</p>
 <h4 id="依赖-Dependency"><a href="#依赖-Dependency" class="headerlink" title="依赖(Dependency)"></a>依赖(Dependency)</h4><p><strong>【依赖关系】：是一种使用的关系，即一个类的实现需要另一个类的协助，所以要尽量不使用双向的互相依赖。<br>【代码表现】：局部变量、方法的参数或者对静态方法的调用<br>【箭头及指向】：带箭头的虚线，指向被使用者</strong><br>例如：程序员需要依赖计算机<br><img src="/2017/05/12/9.png" alt=""></p>
 <p>再举一个例子:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public void PersonServiceBean</span><br><span class="line">&#123;</span><br><span class="line">	private PersonDao personDao;</span><br><span class="line">    public void save(Person person)&#123;&#125;</span><br><span class="line">    public IDCard getIDCard(Integer personid)&#123;&#125;</span><br><span class="line">    public void modify()&#123;&#125;</span><br><span class="line">    &#123;</span><br><span class="line">    	Department department = new Department();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>转成UML如下：<br><img src="/2017/05/12/11.png" alt=""></p>
+<p>转成UML如下：<br><img src="/2017/05/12/13.png" alt=""></p>
 <p>依赖小结:<br>1)类中用到了对方<br>2）如果是类的成员属性<br>3）如果是方法的返回类型<br>4）是方法接受的参数类型<br>5）方法中使用到</p>
 <h4 id="泛化-Generalization"><a href="#泛化-Generalization" class="headerlink" title="泛化(Generalization)"></a>泛化(Generalization)</h4><p><strong>【泛化关系】：是一种继承关系，它是依赖关系的特例，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。</strong>例如：苹果树是树的一种，即有苹果树的特性也有树的共性。<br><strong>【代码体现】：类继承另一个类</strong><br><strong>【箭头指向】：带三角箭头的实线，箭头指向父类</strong><br><img src="/2017/05/12/4.png" alt=""></p>
 <h4 id="实现-Realization"><a href="#实现-Realization" class="headerlink" title="实现(Realization)"></a>实现(Realization)</h4><p><strong>【实现关系】：是一种类与接口的关系，表示类是接口所有特征和行为的实现。<br>【代码体现】：类实现接口成员**</strong><br>【箭头指向】：带三角箭头的虚线，箭头指向接口**<br><img src="/2017/05/12/5.png" alt=""></p>
@@ -315,11 +315,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Unity设计模式与游戏开发</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Unity设计模式与游戏开发</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -544,14 +544,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
@@ -560,7 +552,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -568,11 +568,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,7 +576,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,7 +588,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -604,11 +600,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式与游戏开发</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,11 +632,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式与游戏开发</a>
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -644,27 +652,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -676,11 +672,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -692,11 +696,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,15 +712,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -732,14 +736,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
               </li>
              
@@ -752,15 +748,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -780,7 +776,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -789,6 +785,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -804,15 +804,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">美文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">夫妻不和家必败</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -828,10 +828,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AssetBudnle</a>
               </li>
              
@@ -840,11 +836,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">酒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
