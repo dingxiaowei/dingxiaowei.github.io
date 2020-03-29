@@ -16,16 +16,17 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="前言Advanced示例相比较HelloCube稍微难一些，HelloCube是一些ECS的入门案例，进阶篇的学习更利于实战开发。 1.FixedTimestepWorkaround效果图">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/02/12/5.gif">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/02/12/1.gif">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/02/12/2.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/02/12/3.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/02/12/4.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/02/12/9.png">
-<meta property="og:updated_time" content="2020-02-15T01:56:11.190Z">
+<meta property="og:updated_time" content="2020-02-17T13:33:56.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EntityComponentSystemSamples进阶篇学习笔记">
 <meta name="twitter:description" content="前言Advanced示例相比较HelloCube稍微难一些，HelloCube是一些ECS的入门案例，进阶篇的学习更利于实战开发。 1.FixedTimestepWorkaround效果图">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2020/02/12/1.gif">
+<meta name="twitter:image" content="http://dingxiaowei.cn/2020/02/12/5.gif">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -242,8 +243,9 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Advanced示例相比较HelloCube稍微难一些，HelloCube是一些ECS的入门案例，进阶篇的学习更利于实战开发。</p>
-<h2 id="1-FixedTimestepWorkaround"><a href="#1-FixedTimestepWorkaround" class="headerlink" title="1.FixedTimestepWorkaround"></a>1.FixedTimestepWorkaround</h2><h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="/2020/02/12/1.gif" alt=""></p>
+<h2 id="1-FixedTimestepWorkaround"><a href="#1-FixedTimestepWorkaround" class="headerlink" title="1.FixedTimestepWorkaround"></a>1.FixedTimestepWorkaround</h2><h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="/2020/02/12/5.gif" alt=""></p>
 <a id="more"></a>
+<p><img src="/2020/02/12/1.gif" alt=""></p>
 <p>直观的操作感受就是拖动进度条下面一个发射器发射的”子弹”频率会不同，感觉比之前的案例稍微复杂一些，还有UI的交互了，然后UI的交互也就是改变了某个频率的参数而已，并没有那么唬人。</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>先看上面一个固定频率发射的例子，VariableSpawner还是跟之前的案例一样挂上了ConvertToEntity组件和自定义的VariableRateSpawnerAuthoring脚本。</p>
 <h4 id="VariableSpawner"><a href="#VariableSpawner" class="headerlink" title="VariableSpawner"></a>VariableSpawner</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">namespace Samples.FixedTimestepSystem.Authoring</span><br><span class="line">&#123;</span><br><span class="line">    [AddComponentMenu(<span class="string">"DOTS Samples/FixedTimestepWorkaround/Variable Rate Spawner"</span>)]</span><br><span class="line">    [ConverterVersion(<span class="string">"joe"</span>, <span class="number">1</span>)]</span><br><span class="line">    public class VariableRateSpawnerAuthoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclareReferencedPrefabs</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> GameObject projectilePrefab;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Convert</span><span class="params">(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            var spawnerData = <span class="keyword">new</span> VariableRateSpawner</span><br><span class="line">            &#123;</span><br><span class="line">                Prefab = conversionSystem.GetPrimaryEntity(projectilePrefab), <span class="comment">//将Prefab转成Entity</span></span><br><span class="line">            &#125;;</span><br><span class="line">            dstManager.AddComponentData(entity, spawnerData);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DeclareReferencedPrefabs</span><span class="params">(List&lt;GameObject&gt; referencedPrefabs)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            referencedPrefabs.Add(projectilePrefab);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -288,7 +290,7 @@ var _hmt = _hmt || [];
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">m_Group = GetEntityQuery(typeof(LocalToWorld), ComponentType.ReadOnly&lt;Translation&gt;());</span><br><span class="line">m_Group.SetFilterChanged(typeof(Translation));</span><br></pre></td></tr></table></figure>
 <h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p><img src="/2020/02/12/2.png" alt=""></p>
-<h2 id="2-Boids"><a href="#2-Boids" class="headerlink" title="2.Boids"></a>2.Boids</h2><p>这个案例向我们展示了大量鱼群（50000）实体的风采，是不是非常的壮观，我目前用的是Unity2019.3.0免费版的，貌似这个场景运行不了，会卡死，据说收费版的是可以的，目前还没找到原因，效果图是我找的网上的，主要是学习代码。</p>
+<h2 id="2-Boids"><a href="#2-Boids" class="headerlink" title="2.Boids"></a>2.Boids</h2><p>这个案例向我们展示了大量鱼群（50000）实体的风采，是不是非常的壮观，简直屌爆了，动态效果图见上图gif，关键还能保持70帧率。</p>
 <h3 id="效果图-1"><a href="#效果图-1" class="headerlink" title="效果图"></a>效果图</h3><p><img src="/2020/02/12/3.png" alt=""></p>
 <h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><p>代码主要选一些跟之前案例不一样的挑选看一下，一样的就略过了。</p>
 <p>鱼群的共享数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;summary&gt;</span></span><br><span class="line"><span class="comment">/// 大群的共享数据</span></span><br><span class="line"><span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">[Serializable]</span><br><span class="line">[WriteGroup(typeof(LocalToWorld))]</span><br><span class="line"><span class="keyword">public</span> struct Boid : ISharedComponentData</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 单元半径</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> CellRadius;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 间隔宽度</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> SeparationWeight;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 对齐宽度</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> AlignmentWeight;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 目标宽度</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> TargetWeight;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 排斥距离</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> ObstacleAversionDistance;</span><br><span class="line">    <span class="comment">/// &lt;summary&gt;</span></span><br><span class="line">    <span class="comment">/// 移动速度</span></span><br><span class="line">    <span class="comment">/// &lt;/summary&gt;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> MoveSpeed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -585,6 +587,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
@@ -593,15 +599,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,7 +619,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -625,27 +627,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+                <a href="javascript:void(0)" class="js-tag color3">内购</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,11 +663,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">内购</a>
+                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,7 +675,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -693,19 +687,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -714,10 +712,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -753,6 +747,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
               </li>
              
@@ -765,31 +779,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -802,6 +792,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">程序员的职业素养</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -821,15 +815,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">美文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">夫妻不和家必败</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -861,11 +855,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">酒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">优化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">金庸小说点评</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
               </li>
             
             <div class="clearfix"></div>
