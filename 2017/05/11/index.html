@@ -9,7 +9,7 @@
   <title>[Unity设计模式与游戏开发]七大设计原则 | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前言我对设计模式的理解是它就好像习武之人的内功，当内功强的人学习各种高深的武功就很得心应手，设计模式不同层次不同阶段的人对它的理解不同，我一直认为设计模式和算法一直是程序员两块非常重要的基本功，当基本功扎实就能对各种框架各种新技术驾轻就熟，会学习的很快，虽然在刚毕业的时候看过一遍设计模式，但感觉对它的理解还不够深，现在再重头回顾捋一遍。 设计模式的目的设计模式为了保证程序具有更好的  代码重用性">
-<meta name="keywords" content="Unity设计模式与游戏开发,设计模式,七大设计原则">
+<meta name="keywords" content="设计模式,Unity设计模式与游戏开发,七大设计原则">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Unity设计模式与游戏开发]七大设计原则">
 <meta property="og:url" content="http://dingxiaowei.cn/2017/05/11/index.html">
@@ -17,7 +17,7 @@
 <meta property="og:description" content="前言我对设计模式的理解是它就好像习武之人的内功，当内功强的人学习各种高深的武功就很得心应手，设计模式不同层次不同阶段的人对它的理解不同，我一直认为设计模式和算法一直是程序员两块非常重要的基本功，当基本功扎实就能对各种框架各种新技术驾轻就熟，会学习的很快，虽然在刚毕业的时候看过一遍设计模式，但感觉对它的理解还不够深，现在再重头回顾捋一遍。 设计模式的目的设计模式为了保证程序具有更好的  代码重用性">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/11/2.png">
-<meta property="og:updated_time" content="2020-03-29T00:33:27.414Z">
+<meta property="og:updated_time" content="2020-04-11T09:06:27.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Unity设计模式与游戏开发]七大设计原则">
 <meta name="twitter:description" content="前言我对设计模式的理解是它就好像习武之人的内功，当内功强的人学习各种高深的武功就很得心应手，设计模式不同层次不同阶段的人对它的理解不同，我一直认为设计模式和算法一直是程序员两块非常重要的基本功，当基本功扎实就能对各种框架各种新技术驾轻就熟，会学习的很快，虽然在刚毕业的时候看过一遍设计模式，但感觉对它的理解还不够深，现在再重头回顾捋一遍。 设计模式的目的设计模式为了保证程序具有更好的  代码重用性">
@@ -317,7 +317,8 @@ var _hmt = _hmt || [];
 <h5 id="迪米特法则注意事项"><a href="#迪米特法则注意事项" class="headerlink" title="迪米特法则注意事项"></a>迪米特法则注意事项</h5><p>1) 迪米特法则的核心是降低类之间的耦合。<br>2）但是注意：由于每个类都减少了不必要的依赖，因此迪米特法则只是要求降低类之间(对象间)耦合关系，并不是要求完全没有依赖关系。</p>
 <h2 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h2><p>原则是尽量使用合成/聚合的方式，而不是使用继承。</p>
 <p>举例：如果A类有两个方法，要让B类能够使用这两个方法，我们可以将B继承自A，那么B类就可以使用A类的两个方法，这样就增强了他们的耦合性。但如果A类还有其他方法，但B类并不需要用，那就不太适合。还有一种方案就是让B依赖A，通过参数将A的对象传进来(依赖)，或者B类添加一个A类的属性(聚合)，或者setter方法，又或者在B类实例化一个A类的对象(组合)，这些都是设置依赖方式，如下图<br><img src="/2017/05/11/2.png" alt=""></p>
-<h2 id="更多教程"><a href="#更多教程" class="headerlink" title="更多教程"></a>更多教程</h2><p><a href="http://dingxiaowei.cn">http://dingxiaowei.cn</a></p>
+<h2 id="设计模式系列教程汇总"><a href="#设计模式系列教程汇总" class="headerlink" title="设计模式系列教程汇总"></a>设计模式系列教程汇总</h2><p><a href="http://dingxiaowei.cn/tags/设计模式/">http://dingxiaowei.cn/tags/设计模式/</a></p>
+<h2 id="教程代码下载"><a href="#教程代码下载" class="headerlink" title="教程代码下载"></a>教程代码下载</h2><p><a href="https://github.com/dingxiaowei/UnityDesignPatterns" target="_blank" rel="noopener">https://github.com/dingxiaowei/UnityDesignPatterns</a></p>
 
       
 
@@ -362,11 +363,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Unity设计模式与游戏开发</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Unity设计模式与游戏开发</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -440,11 +441,11 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2017/06/07/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/05/12/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          [Unity 设计模式]IOC依赖倒置
+          [Unity设计模式与游戏开发]UML
         
       </div>
     </a>
@@ -587,6 +588,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ECS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
               </li>
              
@@ -596,10 +601,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">元表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ECS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -615,14 +616,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
@@ -631,11 +624,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,51 +652,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式与游戏开发</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -711,11 +672,59 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式与游戏开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -731,15 +740,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Shader</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -779,10 +788,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
               </li>
              
@@ -792,6 +797,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity数据存储</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -815,6 +824,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">代码整洁之道</a>
               </li>
              
@@ -827,14 +840,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
               </li>
              
@@ -844,6 +849,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -867,19 +876,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">酒</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -888,6 +889,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">酒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
