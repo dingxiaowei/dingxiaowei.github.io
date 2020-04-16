@@ -21,7 +21,11 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/14/4.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/14/3.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/14/5.png">
-<meta property="og:updated_time" content="2020-04-15T13:51:10.717Z">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/05/14/6.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/05/14/7.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/05/14/8.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2017/05/14/9.png">
+<meta property="og:updated_time" content="2020-04-16T13:33:01.076Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Unity设计模式与游戏开发]工厂模式">
 <meta name="twitter:description" content="前言工厂模式(Factory Design Pattern)也是游戏开发中比较常用的创建型模式，一般情况下，工厂模式分为三种更加细分的类型：简单工厂、工厂方法和抽象工厂。在GoF设计模式一书中，它将简单工厂模式看做是工厂方法模式的一种特例，所以工厂模式只被分成了工厂方法和抽象工厂两类。举个例子在游戏开发中哪儿用到了工厂模式，我随意看到了FairyGUI中创建UI组件相关的源码就用到了简单工厂模式，">
@@ -257,7 +261,9 @@ var _hmt = _hmt || [];
 <p>实例化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Weapon weapon1 = new Pistol(&quot;王八盒子&quot;);</span><br><span class="line">Weapon weapon2 = new Rifle(&quot;AK47&quot;);</span><br></pre></td></tr></table></figure></p>
 <p>效果图<br><img src="/2017/05/14/5.png" alt=""><br>可以看到程序运行没问题，假设我们程序中只要需要用到手枪或者步枪对象的对方我们都实例化一个，当代码中好多New Pistol(“XXX”)这样的代码的时候，假设程序需求改了，如果游戏送审，工信部说你们游戏中不允许使用王八盒子这种武器，不然不给过审，那策划反馈到程序这边，程序就需要全局搜索，把所有代码中凡是New Pistol的地方全部删掉或者修改，是不是超级麻烦，这也是为什么初级跟高级程序虽然对同一个功能都能达到最终的运行效果，但如果需求变动，甚至改个好几遍，初级程序会更崩溃的原因，因为代码设计本身可扩展性，可维护性就很差，当然初级程序并不是不想写高级一点的代码，而是自身的水平有限，这也就是为什么公司宁可重金招聘高级程序也不愿意招聘初级的原因。再或者如果我们要实例化100个手枪或者步枪，是不是要写100个New，这是一个巨大的工作量，如果我们用简单工厂模式，就会降低客户端跟具体武器类的强耦合关系，下面我们来用简单工厂模式来修改这个设计。</p>
 <h5 id="通过简单工厂模式来优化设计"><a href="#通过简单工厂模式来优化设计" class="headerlink" title="通过简单工厂模式来优化设计"></a>通过简单工厂模式来优化设计</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public enum WeaponType</span><br><span class="line">&#123;</span><br><span class="line">    None = 0,</span><br><span class="line">    EPistol,</span><br><span class="line">    ERifle</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class WeaponFactory</span><br><span class="line">&#123;</span><br><span class="line">    public Weapon Create(WeaponType type, string name)</span><br><span class="line">    &#123;</span><br><span class="line">        Weapon weapon = null;</span><br><span class="line">        switch (type)</span><br><span class="line">        &#123;</span><br><span class="line">            case WeaponType.EPistol:</span><br><span class="line">                weapon = new Pistol(name);</span><br><span class="line">                break;</span><br><span class="line">            case WeaponType.ERifle:</span><br><span class="line">                weapon = new Rifle(name);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        return weapon;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class SimpleFactoryPatternExample : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        WeaponFactory weaponFactory = new WeaponFactory();</span><br><span class="line">        Weapon weapon1 = weaponFactory.Create(WeaponType.EPistol, &quot;王八盒子&quot;);</span><br><span class="line">        Weapon weapon2 = weaponFactory.Create(WeaponType.ERifle, &quot;AK47&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行的结果跟上图是一样的，这样做有什么好处呢？我们把new Pistol()的操作改成了weaponFactory.Create()，客户端跟Weapon的耦合就变成了客户端<-->WeaponFactory<-->Weapon的耦合，有效的降低了客户端跟Weapon的耦合度，将创建实例的方法封装到了工厂里面，客户端需要什么对象就由交给工厂去创建就可以了，就不需要客户端去创建了，客户端去管理各种工厂，工厂去做自己擅长的事情，这就好比类似公司管理，老板适当放权，只需要管理核心骨干即可，每个部门由每个部门的领导去管理，这样老板有更多的精力去处理更重要的事情。但这样的修改也带来一个问题，就是如果我再添加一个冲锋枪怎么办呢？也就违背了我们设计原则之一的开闭原则，这个问题就可以引出工厂方法模式来解决。</--></--></p>
+<p>运行的结果跟上图是一样的，这样做有什么好处呢？我们把new Pistol()的操作改成了weaponFactory.Create()，客户端跟Weapon的耦合就变成了客户端<-->WeaponFactory<-->Weapon的耦合，有效的降低了客户端跟Weapon的耦合度，将创建实例的方法封装到了工厂里面，客户端需要什么对象就由交给工厂去创建就可以了，就不需要客户端去创建了，客户端去管理各种工厂，工厂去做自己擅长的事情，这就好比类似公司管理，老板适当放权，只需要管理核心骨干即可，每个部门由每个部门的领导去管理，这样老板有更多的精力去处理更重要的事情。</--></--></p>
+<p>UML类图：<br><img src="/2017/05/14/6.png" alt=""></p>
+<p>但这样的修改也带来一个问题，就是如果我再添加一个冲锋枪怎么办呢？也就违背了我们设计原则之一的开闭原则，这个问题就可以引出工厂方法模式来解决。</p>
 <h4 id="简单工厂模式优缺点分析"><a href="#简单工厂模式优缺点分析" class="headerlink" title="简单工厂模式优缺点分析"></a>简单工厂模式优缺点分析</h4><h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
 <li>比较好理解，简易操作</li>
 <li>简单工厂可以有效降低客户端和具体对象的耦合，将new具体任务交给了一个简单的工厂类</li>
@@ -267,8 +273,25 @@ var _hmt = _hmt || [];
 <li>一定程度违背了开闭原则(OCP)，即对扩展开放，对修改关闭。在新增产品时需要修改简单工厂类，我们应该做到在添加功能的时候，尽量不要修改代码或者尽可能的减少修改代码</li>
 </ul>
 <h5 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h5><p>简单工厂模式虽然有说违背了OCP原则，但并不是说不能用它，相反其实简单工厂在我们日常开发中还是比较常用的，上面已经列举了Unity引擎中用到了简单工厂的一些案例，总而言之就是一般应对简单需求，对象之间的关系不是那么复杂的时候最适合用它。</p>
-<h2 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h2><p>//TODO:</p>
-<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><p>//TODO:</p>
+<h2 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h2><p>上文我们提到引进简单工厂模型来优化程序设计，但也有弊端，就是不满足OCP原则，那在此基础上我们如何优化设计来避免不满足OCP原则呢，就可以引进工厂方法模式。当然在需求简单的情况下，还是可以使用简单工厂模式的，当需求复杂化，我们可以考虑使用工厂方法模式，对于设计模式的使用，恰到好处就好，千万避免过度设计。针对上面的需求，我们发生修改：当武器工厂产能有限，因为不同的武器生产流水线不同，为了提高效率，我们就专门的手枪武器工厂专门生产手枪，步枪武器工厂专门生产步枪，这样专门的工厂专门生成专门的特定的武器，这样效率就会高很多，就不需要来回的切换，再举个生活中的例子，通用汽车公司是好几个汽车品牌的母公司，它旗下有凯迪拉克、别克、雪佛兰三个汽车品牌， 然后各种不同的品牌都有自己专门的汽车生产工厂，不存在一个通用汽车工厂生成这三种不同的汽车。那我们针对这个修改的需求来用工厂方法模式修改一下。</p>
+<h4 id="UML设计图"><a href="#UML设计图" class="headerlink" title="UML设计图"></a>UML设计图</h4><p><img src="/2017/05/14/7.png" alt=""></p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/// &lt;summary&gt;</span><br><span class="line">/// 武器工厂抽象基类</span><br><span class="line">/// &lt;/summary&gt;</span><br><span class="line">public abstract class WeaponFactoryBase</span><br><span class="line">&#123;</span><br><span class="line">    public abstract Weapon CreateWeapon(string name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// &lt;summary&gt;</span><br><span class="line">/// 手枪生产工厂</span><br><span class="line">/// &lt;/summary&gt;</span><br><span class="line">public class PistolFactory : WeaponFactoryBase</span><br><span class="line">&#123;</span><br><span class="line">    public override Weapon CreateWeapon(string name)</span><br><span class="line">    &#123;</span><br><span class="line">        return new Pistol(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// &lt;summary&gt;</span><br><span class="line">/// 步枪生产工厂</span><br><span class="line">/// &lt;/summary&gt;</span><br><span class="line">public class RifleFactory : WeaponFactoryBase</span><br><span class="line">&#123;</span><br><span class="line">    public override Weapon CreateWeapon(string name)</span><br><span class="line">    &#123;</span><br><span class="line">        return new Rifle(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果还是跟上面是一样的。</p>
+<h4 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h4><h5 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h5><p>工厂模式有效的解决了添加新产品必须要修改工厂类代码的问题，新增一种武器只需要新增一个武器类型的工厂即可，符合开闭原则。</p>
+<h5 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h5><p>工厂模式的本质是将具体的创建工作放在了具体子类的工厂中进行。</p>
+<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><h4 id="基本介绍-1"><a href="#基本介绍-1" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul>
+<li>抽象工厂模式：定义一个interface用于创建相关或有依赖关系的对象族，而无需指明具体的类。</li>
+<li>抽象工厂模式可以将简单工厂模式和工厂方法模式进行整合</li>
+<li>从设计层面看，抽象工厂模式就是简单工厂模式的改进(或者称进一步抽象)</li>
+<li>将工厂抽象成两层，AbsFactory(抽象工厂)和具体实现的工厂子类。程序员可以根据创建对象类型使用对应的工厂子类。这样单个的简单工厂就变成了工厂族，更利于代码的维护和扩展。</li>
+</ul>
+<p>我的理解就是抽象抽象再抽象。</p>
+<h4 id="需求变更"><a href="#需求变更" class="headerlink" title="需求变更"></a>需求变更</h4><p>针对上面武器工厂我们抽象到具体的某个武器工厂，如果再抽象一层，上升到不同国家各个武器工厂生产的规格不同，那我们如何抽象呢？可能这个例子有点不太恰当，按道理一个型号的武器规则应该是一样的，到底是否一样我也不知道，假设游戏里面有各个不同的国家，国家生产某个类型的武器参数可以自定义，如果还理解不了，我再举个生活中的例子，上面讲到通用汽车公司旗下三款品牌的汽车，想必在不同国家虽然同一款型号的汽车肯定都是不一样的，要根据当地国家人民的喜好来进行定制，所谓同一款型号就有国产和进口一说，这样类比可能你就理解刚刚那个游戏中不同国家生产同一款武器型号不一样的例子，我们可以理解为改装。这里我们就拿中国武器工厂和美国武器工厂来举例。</p>
+<h4 id="UML设计图-1"><a href="#UML设计图-1" class="headerlink" title="UML设计图"></a>UML设计图</h4><p><img src="/2017/05/14/8.png" alt=""></p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">/// &lt;summary&gt;</span><br><span class="line">/// 国家武器工厂基类</span><br><span class="line">/// &lt;/summary&gt;</span><br><span class="line">public abstract class CountryWeaponFactoryBase</span><br><span class="line">&#123;</span><br><span class="line">    string name;</span><br><span class="line">    public WeaponFactoryBase RifleFactory;</span><br><span class="line">    public WeaponFactoryBase PistolFactory;</span><br><span class="line">    public virtual void InitFactory(string factoryName)</span><br><span class="line">    &#123;</span><br><span class="line">        name = factoryName;</span><br><span class="line">        RifleFactory = new RifleFactory();</span><br><span class="line">        PistolFactory = new PistolFactory();</span><br><span class="line">    &#125;</span><br><span class="line">    public abstract void CreateRifle(string name);</span><br><span class="line">    public abstract void CreatePistol(string name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// &lt;summary&gt;</span><br><span class="line">/// 中国武器工厂</span><br><span class="line">/// &lt;/summary&gt;</span><br><span class="line">public class ChineseWeaponFactory : CountryWeaponFactoryBase</span><br><span class="line">&#123;</span><br><span class="line">    public override void InitFactory(string factoryName)</span><br><span class="line">    &#123;</span><br><span class="line">        base.InitFactory(factoryName);</span><br><span class="line">        Debug.Log(string.Format(&quot;初始化&#123;0&#125;,并做一些个性化设置&quot;,factoryName));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public override void CreatePistol(string name)</span><br><span class="line">    &#123;</span><br><span class="line">        base.PistolFactory.CreateWeapon(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public override void CreateRifle(string name)</span><br><span class="line">    &#123;</span><br><span class="line">        base.RifleFactory.CreateWeapon(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/// &lt;summary&gt;</span><br><span class="line">/// 美国武器工厂</span><br><span class="line">/// &lt;/summary&gt;</span><br><span class="line">public class AmericanWeaponFactory : CountryWeaponFactoryBase</span><br><span class="line">&#123;</span><br><span class="line">    public override void InitFactory(string factoryName)</span><br><span class="line">    &#123;</span><br><span class="line">        base.InitFactory(factoryName);</span><br><span class="line">        Debug.Log(string.Format(&quot;初始化&#123;0&#125;,并做一些个性化设置&quot;, factoryName));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public override void CreatePistol(string name)</span><br><span class="line">    &#123;</span><br><span class="line">        base.PistolFactory.CreateWeapon(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public override void CreateRifle(string name)</span><br><span class="line">    &#123;</span><br><span class="line">        base.RifleFactory.CreateWeapon(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CountryWeaponFactoryBase chineseWeaponFactory = new ChineseWeaponFactory();</span><br><span class="line">chineseWeaponFactory.InitFactory(&quot;中国军工厂&quot;);</span><br><span class="line">chineseWeaponFactory.CreatePistol(&quot;92式手枪&quot;);</span><br><span class="line">chineseWeaponFactory.CreateRifle(&quot;95式自动步枪&quot;);</span><br><span class="line"></span><br><span class="line">CountryWeaponFactoryBase americanWeaponFactory = new AmericanWeaponFactory();</span><br><span class="line">americanWeaponFactory.InitFactory(&quot;美国武器工厂&quot;);</span><br><span class="line">americanWeaponFactory.CreatePistol(&quot;MK23手枪&quot;);</span><br><span class="line">americanWeaponFactory.CreateRifle(&quot;M-16步枪&quot;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><p><img src="/2017/05/14/9.png" alt=""></p>
+<h4 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h4><p>将具体生产过程下沉到各个国家自己的工厂之中，我的理解就是对工厂又做了一层抽象。</p>
 <h2 id="工厂模式小结"><a href="#工厂模式小结" class="headerlink" title="工厂模式小结"></a>工厂模式小结</h2><p>1) 工厂模式的意义<br>将实例化对象的代码提取出来，放到一个类中统一管理和维护，达到和主项目的依赖关系的解耦。从而提高项目的扩展和维护性。<br>2) 三种工厂模式(简单工厂模式、工厂方法模式、抽象工厂模式)<br>3) 设计模式的依赖抽象原则</p>
 <ul>
 <li>创建对象实例时，不要直接new类，而是把这个new类的动作放在一个工厂的方法中，并返回。有的书上说，变量不要直接持有具体类的引用。</li>
@@ -276,10 +299,12 @@ var _hmt = _hmt || [];
 <li>不要覆盖基类中已经实现的方法</li>
 </ul>
 <h2 id="设计模式系列教程汇总"><a href="#设计模式系列教程汇总" class="headerlink" title="设计模式系列教程汇总"></a>设计模式系列教程汇总</h2><p><a href="http://dingxiaowei.cn/tags/设计模式/">http://dingxiaowei.cn/tags/设计模式/</a></p>
-<h2 id="参考引用"><a href="#参考引用" class="headerlink" title="参考引用"></a>参考引用</h2><ul>
+<h2 id="更多相关学习资料"><a href="#更多相关学习资料" class="headerlink" title="更多相关学习资料"></a>更多相关学习资料</h2><ul>
 <li><a href="https://cloud.tencent.com/developer/article/1005786" target="_blank" rel="noopener">Unity引擎资源管理代码分析1</a></li>
 <li><a href="https://cloud.tencent.com/developer/article/1005843" target="_blank" rel="noopener">Unity引擎资源管理代码分析2</a></li>
 <li><a href="https://cloud.tencent.com/developer/article/1005853" target="_blank" rel="noopener">Unity引擎资源管理代码分析3</a></li>
+<li><a href="https://www.runoob.com/design-pattern/abstract-factory-pattern.html" target="_blank" rel="noopener">菜鸟教程设计模式</a></li>
+<li><a href="https://www.jianshu.com/p/6d447cea14c7" target="_blank" rel="noopener">https://www.jianshu.com/p/6d447cea14c7</a></li>
 </ul>
 <h2 id="教程代码下载"><a href="#教程代码下载" class="headerlink" title="教程代码下载"></a>教程代码下载</h2><p><a href="https://github.com/dingxiaowei/UnityDesignPatterns" target="_blank" rel="noopener">https://github.com/dingxiaowei/UnityDesignPatterns</a></p>
 
@@ -567,15 +592,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">元表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -603,11 +628,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,6 +692,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
@@ -680,10 +709,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -703,10 +728,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
               </li>
              
@@ -715,7 +736,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -723,7 +748,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -735,6 +760,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
               </li>
              
@@ -743,35 +772,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PlayerPrefs替代方案</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity数据存储</a>
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -787,15 +792,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PlayerPrefs替代方案</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity数据存储</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -807,15 +832,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">代码整洁之道</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">程序员的职业素养</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -832,14 +865,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">代码整洁之道</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">程序员的职业素养</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -871,15 +896,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AssetBudnle</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
