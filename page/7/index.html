@@ -500,6 +500,105 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-Unity-设计模式-原型模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/15/">[Unity设计模式与游戏开发]原型模式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/15/" class="archive-article-date">
+  	<time datetime="2017-05-15T12:26:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-15</time>
+</a>
+        
+		
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>原型模式谈的最多的就是克隆，谈到克隆我们就会想到第一个克隆羊多利，是我们生物工程史上的一次重大突破。克隆又称作拷贝，记得在做iOS开发的时候，刚接触OC开发谈的比较多一个知识点就是深拷贝和浅拷贝，浅拷贝只是拷贝了变量的内存地址，深拷贝拷贝了变量的内容。提到克隆我们在Unity开发中最常见的API就是 GameObject.Instantiate()，看他们的注释，Clones the object original and returns the clone，参数就是我们给定的Object然后克隆返回这个对象。为什么要有这个克隆方法呢？假设没有这个克隆方法，也就是说不用原型模式，我们想要实例化10个甚至100个这样的对象，我们是不是都要重复这些操作，实例化模型的顶点，网格，材质等等，创建实例化一个模型是非常费资源的操作，没实例化一个我们就需要从0开始，如果提供克隆方法我们就直接将这段内存copy一份然后返回即可，就方便快捷了许多。在这里抛出一个问题，思考一下Unity的GameObject.Instantiate()是如何实现的？虽然我们看不到C++实现的源代码，我们可以先猜测一下，等到学完本章节，你能猜到答案嘛？</p>
+        
+          <a class="article-more-a" href="/2017/05/15/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Unity设计模式与游戏开发</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">设计模式与游戏完美开发</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">原型模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/15/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Unity-设计模式-工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1108,119 +1207,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-Unity-UGUI-ScrollRect效果大全" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/25/">[Unity UGUI]ScrollRect效果大全</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/25/" class="archive-article-date">
-  	<time datetime="2017-04-25T06:31:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-25</time>
-</a>
-        
-		
-		<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?a2561bf66b8f6a59e491c5c1c06a0f68";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="UGUI各种优化效果"><a href="#UGUI各种优化效果" class="headerlink" title="UGUI各种优化效果"></a>UGUI各种优化效果</h1><p>本文所实现的UGUI效果需求如下：</p>
-<ul>
-<li><strong>支持缩放滑动效果</strong></li>
-<li><strong>支持动态缩放循环加载</strong></li>
-<li><strong>支持大数据固定Item复用加载</strong></li>
-<li><strong>支持不用Mask遮罩无限循环加载</strong></li>
-<li><strong>支持ObjectPool动态加载</strong></li>
-<li><strong>支持无限不规则子物体动态加载</strong></li>
-<li><strong>支持拖动并点击和拖拽</strong></li>
-<li><strong>支持拖动并拖拽</strong></li>
-<li><strong>支持ScrollRect拖动自动吸附功能(拖动是否超过一半自动进退)</strong></li>
-</ul>
-<hr>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>要实现以上效果，我从网上搜索得到部分解决方案<a href="https://github.com/qiankanglai/LoopScrollRect" target="_blank" rel="noopener">链接</a>，但不是完全满足想要的效果，就自己继续改造优化和添加想要的效果，本文最后会附带上完整Demo下载链接。</p>
-</blockquote>
-<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><ul>
-<li><strong>缩放滑动效果</strong><br><img src="/2017/04/25/1.gif" alt="这里写图片描述"></li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/04/25/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Unity</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">UGUI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ScrollRect效果大全</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/25/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
@@ -1322,7 +1308,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1334,7 +1320,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1350,15 +1336,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1366,7 +1348,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1375,10 +1365,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">内购</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1410,15 +1396,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">简单工厂模式</a>
+                <a href="javascript:void(0)" class="js-tag color2">设计模式与游戏完美开发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">抽象工厂模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">原型模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1446,11 +1428,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+                <a href="javascript:void(0)" class="js-tag color2">简单工厂模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">抽象工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1458,7 +1448,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+                <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1474,15 +1468,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1491,6 +1477,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1510,10 +1504,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
               </li>
              
@@ -1530,14 +1520,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
               </li>
              
@@ -1547,6 +1529,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity数据存储</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1586,6 +1580,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">美文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">夫妻不和家必败</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">单片机</a>
               </li>
              
@@ -1599,14 +1601,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">美文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">夫妻不和家必败</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1630,15 +1624,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AssetBudnle</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
