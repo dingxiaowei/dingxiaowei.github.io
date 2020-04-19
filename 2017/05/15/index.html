@@ -9,7 +9,7 @@
   <title>[Unity设计模式与游戏开发]原型模式 | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前言原型模式谈的最多的就是克隆，谈到克隆我们就会想到第一个克隆羊多利，是我们生物工程史上的一次重大突破。克隆又称作拷贝，记得在做iOS开发的时候，刚接触OC开发谈的比较多一个知识点就是深拷贝和浅拷贝，浅拷贝只是拷贝了变量的内存地址，深拷贝拷贝了变量的内容。提到克隆我们在Unity开发中最常见的API就是 GameObject.Instantiate()，看他们的注释，Clones the obje">
-<meta name="keywords" content="设计模式,Unity设计模式与游戏开发,设计模式与游戏完美开发,原型模式">
+<meta name="keywords" content="Unity设计模式与游戏开发,设计模式,设计模式与游戏完美开发,原型模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Unity设计模式与游戏开发]原型模式">
 <meta property="og:url" content="http://dingxiaowei.cn/2017/05/15/index.html">
@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/15/4.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/15/5.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/15/6.png">
-<meta property="og:updated_time" content="2020-04-19T15:05:52.878Z">
+<meta property="og:updated_time" content="2020-04-19T23:09:00.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Unity设计模式与游戏开发]原型模式">
 <meta name="twitter:description" content="前言原型模式谈的最多的就是克隆，谈到克隆我们就会想到第一个克隆羊多利，是我们生物工程史上的一次重大突破。克隆又称作拷贝，记得在做iOS开发的时候，刚接触OC开发谈的比较多一个知识点就是深拷贝和浅拷贝，浅拷贝只是拷贝了变量的内存地址，深拷贝拷贝了变量的内容。提到克隆我们在Unity开发中最常见的API就是 GameObject.Instantiate()，看他们的注释，Clones the obje">
@@ -269,6 +269,7 @@ var _hmt = _hmt || [];
 <p>测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Person p = new Person() &#123; Name = &quot;P&quot;, Age = 21, Job = new Job() &#123; JobName = &quot;Coder&quot;, Id = 1001 &#125; &#125;;</span><br><span class="line">Person p1 = p.ShallowClone();</span><br><span class="line">Person p2 = p.DeepClone();</span><br><span class="line">string Str = string.Format(&quot;修改前：p.Name=&#123;0&#125;,p.Age=&#123;1&#125;,p.Job.Id=&#123;2&#125;,p.Job.JobName=&#123;3&#125;&quot;, p.Name, p.Age, p.Job.Id, p.Job.JobName);</span><br><span class="line">Debug.Log(Str);</span><br><span class="line">Str = string.Format(&quot;修改前：p1.Name=&#123;0&#125;,p1.Age=&#123;1&#125;,p.Job.Id=&#123;2&#125;,p1.Job.JobName=&#123;3&#125;&quot;, p1.Name, p1.Age, p1.Job.Id, p1.Job.JobName);</span><br><span class="line">Debug.Log(Str);</span><br><span class="line">Str = string.Format(&quot;修改前：p2.Name=&#123;0&#125;,p2.Age=&#123;1&#125;,p.Job.Id=&#123;2&#125;,p2.Job.JobName=&#123;3&#125;&quot;, p2.Name, p2.Age, p2.Job.Id, p2.Job.JobName);</span><br><span class="line">Debug.Log(Str);</span><br><span class="line"></span><br><span class="line">//修改P1的值</span><br><span class="line">p1.Name = &quot;PM&quot;;</span><br><span class="line">p1.Age = 30;</span><br><span class="line">p1.Job.JobName = &quot;Manager&quot;;</span><br><span class="line">p1.Job.Id = 1002;</span><br><span class="line"></span><br><span class="line">Str = string.Format(&quot;修改后：p.Name=&#123;0&#125;,p.Age=&#123;1&#125;,p.Job.Id=&#123;2&#125;,p.Job.JobName=&#123;3&#125;&quot;, p.Name, p.Age, p.Job.Id,p.Job.JobName);</span><br><span class="line">Debug.Log(Str);</span><br><span class="line">Str = string.Format(&quot;修改后：p1.Name=&#123;0&#125;,p1.Age=&#123;1&#125;,p1.Job.Id=&#123;2&#125;,p1.Job.JobName=&#123;3&#125;&quot;, p1.Name, p1.Age, p1.Job.Id, p1.Job.JobName);</span><br><span class="line">Debug.Log(Str);</span><br><span class="line">Str = string.Format(&quot;修改后：p2.Name=&#123;0&#125;,p2.Age=&#123;1&#125;,p2.Job.Id=&#123;2&#125;,p2.Job.JobName=&#123;3&#125;&quot;, p2.Name, p2.Age, p2.Job.Id, p2.Job.JobName);</span><br><span class="line">Debug.Log(Str);</span><br></pre></td></tr></table></figure></p>
 <h5 id="运行效果图："><a href="#运行效果图：" class="headerlink" title="运行效果图："></a>运行效果图：</h5><p><img src="/2017/05/15/2.jpg" alt=""></p>
 <h4 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h4><p>如果我们项目中有好多需要实现拷贝的Model，那我们是不是每个自定义Model里面都要继承一下ICloneable接口实现一下浅拷贝，再实现一下深拷贝，那多麻烦，程序员最重要的一项技能就是优化代码的能力，只要看到有重复性的代码，那我们就要想办法去抽象和优化，因此就抽象成一个通用的克隆基类，在想要有克隆功能的Model只要继承这个即可，代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//通用深拷贝基类</span><br><span class="line">[Serializable]</span><br><span class="line">public class BaseClone&lt;T&gt; : ICloneable where T : new()</span><br><span class="line">&#123;</span><br><span class="line">    //浅拷贝</span><br><span class="line">    public virtual T ShallowClone()</span><br><span class="line">    &#123;</span><br><span class="line">        return (T)this.Clone();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //深拷贝</span><br><span class="line">    public virtual T DeepClone()</span><br><span class="line">    &#123;</span><br><span class="line">        try</span><br><span class="line">        &#123;</span><br><span class="line">            using (Stream memoryStream = new MemoryStream())</span><br><span class="line">            &#123;</span><br><span class="line">                BinaryFormatter formatter = new BinaryFormatter();</span><br><span class="line">                formatter.Serialize(memoryStream, this);</span><br><span class="line">                memoryStream.Position = 0;</span><br><span class="line">                return (T)formatter.Deserialize(memoryStream);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        catch (Exception ex)</span><br><span class="line">        &#123;</span><br><span class="line">            Debug.LogError(&quot;克隆异常:&quot; + ex.ToString());</span><br><span class="line">        &#125;</span><br><span class="line">        return default(T);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public object Clone()</span><br><span class="line">    &#123;</span><br><span class="line">        return this.MemberwiseClone();//淺拷贝</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[Serializable]</span><br><span class="line">public class Person1 : BaseClone&lt;Person1&gt;</span><br><span class="line">&#123;</span><br><span class="line">    public int Age &#123; get; set; &#125;</span><br><span class="line">    public string Name &#123; get; set; &#125;</span><br><span class="line">    public Job Job &#123; get; set; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>代码测试还是跟上面一样，具体测试代码可以见给出的案例工程<a href="https://github.com/dingxiaowei/UnityDesignPatterns。" target="_blank" rel="noopener">https://github.com/dingxiaowei/UnityDesignPatterns。</a></p>
 <h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>从上面论证的结果来看，浅拷贝之后的对象跟原来的对象并不是一个对象，但浅表副本复制了原对象的值类型和string类型，但是非string类型的引用类型是复制了引用，也可以理解为复制了数据的地址指针。</p>
 <p>这里有一个特别要注意的一个”坑”，也是面试官比较喜欢用来考察面试者的一个点，就是在我们通常理解中，引用类型的浅拷贝在修改拷贝之后的对象的值的时候，是会引起原来初始对象的值的，因为引用类型的浅拷贝只是拷贝了一份引用类型的值的地址指针，但这里要注意字符串类型是一个特例。字符串类型是一个不可修改的引用类型，也就是说string虽然是引用类型，但浅表副本却复制了这个值，把它当值类型一样处理了。</p>
@@ -375,11 +376,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Unity设计模式与游戏开发</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Unity设计模式与游戏开发</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -612,19 +613,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Lua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">元表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color4">Lua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -632,11 +625,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -648,11 +641,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">元表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -668,11 +669,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式与游戏开发</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -688,14 +697,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式与游戏开发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">设计模式与游戏完美开发</a>
               </li>
              
@@ -705,10 +706,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">UML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -724,10 +721,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">简单工厂模式</a>
               </li>
              
@@ -740,11 +733,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -753,6 +746,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -768,15 +769,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Shader</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -788,10 +789,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
               </li>
              
@@ -800,7 +797,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -813,6 +810,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -829,14 +834,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity数据存储</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -872,11 +869,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -900,10 +905,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
@@ -912,19 +913,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">酒</a>
+                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+                <a href="javascript:void(0)" class="js-tag color2">酒</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -933,6 +930,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
