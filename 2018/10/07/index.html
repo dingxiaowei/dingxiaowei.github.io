@@ -8,20 +8,17 @@
   <link rel="dns-prefetch" href="http://dingxiaowei.cn">
   <title>Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: ‘ [Unity 设计模式]桥接模式(BridgePattern)’date: 2017-6-8 14:26:50tags: [Unity 设计模式, 设计模式, 桥接模式, BridgePattern]  1.前言继上一讲IOC模式的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们">
+  <meta name="description" content="title: ‘[Unity 设计模式]IOC依赖倒置’date: 2017-6-7 14:24:40tags: [Unity设计模式, 设计模式, IOC, 依赖倒置, 依赖反转]  1.前言最近在看《游戏开发与设计模式》一书，看到控制反转设计模式，作者说：上层模块不应该依赖于下层模块，上层模块和下层模块都应该依赖于接口，这样能减少耦合。然后附带举了个例子，我觉得特别好，就是一台计算机是属于上">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Aladdin的博客">
 <meta property="og:url" content="http://dingxiaowei.cn/2018/10/07/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
-<meta property="og:description" content="title: ‘ [Unity 设计模式]桥接模式(BridgePattern)’date: 2017-6-8 14:26:50tags: [Unity 设计模式, 设计模式, 桥接模式, BridgePattern]  1.前言继上一讲IOC模式的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们">
+<meta property="og:description" content="title: ‘[Unity 设计模式]IOC依赖倒置’date: 2017-6-7 14:24:40tags: [Unity设计模式, 设计模式, IOC, 依赖倒置, 依赖反转]  1.前言最近在看《游戏开发与设计模式》一书，看到控制反转设计模式，作者说：上层模块不应该依赖于下层模块，上层模块和下层模块都应该依赖于接口，这样能减少耦合。然后附带举了个例子，我觉得特别好，就是一台计算机是属于上">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/07/1.png">
-<meta property="og:image" content="http://dingxiaowei.cn/2018/10/07/2.png">
-<meta property="og:updated_time" content="2020-03-28T03:37:22.652Z">
+<meta property="og:updated_time" content="2020-03-29T00:50:11.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Aladdin的博客">
-<meta name="twitter:description" content="title: ‘ [Unity 设计模式]桥接模式(BridgePattern)’date: 2017-6-8 14:26:50tags: [Unity 设计模式, 设计模式, 桥接模式, BridgePattern]  1.前言继上一讲IOC模式的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们">
-<meta name="twitter:image" content="http://dingxiaowei.cn/2018/10/07/1.png">
+<meta name="twitter:description" content="title: ‘[Unity 设计模式]IOC依赖倒置’date: 2017-6-7 14:24:40tags: [Unity设计模式, 设计模式, IOC, 依赖倒置, 依赖反转]  1.前言最近在看《游戏开发与设计模式》一书，看到控制反转设计模式，作者说：上层模块不应该依赖于下层模块，上层模块和下层模块都应该依赖于接口，这样能减少耦合。然后附带举了个例子，我觉得特别好，就是一台计算机是属于上">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
   
@@ -206,352 +203,210 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Unity-设计模式-桥接模式-BridgePattern" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Unity-设计模式-IOC依赖倒置" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>title: ‘ [Unity 设计模式]桥接模式(BridgePattern)’<br>date: 2017-6-8 14:26:50<br>tags: [Unity 设计模式, 设计模式, 桥接模式, BridgePattern]</p>
+<p>title: ‘[Unity 设计模式]IOC依赖倒置’<br>date: 2017-6-7 14:24:40<br>tags: [Unity设计模式, 设计模式, IOC, 依赖倒置, 依赖反转]</p>
 <hr>
-<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h2><p>继上一讲<a href="http://blog.csdn.net/dingxiaowei2013/article/details/72933223" target="_blank" rel="noopener">IOC模式</a>的基础上继续本讲桥接模式，笔者感觉桥接模式是23种设计模式中桥接模式是最好用但也是最难理解的设计模式之一，23中设计模式就好武侠剧中一本武功秘籍，我们在工作过程中想要熟练运用其中的每一种设计模式就好比跟高手过招想要能运用好武侠秘籍中的每一招每一式，并且能随着对手出招的不同我们能随机应变对应的招数，这就要求我们对每一种设计模式都理解的非常深刻才能运用自如，打出组合拳的效果。</p>
-<h2 id="2-需求"><a href="#2-需求" class="headerlink" title="2.需求"></a>2.需求</h2><p>我们在FPS类游戏中会碰到这样的需求——实现武器和角色，无论是敌人还是我方角色都能通过不同的武器击杀对方，武器有手枪、散弹枪、以及火箭炮，并以”攻击力”和”攻击距离”来区分他们的威力。我们可能会这样实现：</p>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h2><p>最近在看《游戏开发与设计模式》一书，看到控制反转设计模式，作者说：上层模块不应该依赖于下层模块，上层模块和下层模块都应该依赖于接口，这样能减少耦合。然后附带举了个例子，我觉得特别好，就是一台计算机是属于上层模块，里面硬盘属于下层模块，计算机依赖于硬盘，硬盘是计算机的基本组成部件之一。这里提到依赖一词，下面就详细谈谈依赖。</p>
 <a id="more"></a>
-<p><img src="/2018/10/07/1.png" alt="这里写图片描述"><br>上面是我们的一个UML示例图，这里笔者很惭愧没用过UML专业的绘图工具，就临时用绘图软件简单的画了一下。下面就是我们的初步设计代码。</p>
+<h2 id="2-依赖"><a href="#2-依赖" class="headerlink" title="2.依赖"></a>2.依赖</h2><p>依赖就是一种联系关系，人对人的依赖那是一种羁绊关系。再拿上面的计算机举例，华硕是我们都耳熟能详的计算机厂商，西部数据和希捷都是硬盘厂商，如果说华硕依赖于某一个具体型号的硬盘，那么华硕同一款型号的电脑那得生产多少台内置硬盘不同的型号的电脑。假设华硕厂商喜欢用西部数据的硬盘，那好假如西部数据倒闭或者硬盘升级，那么华硕厂商是不是会造成连锁反应，华硕已经生产的电脑要重新回炉重造或者说要被迫改成使用其他希捷厂商的电脑。造成这种问题的原因就是华硕对西部数据有严重的依赖关系，解决方法就是硬盘厂商生产硬盘的时候遵循硬盘接口SATA接口协议，然后计算机厂商也遵循这种接口协议，这就是我们看到的PC具有好多接口例如我们熟知的USB接口，USB是更通用的接口，无论鼠标、键盘还是优盘都具备这样的接口，所以只要遵循USB接口或者ASTA接口的设备都能用用在任何一个PC计算机上。我们如果写代码的话，也能这样设计我们的代码模块，那么模块跟模块之间耦合度就很低了。下面我们来看一个简单的例子：</p>
+<pre><code>public class FlashDisk
+  {
+      public string TypeName { get; set; }
+      public void TransportData()
+      {
+          Console.WriteLine(string.Format(&quot;读取{0}硬盘的数据&quot;));
+      }
+
+      public FlashDisk(string name)
+      {
+          TypeName = name;
+      }
+  }
+
+  public class HardDisk
+  {
+      public string TypeName { get; set; }
+      public void TransportData()
+      {
+          Console.WriteLine(string.Format(&quot;读取{0}硬盘的数据&quot;));
+      }
+
+      public HardDisk(string name)
+      {
+          TypeName = name;
+      }
+  }
+  public class Computer
+  {
+      public Computer(string name)
+      {
+          TypeName = name;
+      }
+      public void ReadHardDiskData(HardDisk m_HardDisk)
+      {
+          m_HardDisk.TransportData();
+      }
+
+      public void ReadFlashDiskData(FlashDisk m_FlashDisk)
+      {
+          m_FlashDisk.TransportData();
+      }
+  }
+ static void ReadData()
+  {
+      HardDisk hardDisk = new HardDisk(&quot;西部数据&quot;);
+      FlashDisk flashDisk = new FlashDisk(&quot;闪迪&quot;);
+      Computer pc = new Computer(&quot;联想&quot;);
+      pc.ReadHardDiskData(hardDisk);
+      pc.ReadFlashDiskData(flashDisk);
+  }
+
+</code></pre><p>上面是一个简单的示例，想要实现传输数据的功能，用户的操作一个PC来读取某个硬盘或者优盘才能实现。先看看依赖关系：</p>
 <ul>
-<li>角色基类</li>
+<li>Computer依赖HardWare</li>
+<li>ReadData操作依赖Computer</li>
+<li>ReadData操作依赖HardDisk/FlashDisk</li>
 </ul>
-<pre><code>public abstract class ICharacter
-{
-    //拥有一把武器
-    protected Weapon m_Weapon = null;
-    //攻击目标
-    public abstract void Attack(ICharacter target);
-}
-</code></pre><ul>
-<li>武器类</li>
+<h2 id="3-依赖倒置"><a href="#3-依赖倒置" class="headerlink" title="3.依赖倒置"></a>3.依赖倒置</h2><p>如果我们这时候用不用的电脑比如联想来读取金斯顿优盘的数据，我们就要抽象出来减少耦合。<br>耦合就是依赖，如果依赖过于严重就会牵一发而动全身，所谓城门失火，殃及池鱼。依赖关系越少，维护就越容易，所以必须要减少依赖。<br>幸亏Robert Martin提出面向对象设计原则-依赖倒置原则：</p>
+<ul>
+<li>上层模块不应该依赖于下层模块，他们共同依赖于一个抽象。</li>
+<li>抽象不依赖于具体，具体依赖于抽象。<br>理解：</li>
+<li>上层模块就是使用者，这里的PC使用优盘、硬盘，而后者自然就是被使用者就是下层模块。他们应该都共同依赖于抽象——接口。</li>
+<li>面向对象编程时需要面向抽象或者面向接口编程，抽象或者接口一般比较稳定，接口不要依赖于具体的对象。</li>
 </ul>
-<pre><code>using UnityEngine;
-
-public enum ENUM_Weapon
-{
-    Null = 0,
-    Gun,
-    Rifle,
-    Rocket,
-}
-
-public class Weapon
-{
-    protected ENUM_Weapon m_EmEwapon = ENUM_Weapon.Null;
-    protected int m_AtkValue = 0;//攻击力
-    protected int m_AtkRange = 0;//攻击距离
-    protected int m_AtkPlusValue = 0;//额外加成
-
-    public Weapon(ENUM_Weapon type, int atkValue, int atkRange)
-    {
-        m_EmEwapon = type;
-        m_AtkValue = atkValue;
-        m_AtkRange = atkRange;
-    }
-
-    public ENUM_Weapon GetWeaponType()
-    {
-        return m_EmEwapon;
-    }
-
-    public void Fire(ICharacter target)
-    {
-        //
-    }
-
-    public void SetAtkPlusValue(int atkPlusValue)
-    {
-        m_AtkPlusValue = atkPlusValue;
-    }
-
-    public void ShowBulletEffect(Vector3 targetPosition, float lineWidth, float displayTime)
-    {
-
-    }
-
-    public void ShowShootEffect()
-    {
-
-    }
-
-    public void ShowSoundEffect(string clipName)
-    {
-
-    }
-}
-</code></pre><ul>
-<li>敌人使用武器</li>
+<p>根据控制反转的原则我们来重新设计上的实现：</p>
+<ul>
+<li>优盘或者硬盘都要遵循一个接口协议，这里我们就定义ISATA和IUSB协议，</li>
+<li>数据传输接口ISATA和IUSB都要遵循数据传输协议我们就定义ITransportData</li>
+<li>ReadData操作依赖PC，就让ReadData和HardDisk/FlashDisk都依赖ISATA和IUSB协议，于是优化过的代码就出来了</li>
 </ul>
-<pre><code>using System.Collections;
+<pre><code>using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IEnemy : ICharacter
+public interface ITransportData
 {
-    public IEnemy()
-    { }
-
-    public override void Attack(ICharacter target)
-    {
-        m_Weapon.ShowShootEffect();
-        int atkPlusValue = 0;
-        switch(m_Weapon.GetWeaponType())
-        {
-            case ENUM_Weapon.Gun:
-                //显示武器特效
-                m_Weapon.ShowBulletEffect(target.GetPosition(), 0.3f, 0.2f);
-                m_Weapon.ShowSoundEffect(&quot;GunShot&quot;);
-                atkPlusValue = GetAtkPluginValue(5, 20);
-                break;
-            case ENUM_Weapon.Rifle:
-                m_Weapon.ShowBulletEffect(target.GetPosition(), 0.4f, 0.2f);
-                m_Weapon.ShowSoundEffect(&quot;GunShot&quot;);
-                atkPlusValue = GetAtkPluginValue(5, 20);
-                break;
-            case ENUM_Weapon.Rocket:
-                m_Weapon.ShowBulletEffect(target.GetPosition(), 0.5f, 0.2f);
-                m_Weapon.ShowSoundEffect(&quot;GunShot&quot;);
-                atkPlusValue = GetAtkPluginValue(5, 20);
-                break;
-        }
-        m_Weapon.SetAtkPlusValue(atkPlusValue);
-        m_Weapon.Fire(target);
-    }
-    private int GetAtkPlusValue(int rate, int atkValue)
-    {
-        int randValue = UnityEngine.Random.Range(0, 100);
-        if (rate &gt; randValue)
-            return atkValue;
-        return 0;
-    }
-}
-</code></pre><ul>
-<li>玩家使用武器</li>
-</ul>
-<pre><code>using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ISoldier : ICharacter
-{
-    public ISoldier()
-    {
-
-    }
-
-    public override void Attack(ICharacter target)
-    {
-        m_Weapon.ShowShootEffect();
-        switch(m_Weapon.GetWeaponType())
-        {
-            case ENUM_Weapon.Gun:
-                m_Weapon.ShowBulletEffect(target.GetPosition(), 0.03f, 0.2f);
-                m_Weapon.ShowSoundEffect(&quot;GunShot&quot;);
-                break;
-            case ENUM_Weapon.Rifle:
-                m_Weapon.ShowBulletEffect(target.GetPosition(), 0.5f, 0.2f);
-                m_Weapon.ShowSoundEffect(&quot;RifleShot&quot;);
-                break;
-            case ENUM_Weapon.Rocket:
-                m_Weapon.ShowBulletEffect(target.GetPosition(), 0.8f, 0.2f);
-                m_Weapon.ShowSoundEffect(&quot;RocketShot&quot;);
-                break;
-        }
-        m_Weapon.Fire(target);
-    }
-}
-</code></pre><h2 id="3-初步分析"><a href="#3-初步分析" class="headerlink" title="3.初步分析"></a>3.初步分析</h2><p>以上实现存在明显两个缺点：</p>
-<ul>
-<li>每当添加一个角色时，继承自ICharacter接口的角色重新定义Attack都必须针对不同的武器进行判断，并且要写重复的相同的代码。</li>
-<li>每当新增武器时，所有角色的Attack都需要重新改造，这样增加维护成本。<br>为了解决以上问题，下面我们桥接模式隆重登场了！</li>
-</ul>
-<h2 id="4-桥接模式"><a href="#4-桥接模式" class="headerlink" title="4.桥接模式"></a>4.桥接模式</h2><p>桥接模式（Bridge Pattern）：桥接模式的用意是将抽象化(Abstraction)与实现化(Implementation)脱耦，使得二者可以独立地变化。<br>以上是桥接模式的官方定义，我们还是通过以上例子来理解分析，”桥接”顾名思义就是这一组跟那一组两组对象通过某种中间关系链接在一起。”当两个群组因为功能上的需求，想要进行链接合作，但又希望两组类可以自行发展互相不受对方变化而影响”，上面角色跟武器的实现案例，武器和角色分别是两组群组，其实上面的实现只是考虑了角色通过子类通过基类继承来实现，然后传入武器对象，这中实现思路有点上一讲介绍的控制反转的味道，那既然角色可以这样设计，为何不把武器也这样设计呢，然后两个群组之间就通过两个群组的接口来实现，就好比两家结婚，双方都有一个媒人来传递信息，这是我对桥接模式的理解，哈哈。基于这种想法，我们来改造一下角色和武器的实现。<br><img src="/2018/10/07/2.png" alt="这里写图片描述"><br>说明：</p>
-<ul>
-<li>ICharacter:角色的抽象接口拥有一个IWeapon的对象引用，并在接口中申明了一个武器攻击目标WeaponAttackTarget()方法让子类可以调用,同时要求继承子类必须在Attack()中重新实现攻击目标的功能。</li>
-<li>ISoldier、IEnemy:双方阵容单位实现攻击目标Attack()时，只需要调用父类的WeaponAttackTarget方法就可以使用当前武器攻击对手。</li>
-<li>IWeapon：武器接口，定义游戏中对于武器的操作和使用方法。</li>
-<li>WeaponGun、WeaponRifle、WeaponRocket：游戏中可以使用三中武器对象。</li>
-</ul>
-<h2 id="5-桥接模式实现武器和角色功能"><a href="#5-桥接模式实现武器和角色功能" class="headerlink" title="5.桥接模式实现武器和角色功能"></a>5.桥接模式实现武器和角色功能</h2><ul>
-<li>武器接口</li>
-</ul>
-<pre><code>using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class IWeapon
-{
-    //属性
-    protected int m_AtkPlusValue = 0;
-    protected int m_Atk = 0;
-    protected float m_Range = 0;
-
-    protected GameObject m_GameObject = null;
-    protected ICharacter m_WeaponOwner = null;//武器拥有者
-
-    //发射特效
-    protected float m_EffectDisplayTime = 0;
-    protected ParticleSystem m_Particles;
-    protected AudioSource m_Audio;
-
-    //显示子弹特效
-    protected void ShowBulletEffect(Vector3 targetPosition, float disPlayTime)
-    {
-        m_EffectDisplayTime = disPlayTime;
-    }
-
-    //显示枪口特效
-    protected void ShowShootEffect()
-    {
-        if(m_Particles != null)
-        {
-            m_Particles.Stop();
-            m_Particles.Play();
-        }
-    }
-
-    //显示音效
-    protected void ShowSoundEffect(string clipName)
-    {
-        if (m_Audio == null)
-            return;
-        IAssetFactory factory = Factory.GetAssetFactory();
-        var clip = factory.LoadAudioClip(clipName);
-        if (clip == null)
-            return;
-        m_Audio.clip = clip;
-        m_Audio.Play();
-    }
-
-    //攻击目标
-    public abstract void Fire(ICharacter target);
+    void TransPortData();
 }
 
-</code></pre><ul>
-<li>手枪武器的实现</li>
-</ul>
-<pre><code>public class WeaponGun:IWeapon
+public interface IUSB : ITransportData
 {
-    public WeaponGun()
-    {
-
-    }
-
-    public override void Fire(ICharacter target)
-    {
-        ShowShootEffect();
-        ShowBulletEffect(target.GetPosition(), 0.3f, 0.2f);
-        ShowSoundEffect(&quot;GunShot&quot;);
-
-        target.UnderAttack(m_WeaponOwner);
-    }
-}
-</code></pre><p>其他武器同理…</p>
-<ul>
-<li>角色接口</li>
-</ul>
-<pre><code>using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class ICharacter
-{
-    protected Weapon m_Weapon = null;
-
-    public void SetWeapon(IWeapon weapon)
-    {
-        if (m_Weapon != null)
-            m_Weapon.Release();
-        m_Weapon = weapon;
-        //设置武器拥有者
-        m_Weapon.SetOwener(this);
-    }
-
-    //获取武器
-    public IWeapon GetWeapon()
-    {
-        return m_Weapon;
-    }
-
-    protected void SetWeaponAtkPlusValue(int value)
-    {
-        m_Weapon.SetAtkPlusValue(value);
-    }
-
-    protected void WeaponAttackTarget(ICharacter target)
-    {
-        m_Weapon.Fire(target);
-    }
-
-    //获取武器攻击力
-    public void GetAtkValue()
-    {
-        return m_Weapon.GetAtkValue();
-    }
-
-    /// &lt;summary&gt;
-    /// 获得攻击距离
-    /// &lt;/summary&gt;
-    /// &lt;returns&gt;&lt;/returns&gt;
-    public float GetAttackRange()
-    {
-        return m_Weapon.GetAtkRange();
-    }
-    /// &lt;summary&gt;
-    /// 攻击目标
-    /// &lt;/summary&gt;
-    /// &lt;param name=&quot;target&quot;&gt;&lt;/param&gt;
-    public abstract void Attack(ICharacter target);
-    /// &lt;summary&gt;
-    /// 被其他角色攻击
-    /// &lt;/summary&gt;
-    /// &lt;param name=&quot;attacker&quot;&gt;&lt;/param&gt;
-    public abstract void UnderAttack(ICharacter attacker);
+    string TypenName { get; set; }
 }
 
-</code></pre><ul>
-<li>桥接模式角色实现</li>
-</ul>
-<pre><code>//角色接口
-public class ISolider : ICharacter
+public interface ISATA : ITransportData
 {
-    public override void Attack(ICharacter target)
-    {
-        WeaponAttackTarget(target);
-    }
+    string TypenName { get; set; }
+}
 
-    public override void UnderAttack(ICharacter attacker)
+public class UFlashDisk : IUSB
+{
+    public string TypenName { get; set; }
+
+    public UFlashDisk(string typeName)
     {
-        ...
+        TypenName = typeName;
+    }
+    public void TransPortData()
+    {
+        UnityEngine.Debug.Log(string.Format(&quot;优盘型号:{0}传输数据&quot;, TypenName));
     }
 }
 
-//Enemy接口
-public class IEnemy:ICharacter
+public class HardDisk : ISATA
 {
-    public override void Attack(ICharacter target)
+    public string TypenName { get; set; }
+
+    public HardDisk(string typeName)
     {
-        SetWeaponAtkPlusValue(m_Weapon.GetAtkPlusValue);
-        WeaponAttackTarget(target);
+        TypenName = typeName;
     }
 
-    public override void UnderAttack(ICharacter attacker)
+    public void TransPortData()
     {
-        ...
+        UnityEngine.Debug.Log(string.Format(&quot;硬盘型号:{0}传输数据&quot;, TypenName));
     }
 }
-</code></pre><h2 id="4-桥接模式改造后分析"><a href="#4-桥接模式改造后分析" class="headerlink" title="4.桥接模式改造后分析"></a>4.桥接模式改造后分析</h2><p>以上设计运用桥接模式后的ICharacter就是群组”抽象类”，它定义了”攻击目标”功能，但实现攻击目标功能的却是群组”IWeapon武器类”，对于ICharacter以及其继承都不会理会IWeapon群组的变化，尤其在新增武器类的时候也不会影响角色类。对于ICharacter来说，它面对的指示IWeapon这个接口类，这让两个群组耦合度降到最低。</p>
-<h2 id="5-思考"><a href="#5-思考" class="headerlink" title="5.思考"></a>5.思考</h2><p>结合以上案例，可以思考另外一个需求：用不同的图形渲染引擎如OpenGL、DirectX来绘制不同的图形。<br>提示：渲染引擎RenderEngine和图形属于两大群体，这两大群体都要单独有各自的“抽象类”抽象类RenderEngine和抽象类Shape。</p>
-<ul>
-<li>抽象类RenderEngine肯定要有一个抽象功能方法就是Draw(string shape)，这个是被子类具体的渲染引擎重写，因为各自的引擎都有自己独特的渲染方法，所以这个Draw方法就被重写调用各个引擎自己的渲染方法GLRender()和DXRender()。</li>
-<li>抽象类Shape肯定也要有一个保护对象RenderEngine和设置这个对象的注入方法SetRenderEngine(RenderEngine engine)以及抽象方法Draw()。Draw方法是要被子类重写实现：调用renderEngine的Draw方法来绘制自己。</li>
-</ul>
+
+public class Computer
+{
+    ISATA m_HardDisk;
+
+    public void SetHardWare(ISATA hardDisk)
+    {
+        m_HardDisk = hardDisk;
+    }
+
+    public void ReadData()
+    {
+        if (m_HardDisk == null)
+            throw new Exception();
+        m_HardDisk.TransPortData();
+    }
+
+    public void UseUFlashDisk(IUSB flashDisk)
+    {
+        flashDisk.TransPortData();
+    }
+}
+
+public class IOCDemo : MonoBehaviour
+{
+    void Start()
+    {
+        ISATA hardDisk = new HardDisk(&quot;西部数据硬盘&quot;);
+        IUSB uFlashDisk = new UFlashDisk(&quot;闪迪优盘&quot;);
+        var pc = new Computer();
+        pc.SetHardWare(hardDisk);
+        pc.ReadData();
+        pc.UseUFlashDisk(uFlashDisk);
+        pc.UseUFlashDisk(new UFlashDisk(&quot;西门子优盘&quot;));
+    }
+}
+
+</code></pre><h2 id="4-控制反转-IOC"><a href="#4-控制反转-IOC" class="headerlink" title="4.控制反转(IOC)"></a>4.控制反转(IOC)</h2><p>现实生活中，我们想要读取数据，无论我们用什么电脑，文件数据在哪个优盘里，这都取决于我们用户自己。<br>上面基本实现了隔离，具体的电脑跟优盘隔离，具体的优盘、硬盘跟接口有关系，如果我们对象在代码里面写死，假如就用华硕电脑读取闪迪优盘，这样又不灵活了，如果需求是我用联想电脑去读取金斯顿优盘，我们是不是又要改代码。这样我们就可以把决定权交给我们配置的人，游戏开发中这类人就称之为策划，我们就把权利给他们，让他们想用什么电脑读取什么优盘就让他们来配表实现，然后程序写一个读表生成具体对象的读取数据的操作。<br>这样控制权交给了配表的文件，这种就是我们这里要说的控制反转。</p>
+<pre><code>public class Computer
+{
+    public string Name { get; set; }
+    public Computer(string name)
+    {
+        Name = name;
+    }
+
+    ISATA m_HardDisk;
+
+    public void SetHardWare(ISATA hardDisk)
+    {
+        m_HardDisk = hardDisk;
+    }
+
+    public void ReadData()
+    {
+        if (m_HardDisk == null)
+            throw new Exception();
+        m_HardDisk.TransPortData();
+    }
+
+    public void UseUFlashDisk(IUSB flashDisk)
+    {
+        flashDisk.TransPortData();
+    }
+}
+
+var pc = new Computer(&quot;读取配置表&quot;);
+pc.SetHardWare(new UFlashDisk(&quot;读取配置表&quot;));
+pc.ReadData();
+</code></pre><p>控制反转IOC是Inversion of control的缩写，说将对象进行转移，转移到第三方，比如交给了配表文件。它就像一个对象创建工程，想要什么对象就配置什么对象，这样原先的依赖关系没有了，都变成IOC容器依赖了。</p>
+<h2 id="5-依赖注入（ID）"><a href="#5-依赖注入（ID）" class="headerlink" title="5.依赖注入（ID）"></a>5.依赖注入（ID）</h2><p>上面说的控制反转是一个思想概念，要看具体的实现，配表也是一种实现方式。依赖注入提出了具体的思想。<br>依赖注入DI是Dependency Injection缩写，它提出了“哪些东东的控制权被反转了，被转移了？”，它也给出了答案：“依赖对象的创建获得被反转”。<br>所谓依赖注入，就是由IoC容器在运行期间，动态地将某种依赖关系注入到对象之中。<br>上面SetHardWare其实就是运行时候依赖注入，将具体的依赖对象传递进去，传递的切入点可以是方法，可以是属性，可以是构造函数。</p>
+<h2 id="6-小结"><a href="#6-小结" class="headerlink" title="6.小结"></a>6.小结</h2><p>通过一个小例子来由浅入深讲解IOC模式，看完之后记得自己在敲一遍哦，这样感悟才深刻！</p>
+<h2 id="7-工程下载"><a href="#7-工程下载" class="headerlink" title="7.工程下载"></a>7.工程下载</h2><p><a href="https://git.oschina.net/dingxiaowei/UnityIOC.git" target="_blank" rel="noopener">https://git.oschina.net/dingxiaowei/UnityIOC.git</a></p>
+<h2 id="8-相关设计模式好文连接"><a href="#8-相关设计模式好文连接" class="headerlink" title="8.相关设计模式好文连接"></a>8.相关设计模式好文连接</h2><p><a href="http://gpp.tkchu.me/" target="_blank" rel="noopener">http://gpp.tkchu.me/</a></p>
 
       
 
@@ -696,7 +551,7 @@ public class IEnemy:ICharacter
   
 
   
-  <div id="SOHUCS" sid="Unity-设计模式-桥接模式-BridgePattern" ></div> 
+  <div id="SOHUCS" sid="Unity-设计模式-IOC依赖倒置" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -806,11 +661,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -822,15 +677,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -842,7 +693,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -850,7 +705,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -862,7 +717,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式与游戏开发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -870,19 +725,55 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖倒置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
+                <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">设计模式与游戏完美开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">原型模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">简单工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">抽象工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">建造者模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -898,11 +789,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
+                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -914,19 +809,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -974,22 +865,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
               </li>
              
@@ -1002,11 +877,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1038,15 +929,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">美文</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">夫妻不和家必败</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1066,10 +957,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">AssetBudnle</a>
               </li>
              
@@ -1082,15 +969,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">优化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">金庸小说点评</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
               </li>
             
             <div class="clearfix"></div>
