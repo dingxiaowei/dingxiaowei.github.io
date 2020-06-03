@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="1.前言最近在看《游戏开发与设计模式》一书，看到控制反转设计模式，作者说：上层模块不应该依赖于下层模块，上层模块和下层模块都应该依赖于接口，这样能减少耦合。然后附带举了个例子，我觉得特别好，就是一台计算机是属于上层模块，里面硬盘属于下层模块，计算机依赖于硬盘，硬盘是计算机的基本组成部件之一。这里提到依赖一词，下面就详细谈谈依赖。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-20T12:29:05.350Z">
+<meta property="og:updated_time" content="2020-06-03T13:52:18.026Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Unity 设计模式]IOC依赖倒置">
 <meta name="twitter:description" content="1.前言最近在看《游戏开发与设计模式》一书，看到控制反转设计模式，作者说：上层模块不应该依赖于下层模块，上层模块和下层模块都应该依赖于接口，这样能减少耦合。然后附带举了个例子，我觉得特别好，就是一台计算机是属于上层模块，里面硬盘属于下层模块，计算机依赖于硬盘，硬盘是计算机的基本组成部件之一。这里提到依赖一词，下面就详细谈谈依赖。">
@@ -247,7 +247,10 @@ var _hmt = _hmt || [];
 <h2 id="3-依赖倒置"><a href="#3-依赖倒置" class="headerlink" title="3.依赖倒置"></a>3.依赖倒置</h2><p>如果我们这时候用不用的电脑比如联想来读取金斯顿优盘的数据，我们就要抽象出来减少耦合。<br>耦合就是依赖，如果依赖过于严重就会牵一发而动全身，所谓城门失火，殃及池鱼。依赖关系越少，维护就越容易，所以必须要减少依赖。<br>幸亏Robert Martin提出面向对象设计原则-依赖倒置原则：</p>
 <ul>
 <li>上层模块不应该依赖于下层模块，他们共同依赖于一个抽象。</li>
-<li>抽象不依赖于具体，具体依赖于抽象。<br>理解：</li>
+<li>抽象不依赖于具体，具体依赖于抽象。</li>
+</ul>
+<p>理解：</p>
+<ul>
 <li>上层模块就是使用者，这里的PC使用优盘、硬盘，而后者自然就是被使用者就是下层模块。他们应该都共同依赖于抽象——接口。</li>
 <li>面向对象编程时需要面向抽象或者面向接口编程，抽象或者接口一般比较稳定，接口不要依赖于具体的对象。</li>
 </ul>
@@ -257,7 +260,7 @@ var _hmt = _hmt || [];
 <li>数据传输接口ISATA和IUSB都要遵循数据传输协议我们就定义ITransportData</li>
 <li>ReadData操作依赖PC，就让ReadData和HardDisk/FlashDisk都依赖ISATA和IUSB协议，于是优化过的代码就出来了</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">public interface ITransportData</span><br><span class="line">&#123;</span><br><span class="line">	void TransPortData();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface IUSB : ITransportData</span><br><span class="line">&#123;</span><br><span class="line">	string TypenName &#123; get; set; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface ISATA : ITransportData</span><br><span class="line">&#123;</span><br><span class="line">	string TypenName &#123; get; set; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class UFlashDisk : IUSB</span><br><span class="line">&#123;</span><br><span class="line">	public string TypenName &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	public UFlashDisk(string typeName)</span><br><span class="line">	&#123;</span><br><span class="line">		TypenName = typeName;</span><br><span class="line">	&#125;</span><br><span class="line">	public void TransPortData()</span><br><span class="line">	&#123;</span><br><span class="line">		UnityEngine.Debug.Log(string.Format(&quot;优盘型号:&#123;0&#125;传输数据&quot;, TypenName));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HardDisk : ISATA</span><br><span class="line">&#123;</span><br><span class="line">	public string TypenName &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	public HardDisk(string typeName)</span><br><span class="line">	&#123;</span><br><span class="line">		TypenName = typeName;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void TransPortData()</span><br><span class="line">	&#123;</span><br><span class="line">		UnityEngine.Debug.Log(string.Format(&quot;硬盘型号:&#123;0&#125;传输数据&quot;, TypenName));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Computer</span><br><span class="line">&#123;</span><br><span class="line">	ISATA m_HardDisk;</span><br><span class="line"></span><br><span class="line">	public void SetHardWare(ISATA hardDisk)</span><br><span class="line">	&#123;</span><br><span class="line">		m_HardDisk = hardDisk;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void ReadData()</span><br><span class="line">	&#123;</span><br><span class="line">		if (m_HardDisk == null)</span><br><span class="line">			throw new Exception();</span><br><span class="line">		m_HardDisk.TransPortData();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void UseUFlashDisk(IUSB flashDisk)</span><br><span class="line">	&#123;</span><br><span class="line">		flashDisk.TransPortData();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class IOCDemo : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">	void Start()</span><br><span class="line">	&#123;</span><br><span class="line">		ISATA hardDisk = new HardDisk(&quot;西部数据硬盘&quot;);</span><br><span class="line">		IUSB uFlashDisk = new UFlashDisk(&quot;闪迪优盘&quot;);</span><br><span class="line">		var pc = new Computer();</span><br><span class="line">		pc.SetHardWare(hardDisk);</span><br><span class="line">		pc.ReadData();</span><br><span class="line">		pc.UseUFlashDisk(uFlashDisk);</span><br><span class="line">		pc.UseUFlashDisk(new UFlashDisk(&quot;西门子优盘&quot;));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Collections;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">public interface ITransportData</span><br><span class="line">&#123;</span><br><span class="line">	void TransPortData();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface IUSB : ITransportData</span><br><span class="line">&#123;</span><br><span class="line">	string TypenName &#123; get; set; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public interface ISATA : ITransportData</span><br><span class="line">&#123;</span><br><span class="line">	string TypenName &#123; get; set; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class UFlashDisk : IUSB</span><br><span class="line">&#123;</span><br><span class="line">	public string TypenName &#123; get; set; &#125;</span><br><span class="line">	public UFlashDisk(string typeName)</span><br><span class="line">	&#123;</span><br><span class="line">		TypenName = typeName;</span><br><span class="line">	&#125;</span><br><span class="line">	public void TransPortData()</span><br><span class="line">	&#123;</span><br><span class="line">		UnityEngine.Debug.Log(string.Format(&quot;优盘型号:&#123;0&#125;传输数据&quot;, TypenName));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HardDisk : ISATA</span><br><span class="line">&#123;</span><br><span class="line">	public string TypenName &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">	public HardDisk(string typeName)</span><br><span class="line">	&#123;</span><br><span class="line">		TypenName = typeName;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void TransPortData()</span><br><span class="line">	&#123;</span><br><span class="line">		UnityEngine.Debug.Log(string.Format(&quot;硬盘型号:&#123;0&#125;传输数据&quot;, TypenName));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Computer</span><br><span class="line">&#123;</span><br><span class="line">	ISATA m_HardDisk;</span><br><span class="line"></span><br><span class="line">	public void SetHardWare(ISATA hardDisk)</span><br><span class="line">	&#123;</span><br><span class="line">		m_HardDisk = hardDisk;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void ReadData()</span><br><span class="line">	&#123;</span><br><span class="line">		if (m_HardDisk == null)</span><br><span class="line">			throw new Exception();</span><br><span class="line">		m_HardDisk.TransPortData();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void UseUFlashDisk(IUSB flashDisk)</span><br><span class="line">	&#123;</span><br><span class="line">		flashDisk.TransPortData();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class IOCDemo : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">	void Start()</span><br><span class="line">	&#123;</span><br><span class="line">		ISATA hardDisk = new HardDisk(&quot;西部数据硬盘&quot;);</span><br><span class="line">		IUSB uFlashDisk = new UFlashDisk(&quot;闪迪优盘&quot;);</span><br><span class="line">		var pc = new Computer();</span><br><span class="line">		pc.SetHardWare(hardDisk);</span><br><span class="line">		pc.ReadData();</span><br><span class="line">		pc.UseUFlashDisk(uFlashDisk);</span><br><span class="line">		pc.UseUFlashDisk(new UFlashDisk(&quot;西门子优盘&quot;));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="4-控制反转-IOC"><a href="#4-控制反转-IOC" class="headerlink" title="4.控制反转(IOC)"></a>4.控制反转(IOC)</h2><p>现实生活中，我们想要读取数据，无论我们用什么电脑，文件数据在哪个优盘里，这都取决于我们用户自己。<br>上面基本实现了隔离，具体的电脑跟优盘隔离，具体的优盘、硬盘跟接口有关系，如果我们对象在代码里面写死，假如就用华硕电脑读取闪迪优盘，这样又不灵活了，如果需求是我用联想电脑去读取金斯顿优盘，我们是不是又要改代码。这样我们就可以把决定权交给我们配置的人，游戏开发中这类人就称之为策划，我们就把权利给他们，让他们想用什么电脑读取什么优盘就让他们来配表实现，然后程序写一个读表生成具体对象的读取数据的操作。<br>这样控制权交给了配表的文件，这种就是我们这里要说的控制反转。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class Computer</span><br><span class="line">&#123;</span><br><span class="line">	public string Name &#123; get; set; &#125;</span><br><span class="line">	public Computer(string name)</span><br><span class="line">	&#123;</span><br><span class="line">		Name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ISATA m_HardDisk;</span><br><span class="line"></span><br><span class="line">	public void SetHardWare(ISATA hardDisk)</span><br><span class="line">	&#123;</span><br><span class="line">		m_HardDisk = hardDisk;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void ReadData()</span><br><span class="line">	&#123;</span><br><span class="line">		if (m_HardDisk == null)</span><br><span class="line">			throw new Exception();</span><br><span class="line">		m_HardDisk.TransPortData();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void UseUFlashDisk(IUSB flashDisk)</span><br><span class="line">	&#123;</span><br><span class="line">		flashDisk.TransPortData();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var pc = new Computer(&quot;读取配置表&quot;);</span><br><span class="line">pc.SetHardWare(new UFlashDisk(&quot;读取配置表&quot;));</span><br><span class="line">pc.ReadData();</span><br></pre></td></tr></table></figure></p>
 <p>控制反转IOC是Inversion of control的缩写，说将对象进行转移，转移到第三方，比如交给了配表文件。它就像一个对象创建工程，想要什么对象就配置什么对象，这样原先的依赖关系没有了，都变成IOC容器依赖了。</p>
 <h2 id="5-依赖注入（ID）"><a href="#5-依赖注入（ID）" class="headerlink" title="5.依赖注入（ID）"></a>5.依赖注入（ID）</h2><p>上面说的控制反转是一个思想概念，要看具体的实现，配表也是一种实现方式。依赖注入提出了具体的思想。<br>依赖注入DI是Dependency Injection缩写，它提出了“哪些东东的控制权被反转了，被转移了？”，它也给出了答案：“依赖对象的创建获得被反转”。<br>所谓依赖注入，就是由IoC容器在运行期间，动态地将某种依赖关系注入到对象之中。<br>上面SetHardWare其实就是运行时候依赖注入，将具体的依赖对象传递进去，传递的切入点可以是方法，可以是属性，可以是构造函数。</p>
@@ -404,8 +407,8 @@ var _hmt = _hmt || [];
     </a>
   
   
-    <a href="/2017/05/15/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">[Unity设计模式与游戏开发]原型模式</div>
+    <a href="/2017/05/16/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">[Unity设计模式与游戏开发]建造者模式</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -545,6 +548,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
@@ -561,15 +568,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,10 +589,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -629,6 +632,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
               </li>
              
@@ -637,15 +644,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">设计模式与游戏完美开发</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">原型模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">建造者模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -693,10 +700,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
               </li>
              
@@ -705,7 +708,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -713,11 +716,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Shader</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -745,23 +752,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ILRuntime</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Log</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -777,10 +776,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -789,11 +784,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
+                <a href="javascript:void(0)" class="js-tag color5">资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ILRuntime</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">C#热更</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,7 +812,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
+                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -825,6 +832,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
@@ -837,11 +848,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -849,11 +856,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
+                <a href="javascript:void(0)" class="js-tag color2">酒</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">酒</a>
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -865,11 +872,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
+                <a href="javascript:void(0)" class="js-tag color5">视频教程</a>
               </li>
              
               <li class="article-tag-list-item">
