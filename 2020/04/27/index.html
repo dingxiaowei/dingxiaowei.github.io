@@ -33,7 +33,42 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/16.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/14.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/17.png">
-<meta property="og:updated_time" content="2020-06-30T15:03:08.052Z">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/18.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/19.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/20.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/25.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/26.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/27.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/28.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/29.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/31.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/30.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/32.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/21.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/22.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/23.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/24.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/34.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/35.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/36.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/37.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/38.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/39.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/40.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/41.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/42.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/43.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/44.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/45.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/46.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/47.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/48.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/49.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/50.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/51.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/52.png">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/53.png">
+<meta property="og:updated_time" content="2020-07-01T13:20:47.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ET案例解析">
 <meta name="twitter:description" content="ET案例解析">
@@ -264,8 +299,27 @@ var _hmt = _hmt || [];
 <h3 id="资源加载"><a href="#资源加载" class="headerlink" title="资源加载"></a>资源加载</h3><p><img src="/2020/04/27/13.png" alt=""></p>
 <h5 id="AB资源打包和加载"><a href="#AB资源打包和加载" class="headerlink" title="AB资源打包和加载"></a>AB资源打包和加载</h5><h6 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h6><p>打AB直接用Tools-&gt;打包工具，我们来看下具体的打包代码。打开BuildHelper，会看到打包的路径是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">private const string relativeDirPrefix = &quot;../Release&quot;;</span><br><span class="line">public static string BuildFolder = &quot;../Release/&#123;0&#125;/StreamingAssets/&quot;;</span><br></pre></td></tr></table></figure></p>
 <p>打包到工程上一级目录的Release中了，<br><img src="/2020/04/27/15.png" alt=""><br><img src="/2020/04/27/16.png" alt=""><br>上面代码分别对应下图两个Toggle，如果勾选打包Exe则编译导出不同平台的运营包，如果勾选将资源打进EXE，就会将Release中的AB包拷贝到StreamAssets目录中，这样就不需要进行下载更新。</p>
-<h6 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h6><p><img src="/2020/04/27/14.png" alt=""><br>资源热更新我之前有写过这方面的文章，可以查看<a href="http://dingxiaowei.cn/2019/02/06/">【GFFrameWork】代码热更及资源下载</a>。我们来分析代码，在Init脚本中，一开始就调用了同步AB资源的方法<br><img src="/2020/04/27/17.png" alt=""><br>提醒：如果在Editor下测试资源更新，需要添加上ASYNC的宏定义。然后把本地StreamingAssets目录下的资源列表删除，注意不要把整个Version文件都删除，不然会报错的。</p>
-<h5 id="代码加载"><a href="#代码加载" class="headerlink" title="代码加载"></a>代码加载</h5><p>如果是ILRuntime模式则加载dll，否则通过反射执行本地的代码。</p>
+<h6 id="打包依赖分析"><a href="#打包依赖分析" class="headerlink" title="打包依赖分析"></a>打包依赖分析</h6><p>原本准备分析一下打包的依赖分析的，但ET打包这块处理的比较粗糙，就是手动打标签然后打包，我打算进行改性，自动搜集引用关系然后自动打标签，然后打包。主要的思路就是指定要打包的目录，然后以目录作为单位打包，遍历每个资源然后通过AssetDatabase.GetDependence获取到资源的应用关系，提取被引用的资源拎出来单独打包。思路大体就是这样。</p>
+<h6 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h6><p><img src="/2020/04/27/14.png" alt=""><br>资源热更新我之前有写过这方面的文章，可以查看<a href="http://dingxiaowei.cn/2019/02/06/">【GFFrameWork】代码热更及资源下载</a>。我们来分析代码，在Init脚本中，一开始就调用了同步AB资源的方法<br><img src="/2020/04/27/17.png" alt=""><br>提醒：如果在Editor下测试资源更新，需要添加上ASYNC的宏定义。然后把本地StreamingAssets目录下的资源列表删除，注意不要把整个Version文件都删除，不然会报错的。<br>ET是如何判断是该加载AB还是该加载本地Assets资源呢？<br><img src="/2020/04/27/18.png" alt=""><br>如果是Editor模式，首先从AB包里面获取所有的Assets路径，然后遍历添加资源到资源缓存，因为我们要加载一个Asset资源就先需要LoadBundle加载Bundle，然后将资源缓存，然后再是通过ResourcesComponent从缓存中LoadAsset<br><img src="/2020/04/27/19.png" alt=""><br>然后通过组件工厂创建出来并添加到bundles缓存，这里每一个Asset都当成了一个ABInfo<br><img src="/2020/04/27/20.png" alt=""><br>我们可以大致看一下ABInfo的结构，Name就是AB包名(例如:code.unity3d),RefCount就是引用计数。</p>
+<h5 id="加载依赖分析"><a href="#加载依赖分析" class="headerlink" title="加载依赖分析"></a>加载依赖分析</h5><p>加载资源组件是ResourcesComponent，主要就是加载AB和引用依赖分析，下面对这个组件进行详细分析，从加载一个Asset完整流程分析起，如果是AB加载模式，在Download结束之后会加载一个StreamingAsset的AB包，里面获取Manifest，这个Manifest就是AB依赖分析的重要记录信息<br><img src="/2020/04/27/25.png" alt=""><br>当然Demo里面过于简单，都没有包含依赖的例子，我们假设他有依赖关系，然后走一遍依赖处理流程。<br>首先是加载AB<br><img src="/2020/04/27/26.png" alt=""><br>进入这个LoadBundle方法<br><img src="/2020/04/27/27.png" alt=""><br>会发现里面有计算要加载的AB它所依赖的AB，如何计算依赖的AB的呢？<br><img src="/2020/04/27/28.png" alt=""><br>上图中知道，我们要查找一个AB的依赖列表，就要深度递归遍历，为什么要深度遍历呢，比如A依赖B，B依赖C，那么要加载A的话，不仅仅要加载B，还要先加载C，这就是为啥要深度递归遍历的原因，C也是A的间接依赖包，下面看一下是如何计算依赖的<br><img src="/2020/04/27/29.png" alt=""><br>到这里就应该知道了是如何计算依赖包的。接来下是一个个的加载所依赖的AB，也就是这个LoadOneBundle方法，这个方法中有一个将AB封装成一个ABInfo的对象，之前也有介绍，还有Editor模式下直接走AssetDatabase加载，这个前面也有介绍，关键是讲一下AB的加载流程<br><img src="/2020/04/27/31.png" alt=""><br>这里采用的是同步加载资源的方法，并且读取AB之后将里面所有的资源缓存，一般适用于AB包里面资源不多的情况，如果资源比较多建议采用异步加载方式，至于查找路径看下图就知道了<br><img src="/2020/04/27/30.png" alt=""><br>当然ET也给我们提供了异步加载资源的方法LoadOneBundleAsync<br><img src="/2020/04/27/32.png" alt=""></p>
+<h5 id="代码加载"><a href="#代码加载" class="headerlink" title="代码加载"></a>代码加载</h5><p>如果是ILRuntime模式则通过IL程序域加载dll，否则通过Assembly反射执行dll代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public void LoadHotfixAssembly()</span><br><span class="line">&#123;</span><br><span class="line">    //加载code资源包</span><br><span class="line">    Game.Scene.GetComponent&lt;ResourcesComponent&gt;().LoadBundle($&quot;code.unity3d&quot;);</span><br><span class="line">    //加载code资源</span><br><span class="line">    GameObject code = (GameObject)Game.Scene.GetComponent&lt;ResourcesComponent&gt;().GetAsset(&quot;code.unity3d&quot;, &quot;Code&quot;);</span><br><span class="line">    //加载dll</span><br><span class="line">    byte[] assBytes = code.Get&lt;TextAsset&gt;(&quot;Hotfix.dll&quot;).bytes;</span><br><span class="line">    //加载pdb调试文件</span><br><span class="line">    byte[] pdbBytes = code.Get&lt;TextAsset&gt;(&quot;Hotfix.pdb&quot;).bytes;</span><br><span class="line"></span><br><span class="line">#if ILRuntime</span><br><span class="line">    Log.Debug($&quot;当前使用的是ILRuntime模式&quot;);</span><br><span class="line">    //创建ILRuntime程序域</span><br><span class="line">    this.appDomain = new ILRuntime.Runtime.Enviorment.AppDomain();</span><br><span class="line">    //将dll和pdb加载进内存流</span><br><span class="line">    this.dllStream = new MemoryStream(assBytes);</span><br><span class="line">    this.pdbStream = new MemoryStream(pdbBytes);</span><br><span class="line">    //通过IL程序域加载代码内存流</span><br><span class="line">    this.appDomain.LoadAssembly(this.dllStream, this.pdbStream, new Mono.Cecil.Pdb.PdbReaderProvider());</span><br><span class="line">    //设置启动方法，从静态方法里查找</span><br><span class="line">    this.start = new ILStaticMethod(this.appDomain, &quot;ETHotfix.Init&quot;, &quot;Start&quot;, 0);</span><br><span class="line">    //搜集热更层的所有类型type以便在EventSystem中进行初始化</span><br><span class="line">    this.hotfixTypes = this.appDomain.LoadedTypes.Values.Select(x =&gt; x.ReflectionType).ToList();</span><br><span class="line">#else</span><br><span class="line">    Log.Debug($&quot;当前使用的是Mono模式&quot;);</span><br><span class="line">    //通过C#的程序集加载dll和pdb</span><br><span class="line">    this.assembly = Assembly.Load(assBytes, pdbBytes);</span><br><span class="line">    //设置初始化方法</span><br><span class="line">    Type hotfixInit = this.assembly.GetType(&quot;ETHotfix.Init&quot;);</span><br><span class="line">    this.start = new MonoStaticMethod(hotfixInit, &quot;Start&quot;);</span><br><span class="line">    //搜集热更层的类型type</span><br><span class="line">    this.hotfixTypes = this.assembly.GetTypes().ToList();</span><br><span class="line">#endif</span><br><span class="line">    //卸载Bundle</span><br><span class="line">    Game.Scene.GetComponent&lt;ResourcesComponent&gt;().UnloadBundle($&quot;code.unity3d&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="EventSystem事件系统"><a href="#EventSystem事件系统" class="headerlink" title="EventSystem事件系统"></a>EventSystem事件系统</h2><p>事件系统是代码解耦的最常用方式之一，ET里面是EventSystem，EventSystem包含事件消息搜集，事件消息分发和接受，更多的事件类型在ET的Book中也有介绍，这里主要分析一下原理。关于事件系统我之前写过一篇<a href="http://dingxiaowei.cn/2019/03/20/">【GFFrameWork】事件系统</a>可以对比学习一下。ET中的事件系统的原理是通过特性和反射进行搜集事件，抛事件到事件接受就是从事件缓存中根据事件类型去查找然后执行。还有一种事件模式是通过事件订阅和事件分发来执行，比如多个地方想关注同一个事件，就在不同的地方(UI界面)进行订阅，当UI关闭或者销毁的时候就取消订阅，这样如果抛出这个事件，就能在所有订阅的地方都接受执行。</p>
+<h4 id="举例详解"><a href="#举例详解" class="headerlink" title="举例详解"></a>举例详解</h4><p>在DownloadBundle中就有这么一行代码 <code>Game.EventSystem.Run(EventType.LoadingFinish)</code>意思就是下载AB完成之后抛出一个LoadingFinish的事件，UI层接受到这样的事件之后就开始进行处理，比如关闭LoadingUI。<br><img src="/2020/04/27/21.png" alt=""><br>前面Game.EventSystem.Run方法就是抛事件，而上图中就是接受事件，Run方法里是移除LoadingUI，那么会有人好奇为什么那边抛出这边能接收到呢？下面我们来分析一下原理。</p>
+<h5 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h5><p>前面我们介绍了Init中通过反射来获取自定义特性<br><img src="/2020/04/27/22.png" alt=""><br>这个allEvents就是一个字典，key是我们自定义的事件名字符串，收发事件都是通过这个字符串来标记的，而抛事件呢如下图<br><img src="/2020/04/27/23.png" alt=""><br>这个Handle方法正是调用了我们继承了AEvent时间类的Run抽象方法<br><img src="/2020/04/27/24.png" alt=""><br>也就是调用了上面的LoadingFinishEvent_RemoveLoadingUI中的重写Run方法，到这里应该理解了整个AEvent事件流程了吧，当然ET也给我们提供了三种参数的事件类型，不过带参数的貌似并没有实现，需要我们自己扩展。</p>
+<h5 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h5><p>关于事件类型这里只是详细介绍了好多种类型中的一种普通的Event类型，<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> oldhp = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> newhp = <span class="number">5</span>;</span><br><span class="line"><span class="comment">// 抛出hp改变事件</span></span><br><span class="line">Game.EventSystem.Run(<span class="string">"HpChange"</span>, oldhp, newhp);</span><br><span class="line"></span><br><span class="line"><span class="comment">// UI订阅hp改变事件</span></span><br><span class="line">[<span class="meta">Event(<span class="meta-string">"HpChange"</span>)</span>]</span><br><span class="line">public class HpChange_ShowUI: AEvent&lt;int, int&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Run</span>(<span class="params"><span class="keyword">int</span> a, <span class="keyword">int</span> b</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NotImplementedException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模型头顶血条模块也订阅hp改变事件</span></span><br><span class="line">[<span class="meta">Event(<span class="meta-string">"HpChange"</span>)</span>]</span><br><span class="line">public class HpChange_ModelHeadChange: AEvent&lt;int, int&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Run</span>(<span class="params"><span class="keyword">int</span> a, <span class="keyword">int</span> b</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NotImplementedException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其他还有一些生命周期系统例如AwakeSystem、StartSystem、UpdateSystem、DestroySystem、ChangeSystem、DeserializeSystem、LoadSystem，还有指定某个类型服务器接收的事件类型<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">MessageHandler(AppType.Gate)</span>]</span><br><span class="line">public class C2G_LoginGateHandler : AMRpcHandler&lt;C2G_LoginGate, G2C_LoginGate&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Run</span>(<span class="params">Session session, C2G_LoginGate message, Action&lt;G2C_LoginGate&gt; reply</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        G2C_LoginGate response = <span class="keyword">new</span> G2C_LoginGate();</span><br><span class="line">        reply(response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>具体的可以看官方文档或者看我上一篇的介绍。</p>
+<h2 id="案例剖析"><a href="#案例剖析" class="headerlink" title="案例剖析"></a>案例剖析</h2><p>上面做了那么多基础铺垫，下面真是进入游戏中登录流程的分析</p>
+<h4 id="游戏登录"><a href="#游戏登录" class="headerlink" title="游戏登录"></a>游戏登录</h4><p>运行游戏，首先进入眼帘的是登录界面，我们就分析一下他是如何被加载出来的，点登录按钮又如何跟服务器交互的，然后如何消失进入Lobby界面的。</p>
+<h5 id="加载登录界面"><a href="#加载登录界面" class="headerlink" title="加载登录界面"></a>加载登录界面</h5><p>在Hotfix的Init方法中有这么一行代码<code>Game.EventSystem.Run(EventIdType.InitSceneStart)</code>这个是上面介绍过的发事件，然后下图中就响应了这个事件<br><img src="/2020/04/27/34.png" alt=""></p>
+<p><img src="/2020/04/27/35.png" alt=""><br>还是我们熟悉的通过加载AB然后获取Asset实例化并且通过组件工厂实例化出来然后添加上UILoginComponent，<br><img src="/2020/04/27/36.png" alt=""><br>这里ReferenceCollector组件，是一个UI绑定对应对象的功能组件，这样省的我们代码去GetGameObject<br><img src="/2020/04/27/37.png" alt=""><br>下面我们来看这个OnLogin登录交互逻辑</p>
+<h5 id="登录交互"><a href="#登录交互" class="headerlink" title="登录交互"></a>登录交互</h5><p><img src="/2020/04/27/38.png" alt=""><br>创建一个会话session，然后通过session.Call给服务器发送C2R_Login消息，这个Call方法前面有一个await是异步阻塞方法，直到服务器返回消息才继续往下执行，不然一直阻塞，我们再看下服务器对应的逻辑<br><img src="/2020/04/27/39.png" alt=""><br>服务器根据账号名向网关服务器请求一个key用户客户端的网关登录，或许有人会问，服务器是怎么接受到消息然后执行这个C2R_LoginHandler中的Run方法的，根据上文讲解的知识初步猜测，也是根据特性标签和继承预先缓存这些消息然后通过消息分发的，不过还有待验证。根据这个猜想，然后我们搜索特性表现MessageHandler标签会发现在MessageDispatchComponentSystem有引用，那我们就分析一下这个组件</p>
+<h5 id="MessageDispatchComponentSystem"><a href="#MessageDispatchComponentSystem" class="headerlink" title="MessageDispatchComponentSystem"></a>MessageDispatchComponentSystem</h5><p>我们知道ET的ECS有AwakeSystem和LoadSystem，在组件加载和初始化的时候会调用对应的方法，<br><img src="/2020/04/27/40.png" alt=""><br>果真证实了我们的猜想，还是通过特性标签+继承的方式搜集所有的消息类，注意一下这个IMHandler接口，我们的消息类C2R——LoginHandler继承的AMRpcHandler&lt;Request,Response&gt;这个类正是继承自这个接口，然后通过GetmessageType方法，这个方法是反射的Request类型作为key去缓存<br><img src="/2020/04/27/41.png" alt=""><br>这个Handle方法被InnerMessageDispatcher和OuterMessageDispatcher引用，而这两个组件中的Dispatch方法在Session中调用，Session中收到消息就调用OnRead方法，然后消息解析，消息分发。</p>
+<p>继续上文的登录流程，客户端拿到服务器返回的R2C_Login消息，里面包含网关地址和key，然后客户端继续用这个Key向网关服务器发送登录请求C2G_LoginGame消息<br><img src="/2020/04/27/42.png" alt=""><br>服务器端的处理逻辑<br><img src="/2020/04/27/43.png" alt=""><br>服务器主要是验证Key是否合法，然后创建玩家，客户端拿到返回消息之后根据返回的玩家ID创建玩家，这里有一个reply()方法，这个方法底层是通过session返回response消息给客户端，所以带有返回消息的函数都要调用这个方法，客户端才能接受到返回消息。<br><img src="/2020/04/27/44.png" alt=""><br>发送了登录成功的消息之后，我们看下接受消息是如何处理的，应该就是关闭这个登录界面，跳转到下一个界面<br><img src="/2020/04/27/45.png" alt=""><br><img src="/2020/04/27/46.png" alt=""><br>一个事件两个地方响应，一个是删除老的登录UI，一个是创建新的LobbyUI，也证实了我们的想法。</p>
+<h2 id="Map地图寻路剖析"><a href="#Map地图寻路剖析" class="headerlink" title="Map地图寻路剖析"></a>Map地图寻路剖析</h2><p>点击进入地图之后，就会跳转场景。在客户端MapHelper中有这两行代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Game.Scene.AddComponent&lt;OperaComponent&gt;();</span><br><span class="line">Game.EventSystem.Run(EventIdType.EnterMapFinish);</span><br></pre></td></tr></table></figure></p>
+<p>我们看一下OperationComponent组件<br><img src="/2020/04/27/47.png" alt=""><br>这不正是我们鼠标操作地图的逻辑么，点击地面然后角色朝目标点走，但这里注意有一个Session.Send方法，之前我们学的是Call方法，Call方法是向服务器发送消息并且等待服务器返回消息这么个交互过程，而Send方法只管向服务器发送消息，至于如何起是如何接受处理的我们来看下服务器的逻辑。<br>客户端向服务器发送的Frame_ClickMap消息是一个继承自IActorLocationMessage的消息，我们就在服务器搜这个消息对应的消息Handler<br><img src="/2020/04/27/48.png" alt=""><br>找到这个角色Unit然后调用它的UnitPathComponent组件的MoveTo寻路方法<br><img src="/2020/04/27/49.png" alt=""></p>
+<p><img src="/2020/04/27/50.png" alt=""><br>广播路径，返回M2C_PathfindingResult消息，包含当前坐标、id、以及后面三个点<br><img src="/2020/04/27/51.png" alt=""><br>获取所有的角色进行广播，我们继续看下客户端接收到消息是如何处理的<br><img src="/2020/04/27/52.png" alt=""><br>角色真正的移动逻辑是在MoveComponent中，由于需要每帧更新角色的位置，所以我们这个MoveComponent组件就需要启动Update功能<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[ObjectSystem]</span><br><span class="line">public class MoveComponentUpdateSystem : UpdateSystem&lt;MoveComponent&gt;</span><br><span class="line">&#123;</span><br><span class="line">    public override void Update(MoveComponent self)</span><br><span class="line">    &#123;</span><br><span class="line">        self.Update();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/04/27/53.png" alt=""><br>角色的移动就是这样的。</p>
 <h2 id="更多ET教程"><a href="#更多ET教程" class="headerlink" title="更多ET教程"></a>更多ET教程</h2><p><a href="http://dingxiaowei.cn/">http://dingxiaowei.cn/</a></p>
 
       
@@ -425,7 +479,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo运行效果"><span class="toc-number">2.</span> <span class="toc-text">Demo运行效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行流程分析"><span class="toc-number">3.</span> <span class="toc-text">运行流程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#框架启动"><span class="toc-number">3.1.</span> <span class="toc-text">框架启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源加载"><span class="toc-number">3.2.</span> <span class="toc-text">资源加载</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#AB资源打包和加载"><span class="toc-number">3.2.0.1.</span> <span class="toc-text">AB资源打包和加载</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#打包"><span class="toc-number">3.2.0.1.1.</span> <span class="toc-text">打包</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#加载"><span class="toc-number">3.2.0.1.2.</span> <span class="toc-text">加载</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代码加载"><span class="toc-number">3.2.0.2.</span> <span class="toc-text">代码加载</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多ET教程"><span class="toc-number">4.</span> <span class="toc-text">更多ET教程</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo运行效果"><span class="toc-number">2.</span> <span class="toc-text">Demo运行效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行流程分析"><span class="toc-number">3.</span> <span class="toc-text">运行流程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#框架启动"><span class="toc-number">3.1.</span> <span class="toc-text">框架启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源加载"><span class="toc-number">3.2.</span> <span class="toc-text">资源加载</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#AB资源打包和加载"><span class="toc-number">3.2.0.1.</span> <span class="toc-text">AB资源打包和加载</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#打包"><span class="toc-number">3.2.0.1.1.</span> <span class="toc-text">打包</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#打包依赖分析"><span class="toc-number">3.2.0.1.2.</span> <span class="toc-text">打包依赖分析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#加载"><span class="toc-number">3.2.0.1.3.</span> <span class="toc-text">加载</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#加载依赖分析"><span class="toc-number">3.2.0.2.</span> <span class="toc-text">加载依赖分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代码加载"><span class="toc-number">3.2.0.3.</span> <span class="toc-text">代码加载</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EventSystem事件系统"><span class="toc-number">4.</span> <span class="toc-text">EventSystem事件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#举例详解"><span class="toc-number">4.0.1.</span> <span class="toc-text">举例详解</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#原理分析"><span class="toc-number">4.0.1.1.</span> <span class="toc-text">原理分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#事件类型"><span class="toc-number">4.0.1.2.</span> <span class="toc-text">事件类型</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例剖析"><span class="toc-number">5.</span> <span class="toc-text">案例剖析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#游戏登录"><span class="toc-number">5.0.1.</span> <span class="toc-text">游戏登录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#加载登录界面"><span class="toc-number">5.0.1.1.</span> <span class="toc-text">加载登录界面</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#登录交互"><span class="toc-number">5.0.1.2.</span> <span class="toc-text">登录交互</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MessageDispatchComponentSystem"><span class="toc-number">5.0.1.3.</span> <span class="toc-text">MessageDispatchComponentSystem</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map地图寻路剖析"><span class="toc-number">6.</span> <span class="toc-text">Map地图寻路剖析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多ET教程"><span class="toc-number">7.</span> <span class="toc-text">更多ET教程</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -547,11 +601,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ET学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color2">ET案例解析</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ET案例解析</a>
+                <a href="javascript:void(0)" class="js-tag color2">ET学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,11 +629,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -603,10 +657,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
@@ -615,27 +665,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式与游戏开发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -648,6 +690,42 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">依赖反转</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Unity设计模式与游戏开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">简单工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">抽象工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">设计模式与游戏完美开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">原型模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">建造者模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,15 +745,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">设计模式与游戏完美开发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">原型模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -687,31 +769,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">简单工厂模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">抽象工厂模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -719,7 +777,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -731,11 +797,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -743,27 +805,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UI框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
+                <a href="javascript:void(0)" class="js-tag color5">UI框架</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -779,6 +825,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
@@ -788,6 +846,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -815,19 +877,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">算法，复杂度分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">建造者模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -843,11 +897,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
+                <a href="javascript:void(0)" class="js-tag color3">美文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">夫妻不和家必败</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -859,11 +921,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">美文</a>
+                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -875,19 +937,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">酒</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">夫妻不和家必败</a>
+                <a href="javascript:void(0)" class="js-tag color2">酒</a>
               </li>
              
               <li class="article-tag-list-item">
