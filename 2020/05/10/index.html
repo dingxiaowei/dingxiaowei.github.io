@@ -8,23 +8,22 @@
   <link rel="dns-prefetch" href="http://dingxiaowei.cn">
   <title>游戏中常用的运动曲线 | Aladdin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="游戏中常用的运动曲线详解">
+  <meta name="description" content="游戏中常用的运动曲线">
 <meta name="keywords" content="Unity,抛物线运动编辑工具,炮弹轨迹编辑工具,贝塞尔曲线,抛物线曲线">
 <meta property="og:type" content="article">
 <meta property="og:title" content="游戏中常用的运动曲线">
 <meta property="og:url" content="http://dingxiaowei.cn/2020/05/10/index.html">
 <meta property="og:site_name" content="Aladdin的博客">
-<meta property="og:description" content="游戏中常用的运动曲线详解">
+<meta property="og:description" content="游戏中常用的运动曲线">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/05/10/1.gif">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/05/10/2.gif">
-<meta property="og:image" content="http://dingxiaowei.cn/2020/05/10/6.gif">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/05/10/4.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/05/10/3.gif">
-<meta property="og:updated_time" content="2020-07-02T23:46:53.264Z">
+<meta property="og:updated_time" content="2020-07-02T23:57:07.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="游戏中常用的运动曲线">
-<meta name="twitter:description" content="游戏中常用的运动曲线详解">
+<meta name="twitter:description" content="游戏中常用的运动曲线">
 <meta name="twitter:image" content="http://dingxiaowei.cn/2020/05/10/1.gif">
   
     <link rel="alternative" href="/atom.xml" title="Aladdin的博客" type="application/atom+xml">
@@ -245,7 +244,6 @@ var _hmt = _hmt || [];
 <h2 id="工具运行效果"><a href="#工具运行效果" class="headerlink" title="工具运行效果"></a>工具运行效果</h2><p><img src="/2020/05/10/1.gif" alt=""></p>
 <p><img src="/2020/05/10/2.gif" alt=""></p>
 <a id="more"></a>
-<p><img src="/2020/05/10/6.gif" alt=""></p>
 <h2 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h2><p><img src="/2020/05/10/4.png" alt=""><br>以上是抛物线运动公式，下面是二阶贝塞尔曲线公式，想要了解详细的<a href="https://www.jianshu.com/p/afccc4642621" target="_blank" rel="noopener">贝塞尔曲线</a><br><img src="/2020/05/10/3.gif" alt=""></p>
 <h2 id="抛物线运动编辑工具"><a href="#抛物线运动编辑工具" class="headerlink" title="抛物线运动编辑工具"></a>抛物线运动编辑工具</h2><h4 id="ParabolaTool"><a href="#ParabolaTool" class="headerlink" title="ParabolaTool"></a>ParabolaTool</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">using UnityEditor;</span><br><span class="line">using UnityEditor.SceneManagement;</span><br><span class="line">using UnityEngine;</span><br><span class="line">using UnityEngine.Rendering;</span><br><span class="line"></span><br><span class="line">[CustomEditor(typeof(ParabolaEditor))]</span><br><span class="line">public class ParabolaTool : Editor</span><br><span class="line">&#123;</span><br><span class="line">    [MenuItem(&quot;Tools/Parabola&quot;)]</span><br><span class="line">    static void MakeParampola()</span><br><span class="line">    &#123;</span><br><span class="line">        if (MakeEnv())</span><br><span class="line">        &#123;</span><br><span class="line">            var obj = AssetDatabase.LoadAssetAtPath&lt;GameObject&gt;(&quot;Assets/Demo/ParabolaEdit/Parabola/Editor/Parabola.prefab&quot;);</span><br><span class="line">            var go = GameObject.Instantiate(obj) as GameObject;</span><br><span class="line">            go.transform.position = Vector3.zero;</span><br><span class="line">            go.transform.rotation = Quaternion.identity;</span><br><span class="line">            Selection.activeGameObject = go;</span><br><span class="line"></span><br><span class="line">            var camera = Camera.main;</span><br><span class="line">            if (camera)</span><br><span class="line">            &#123;</span><br><span class="line">                camera.transform.position = new Vector3(-29,8 -70);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static bool MakeEnv()</span><br><span class="line">    &#123;</span><br><span class="line">        if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())</span><br><span class="line">        &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects);</span><br><span class="line">            GraphicsSettings.renderPipelineAsset = null;</span><br><span class="line">            var light = GameObject.FindObjectOfType&lt;Light&gt;();</span><br><span class="line">            light.transform.localEulerAngles = new Vector3(100, 0, 0);</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ParabolaEditor parabola;</span><br><span class="line"></span><br><span class="line">    private void OnEnable()</span><br><span class="line">    &#123;</span><br><span class="line">        parabola = target as ParabolaEditor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public override void OnInspectorGUI()</span><br><span class="line">    &#123;</span><br><span class="line">        base.OnInspectorGUI();</span><br><span class="line">        EditorGUILayout.Space();</span><br><span class="line">        EditorGUILayout.LabelField(&quot;其他程序生成信息&quot;);</span><br><span class="line">        double a = parabola.RuntimeParabola(out var dir, out float speed);</span><br><span class="line">        EditorGUILayout.LabelField(&quot;水平分速度:&quot;, speed.ToString(&quot;f2&quot;));</span><br><span class="line">        EditorGUILayout.LabelField(&quot;垂直加速度:&quot;, a.ToString(&quot;f2&quot;));</span><br><span class="line">        EditorGUILayout.Space();</span><br><span class="line">        var ori = parabola.original.transform.position;</span><br><span class="line">        var des = parabola.destination.transform.position;</span><br><span class="line">        var start = new Vector2(ori.x, ori.z);</span><br><span class="line">        var end = new Vector2(des.x, des.z);</span><br><span class="line">        float dist = Vector2.Distance(start, end); //水平距离</span><br><span class="line">        EditorGUILayout.LabelField(&quot;总距离:&quot;, Vector3.Distance(des, ori).ToString(&quot;f2&quot;)); //3D距离</span><br><span class="line">        EditorGUILayout.LabelField(&quot;水平方向距离:&quot;, dist.ToString(&quot;f2&quot;));</span><br><span class="line">        EditorGUILayout.LabelField(&quot;垂直方向距离:&quot;, (ori.y - des.y).ToString(&quot;f2&quot;)); //垂直距离 Y高度差</span><br><span class="line"></span><br><span class="line">        var go = parabola.go;</span><br><span class="line">        if (go != null)</span><br><span class="line">        &#123;</span><br><span class="line">            EditorGUILayout.Space();</span><br><span class="line">            EditorGUILayout.LabelField(&quot;当前位置:&quot;, go.transform.position.ToString());</span><br><span class="line">            Repaint(); //重绘</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="ParabolaEditor"><a href="#ParabolaEditor" class="headerlink" title="ParabolaEditor"></a>ParabolaEditor</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line">#if UNITY_EDITOR</span><br><span class="line">using System;</span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">public class ParabolaEditor : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    [Header(&quot;起始点&quot;)]</span><br><span class="line">    public Transform original;</span><br><span class="line">    [Header(&quot;结束点&quot;)]</span><br><span class="line">    public Transform destination;</span><br><span class="line">    [Header(&quot;向上速度&quot;)]</span><br><span class="line">    public int vy;</span><br><span class="line">    [Header(&quot;轨迹点数&quot;)]</span><br><span class="line">    public int count;</span><br><span class="line">    [Header(&quot;运动时间&quot;)]</span><br><span class="line">    public float time;</span><br><span class="line">    //垂直加速度</span><br><span class="line">    private double acc;</span><br><span class="line">    private Vector2 h_dir; //水平方向</span><br><span class="line">    private float h_speed; //水平速度</span><br><span class="line">    private bool play;</span><br><span class="line">    private float start; //开始时间</span><br><span class="line">    [HideInInspector]</span><br><span class="line">    public GameObject go;</span><br><span class="line"></span><br><span class="line">    private void TodoStart()</span><br><span class="line">    &#123;</span><br><span class="line">        if (go == null)</span><br><span class="line">            go = GameObject.Instantiate(original.gameObject);</span><br><span class="line">        go.transform.position = original.position;</span><br><span class="line">        //计算出垂直加速度</span><br><span class="line">        acc = RuntimeParabola(out h_dir, out h_speed);</span><br><span class="line">        play = true;</span><br><span class="line">        start = Time.time;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void Update()</span><br><span class="line">    &#123;</span><br><span class="line">        if (play)</span><br><span class="line">        &#123;</span><br><span class="line">            float t = Time.time - start;</span><br><span class="line">            Vector2 st = new Vector2(original.position.x, original.position.z);</span><br><span class="line">            var h1 = st + h_dir * h_speed * t; //帧事件内水平位置</span><br><span class="line">            var v1 = original.position.y - (float)(0.5f * acc * t * t) + vy * t; //帧时内垂直位置</span><br><span class="line">            go.transform.position = new Vector3(h1.x, v1, h1.y); //实时坐标</span><br><span class="line">            if (t &gt;= time)</span><br><span class="line">            &#123;</span><br><span class="line">                play = false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (Input.GetKeyUp(KeyCode.Space))</span><br><span class="line">        &#123;</span><br><span class="line">            TodoStart();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void OnDrawGizmos()</span><br><span class="line">    &#123;</span><br><span class="line">        if (original &amp;&amp; destination)</span><br><span class="line">        &#123;</span><br><span class="line">            Gizmos.color = Color.red;</span><br><span class="line">            CalParabola(out var v_s); //获取3D路点列表</span><br><span class="line">            int len = v_s.Length;</span><br><span class="line">            for (int i = 0; i &lt; len - 1; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                Gizmos.DrawLine(v_s[i], v_s[i + 1]); //每个点之间连线</span><br><span class="line">            &#125;</span><br><span class="line">            Gizmos.color = Color.cyan;</span><br><span class="line">            for (int i = 0; i &lt; len; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                Gizmos.DrawSphere(v_s[i], 1); //绘制圆形</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //计算垂直加速度</span><br><span class="line">    public double RuntimeParabola(out Vector2 h_dir, out float h_speed)</span><br><span class="line">    &#123;</span><br><span class="line">        //获取水平方向的距离</span><br><span class="line">        float h = h_dis(out var dir, out Vector2 start);</span><br><span class="line">        h_dir = dir; //水平方向的单位向量</span><br><span class="line">        h_speed = h / time; //水平方向的速度</span><br><span class="line">        float s = destination.position.y - original.position.y;//垂直方向高度差</span><br><span class="line">        return Math.Abs((vy * time - s) / (0.5 * time * time)); //计算出加速度  s = vt+(1/2)at*t</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //计算3D路点</span><br><span class="line">    private void CalParabola(out Vector3[] ps)</span><br><span class="line">    &#123;</span><br><span class="line">        //计算水平距离</span><br><span class="line">        float h = h_dis(out var dir, out Vector2 start);</span><br><span class="line">        //计算水平速度</span><br><span class="line">        float vx = h / time;</span><br><span class="line">        //垂直距离</span><br><span class="line">        float s = destination.position.y - original.position.y;</span><br><span class="line">        ps = new Vector3[count + 1];</span><br><span class="line">        //计算垂直加速度g</span><br><span class="line">        double a = Math.Abs((vy * time - s) / (0.5 * time * time));</span><br><span class="line">        for (int i = 0; i &lt; count + 1; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            float t = (time * i) / count; //每隔一个路点的时间</span><br><span class="line">            var h1 = start + dir * vx * t; //水平方向的2d坐标</span><br><span class="line">            var v1 = original.position.y - (float)(0.5 * a * (t * t)) + vy * t;  //v1-position.y = vt-0.5*a*t*t</span><br><span class="line">            ps[i] = new Vector3(h1.x, v1, h1.y); //每一个点的坐标</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /// &lt;summary&gt;</span><br><span class="line">    /// 计算水平方向的距离</span><br><span class="line">    /// &lt;/summary&gt;</span><br><span class="line">    /// &lt;param name=&quot;dir&quot;&gt;水平方向的单位向量&lt;/param&gt;</span><br><span class="line">    /// &lt;param name=&quot;start&quot;&gt;开始位置&lt;/param&gt;</span><br><span class="line">    /// &lt;returns&gt;&lt;/returns&gt;</span><br><span class="line">    private float h_dis(out Vector2 dir, out Vector2 start)</span><br><span class="line">    &#123;</span><br><span class="line">        start = new Vector2(original.position.x, original.position.z);</span><br><span class="line">        var end = new Vector2(destination.position.x, destination.position.z);</span><br><span class="line">        dir = (end - start).normalized;</span><br><span class="line">        return Vector2.Distance(end, start);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
@@ -543,11 +541,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ET案例解析</a>
+                <a href="javascript:void(0)" class="js-tag color2">ET学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ET学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color2">ET案例解析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,11 +561,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -579,15 +577,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UGUI</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -595,7 +593,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+                <a href="javascript:void(0)" class="js-tag color5">UGUI原理和优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,6 +609,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity设计模式与游戏开发</a>
               </li>
              
@@ -620,10 +622,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">UML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -647,31 +645,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">设计模式与游戏完美开发</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">原型模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">建造者模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">简单工厂模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">抽象工厂模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -687,6 +669,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">简单工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">抽象工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">建造者模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Uniyt</a>
               </li>
              
@@ -695,15 +697,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -711,11 +705,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
+                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">InputSystem</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -751,11 +749,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
+                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -771,18 +773,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
               </li>
              
@@ -792,6 +782,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity数据存储</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -811,15 +809,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">代码整洁之道</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">程序员的职业素养</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
               </li>
              
               <li class="article-tag-list-item">
