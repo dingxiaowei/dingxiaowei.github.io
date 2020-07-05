@@ -72,7 +72,9 @@
 <meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/54.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/55.png">
 <meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/56.png">
-<meta property="og:updated_time" content="2020-07-03T13:22:55.937Z">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/57.jpg">
+<meta property="og:image" content="http://dingxiaowei.cn/2020/04/27/58.jpg">
+<meta property="og:updated_time" content="2020-07-05T04:33:18.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ET案例解析">
 <meta name="twitter:description" content="ET案例解析">
@@ -335,6 +337,10 @@ var _hmt = _hmt || [];
 </ul>
 <h4 id="我们自己实现一个自定义异步"><a href="#我们自己实现一个自定义异步" class="headerlink" title="我们自己实现一个自定义异步"></a>我们自己实现一个自定义异步</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.Runtime.CompilerServices;</span><br><span class="line"></span><br><span class="line">namespace ConsoleApp1</span><br><span class="line">&#123;</span><br><span class="line">    public class Awaitable&lt;T&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        public Awaiter&lt;T&gt; GetAwaiter()</span><br><span class="line">        &#123;</span><br><span class="line">            return new Awaiter&lt;T&gt;();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public class Awaiter&lt;T&gt; : INotifyCompletion</span><br><span class="line">        &#123;</span><br><span class="line">            public void OnCompleted(Action continuation)</span><br><span class="line">            &#123;</span><br><span class="line">                continuation?.Invoke();</span><br><span class="line">            &#125;</span><br><span class="line">            public bool IsCompleted &#123; get; set; &#125;</span><br><span class="line">            public T GetResult()</span><br><span class="line">            &#123;</span><br><span class="line">                return default(T);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class Program</span><br><span class="line">    &#123;</span><br><span class="line">        static void Main(string[] args)</span><br><span class="line">        &#123;</span><br><span class="line">            MyAwaitable();</span><br><span class="line">            Console.Read();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        static async void MyAwaitable()</span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(&quot;before awaiting&quot;);</span><br><span class="line">            var awaitable = new Awaitable&lt;int&gt;();</span><br><span class="line">            await awaitable;</span><br><span class="line">            Console.WriteLine(&quot;after awaiting&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="InnerMessage和OuterMessage的区别"><a href="#InnerMessage和OuterMessage的区别" class="headerlink" title="InnerMessage和OuterMessage的区别"></a>InnerMessage和OuterMessage的区别</h2><p>简单来说就是InnerMessage是用于服务器之间的消息，而OuterMessage是客户端和服务器交互的消息。</p>
+<h2 id="寻路相关"><a href="#寻路相关" class="headerlink" title="寻路相关"></a>寻路相关</h2><h4 id="地图数据导出"><a href="#地图数据导出" class="headerlink" title="地图数据导出"></a>地图数据导出</h4><p>5.0 unity2018 里<br>1.在Map场景中创建一个空物体，将Pathfinder脚本组件挂到这个物体上，组件名称显示为【Astar Path(Script)】<br>2.选择【Save&amp;Load】中的【Load from file】，加载Config/graph.bytes<br>3.将【Recast Graph】中的【Layer Mask】选择Map<br>4.点击最底下的【Scan】，即可查看重新生成的导航网格<br>5.选择【Save to file】，保存替换回Config/graph.bytes</p>
+<p>说明：2019的FindPathing插件需要更新，不然Inspector显示有问题。更新插件<a href="https://assetstore.unity.com/packages/tools/ai/a-pathfinding-project-pro-87744?aid=1011l7JId&amp;utm_source=aff" target="_blank" rel="noopener">地址</a>，或者添加下方qq群里面有上传该插件。或者也可以用这个<a href="https://github.com/genechiu/NavMesh" target="_blank" rel="noopener">https://github.com/genechiu/NavMesh</a> 开源的寻路。</p>
+<h2 id="ET流程图"><a href="#ET流程图" class="headerlink" title="ET流程图"></a>ET流程图</h2><p><img src="/2020/04/27/57.jpg" alt=""></p>
+<p><img src="/2020/04/27/58.jpg" alt=""></p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
 <li><a href="https://www.xyting.org/2017/02/28/understand-async-await-in-depth.html" target="_blank" rel="noopener">https://www.xyting.org/2017/02/28/understand-async-await-in-depth.html</a> 深入理解Async和Await</li>
 <li><a href="https://blog.walterlv.com/post/abstract-awaitable-and-awaiter.html" target="_blank" rel="noopener">https://blog.walterlv.com/post/abstract-awaitable-and-awaiter.html</a> 定义一组抽象的 Awaiter 的实现接口，你下次写自己的 await 可等待对象时将更加方便</li>
@@ -510,7 +516,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo运行效果"><span class="toc-number">2.</span> <span class="toc-text">Demo运行效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行流程分析"><span class="toc-number">3.</span> <span class="toc-text">运行流程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#框架启动"><span class="toc-number">3.1.</span> <span class="toc-text">框架启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源加载"><span class="toc-number">3.2.</span> <span class="toc-text">资源加载</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#AB资源打包和加载"><span class="toc-number">3.2.0.1.</span> <span class="toc-text">AB资源打包和加载</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#打包"><span class="toc-number">3.2.0.1.1.</span> <span class="toc-text">打包</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#打包依赖分析"><span class="toc-number">3.2.0.1.2.</span> <span class="toc-text">打包依赖分析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#加载"><span class="toc-number">3.2.0.1.3.</span> <span class="toc-text">加载</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#加载依赖分析"><span class="toc-number">3.2.0.2.</span> <span class="toc-text">加载依赖分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代码加载"><span class="toc-number">3.2.0.3.</span> <span class="toc-text">代码加载</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EventSystem事件系统"><span class="toc-number">4.</span> <span class="toc-text">EventSystem事件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#举例详解"><span class="toc-number">4.0.1.</span> <span class="toc-text">举例详解</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#原理分析"><span class="toc-number">4.0.1.1.</span> <span class="toc-text">原理分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#事件类型"><span class="toc-number">4.0.1.2.</span> <span class="toc-text">事件类型</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例剖析"><span class="toc-number">5.</span> <span class="toc-text">案例剖析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#游戏登录"><span class="toc-number">5.0.1.</span> <span class="toc-text">游戏登录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#加载登录界面"><span class="toc-number">5.0.1.1.</span> <span class="toc-text">加载登录界面</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#登录交互"><span class="toc-number">5.0.1.2.</span> <span class="toc-text">登录交互</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MessageDispatchComponentSystem"><span class="toc-number">5.0.1.3.</span> <span class="toc-text">MessageDispatchComponentSystem</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map地图寻路剖析"><span class="toc-number">6.</span> <span class="toc-text">Map地图寻路剖析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于ETVoid和ETTask区别"><span class="toc-number">7.</span> <span class="toc-text">关于ETVoid和ETTask区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ETVoid"><span class="toc-number">7.0.1.</span> <span class="toc-text">ETVoid</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#结论"><span class="toc-number">7.0.2.</span> <span class="toc-text">结论</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#相同点"><span class="toc-number">7.0.2.1.</span> <span class="toc-text">相同点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#不同点"><span class="toc-number">7.0.2.2.</span> <span class="toc-text">不同点</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#我们自己实现一个自定义异步"><span class="toc-number">7.0.3.</span> <span class="toc-text">我们自己实现一个自定义异步</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#InnerMessage和OuterMessage的区别"><span class="toc-number">8.</span> <span class="toc-text">InnerMessage和OuterMessage的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">9.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多ET教程"><span class="toc-number">10.</span> <span class="toc-text">更多ET教程</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo运行效果"><span class="toc-number">2.</span> <span class="toc-text">Demo运行效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行流程分析"><span class="toc-number">3.</span> <span class="toc-text">运行流程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#框架启动"><span class="toc-number">3.1.</span> <span class="toc-text">框架启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源加载"><span class="toc-number">3.2.</span> <span class="toc-text">资源加载</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#AB资源打包和加载"><span class="toc-number">3.2.0.1.</span> <span class="toc-text">AB资源打包和加载</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#打包"><span class="toc-number">3.2.0.1.1.</span> <span class="toc-text">打包</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#打包依赖分析"><span class="toc-number">3.2.0.1.2.</span> <span class="toc-text">打包依赖分析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#加载"><span class="toc-number">3.2.0.1.3.</span> <span class="toc-text">加载</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#加载依赖分析"><span class="toc-number">3.2.0.2.</span> <span class="toc-text">加载依赖分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代码加载"><span class="toc-number">3.2.0.3.</span> <span class="toc-text">代码加载</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EventSystem事件系统"><span class="toc-number">4.</span> <span class="toc-text">EventSystem事件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#举例详解"><span class="toc-number">4.0.1.</span> <span class="toc-text">举例详解</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#原理分析"><span class="toc-number">4.0.1.1.</span> <span class="toc-text">原理分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#事件类型"><span class="toc-number">4.0.1.2.</span> <span class="toc-text">事件类型</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例剖析"><span class="toc-number">5.</span> <span class="toc-text">案例剖析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#游戏登录"><span class="toc-number">5.0.1.</span> <span class="toc-text">游戏登录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#加载登录界面"><span class="toc-number">5.0.1.1.</span> <span class="toc-text">加载登录界面</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#登录交互"><span class="toc-number">5.0.1.2.</span> <span class="toc-text">登录交互</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MessageDispatchComponentSystem"><span class="toc-number">5.0.1.3.</span> <span class="toc-text">MessageDispatchComponentSystem</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map地图寻路剖析"><span class="toc-number">6.</span> <span class="toc-text">Map地图寻路剖析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于ETVoid和ETTask区别"><span class="toc-number">7.</span> <span class="toc-text">关于ETVoid和ETTask区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ETVoid"><span class="toc-number">7.0.1.</span> <span class="toc-text">ETVoid</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#结论"><span class="toc-number">7.0.2.</span> <span class="toc-text">结论</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#相同点"><span class="toc-number">7.0.2.1.</span> <span class="toc-text">相同点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#不同点"><span class="toc-number">7.0.2.2.</span> <span class="toc-text">不同点</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#我们自己实现一个自定义异步"><span class="toc-number">7.0.3.</span> <span class="toc-text">我们自己实现一个自定义异步</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#InnerMessage和OuterMessage的区别"><span class="toc-number">8.</span> <span class="toc-text">InnerMessage和OuterMessage的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寻路相关"><span class="toc-number">9.</span> <span class="toc-text">寻路相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#地图数据导出"><span class="toc-number">9.0.1.</span> <span class="toc-text">地图数据导出</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ET流程图"><span class="toc-number">10.</span> <span class="toc-text">ET流程图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">11.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多ET教程"><span class="toc-number">12.</span> <span class="toc-text">更多ET教程</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -632,15 +638,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ET案例解析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ET学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ECS</a>
+                <a href="javascript:void(0)" class="js-tag color2">ET案例解析</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,6 +654,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ECS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
               </li>
              
@@ -660,15 +674,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,19 +698,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">iOS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">内购</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -716,34 +722,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">简单工厂模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">抽象工厂模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">设计模式与游戏完美开发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">原型模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity设计模式</a>
               </li>
              
@@ -760,15 +738,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+                <a href="javascript:void(0)" class="js-tag color2">设计模式与游戏完美开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">原型模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">简单工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">抽象工厂模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -784,7 +778,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
+                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -792,11 +798,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
+                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -804,7 +810,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
+                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -812,7 +822,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -821,10 +831,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">光照模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -840,7 +846,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -856,15 +862,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -896,15 +898,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">简历</a>
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -916,7 +914,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
+                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">简历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -933,6 +935,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">自我反思</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">美文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">夫妻不和家必败</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -960,10 +974,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">美文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
@@ -972,19 +982,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">酒</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">夫妻不和家必败</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -993,6 +991,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AssetBundle Manager</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">优化</a>
               </li>
              
               <li class="article-tag-list-item">
