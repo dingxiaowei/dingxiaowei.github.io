@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Aladdin的博客">
 <meta property="og:description" content="前言本节要介绍的是建造者模式，顾名思义，重点就是在建造一词，说到建造我们首先能想到的就是建房子，这也是大多数教程都拿建房子举例介绍建造者模式，这里也简单的提一下，建房子就是打地基、砌砖、盖顶、粉刷等，着重是体现一个建造的详细过程。那么在我们游戏开发中，哪儿用到建造者模式呢？最常用于角色的创建，我们一个角色有你看得到的模型，模型需要我们实例化，也有各种各样的属性和组件组成。这些属性和组件都是需要我们">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-10T13:28:44.565Z">
+<meta property="og:updated_time" content="2020-07-07T15:47:02.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Unity设计模式与游戏开发]建造者模式">
 <meta name="twitter:description" content="前言本节要介绍的是建造者模式，顾名思义，重点就是在建造一词，说到建造我们首先能想到的就是建房子，这也是大多数教程都拿建房子举例介绍建造者模式，这里也简单的提一下，建房子就是打地基、砌砖、盖顶、粉刷等，着重是体现一个建造的详细过程。那么在我们游戏开发中，哪儿用到建造者模式呢？最常用于角色的创建，我们一个角色有你看得到的模型，模型需要我们实例化，也有各种各样的属性和组件组成。这些属性和组件都是需要我们">
@@ -238,12 +238,105 @@ var _hmt = _hmt || [];
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本节要介绍的是建造者模式，顾名思义，重点就是在建造一词，说到建造我们首先能想到的就是建房子，这也是大多数教程都拿建房子举例介绍建造者模式，这里也简单的提一下，建房子就是打地基、砌砖、盖顶、粉刷等，着重是体现一个建造的详细过程。那么在我们游戏开发中，哪儿用到建造者模式呢？最常用于角色的创建，我们一个角色有你看得到的模型，模型需要我们实例化，也有各种各样的属性和组件组成。这些属性和组件都是需要我们去逐个创建的，然后最后再由具体的建造者去创建。</p>
 <a id="more"></a>
 <h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><p>建造者模式是一种对象构建模式，它可以将复杂的对象建造过程抽象出来，使这个抽象过程的不同实现方法可以构造出不同表现的对象。建造者模式是一步一步创建一个复杂的对象，它允许用户只通过指定复杂对象的类型和内容就可以构建它们，用户无需知道内部的具体构建细节。</p>
+<h2 id="为什么需要建造者模式？"><a href="#为什么需要建造者模式？" class="headerlink" title="为什么需要建造者模式？"></a>为什么需要建造者模式？</h2><p>建造者模式也叫构建者模式或者生成器模式，顾名思义那肯定是跟对象初始化有很大的关系。我们在平时开发中，创建一个对象最常用的方式就是通过new关键字调用类的关键字来完成对象的初始化。假设有这么一个需求，我要做一道菜红烧肉，可能100个大厨会做出一百种口味，这是为啥呢？因为不同的大厨对各种调料的配置是不同的，列举几个简单的调料配方</p>
+<table>
+<thead>
+<tr>
+<th>调料名</th>
+<th>是否添加</th>
+<th>添加多少</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>油</td>
+<td>是</td>
+<td>10ml</td>
+</tr>
+<tr>
+<td>生抽</td>
+<td>是</td>
+<td>6ml</td>
+</tr>
+<tr>
+<td>啤酒</td>
+<td>是</td>
+<td>500ml</td>
+</tr>
+<tr>
+<td>食盐</td>
+<td>是</td>
+<td>5g</td>
+</tr>
+<tr>
+<td>生姜</td>
+<td>是</td>
+<td>3g</td>
+</tr>
+<tr>
+<td>料酒</td>
+<td>是</td>
+<td>20ml</td>
+</tr>
+<tr>
+<td>辣椒</td>
+<td>是</td>
+<td>6g</td>
+</tr>
+<tr>
+<td>糖</td>
+<td>是</td>
+<td>10g</td>
+</tr>
+<tr>
+<td>醋</td>
+<td>否</td>
+<td>0</td>
+</tr>
+<tr>
+<td>老抽</td>
+<td>是</td>
+<td>10ml</td>
+</tr>
+<tr>
+<td>鸡精</td>
+<td>是</td>
+<td>5g</td>
+</tr>
+<tr>
+<td>味精</td>
+<td>否</td>
+<td>0</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>上面只是列举了一些常用的食材，添加的量也是我自己随便写的，想要做菜的小伙伴友情提醒不要照抄。可能大厨还有各种不同的独门秘方调料我没有列举到的，反正就是如上所述不同的大厨做同一道菜味道都是不一样的。那么我们如何用程序去抽象实现上述需求呢，想必只要对有点开发经验的小伙伴都不是难事，最容易想到的就是通过构造函数的参数来初始化，如果传入null或者0表示不需要这个参数，具体的抽象代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class SoyBraisedPork</span><br><span class="line">&#123;</span><br><span class="line">	public SoyBraisedPork(float 油，float 生抽，..., float 味精)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这还好就列举了12个可配置项，对应构造函数参数还能接受，说多吧也不是特别多，说少吧也不少，但如果有上百个参数呢，会不会很奔溃，参数列表会变成很长很长，代码在可读性和易用性上都会变得很差很差，我们在调用构造函数的时候还很容易搞错各种参数的顺序，传递错误的值，导致非常隐蔽的bug。想必聪明的你，会想到优化的解决方法，也就是我们常用的set()函数来给成员变量赋值，以替代冗长的构造函数，我们可以将必须的一些参数放在构造函数里面，可选项通过set()函数来设置，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class SoyBraisedPork</span><br><span class="line">&#123;</span><br><span class="line">	public SoyBraisedPork(float 油，float 食盐)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void SetSugar(float v)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void SetVinegar(float v)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面还并没有用到建造者模式，如果我们把问题难度加大，比如要解决下面三个问题，或许现在的思路就不能满足了</p>
+<ul>
+<li>如果油和食盐是必添加调料，如果必添加调料的类型比较多，那么又会出现上面的问题，构造函数比较长了</li>
+<li>假设这些调料之间有依赖关系，如果添加了某一个就必须添加另外一个调料或者说如果添加了某一个，另外一个就不需要添加了这种逻辑关系，那么约束条件就无处处理了。</li>
+<li>如果我们希望这个红烧肉对象是不可变对象，一旦做好之后就不能在添加调料了，比如我们嫌淡再添加点盐，这样的操作是不允许的，那么我们就不能暴露set()方法了。</li>
+</ul>
+<p>为了解决以上问题，我们的建造者模式就要登场了。</p>
+<p>我们可以把校验逻辑放在Builder类中，先创建建造者，并通过set()方法设置建造者的变量值，然后再通过build()方法真正创建对象之前再做集中的校验，校验通过之后才会创建对象。用建造者模式重新实现上面的需求，具体伪代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class SoyBraisedPork</span><br><span class="line">&#123;</span><br><span class="line">	private SoyBraisedPork(Builder builder)</span><br><span class="line">    &#123;</span><br><span class="line">    	this.Sugar = builder.Sugar;</span><br><span class="line">        this.Vinegar = builder.Vinegar;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Builder</span><br><span class="line">&#123;</span><br><span class="line">	public SoyBraisedPork Build()</span><br><span class="line">    &#123;</span><br><span class="line">    	if(xxx)</span><br><span class="line">        &#123;</span><br><span class="line">        	//做各种逻辑判断和校验</span><br><span class="line">        &#125;</span><br><span class="line">        return new SoyBraisedPock(this);</span><br><span class="line">    &#125;</span><br><span class="line">    public Builder SetOil(float v)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    ... //其他Set方法</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//调用</span><br><span class="line">SoyBraisedPork meat = new Builder().SetOil(10).SetXXX()...Build();</span><br></pre></td></tr></table></figure></p>
+<p>实际上，使用建造者模式创建对象，还能避免一些”异常Bug”，举个例子，我们给一个Vector2的向量设置值，我们可能会这样写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vector2 v2 = new Vector2();</span><br><span class="line">v2.SetX();</span><br><span class="line">V2.SetY();</span><br></pre></td></tr></table></figure></p>
+<p>这种结构体类型的变量在Unity里面很多，是不可能单独设置值的。</p>
+<h2 id="建造者模式在游戏开发中的典型应用"><a href="#建造者模式在游戏开发中的典型应用" class="headerlink" title="建造者模式在游戏开发中的典型应用"></a>建造者模式在游戏开发中的典型应用</h2><p>在引擎中，一个类也会给我们好多可以设置的属性，我们可以通过调用链式编程来完成参数的设置。想到链式变成我们可能最先想到的就是DoTween的使用，DoMove、DoScale等方法可以链式串联，基于这种思路我们可以实现一个基于GameObject的链式编程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using UnityEngine;</span><br><span class="line">/// &lt;summary&gt;</span><br><span class="line">/// GameObject&apos;s Util/This Extension</span><br><span class="line">/// &lt;/summary&gt;</span><br><span class="line">public static class GameObjectExtension</span><br><span class="line">&#123;</span><br><span class="line">    public static GameObject Show(this GameObject selfObj)</span><br><span class="line">    &#123;</span><br><span class="line">        selfObj.SetActive(true);</span><br><span class="line">        return selfObj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static GameObject Hide(this GameObject selfObj)</span><br><span class="line">    &#123;</span><br><span class="line">        selfObj.SetActive(false);</span><br><span class="line">        return selfObj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static GameObject Name(this GameObject selfObj,string name)</span><br><span class="line">    &#123;</span><br><span class="line">        selfObj.name = name;</span><br><span class="line">        return selfObj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static GameObject Layer(this GameObject selfObj, int layer)</span><br><span class="line">    &#123;</span><br><span class="line">        selfObj.layer = layer;</span><br><span class="line">        return selfObj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void DestroySelf(this GameObject selfObj)</span><br><span class="line">    &#123;</span><br><span class="line">        GameObject.Destroy(selfObj);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面通过扩展方法扩展了GameObject的属性方法，调用如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gameObject.Show()   	// active = true</span><br><span class="line">	.Layer(0) 			// layer = 0</span><br><span class="line">	.Name(&quot;Example&quot;);	// name = &quot;Example&quot;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到无论是Layer还是Name都是设置的他的属性，这些属性可以设置也可以不设置，是上述中的可选项设置属性。</p>
 <h2 id="四个核心角色"><a href="#四个核心角色" class="headerlink" title="四个核心角色"></a>四个核心角色</h2><ul>
 <li>Product(产品角色):一个具体的产品对象</li>
 <li>Builder(抽象建造者):创建一个Product对象的各个部件指定的接口/抽象类</li>
 <li>ConcreteBuilder(具体建造者):实现接口，构建和装备各个部件</li>
 <li>Director(指挥者/监工)：构建一个使用Builder接口对象，它主要用于创建一个复杂的对象，它主要有两个作用，一是：隔离了客户与对象的生产过程，二是：负责控制产品对象的生产过程</li>
 </ul>
+<p>我对这四种角色的理解，Product很好理解，就是我们最终需要的产品，Builder相当于生产流程制定者，规定一些生产的大方向流程，至于里面每一个流程的生产规范和细节由ConcreteBuilder具体制造者去制定和生产，Director负责监督各个具体建造者生产。</p>
 <h2 id="工厂模式VS建造者模式"><a href="#工厂模式VS建造者模式" class="headerlink" title="工厂模式VS建造者模式"></a>工厂模式VS建造者模式</h2><p>如果刚接触建造者模式，可能会有个疑惑，同样都是创建型模式，而且都是创建对象这种创建型模式，那么它们之间的区别是什么呢？从我的理解来讲，我觉得工厂模式是注重创建不同类型的产品，从宏观上体现出差别，举个例子，还是汽车厂商通用公司，它下面有各种类型的汽车品牌工厂，雪佛兰、别克、凯迪拉克等工厂，每个工厂生产出来的产品是不一样的，而建造者模式我认为是体现了”建造”这样的流程，例如我要生产一个汽车，那么汽车厂在生产的过程是一条流水线，先生产什么，再生产什么，最后有装配车间去组装，重点是在建造的过程上。所以说差异性在以下两个方面：</p>
 <ul>
 <li><p>意图不同<br>在工厂模式中，我们关注的是一个产品整体，无需关心产品各个部分是如何生产出来的，但建造者模式中，一个具体产品的生产是依赖各个部件的产生以及装配顺序，它关注的是由”零部件一步一步地组装产品对象”。简单来说，工厂模式是一个对象创建的组线条应用，建造者模式则是通过细线条勾勒出一个复杂对象，关注的是产品组成部分的创建过程。工厂方法模式注重产品本身，而建造者模式注重产品创建过程。</p>
@@ -253,6 +346,9 @@ var _hmt = _hmt || [];
 </ul>
 <p>两者的区别有了，那么在具体应用中，我们该如何选择呢？使用工厂模式创建对象，还是用建造者模式来创建对象。这取决于我们在做设计的意图，是关心最终的产品的零部件生产、组装过程，还是说想得到不同的产品。就像上面举例的创建一个角色，我们需要给他创建各个零部件，然后组合成一个角色，还记得工厂模式的例子嘛，生产不同类型的武器，生产不同品牌的汽车，Unity中创建不同类型的UI(Button、Text、Toggle等)。现在你知道这两者的本质区别了嘛。</p>
 <h2 id="设计模式系列教程汇总"><a href="#设计模式系列教程汇总" class="headerlink" title="设计模式系列教程汇总"></a>设计模式系列教程汇总</h2><p><a href="http://dingxiaowei.cn/tags/设计模式/">http://dingxiaowei.cn/tags/设计模式/</a></p>
+<h2 id="更多相关教程"><a href="#更多相关教程" class="headerlink" title="更多相关教程"></a>更多相关教程</h2><ul>
+<li><a href="https://www.cnblogs.com/BeyondAnyTime/archive/2012/07/19/2599980.html" target="_blank" rel="noopener">https://www.cnblogs.com/BeyondAnyTime/archive/2012/07/19/2599980.html</a> 设计模式之建造者模式（Builder）</li>
+</ul>
 <h2 id="教程代码下载"><a href="#教程代码下载" class="headerlink" title="教程代码下载"></a>教程代码下载</h2><p><a href="https://github.com/dingxiaowei/UnityDesignPatterns" target="_blank" rel="noopener">https://github.com/dingxiaowei/UnityDesignPatterns</a></p>
 
       
@@ -531,7 +627,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ET案例解析</a>
+                <a href="javascript:void(0)" class="js-tag color4">ECS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">GC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,35 +643,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">GC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ECS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+                <a href="javascript:void(0)" class="js-tag color2">ET案例解析</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,7 +663,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -595,10 +691,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Unity设计模式与游戏开发</a>
               </li>
              
@@ -607,7 +699,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
+                <a href="javascript:void(0)" class="js-tag color4">UML</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,11 +719,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">UML</a>
+                <a href="javascript:void(0)" class="js-tag color2">七大设计原则</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,6 +736,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">原型模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">建造者模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -663,14 +763,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">建造者模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
               </li>
              
@@ -683,7 +775,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">DOTS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -699,19 +799,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Profile工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -723,7 +811,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -731,11 +823,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UI框架</a>
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
+                <a href="javascript:void(0)" class="js-tag color5">UI框架</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -751,11 +843,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -771,10 +871,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -787,11 +883,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多功能链式计时器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -803,7 +903,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -820,10 +920,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
