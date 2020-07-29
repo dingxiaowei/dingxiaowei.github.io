@@ -17,7 +17,7 @@
 <meta property="og:description" content="前言单例模式是我们最常用的设计模式，面试的时候如果问任何一个开发者设计模式，单例模式估计是脱口而出吧，23中常见的设计模式之中并不是所有设计模式都是很常用的，而单例模式绝对是最常用的那一个。但如果真正面试深入问到单例模式，那你确定你真的了解嘛？常见的面试会让你现场写个单例模式，如果深入一点的问的话会问单例模式有几种实现方式？用代码实现并说出各个方式的优缺点？想必如果面试官真这么问的话，估计绝大多数">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://dingxiaowei.cn/2017/05/13/1.png">
-<meta property="og:updated_time" content="2020-04-11T09:05:54.023Z">
+<meta property="og:updated_time" content="2020-04-11T10:47:18.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Unity设计模式与游戏开发]单例模式">
 <meta name="twitter:description" content="前言单例模式是我们最常用的设计模式，面试的时候如果问任何一个开发者设计模式，单例模式估计是脱口而出吧，23中常见的设计模式之中并不是所有设计模式都是很常用的，而单例模式绝对是最常用的那一个。但如果真正面试深入问到单例模式，那你确定你真的了解嘛？常见的面试会让你现场写个单例模式，如果深入一点的问的话会问单例模式有几种实现方式？用代码实现并说出各个方式的优缺点？想必如果面试官真这么问的话，估计绝大多数">
@@ -270,7 +270,7 @@ var _hmt = _hmt || [];
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton6</span><br><span class="line">&#123;</span><br><span class="line">    private Singleton6() &#123; &#125;</span><br><span class="line"></span><br><span class="line">    private static readonly object syncObj = new object();</span><br><span class="line">    private static Singleton6 instance = null;</span><br><span class="line">    public static Singleton6 Instance</span><br><span class="line">    &#123;</span><br><span class="line">        get</span><br><span class="line">        &#123;</span><br><span class="line">            //双重检测提高效率</span><br><span class="line">            if (instance == null)</span><br><span class="line">            &#123;</span><br><span class="line">                lock (syncObj)     //添加同步锁</span><br><span class="line">                &#123;</span><br><span class="line">                    if (instance == null)</span><br><span class="line">                        instance = new Singleton6();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>优点说明:<br>既解决了懒加载的问题，又解决了线程同步的效率问题。<br>总结:<br>在实际开发中推荐使用的方式。</p>
-<h2 id="Unity中常见的通用单例模式"><a href="#Unity中常见的通用单例模式" class="headerlink" title="Unity中常见的通用单例模式"></a>Unity中常见的通用单例模式</h2><p>Unity开发中最常创建单例模式的就是各种Manager，在程序启动的时候首先实例化各种单例的Manager，而我见过一个主城是这样写的，每一个Manager自己内部定义一个static xxx instance,然后在GetInstance方法中实例化这个instance返回，就会显得很重复，一般Unity中是这样创建通用泛型单例类的</p>
+<h2 id="Unity中常见的通用单例模式"><a href="#Unity中常见的通用单例模式" class="headerlink" title="Unity中常见的通用单例模式"></a>Unity中常见的通用单例模式</h2><p>Unity开发中最常创建单例模式的就是各种Manager，在程序启动的时候首先实例化各种单例的Manager，而我见过一个主程是这样写的，每一个Manager自己内部定义一个static xxx instance,然后在GetInstance方法中实例化这个instance返回，就会显得很重复，一般Unity中是这样创建通用泛型单例类的</p>
 <h4 id="创建非MonoBehavior单例"><a href="#创建非MonoBehavior单例" class="headerlink" title="创建非MonoBehavior单例"></a>创建非MonoBehavior单例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton&lt;T&gt; where T : new()</span><br><span class="line">&#123;</span><br><span class="line">    protected static T _instance;</span><br><span class="line">    public static T sInstance</span><br><span class="line">    &#123;</span><br><span class="line">        get</span><br><span class="line">        &#123;</span><br><span class="line">            if (_instance == null)</span><br><span class="line">                _instance = new T();</span><br><span class="line">            return _instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们使用的时候<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class BattleManager : Singleton&lt;BattleManager&gt;</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>因为Unity里面几乎不太使用多线程，所以这里就没考虑加锁的情况。</p>
@@ -292,7 +292,7 @@ var _hmt = _hmt || [];
 </li>
 <li>单例不支持有参数的构造函数</li>
 </ul>
-<h4 id="2-单例有什么替代方案？"><a href="#2-单例有什么替代方案？" class="headerlink" title="2.单例有什么替代方案？"></a>2.单例有什么替代方案？</h4><p>为了保证全局唯一性，除了使用单例，我们还可以用静态方法来实现。不过静态方法这种实现思路，并不能解决上面提到的问题。如果要完全解决这些问题，我们需要从根本上寻找其他方式来实现全局唯一类，可以由程序员自己来保证不要创建爱你两个类的对象。</p>
+<h4 id="2-单例有什么替代方案？"><a href="#2-单例有什么替代方案？" class="headerlink" title="2.单例有什么替代方案？"></a>2.单例有什么替代方案？</h4><p>为了保证全局唯一性，除了使用单例，我们还可以用静态方法来实现。不过静态方法这种实现思路，并不能解决上面提到的问题。如果要完全解决这些问题，我们需要从根本上寻找其他方式来实现全局唯一类，可以由程序员自己来保证不要创建两个类的对象。</p>
 <h2 id="设计模式系列教程汇总"><a href="#设计模式系列教程汇总" class="headerlink" title="设计模式系列教程汇总"></a>设计模式系列教程汇总</h2><p><a href="http://dingxiaowei.cn/tags/设计模式/">http://dingxiaowei.cn/tags/设计模式/</a></p>
 <h2 id="教程代码下载"><a href="#教程代码下载" class="headerlink" title="教程代码下载"></a>教程代码下载</h2><p><a href="https://github.com/dingxiaowei/UnityDesignPatterns" target="_blank" rel="noopener">https://github.com/dingxiaowei/UnityDesignPatterns</a></p>
 
@@ -417,11 +417,11 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2017/06/07/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/05/14/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          [Unity 设计模式]IOC依赖倒置
+          [Unity设计模式与游戏开发]工厂模式
         
       </div>
     </a>
@@ -564,11 +564,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ECS</a>
+                <a href="javascript:void(0)" class="js-tag color2">ET案例解析</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+                <a href="javascript:void(0)" class="js-tag color2">ET学习笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ECS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,7 +584,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Wwise</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">GC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,7 +600,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">REACT NATIVE</a>
+                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,19 +612,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Scut</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">AssetBundle资源更新</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
+                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ScrollRect效果大全</a>
+                <a href="javascript:void(0)" class="js-tag color5">XLua</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,10 +629,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">内购</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -660,7 +664,47 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">行为树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">设计模式与游戏完美开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代理模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">简单工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">抽象工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">建造者模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">装饰器模式模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">原型模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -676,23 +720,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Unity 设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">桥接模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BridgePattern</a>
+                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">发送邮件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Final IK</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,15 +740,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">iOS10 APP审核</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">VisualEffectGraph</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -728,6 +756,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GFFrameWork</a>
               </li>
              
@@ -736,15 +772,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">纹理贴图</a>
+                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">自动生成UI模板代码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -764,6 +796,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Log</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">持久化存储</a>
               </li>
              
@@ -776,19 +820,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Log</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">管理器和框架启动</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -800,10 +832,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">代码整洁之道</a>
               </li>
              
@@ -812,7 +840,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">能力陷阱</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">简历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -825,10 +861,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">智能密码锁</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -852,11 +884,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
+                <a href="javascript:void(0)" class="js-tag color5">抛物线运动编辑工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
+                <a href="javascript:void(0)" class="js-tag color4">炮弹轨迹编辑工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">贝塞尔曲线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">抛物线曲线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">老婆是恩人</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -868,11 +912,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">酒</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">金庸小说中的爱情细节</a>
+                <a href="javascript:void(0)" class="js-tag color5">社区交流</a>
               </li>
              
               <li class="article-tag-list-item">
